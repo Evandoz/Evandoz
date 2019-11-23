@@ -13,15 +13,14 @@
   }
 
   //Scroll
-  var $viewport = $("#overflow"),
+  var $viewport = $(window),
     $topAnchor = $('#top-anchor');
-  $(function() {
-    $viewport.scroll(function() {
-      $(this).scrollTop() > $(this).height() ? $topAnchor.addClass('on') : $topAnchor.removeClass('on');
-    });
-    $topAnchor.click(function() {
-      $viewport.animate({scrollTop: 0}, 600);
-    });
+
+  $viewport.scroll(function() {
+    $(this).scrollTop() > $(this).height() ? $topAnchor.addClass('on') : $topAnchor.removeClass('on');
+  });
+  $topAnchor.click(function() {
+    $viewport.animate({scrollTop: 0}, 600);
   });
 
   // Toc
@@ -30,6 +29,7 @@
   if ($toc.length) {
     var tocPosTop = $toc.offset().top;
     $viewport.scroll(function (event) {
+      console.log(121212121);
       var scrollTop = $viewport.scrollTop();
       if (scrollTop > tocPosTop) {
         $toc.addClass("sticky");
