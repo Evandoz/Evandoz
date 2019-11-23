@@ -29,7 +29,6 @@
   if ($toc.length) {
     var tocPosTop = $toc.offset().top;
     $viewport.scroll(function (event) {
-      console.log(121212121);
       var scrollTop = $viewport.scrollTop();
       if (scrollTop > tocPosTop) {
         $toc.addClass("sticky");
