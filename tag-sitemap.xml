@@ -3,6 +3,13 @@
 
 
     <url>
+        <loc>https://evandoz.github.io/Evandoz/tags/%25E4%25BC%25AA%25E7%25B1%25BB/</loc>
+        <lastmod>2019-11-23T10:23:27.716Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
         <loc>https://evandoz.github.io/Evandoz/tags/%25E5%25BF%25AB%25E9%2580%259F%25E6%258E%2592%25E5%25BA%258F/</loc>
         <lastmod>2019-11-23T06:56:16.162Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -82,13 +89,6 @@
     <url>
         <loc>https://evandoz.github.io/Evandoz/tags/git/</loc>
         <lastmod>2019-11-14T12:33:27.153Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://evandoz.github.io/Evandoz/tags/%25E4%25BC%25AA%25E7%25B1%25BB/</loc>
-        <lastmod>2019-11-14T12:19:44.541Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
