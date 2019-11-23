@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+  
+  <title>交换排序（二） | Notes</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+    <meta name="author" content="Levan">
+  
+  
+    <meta name="description" content="记录与分享">
+  
+  
+    <meta name="keywords" content="交换排序,快速排序">
+  
+  
+    <meta name="google-site-verification" content="W2AVg5n_ALo21rl9n3ZwS8AuEanZfJkirzrRGLLYvn4">
+  
+  
+    <meta name="baidu-site-verification" content="BM2Q3xLpPJ">
+  
+  
+    <meta name="360-site-verification" content="573211edf2de02c99d7b255b2c56513c">
+  
+  
+    <link rel="short icon" type="image/x-icon" href="/Evandoz/css/images/favicon.ico">
+  
+  <link rel="canonical" href="https://evandoz.github.io/Evandoz/posts/5yc30h.htm">
+  <link rel="stylesheet" href="/Evandoz/css/style.css"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</head>
+
+<body>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="overflow" class="overflow">
+    <div class="hiddenbar">
+      <div id="wrapper" class="wrapper">
+        
+  <header id="header" class="header is-page">
+    <div class="outer">
+      <div class="logo">
+        <a class="title" href="/Evandoz/">Notes</a>
+      </div>
+
+
+    <div class="nav">
+      <ul id="nav-icon" class="nav-icon">
+        <li></li><li></li><li></li>
+      </ul>
+      <ul class="nav-menu">
+        
+          <li class="nav-item">
+            <a href="/Evandoz/archives">归档</a>
+          </li>
+        
+          <li class="nav-item">
+            <a href="/Evandoz/categories">分类</a>
+          </li>
+        
+          <li class="nav-item">
+            <a href="/Evandoz/tags">标签</a>
+          </li>
+        
+          <li class="nav-item">
+            <a href="/Evandoz/about">关于</a>
+          </li>
+        
+      </ul>
+    </div>
+
+  </div>
+</header>
+
+        <div id="content" class="content">
+  <div class="outer">
+    <main class="main">
+      <article id="数据结构/排序/20160911-交换排序（二）" class="article card">
+        
+  
+  	<h1 class="post-title">交换排序（二）</h1>
+  
+
+
+        <div class="post-meta">
+          <span class="post-date">
+  <time datetime="2016-09-10T16:00:00.000Z">2016-09-11</time>
+</span>
+
+          
+  <span class="post-category">
+    <a class="category-link" href="/Evandoz/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构</a> · <a class="category-link" href="/Evandoz/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E6%8E%92%E5%BA%8F/">排序</a>
+  </span>
+
+
+        </div>
+        <div id="post-content" class="post-content">
+          <h2 id="基本概念"><a class="headerlink" href="#基本概念"></a>基本概念</h2>
+<p>根据待排序列中两个元素的比较结果来交换两个元素的位置，这样的排序称为<strong>交换排序</strong>，主要包括<strong>冒泡排序</strong>和<strong>快速排序</strong>。</p>
+<h2 id="冒泡排序-bubble-sort"><a class="headerlink" href="#冒泡排序-bubble-sort"></a>冒泡排序（Bubble Sort）</h2>
+<p>冒泡排序见交换排序（一）</p>
+<h2 id="快速排序-quick-sort"><a class="headerlink" href="#快速排序-quick-sort"></a>快速排序（Quick Sort）</h2>
+<h3 id="产生来源"><a class="headerlink" href="#产生来源"></a>产生来源</h3>
+<p>Tony Hoare 爵士在 1962 年发明，被誉为“20世纪十大经典算法之一”。</p>
+<h3 id="基本思想"><a class="headerlink" href="#基本思想"></a>基本思想</h3>
+<p>对冒泡排序的一种改进，基本思想基于<strong>分治法</strong>：</p>
+<p>在待排序列 L[1…n] 中选取一个基准元素 pivot，通常选择第一个元素或者最后一个元素；</p>
+<p>通过一趟排序将待排序列划分成独立的两部分 L[1…k-1] 和 L[k+1…n]，前者的元素值均比基准元素值小，而后者元素值均比基准值大；</p>
+<p>而此时作为分割线的基准 pivot 将会落在其最终的位置上，此即为一趟快速排序；</p>
+<p>然后分别对这两部分记录用同样的方法继续进行排序，直到整个序列有序。</p>
+<p>要点：递归、分治</p>
+<h3 id="具体做法"><a class="headerlink" href="#具体做法"></a>具体做法</h3>
+<p>实现方法一：</p>
+<p>单向遍历，对原始序列 L[p…q]，取 L[q] 为基准，设 j 为遍历指针，i 为分割线指针，即 L[p…i] 均小于 pivotkey，L[i+1…j-1] 均大于pivotkey；</p>
+<p>起始状态时，j=p, i=p-1，两个子序列均为空，j 由低到高遍历时，如果元素大于基准，则继续向前；如果元素小于基准，则将前交换至 i+1 位置，原来 i+1 位置交换至 j，同时 ++i。</p>
+<p>实现方法二：</p>
+<p>双向遍历，设双指针 low 和 high，起始分别指向待排序列首尾元素，设 pivotkey 记录枢纽基准元素；</p>
+<p>首先从 high 指针位置向前搜索，找到第一个比基准 pivotkey 小的元素并与基准元素交换，此时基准右侧元素均大于基准 pivot；</p>
+<p>然后从 low 指针位置向后搜索，找到第一个比比基准 pivotkey 大的元素并与基准元素交换，此时基准右侧元素均小于基准 pivot；</p>
+<p>这样一来，low 之前的元素均小于基准， high 之后元素均大于基准，重复进行这两步，当 low 和 high 重合时，基准 pivotkey 降落在最终位置上，将原序列分割成两部分，一趟快速排序完成。</p>
+<h3 id="代码实现"><a class="headerlink" href="#代码实现"></a>代码实现</h3>
+<p>根据原理分析，快速排序的关键在于划分。</p>
+<p>实现方法一 单向遍历疗法：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 基准枢纽 pivotkey = L[q]</span></span><br><span class="line"><span class="comment">// L[p...i] 均小于 pivotkey，L[i+1...j-1] 均大于pivotkey</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">Partition</span><span class="params">(<span class="keyword">int</span> L[], <span class="keyword">int</span> p, <span class="keyword">int</span> q)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> pivotkey = L[q]; <span class="comment">// 基准枢纽 pivotkey = L[q]</span></span><br><span class="line">    <span class="keyword">int</span> i = p<span class="number">-1</span>, j = p; <span class="comment">// 初始化 i=p-1, j=p 即L[p...i] = L[i+1...j-1] 均为空</span></span><br><span class="line">    <span class="keyword">for</span> (j; j &lt; q; ++j) <span class="comment">// 遍历 &#123;p,...,q-1&#125;</span></span><br><span class="line">        <span class="keyword">if</span> (L[j] &lt;= pivotkey)</span><br><span class="line">            swap(&amp;L[++i], &amp;L[j]); <span class="comment">// 将小于 pivotkey 的元素移到前面</span></span><br><span class="line">    swap(&amp;L[i+<span class="number">1</span>], &amp;L[j]); <span class="comment">// pivotkey 归位</span></span><br><span class="line">    <span class="keyword">return</span> i+<span class="number">1</span>; <span class="comment">// 返回基准值位置</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>实现方法二 双向遍历疗法：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">Partition_1</span><span class="params">(<span class="keyword">int</span> L[], <span class="keyword">int</span> low, <span class="keyword">int</span> high)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> pivotkey = L[low]; <span class="comment">// 选择首元素作为基准</span></span><br><span class="line">    <span class="keyword">while</span>(low &lt; high)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">while</span>(low &lt; high &amp;&amp; L[high] &gt;= pivotkey)</span><br><span class="line">            --high;</span><br><span class="line">        swap(&amp;L[low], &amp;L[high]);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span>(low &lt; high &amp;&amp; L[low] &lt;= pivotkey)</span><br><span class="line">            ++low;</span><br><span class="line">        swap(&amp;L[high], &amp;L[low]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> low; <span class="comment">// 返回基准值位置，用于之后划分原序列</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>前面这种实现算法，每交换一对元素时都需要进行 3 次移动操作，但实际上，排序过程中，不断移动基准枢纽元素是没有必要的，因为只有在一趟排序结束时，即 low=high 的位置才是其最终的最值，因此不需要让基准元素参与排序过程中的交换操作，只移动与基准值相比较的元素即可。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 升级，low=high 的位置才是最终枢纽值的位置，不需要不断移动枢纽值位置</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">Partition_2</span><span class="params">(<span class="keyword">int</span> L[], <span class="keyword">int</span> low, <span class="keyword">int</span> high)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">// 基准点的选择对快排的性能有很大影响，关系到递归栈深度，尤其是在最坏情况下</span></span><br><span class="line">    <span class="comment">// 起始，基准点为L[low]的值</span></span><br><span class="line">    L[<span class="number">0</span>] = L[low]; <span class="comment">// 暂存基准点的值pivotkey，省一个变量</span></span><br><span class="line">    <span class="keyword">while</span> (low &lt; high)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">while</span>(low &lt; high &amp;&amp; L[high] &gt;= L[<span class="number">0</span>]) --high; <span class="comment">// 高端过滤，比它小的移动到它左侧（交换）</span></span><br><span class="line">        L[low] = L[high]; <span class="comment">// 直接将其移动到L[low]</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span>(low &lt; high &amp;&amp; L[low] &lt;= L[<span class="number">0</span>]) ++low; <span class="comment">// 低端过滤，比它大的移动到它右侧</span></span><br><span class="line">        L[high] = L[low];</span><br><span class="line">    &#125;</span><br><span class="line">    L[low] = L[<span class="number">0</span>]; <span class="comment">//基准值归位</span></span><br><span class="line">    <span class="keyword">return</span> low;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>递归调用划分函数：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">QSort</span><span class="params">(<span class="keyword">int</span> L[], <span class="keyword">int</span> low, <span class="keyword">int</span> high)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (low &lt; high)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">int</span> pos = Partition(L, low, high);</span><br><span class="line">        QSort(L, low, pos<span class="number">-1</span>);</span><br><span class="line">        QSort(L, pos+<span class="number">1</span>, high);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>快速排序：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">QuickSort</span><span class="params">(<span class="keyword">int</span> L[], <span class="keyword">int</span> n)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">   QSort(L, <span class="number">1</span>, n);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="归纳分析"><a class="headerlink" href="#归纳分析"></a>归纳分析</h3>
+<ol>
+<li>不稳定排序（unstable sort）</li>
+</ol>
+<p>在划分算法中，若右端区间有两个关键字相同，且均小于基准值，则在交换至左端区间时，他们的相对位置会发生变化，因此，快速排序是<strong>不稳定排序</strong>。</p>
+<ol start="2">
+<li>空间复杂度</li>
+</ol>
+<p>快速排序使用递归，因此需要一个递归栈来保存每层调用的必要信息，其容量应与递归调用的最大深度一致。</p>
+<p><strong>最好</strong>情况下，空间复杂度围为 O(log<sub>2</sub>n)；</p>
+<p>每一趟排序都将原序列均匀地划分为两个长度接近的子序列，则栈最大深度为 ⌈log<sub>2</sub>(n+1)⌉。</p>
+<p><strong>最坏</strong>情况下，空间复杂度围为 O(n)；</p>
+<p>每趟排序后，基准枢纽都偏向子序列的一端，需要进行 n-1 次递归调用，栈最大深度为 n。</p>
+<p><strong>平均</strong>情况下，快速排序的空间复杂度围为 O(log<sub>2</sub>n)；</p>
+<p>为改进之，可在一趟排序结束后比较两个子序列的长度，且先对较短的子序列进行快排，栈最大深度可降低至 O(log<sub>2</sub>n)。</p>
+<ol start="3">
+<li>时间复杂度</li>
+</ol>
+<p>快速排序的运行时间与划分是否对称有关，而后者又与具体使用的划分算法有关。</p>
+<p><strong>最好</strong>情况下，时间复杂度为 O(nlog<sub>2</sub>n)；</p>
+<p>划分函数尽可能的划分平衡，两边的数据量都不大于 n/2。</p>
+<p><strong>最坏</strong>情况下，时间复杂度为 O(n<sup>2</sup>)；</p>
+<p>划分出的两个区域分别包含 n-1 个元素和 0 个元素，如果每一层递归均发生这种最大程度的不对称，即初始待排序列基本有序或者基本逆序。</p>
+<p>当然可以通过随机化来改进（shuffle array 或者 randomized select pivot），使期望运行时间为 O(nlog<sub>2</sub>n)；</p>
+<p><strong>平均</strong>情况下，快速排序的时间复杂度为 O(nlog<sub>2</sub>n)；</p>
+<p>快速排序平均情况下的运行时间与其最好情况下的运行时间很接近，而不是接近其最坏情况下的运行时间。</p>
+<p>注意：只要 Partition 的划分比例是常数的，则快排的效率就是 O(nlog<sub>2</sub>n)，<br>
+比如当划分比例为10000:1时（足够不平衡了），快排的效率还是 O(nlog<sub>2</sub>n)。</p>
+<p>文章 “A killer adversary for quicksort” 介绍了怎么样设计一个输入数组，使快排运行时间为 O(n<sup>2</sup>)。</p>
+<p><strong>快速排序是通常被认为在同数量级 O(nlog<sub>2</sub>n) 的排序方法中平均性能最好的，目前被认为是最好的一种内部排序算法。</strong></p>
+<p>但若初始序列有序或基本有序时，快排序反而蜕化为冒泡排序，其复杂度为 O(n<sup>2</sup>)。<br>
+为改进之，通常用“三者取中法”来选取基准枢纽，即将排序区间的两个端点与中点三个记录中的中值调整为支点记录，即将其与 L[low] 交换，其余部分不变。</p>
+<p>然而，即便如此，也不能使快速排序在初始有序时达到 O(n) 的复杂度，为此进一步修改划分算法：</p>
+<p>在指针 --high 和 ++low 的同时进行冒泡操作，即在相邻两个记录处于“逆序”时进行交换，同时在算法中附设两个标志，分别表示 high 和 low 指针从两端向中间的移动过程中是否进行过元素交换。<br>
+如果 high 指针从高端向中间的移动过程中没有发生交换，则不需要对高端子序列进行排序；<br>
+同理，如果 low 指针从低端向中间的移动过程中没有发生交换，则不需要对低端子序列进行排序；<br>
+显然这样将进一步改善快速排序的平均性能。</p>
+<ol start="4">
+<li>初态影响</li>
+</ol>
+<p>由3可知，初始有序或基本有序时会导致基准值出现严重倾向，从而影响快排的效率。<br>
+不过可采用“三值取中”或“随机取值”等方法优化基准值的选择。</p>
+<ol start="5">
+<li>过程特征</li>
+</ol>
+<p>一趟排序可以确定一个元素的最终位置（基准元素），但不会产生有序子序列。</p>
+<p>基于分治法的快速排序，依次落在其最终位置上的元素集合在算法结束前并不连续（不会产生有序子序列）。</p>
+<ol start="6">
+<li>适用性</li>
+</ol>
+<p>快速排序是通常被认为在同数量级 O(nlog<sub>2</sub>n) 的排序方法中平均性能最好的，目前被认为是最好的一种内部排序算法，只不过不稳定。</p>
+<h3 id="非递归"><a class="headerlink" href="#非递归"></a>非递归</h3>
+<p>用非递归的方式实现快速排序，需用使用一个栈或者队列来保存待排序子区间的区间端点。</p>
+<p>一次划分（快排）后可以确定一个元素的最终位置，并产生的待排子区间；<br>
+这些子区间相互独立，处理完这些子区间就完成最终排序，因此处理子区间的先后顺序并不影响最终结果</p>
+<p>故而，用来存储区间端点的辅助栈也可以用队列代替。</p>
+<h3 id="算法证明-实现方法一"><a class="headerlink" href="#算法证明-实现方法一"></a>算法证明（实现方法一）</h3>
+<p>对 partition 函数证明循环不变式：</p>
+<p>A[p…i] 的所有元素小于等于 pivot，A[i+1…j-1] 的所有元素大于 pivot。</p>
+<p>初始：i=p-1,j=p，A[p…p-1] = 空，A[p…p-1] = 空，因此成立。</p>
+<p>保持：当循环开始前，已知 A[p…i] 的所有元素小于等于 pivot，A[i+1…j-1] 的所有元素大于pivot，</p>
+<p>在循环体中，</p>
+<ul>
+<li>
+<p>如果 A[j] &gt; pivot，那么不动，j++，此时 A[p…i] 的所有元素小于等于 pivot，A[i+1…j-1] 的所有元素大于 pivot。</p>
+</li>
+<li>
+<p>如果 A[j] &lt;= pivot，这时 A[i+1] &gt; pivot，将 A[i+1] 和 A[j] 交换，同时 ++i，如此 A[P…i] 保持所有元素小于等于 pivot，而 A[i+1…j-1] 的所有元素大于 pivot。</p>
+</li>
+</ul>
+<p>终止：j = q，因此 A[p…i] 的所有元素小于等于 pivot，A[i+1…q-1] 的所有元素大于 pivot。</p>
+
+        </div>
+        <div class="post-footer">
+          <div class="post-copyright">&copy; 除特殊声明外，文章著作权归作者所有，转载请注明作者及出处</div>
+        </div>
+      </article>
+      <!-- Pagination -->
+      
+        <div class="nagination card">
+          
+            <a href="/Evandoz/posts/XZ1R69.htm" class="nagination-link">上篇: 交换排序（一）</a>
+          
+          
+            <a href="/Evandoz/posts/1BZ3SG1.htm" class="nagination-link">下篇: 插入排序（一）</a>
+          
+        </div>
+      
+      <!-- Comment -->
+      
+        <div id="article-comment" class="article-comment card"></div>
+
+      
+    </main>
+    <aside class="aside">
+      <div id="toc" class="toc">
+        <h3 class="toc-title">目录</h3>
+        
+          <ol class="toc-content"><li class="toc-content-item toc-content-level-2"><a class="toc-content-link" href="#基本概念"><span class="toc-content-text">基本概念</span></a></li><li class="toc-content-item toc-content-level-2"><a class="toc-content-link" href="#冒泡排序-bubble-sort"><span class="toc-content-text">冒泡排序（Bubble Sort）</span></a></li><li class="toc-content-item toc-content-level-2"><a class="toc-content-link" href="#快速排序-quick-sort"><span class="toc-content-text">快速排序（Quick Sort）</span></a><ol class="toc-content-child"><li class="toc-content-item toc-content-level-3"><a class="toc-content-link" href="#产生来源"><span class="toc-content-text">产生来源</span></a></li><li class="toc-content-item toc-content-level-3"><a class="toc-content-link" href="#基本思想"><span class="toc-content-text">基本思想</span></a></li><li class="toc-content-item toc-content-level-3"><a class="toc-content-link" href="#具体做法"><span class="toc-content-text">具体做法</span></a></li><li class="toc-content-item toc-content-level-3"><a class="toc-content-link" href="#代码实现"><span class="toc-content-text">代码实现</span></a></li><li class="toc-content-item toc-content-level-3"><a class="toc-content-link" href="#归纳分析"><span class="toc-content-text">归纳分析</span></a></li><li class="toc-content-item toc-content-level-3"><a class="toc-content-link" href="#非递归"><span class="toc-content-text">非递归</span></a></li><li class="toc-content-item toc-content-level-3"><a class="toc-content-link" href="#算法证明-实现方法一"><span class="toc-content-text">算法证明（实现方法一）</span></a></li></ol></li></ol>
+        
+      </div>
+    </aside>
+  </div>
+
+
+</div>
+        <footer id="footer" class="footer">
+  <div class="outer">
+    <div class="copyright">
+      <a href="/Evandoz/">Notes &copy; 2015 - 2019<p></p>
+    </a></div>
+    <div class="navigation">
+      <a href="https://evandoz.github.io">Hexo · Levan</a>
+    </div>
+  </div>
+</footer>
+
+      </div>
+    </div>
+  </div>
+  <!-- <div class="scrollbar"></div>
+ -->
+  <div id="top-anchor" class="top-anchor">
+  <ul><li></li><li></li></ul>
+</div>
+
+  <div id="mobile-nav" class="mobile-nav">
+  
+    <a class="menu-item" href="/Evandoz/archives">归档</a>
+  
+    <a class="menu-item" href="/Evandoz/categories">分类</a>
+  
+    <a class="menu-item" href="/Evandoz/tags">标签</a>
+  
+    <a class="menu-item" href="/Evandoz/about">关于</a>
+  
+</div>
+
+<div id="over-layer" class="over-layer"></div>
+
+  <script src="/Evandoz/js/jquery.js"></script>
+<script src="/Evandoz/js/velocity.js"></script>
+<script src="/Evandoz/js/plugins.js"></script>
+<script src="/Evandoz/js/script.js"></script>
+
+<script type="text/javascript">
+(function(){
+  var bp = document.createElement('script');
+  var curProtocol = window.location.protocol.split(':')[0];
+  if (curProtocol === 'https') {
+    bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+  }
+  else {
+    bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+  }
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(bp, s);
+})();
+</script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+
+</body>
+</html>

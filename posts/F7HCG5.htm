@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+  
+  <title>内部排序 | Notes</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+    <meta name="author" content="Levan">
+  
+  
+    <meta name="description" content="记录与分享">
+  
+  
+    <meta name="keywords" content="内部排序">
+  
+  
+    <meta name="google-site-verification" content="W2AVg5n_ALo21rl9n3ZwS8AuEanZfJkirzrRGLLYvn4">
+  
+  
+    <meta name="baidu-site-verification" content="BM2Q3xLpPJ">
+  
+  
+    <meta name="360-site-verification" content="573211edf2de02c99d7b255b2c56513c">
+  
+  
+    <link rel="short icon" type="image/x-icon" href="/Evandoz/css/images/favicon.ico">
+  
+  <link rel="canonical" href="https://evandoz.github.io/Evandoz/posts/f7hcg5.htm">
+  <link rel="stylesheet" href="/Evandoz/css/style.css"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</head>
+
+<body>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="overflow" class="overflow">
+    <div class="hiddenbar">
+      <div id="wrapper" class="wrapper">
+        
+  <header id="header" class="header is-page">
+    <div class="outer">
+      <div class="logo">
+        <a class="title" href="/Evandoz/">Notes</a>
+      </div>
+
+
+    <div class="nav">
+      <ul id="nav-icon" class="nav-icon">
+        <li></li><li></li><li></li>
+      </ul>
+      <ul class="nav-menu">
+        
+          <li class="nav-item">
+            <a href="/Evandoz/archives">归档</a>
+          </li>
+        
+          <li class="nav-item">
+            <a href="/Evandoz/categories">分类</a>
+          </li>
+        
+          <li class="nav-item">
+            <a href="/Evandoz/tags">标签</a>
+          </li>
+        
+          <li class="nav-item">
+            <a href="/Evandoz/about">关于</a>
+          </li>
+        
+      </ul>
+    </div>
+
+  </div>
+</header>
+
+        <div id="content" class="content">
+  <div class="outer">
+    <main class="main">
+      <article id="数据结构/排序/20160908-内部排序" class="article card">
+        
+  
+  	<h1 class="post-title">内部排序</h1>
+  
+
+
+        <div class="post-meta">
+          <span class="post-date">
+  <time datetime="2016-09-07T16:00:00.000Z">2016-09-08</time>
+</span>
+
+          
+  <span class="post-category">
+    <a class="category-link" href="/Evandoz/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构</a> · <a class="category-link" href="/Evandoz/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E6%8E%92%E5%BA%8F/">排序</a>
+  </span>
+
+
+        </div>
+        <div id="post-content" class="post-content">
+          <h2 id="基本概念"><a class="headerlink" href="#基本概念"></a>基本概念</h2>
+<p>内部排序是指排序期间数据元素全部存放在内存中的排序；</p>
+<p>相应的，外部排序是指待排序的数据量很大，排序期间数据元素无法同时存放在内存中，必须在在排序过程中根据要求不断在内、外存之间移动的排序。</p>
+<h2 id="衡量指标"><a class="headerlink" href="#衡量指标"></a>衡量指标</h2>
+<ol>
+<li>稳定性</li>
+</ol>
+<p>稳定排序（stable sort）：插入排序、冒泡排序、归并排序、计数排序、桶排序、基数排序。</p>
+<p>不稳定排序（unstable sort）：希尔排序、快速排序、选择排序、堆排序。</p>
+<p>在基数排序中，排序的稳定性显得尤为重要，关系到排序结果是否正确。</p>
+<p>给每个输入元素加一个index，表示初始时的数组索引，当不稳定的算法排好序后，对于相同的元素重新按 index 排序，这样改进可以使得那些不稳定的算法也稳定。</p>
+<ol start="2">
+<li>空间复杂度</li>
+</ol>
+<p>原地算法（In-place sort 不占用额外内存或占用常数的内存）：插入排序、希尔排序、冒泡排序、快速排序、选择排序、堆排序。</p>
+<p>非原地算法（Out-place sort）：归并排序、计数排序、桶排序、基数排序。</p>
+<p>当需要对大量数据进行排序时，In-place sort就显示出优点，因为只需要占用常数的内存。</p>
+<p>设想一下，如果要对10000个数据排序，如果使用了Out-place sort，则假设需要用200G的额外空间，则一台老式电脑会吃不消，但是如果使用In-place sort，则不需要花费额外内存。</p>
+<ol start="3">
+<li>时间复杂度</li>
+</ol>
+<p>基于比较的排序都是遵循“决策树模型”，而在决策树模型中，可以证明基于比较的排序算法最坏情况下的运行时间为 O(nlogn)，证明的思路是因为将 n 个序列构成的决策树的叶子节点个数至少有 n!，因此高度至少为 nlogn。</p>
+<p>虽然能够理想情况下能在线性时间排序，但是每个排序都需要对输入数组做一些假设，比如计数排序需要输入数组数字范围为[0,k]等。</p>
+<ol start="4">
+<li>初态影响</li>
+</ol>
+<p>待排序列初始状态对时间复杂度的影响，乱序，基本正序，基本逆序等。</p>
+<ol start="5">
+<li>过程特征</li>
+</ol>
+<p>一趟排序能否确定一个元素的最终位置，会不会产生有序子序列（局部有序、全局有序）。</p>
+<h2 id="分类"><a class="headerlink" href="#分类"></a>分类</h2>
+<ol>
+<li>插入排序</li>
+</ol>
+<ul>
+<li>直接插入排序</li>
+<li>折半插入排序</li>
+<li>希尔排序</li>
+</ul>
+<ol start="2">
+<li>交换排序</li>
+</ol>
+<ul>
+<li>冒泡排序</li>
+<li>快速排序</li>
+</ul>
+<ol start="3">
+<li>选择排序</li>
+</ol>
+<ul>
+<li>简单选择排序</li>
+<li>堆排序</li>
+</ul>
+<ol start="4">
+<li>归并排序</li>
+<li>计数/桶/基数排序</li>
+</ol>
+<p>当n较大，则应采用时间复杂度为O(nlog2n)的排序方法：快速排序、堆排序或归并排序序。</p>
+<p><strong>快速排序</strong> 是目前基于比较的内部排序中被认为是最好的方法，当待排序的关键字是随机分布时，快速排序的平均时间最短。</p>
+
+        </div>
+        <div class="post-footer">
+          <div class="post-copyright">&copy; 除特殊声明外，文章著作权归作者所有，转载请注明作者及出处</div>
+        </div>
+      </article>
+      <!-- Pagination -->
+      
+        <div class="nagination card">
+          
+            <a href="/Evandoz/posts/1KYE2PS.htm" class="nagination-link">上篇: 插入排序（二）</a>
+          
+          
+            <a href="/Evandoz/posts/2H5RQ7H.htm" class="nagination-link">下篇: CSS 引入方式与选择器</a>
+          
+        </div>
+      
+      <!-- Comment -->
+      
+        <div id="article-comment" class="article-comment card"></div>
+
+      
+    </main>
+    <aside class="aside">
+      <div id="toc" class="toc">
+        <h3 class="toc-title">目录</h3>
+        
+          <ol class="toc-content"><li class="toc-content-item toc-content-level-2"><a class="toc-content-link" href="#基本概念"><span class="toc-content-text">基本概念</span></a></li><li class="toc-content-item toc-content-level-2"><a class="toc-content-link" href="#衡量指标"><span class="toc-content-text">衡量指标</span></a></li><li class="toc-content-item toc-content-level-2"><a class="toc-content-link" href="#分类"><span class="toc-content-text">分类</span></a></li></ol>
+        
+      </div>
+    </aside>
+  </div>
+
+
+</div>
+        <footer id="footer" class="footer">
+  <div class="outer">
+    <div class="copyright">
+      <a href="/Evandoz/">Notes &copy; 2015 - 2019<p></p>
+    </a></div>
+    <div class="navigation">
+      <a href="https://evandoz.github.io">Hexo · Levan</a>
+    </div>
+  </div>
+</footer>
+
+      </div>
+    </div>
+  </div>
+  <!-- <div class="scrollbar"></div>
+ -->
+  <div id="top-anchor" class="top-anchor">
+  <ul><li></li><li></li></ul>
+</div>
+
+  <div id="mobile-nav" class="mobile-nav">
+  
+    <a class="menu-item" href="/Evandoz/archives">归档</a>
+  
+    <a class="menu-item" href="/Evandoz/categories">分类</a>
+  
+    <a class="menu-item" href="/Evandoz/tags">标签</a>
+  
+    <a class="menu-item" href="/Evandoz/about">关于</a>
+  
+</div>
+
+<div id="over-layer" class="over-layer"></div>
+
+  <script src="/Evandoz/js/jquery.js"></script>
+<script src="/Evandoz/js/velocity.js"></script>
+<script src="/Evandoz/js/plugins.js"></script>
+<script src="/Evandoz/js/script.js"></script>
+
+<script type="text/javascript">
+(function(){
+  var bp = document.createElement('script');
+  var curProtocol = window.location.protocol.split(':')[0];
+  if (curProtocol === 'https') {
+    bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+  }
+  else {
+    bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+  }
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(bp, s);
+})();
+</script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+
+</body>
+</html>

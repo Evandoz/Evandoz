@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+  
+  <title>在 ArchLinux 中使用 Secure Boot | Notes</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+    <meta name="author" content="Levan">
+  
+  
+    <meta name="description" content="记录与分享">
+  
+  
+    <meta name="keywords" content="ArchLinux,Secure Boot,双系统">
+  
+  
+    <meta name="google-site-verification" content="W2AVg5n_ALo21rl9n3ZwS8AuEanZfJkirzrRGLLYvn4">
+  
+  
+    <meta name="baidu-site-verification" content="BM2Q3xLpPJ">
+  
+  
+    <meta name="360-site-verification" content="573211edf2de02c99d7b255b2c56513c">
+  
+  
+    <link rel="short icon" type="image/x-icon" href="/Evandoz/css/images/favicon.ico">
+  
+  <link rel="canonical" href="https://evandoz.github.io/Evandoz/posts/1tqs3hd.htm">
+  <link rel="stylesheet" href="/Evandoz/css/style.css"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</head>
+
+<body>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="overflow" class="overflow">
+    <div class="hiddenbar">
+      <div id="wrapper" class="wrapper">
+        
+  <header id="header" class="header is-page">
+    <div class="outer">
+      <div class="logo">
+        <a class="title" href="/Evandoz/">Notes</a>
+      </div>
+
+
+    <div class="nav">
+      <ul id="nav-icon" class="nav-icon">
+        <li></li><li></li><li></li>
+      </ul>
+      <ul class="nav-menu">
+        
+          <li class="nav-item">
+            <a href="/Evandoz/archives">归档</a>
+          </li>
+        
+          <li class="nav-item">
+            <a href="/Evandoz/categories">分类</a>
+          </li>
+        
+          <li class="nav-item">
+            <a href="/Evandoz/tags">标签</a>
+          </li>
+        
+          <li class="nav-item">
+            <a href="/Evandoz/about">关于</a>
+          </li>
+        
+      </ul>
+    </div>
+
+  </div>
+</header>
+
+        <div id="content" class="content">
+  <div class="outer">
+    <main class="main">
+      <article id="操作系统/ArchLinux/20180630-ArchLinux 安装之 Secure Boot" class="article card">
+        
+  
+  	<h1 class="post-title">在 ArchLinux 中使用 Secure Boot</h1>
+  
+
+
+        <div class="post-meta">
+          <span class="post-date">
+  <time datetime="2018-06-29T16:00:00.000Z">2018-06-30</time>
+</span>
+
+          
+  <span class="post-category">
+    <a class="category-link" href="/Evandoz/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">操作系统</a> · <a class="category-link" href="/Evandoz/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/ArchLinux/">ArchLinux</a>
+  </span>
+
+
+        </div>
+        <div id="post-content" class="post-content">
+          <p>在预装了 Winodws 10 的笔记本上装上了 Archlinux (GPT + UEFI)，由于数字签名信任的问题，无法使用 Secure Boot，不过可以使用可信任的数字签名来解决问题。</p>
+<a id="more"></a>
+<h2 id="介绍"><a class="headerlink" href="#介绍"></a>介绍</h2>
+<p>Secure Boot 是 UEFI (Unified Extensible Firmware Interface) 的一个 feature，用于应对 <code>boot sector viruses</code>，这种病毒在开机时执行，难于防范。 Secure Boot 主要原理是使用加密签名，开机时固件会检查其执行的 UEFI 程序是否有加密签名，若签名与 NVRAM 中保存的签名不一致或是被列入 NVRAM 黑名单，那么该 UEFI 程序将被禁止运行，操作系统没有获得计算机控制权自然就无法启动，理论上就阻止了病毒的传播。</p>
+<p>关于 Secure Boot 尤其是 for Linux 的更多介绍，可参见 <a href="http://www.rodsbooks.com/efi-bootloaders/secureboot.html" target="_blank" rel="external nofollow noopener noreferrer">Managing EFI Boot Loaders for Linux: Dealing with Secure Boot</a>，也正是在该文的引导下解决了 Archlinux 中的 Secure Boot 问题。</p>
+<h2 id="shim-preloader"><a class="headerlink" href="#shim-preloader"></a>Shim &amp; PreLoader</h2>
+<h2 id="参考"><a class="headerlink" href="#参考"></a>参考</h2>
+<p><a href="http://www.rodsbooks.com/efi-bootloaders/secureboot.html" target="_blank" rel="external nofollow noopener noreferrer">Managing EFI Boot Loaders for Linux: Dealing with Secure Boot</a><br>
+<a href="https://wiki.archlinux.org/index.php/Secure_Boot" target="_blank" rel="external nofollow noopener noreferrer">Secure Boot in Arch Linux</a></p>
+
+        </div>
+        <div class="post-footer">
+          <div class="post-copyright">&copy; 除特殊声明外，文章著作权归作者所有，转载请注明作者及出处</div>
+        </div>
+      </article>
+      <!-- Pagination -->
+      
+        <div class="nagination card">
+          
+            <a href="/Evandoz/posts/3RGNXMW.htm" class="nagination-link">上篇: 使用 DiskPart 自定义 Windows 分区类型及大小</a>
+          
+          
+            <a href="/Evandoz/posts/26CFAN8.htm" class="nagination-link">下篇: margin:auto 实现元素绝对居中</a>
+          
+        </div>
+      
+      <!-- Comment -->
+      
+        <div id="article-comment" class="article-comment card"></div>
+
+      
+    </main>
+    <aside class="aside">
+      <div id="toc" class="toc">
+        <h3 class="toc-title">目录</h3>
+        
+          <ol class="toc-content"><li class="toc-content-item toc-content-level-2"><a class="toc-content-link" href="#介绍"><span class="toc-content-text">介绍</span></a></li><li class="toc-content-item toc-content-level-2"><a class="toc-content-link" href="#shim-preloader"><span class="toc-content-text">Shim &amp; PreLoader</span></a></li><li class="toc-content-item toc-content-level-2"><a class="toc-content-link" href="#参考"><span class="toc-content-text">参考</span></a></li></ol>
+        
+      </div>
+    </aside>
+  </div>
+
+
+</div>
+        <footer id="footer" class="footer">
+  <div class="outer">
+    <div class="copyright">
+      <a href="/Evandoz/">Notes &copy; 2015 - 2019<p></p>
+    </a></div>
+    <div class="navigation">
+      <a href="https://evandoz.github.io">Hexo · Levan</a>
+    </div>
+  </div>
+</footer>
+
+      </div>
+    </div>
+  </div>
+  <!-- <div class="scrollbar"></div>
+ -->
+  <div id="top-anchor" class="top-anchor">
+  <ul><li></li><li></li></ul>
+</div>
+
+  <div id="mobile-nav" class="mobile-nav">
+  
+    <a class="menu-item" href="/Evandoz/archives">归档</a>
+  
+    <a class="menu-item" href="/Evandoz/categories">分类</a>
+  
+    <a class="menu-item" href="/Evandoz/tags">标签</a>
+  
+    <a class="menu-item" href="/Evandoz/about">关于</a>
+  
+</div>
+
+<div id="over-layer" class="over-layer"></div>
+
+  <script src="/Evandoz/js/jquery.js"></script>
+<script src="/Evandoz/js/velocity.js"></script>
+<script src="/Evandoz/js/plugins.js"></script>
+<script src="/Evandoz/js/script.js"></script>
+
+<script type="text/javascript">
+(function(){
+  var bp = document.createElement('script');
+  var curProtocol = window.location.protocol.split(':')[0];
+  if (curProtocol === 'https') {
+    bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+  }
+  else {
+    bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+  }
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(bp, s);
+})();
+</script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+
+</body>
+</html>

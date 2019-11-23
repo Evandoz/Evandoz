@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+  
+  <title>8086 通用寄存器的专用功能 | Notes</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+    <meta name="author" content="Levan">
+  
+  
+    <meta name="description" content="记录与分享">
+  
+  
+    <meta name="keywords" content="8086,通用寄存器">
+  
+  
+    <meta name="google-site-verification" content="W2AVg5n_ALo21rl9n3ZwS8AuEanZfJkirzrRGLLYvn4">
+  
+  
+    <meta name="baidu-site-verification" content="BM2Q3xLpPJ">
+  
+  
+    <meta name="360-site-verification" content="573211edf2de02c99d7b255b2c56513c">
+  
+  
+    <link rel="short icon" type="image/x-icon" href="/Evandoz/css/images/favicon.ico">
+  
+  <link rel="canonical" href="https://evandoz.github.io/Evandoz/posts/3d8rh6c.htm">
+  <link rel="stylesheet" href="/Evandoz/css/style.css"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</head>
+
+<body>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="overflow" class="overflow">
+    <div class="hiddenbar">
+      <div id="wrapper" class="wrapper">
+        
+  <header id="header" class="header is-page">
+    <div class="outer">
+      <div class="logo">
+        <a class="title" href="/Evandoz/">Notes</a>
+      </div>
+
+
+    <div class="nav">
+      <ul id="nav-icon" class="nav-icon">
+        <li></li><li></li><li></li>
+      </ul>
+      <ul class="nav-menu">
+        
+          <li class="nav-item">
+            <a href="/Evandoz/archives">归档</a>
+          </li>
+        
+          <li class="nav-item">
+            <a href="/Evandoz/categories">分类</a>
+          </li>
+        
+          <li class="nav-item">
+            <a href="/Evandoz/tags">标签</a>
+          </li>
+        
+          <li class="nav-item">
+            <a href="/Evandoz/about">关于</a>
+          </li>
+        
+      </ul>
+    </div>
+
+  </div>
+</header>
+
+        <div id="content" class="content">
+  <div class="outer">
+    <main class="main">
+      <article id="编程开发/ASM/20161109-8086 通用寄存器的专用功能" class="article card">
+        
+  
+  	<h1 class="post-title">8086 通用寄存器的专用功能</h1>
+  
+
+
+        <div class="post-meta">
+          <span class="post-date">
+  <time datetime="2016-11-08T16:00:00.000Z">2016-11-09</time>
+</span>
+
+          
+  <span class="post-category">
+    <a class="category-link" href="/Evandoz/categories/%E7%BC%96%E7%A8%8B%E5%BC%80%E5%8F%91/">编程开发</a> · <a class="category-link" href="/Evandoz/categories/%E7%BC%96%E7%A8%8B%E5%BC%80%E5%8F%91/ASM/">ASM</a>
+  </span>
+
+
+        </div>
+        <div id="post-content" class="post-content">
+          <p>根据汇编学习经历和编程经验总结一下8086系统通用寄存器的专用功能。</p>
+<a id="more"></a>
+<h2 id="引子"><a class="headerlink" href="#引子"></a>引子</h2>
+<hr>
+<p>8086 系统中有 8 个通用寄存器。虽然叫作通用寄存器，但它们却都有自己专门的名字，这是因为它们都有自己专门的功能。比如 CX 作为计数寄存器，用来存储循环次数。如果只有一个专用功能，那就它们只能称之为专用寄存器了，而这些寄存器还可以用来传送数据和暂存数据，所以称它们为通用寄存器。</p>
+<h2 id="数据寄存器"><a class="headerlink" href="#数据寄存器"></a>数据寄存器</h2>
+<hr>
+<p>数据寄存器主要用来保存操作数和运算结果等信息，它们的存在节省了为存取操作数所需占用总线和访问存储器的时间。这四个 16 位的数据寄存器均可分解成两个独立的 8 位寄存器，这些 8 位的寄存器有各自的名称，均可独立存取。<br>
+例如：AX寄存器可以分解为AH寄存器和 AL 寄存器，其中 AH 寄存器就是 AX 寄存器的高 8 位，AL 寄存器就是AX寄存器的低 8 位。其他寄存器类似。</p>
+<h3 id="累积器"><a class="headerlink" href="#累积器"></a>累积器</h3>
+<p><strong>AX</strong>:<br>
+i. 在字乘、字除指令中做累加器，存储被除数/商以及因数/积；<br>
+ii. 在字I/O操作时用做数据寄存器与外界设备传送数据；</p>
+<p><strong>AH, AL</strong>:<br>
+i. 在LAHF指令中用做目的寄存器；<br>
+ii. 在字节乘、字节除指令中用做累加器，存储；<br>
+iii. 在字节I/O操作时做数据寄存器与外界设备传送数据；<br>
+iv. BCD、ASCII码数据运算时用作累加器，在XLAT指令中用作累加器。</p>
+<p><strong>除法运算</strong><br>
+运算开始时：<br>
+如果除数是 8  位，被除数一定是 16 位的，被除数默认放在 AX 寄存器中；<br>
+如果除数是 16 位，被除数一定是 32 位的，这时要引入 DX，其中 DX 放被除数的高 16 位，AX 则放被除数的低 16 位。<br>
+运算结束时：<br>
+如果除数是 8  位，则 AL 中保存此次除法操作的商，而在 AH 中保存此次除法操作的余数；<br>
+如果除数是 16 位，则 AX 中保存此次除法操作的商，而在 DX 中保存此次除法操作的余数。</p>
+<p><strong>乘法运算</strong><br>
+运算开始时：(两个相乘的数要么都是 8 位，要么都是 16 位)<br>
+如果两个相乘的数都是 8  位，则一个默认放在 AL 中，另一个放在 8  位寄存器中或者内存<strong>字节</strong>单元中；<br>
+如果两个相乘的数都是 16 位，则一个默认放在 AX 中，另一个放在 16 位寄存器中或者内存**字  **单元中。<br>
+运算结束时：<br>
+如果是 8  位的乘法运算，则默认乘法运算的结果是保存在 AX 中；<br>
+如果是 16 位的乘法运算，则默认乘法运算的结果有 32 位，这时要引入 DX，其中高位默认保存在 DX 中，而低位则默认保存在 AX 中。</p>
+<h3 id="基址寄存器"><a class="headerlink" href="#基址寄存器"></a>基址寄存器</h3>
+<p><strong>BX</strong>:<br>
+i. 间接寻址时用作地址寄存器和基址寄存器；<br>
+ii. 在XLAT指令中用作基址寄存器。<br>
+<strong>注</strong>：<br>
+它是四个数据存储器中唯一可以作为存储器指针使用的存储器</p>
+<h3 id="计数寄存器"><a class="headerlink" href="#计数寄存器"></a>计数寄存器</h3>
+<p><strong>CX</strong>:<br>
+i. 字符串操作时用作循环次数计数器；<br>
+ii. 循环操作时用作循环次数计数器。</p>
+<p><strong>CL</strong>:<br>
+在循环移位和移位操作时用作环移和移位次数的计数寄存器</p>
+<p>CPU 在每次执行 LOOP 指令的时候，会完成两个过程：<br>
+i. CX = CX – 1，即令 CX 计数器自动减去 1；<br>
+ii. 判断 CX 中的值，如果 CX 中的值为 0 则会跳出循环，去执行循环后面的指令；如果 CX 中的值不为 0 ，则继续执行循环中所指定的指令。</p>
+<h3 id="数据寄存器-v2"><a class="headerlink" href="#数据寄存器-v2"></a>数据寄存器</h3>
+<p><strong>DX</strong>:<br>
+i. 在字乘、字除指令中用做辅助寄存器，具体使用见 AX 部分；<br>
+ii. I/O指令间接寻址时用作端口寄存器，存放I/O端口地址。</p>
+<h2 id="指针寄存器"><a class="headerlink" href="#指针寄存器"></a>指针寄存器</h2>
+<hr>
+<p>这两个 16 位寄存器只能按 16 位进行存取操作，主要用来形成操作数的地址，用于堆栈操作中计算操作数的有效地址。</p>
+<h3 id="堆栈指针寄存器"><a class="headerlink" href="#堆栈指针寄存器"></a>堆栈指针寄存器</h3>
+<p><strong>SP</strong>:<br>
+堆栈指针，必须与SS配合使用，指向目前的堆栈位置，在任何时刻，SS:SP 都是指向栈顶元素。</p>
+<h3 id="基址指针寄存器"><a class="headerlink" href="#基址指针寄存器"></a>基址指针寄存器</h3>
+<p><strong>BP</strong>:<br>
+i. 间接寻址时用作地址寄存器和变址寄存器；<br>
+ii. 用作 SS 的一个相对基址位置，用于给出堆栈中数据区基址的偏移，从而可以方便的实现直接存取堆栈中的数据。</p>
+<p>如果指令中明确给出段地址，例如 DS:[BP]，那么它代表的内存单元是段地址为 DS，偏移量为 BP 寄存器中的值的内存单元；而如果指令中没有明确段地址，只使用 [BP] 时，那么它代表的内存单元是段地址为 SS，偏移量为 BP 寄存器中的值的内存单元。（BX，SI，DI 会默认使用 DS 段寄存器）</p>
+<h2 id="变址寄存器"><a class="headerlink" href="#变址寄存器"></a>变址寄存器</h2>
+<hr>
+<p>这两个16位寄存器只能按16位进行存取操作，主要用来形成操作数的地址，用于变址运算中计算操作数的有效地址。</p>
+<h3 id="源地址寄存器"><a class="headerlink" href="#源地址寄存器"></a>源地址寄存器</h3>
+<p><strong>SI</strong>:<br>
+i. 间接寻址时用作地址寄存器和变址寄存器；<br>
+ii. 串操作时时用作<strong>源</strong>变址寄存器，用来存放相对于 DS 段的<strong>源变址指针</strong>。</p>
+<h3 id="目的地址寄存器"><a class="headerlink" href="#目的地址寄存器"></a>目的地址寄存器</h3>
+<p><strong>DI</strong>:<br>
+i. 间接寻址时用作地址寄存器和变址寄存器；<br>
+ii. 串操作时时用作<strong>目的</strong>变址寄存器，用来存放相对于 ES 段的<strong>目的变址指针</strong>。</p>
+<p><strong>再次强调</strong>：<br>
+以上四个16位寄存器只能按16位进行存取操作，主要用来形成操作数的地址，用于堆栈操作和变址运算中计算操作数的有效地址。</p>
+<h2 id="最后补充"><a class="headerlink" href="#最后补充"></a>最后补充</h2>
+<hr>
+<p>除上述的专用功能外，在中断系统中相应功能的实现也会指定专用的寄存器，由于中断类型太多不一一列举，详情可以在网上搜索<strong>BIOS、DOS中断大全</strong>便可找到所有的功能实现。</p>
+<p><img src="https://raw.githubusercontent.com/Evandoz/blob/master/Assembly/int21h.png" alt="INT21H"><span class="caption">INT21H</span></p>
+<p>完整 INT21H 功能可参考 <a href="http://wenku.baidu.com/link?url=SIa3cwuKcvxXclwPsgohSyBEKJQn3nRL3msqEo8_vu3ZxubIhBXeqYFqASuGcHmcf_Ca_Ami4_4Lm6eR0Ie0blJHuo0U644a7y-GldyHn9C" target="_blank" rel="external nofollow noopener noreferrer">百度文库</a> 或者自行搜索</p>
+
+        </div>
+        <div class="post-footer">
+          <div class="post-copyright">&copy; 除特殊声明外，文章著作权归作者所有，转载请注明作者及出处</div>
+        </div>
+      </article>
+      <!-- Pagination -->
+      
+        <div class="nagination card">
+          
+            <a href="/Evandoz/posts/KG82GQ.htm" class="nagination-link">上篇: 空数据段引发的问题及思考</a>
+          
+          
+            <a href="/Evandoz/posts/B5HTR6.htm" class="nagination-link">下篇: 汇编语言实现进制转换</a>
+          
+        </div>
+      
+      <!-- Comment -->
+      
+        <div id="article-comment" class="article-comment card"></div>
+
+      
+    </main>
+    <aside class="aside">
+      <div id="toc" class="toc">
+        <h3 class="toc-title">目录</h3>
+        
+          <ol class="toc-content"><li class="toc-content-item toc-content-level-2"><a class="toc-content-link" href="#引子"><span class="toc-content-text">引子</span></a></li><li class="toc-content-item toc-content-level-2"><a class="toc-content-link" href="#数据寄存器"><span class="toc-content-text">数据寄存器</span></a><ol class="toc-content-child"><li class="toc-content-item toc-content-level-3"><a class="toc-content-link" href="#累积器"><span class="toc-content-text">累积器</span></a></li><li class="toc-content-item toc-content-level-3"><a class="toc-content-link" href="#基址寄存器"><span class="toc-content-text">基址寄存器</span></a></li><li class="toc-content-item toc-content-level-3"><a class="toc-content-link" href="#计数寄存器"><span class="toc-content-text">计数寄存器</span></a></li><li class="toc-content-item toc-content-level-3"><a class="toc-content-link" href="#数据寄存器-v2"><span class="toc-content-text">数据寄存器</span></a></li></ol></li><li class="toc-content-item toc-content-level-2"><a class="toc-content-link" href="#指针寄存器"><span class="toc-content-text">指针寄存器</span></a><ol class="toc-content-child"><li class="toc-content-item toc-content-level-3"><a class="toc-content-link" href="#堆栈指针寄存器"><span class="toc-content-text">堆栈指针寄存器</span></a></li><li class="toc-content-item toc-content-level-3"><a class="toc-content-link" href="#基址指针寄存器"><span class="toc-content-text">基址指针寄存器</span></a></li></ol></li><li class="toc-content-item toc-content-level-2"><a class="toc-content-link" href="#变址寄存器"><span class="toc-content-text">变址寄存器</span></a><ol class="toc-content-child"><li class="toc-content-item toc-content-level-3"><a class="toc-content-link" href="#源地址寄存器"><span class="toc-content-text">源地址寄存器</span></a></li><li class="toc-content-item toc-content-level-3"><a class="toc-content-link" href="#目的地址寄存器"><span class="toc-content-text">目的地址寄存器</span></a></li></ol></li><li class="toc-content-item toc-content-level-2"><a class="toc-content-link" href="#最后补充"><span class="toc-content-text">最后补充</span></a></li></ol>
+        
+      </div>
+    </aside>
+  </div>
+
+
+</div>
+        <footer id="footer" class="footer">
+  <div class="outer">
+    <div class="copyright">
+      <a href="/Evandoz/">Notes &copy; 2015 - 2019<p></p>
+    </a></div>
+    <div class="navigation">
+      <a href="https://evandoz.github.io">Hexo · Levan</a>
+    </div>
+  </div>
+</footer>
+
+      </div>
+    </div>
+  </div>
+  <!-- <div class="scrollbar"></div>
+ -->
+  <div id="top-anchor" class="top-anchor">
+  <ul><li></li><li></li></ul>
+</div>
+
+  <div id="mobile-nav" class="mobile-nav">
+  
+    <a class="menu-item" href="/Evandoz/archives">归档</a>
+  
+    <a class="menu-item" href="/Evandoz/categories">分类</a>
+  
+    <a class="menu-item" href="/Evandoz/tags">标签</a>
+  
+    <a class="menu-item" href="/Evandoz/about">关于</a>
+  
+</div>
+
+<div id="over-layer" class="over-layer"></div>
+
+  <script src="/Evandoz/js/jquery.js"></script>
+<script src="/Evandoz/js/velocity.js"></script>
+<script src="/Evandoz/js/plugins.js"></script>
+<script src="/Evandoz/js/script.js"></script>
+
+<script type="text/javascript">
+(function(){
+  var bp = document.createElement('script');
+  var curProtocol = window.location.protocol.split(':')[0];
+  if (curProtocol === 'https') {
+    bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+  }
+  else {
+    bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+  }
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(bp, s);
+})();
+</script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+
+</body>
+</html>
