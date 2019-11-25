@@ -73,7 +73,7 @@
         <div id="content" class="content">
   <div class="outer">
     <main class="main">
-      <article id="数据结构/排序/20160915-归并排序" class="article card">
+      <article id="数据结构/排序/20160918-归并排序" class="article card">
         
   
   	<h1 class="post-title">归并排序</h1>
@@ -82,7 +82,7 @@
 
         <div class="post-meta">
           <span class="post-date">
-  <time datetime="2016-09-14T16:00:00.000Z">2016-09-15</time>
+  <time datetime="2016-09-17T16:00:00.000Z">2016-09-18</time>
 </span>
 
           
@@ -166,7 +166,9 @@
 </ol>
 <p>分治法就是将原问题分解为多个独立的子问题，且这些<strong>子问题的形式和原问题相似</strong>，只是规模上减少了，求解完子问题后合并结果构成原问题的解。</p>
 <p>分治法通常有3步：</p>
-<p>Divide（分解子问题的步骤）、Conquer（递归解决子问题的步骤）、Combine（子问题解求出来后合并成原问题解的步骤）。</p>
+<p>分解 Divide：将要解决的问题划分成若干规模较小的同类问题；<br>
+求解 Conquer：当子问题划分得足够小时，用简单的方法解决（递归）；<br>
+合并 Combine：按原问题的要求，将子问题的解逐层合并构成原问题的解。</p>
 <p>假设 Divide 需要 f(n) 时间，Conquer 分解为 b 个子问题，且子问题大小为 a，Combine 需要 g(n) 时间，则递归式为：</p>
 <p>T(n)=bT(n/a)+f(n)+g(n)</p>
 <p>参数传递是进行递归调用的重要一步，传递不当就可能导致程序结果异常，甚至因为内存问题无法正常运行。</p>
