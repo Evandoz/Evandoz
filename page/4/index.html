@@ -3,13 +3,13 @@
 <head>
   <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
   
-  <title>EXP 技术日常 - 记录与分享</title>
+  <title>EXP - 日常记录与分享</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
     <meta name="author" content="Levan">
   
   
-    <meta name="description" content="记录与分享">
+    <meta name="description" content="日常记录与分享">
   
   
     <meta name="keywords" content>
@@ -37,8 +37,8 @@
         
   <header id="header" class="header is-home">
     <div class="cover" style="background-image: url('/Evandoz/css/images/background.jpg')">
-      <h1 class="title">EXP 技术日常</h1>
-      <p class="desc">记录与分享</p>
+      <h1 class="title">EXP</h1>
+      <p class="desc">日常记录与分享</p>
     </div>
     <div class="outer">
 
@@ -83,16 +83,21 @@
     <div class="article-content">
       
   
-    <a class="post-link" href="/Evandoz/posts/1WNXGVJ.htm">ArchLinux 安装之桌面环境</a>
+    <a class="post-link" href="/Evandoz/posts/3JX9PBE.htm">ArchLinux 安装之显卡驱动</a>
   
 
 
       <div class="post-excerpt">
         
-          1.安装 Xorg
-XOrg 项目提供了 X 窗口系统的开源实现，已经成为图形用户程序的必备条件，桌面环境（如KDE）在它基础上运行，因此要先安装Xorg。
+          1.获取显卡情况
+1
 
-Xorg 可以通过 xorg-serve
+
+# lspci -k | grep -A 2 -E "(VGA|3D)"
+
+
+2.选择合适的显卡驱动
+本机显卡 NVIDIA Corporation GF119 [GeFor
         
       </div>
       <div class="post-meta">
@@ -100,7 +105,7 @@ Xorg 可以通过 xorg-serve
   <time datetime="2019-03-04T16:00:00.000Z">9 个月前</time>
 </span>
 
-        <span class="post-time">时长 3 分钟</span>
+        <span class="post-time">时长 1 分钟</span>
 
       </div>
     </div>
@@ -296,7 +301,7 @@ GUID分区类
       <div class="widget more">
   <div class="widget-content">
     <ul class="more-list">
-      <li><a href="/Evandoz/">EXP 技术日常 &copy; 2015 - 2019</a></li>
+      <li><a href="/Evandoz/">EXP &copy; 2015 - 2019</a></li>
       <li>Powered by <a href="https://evandoz.github.io">Hexo · Levan</a></li>
     </ul>
   </div>
