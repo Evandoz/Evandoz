@@ -3,7 +3,7 @@
 <head>
   <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
   
-  <title>Notes - Note and Share</title>
+  <title>EXP 技术日常 - 记录与分享</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
     <meta name="author" content="Levan">
@@ -37,10 +37,11 @@
         
   <header id="header" class="header is-home">
     <div class="cover" style="background-image: url('/Evandoz/css/images/background.jpg')">
-      <h1 class="title">Notes</h1>
+      <h1 class="title">EXP 技术日常</h1>
       <p class="desc">记录与分享</p>
     </div>
     <div class="outer">
+
 
 
     <div class="nav">
@@ -82,54 +83,21 @@
     <div class="article-content">
       
   
-    <a class="post-link" href="/Evandoz/posts/26CFAN8.htm">margin:auto 实现元素绝对居中</a>
+    <a class="post-link" href="/Evandoz/posts/1WNXGVJ.htm">ArchLinux 安装之桌面环境</a>
   
 
 
       <div class="post-excerpt">
         
-          在 CodePen 发现了一种不太常见元素绝对居中（水平和垂直）方法，大致思路是使用 margin 和 position 属性。但它并非是将 margin 置为负，而是直接置为 auto，需要说明的是
+          1.安装 Xorg
+XOrg 项目提供了 X 窗口系统的开源实现，已经成为图形用户程序的必备条件，桌面环境（如KDE）在它基础上运行，因此要先安装Xorg。
+
+Xorg 可以通过 xorg-serve
         
       </div>
       <div class="post-meta">
         <span class="post-date">
-  <time datetime="2018-05-12T16:00:00.000Z">2 年前</time>
-</span>
-
-        <span class="post-time">时长 2 分钟</span>
-
-      </div>
-    </div>
-  </div>
-
-
-      
-        
-  <div class="article-item card">
-    
-  <div class="article-thumb">
-    <a href="/Evandoz/posts/1AZ97P3.htm" class="image" style="background-image: url('https://raw.githubusercontent.com/Evandoz/blob/master/NPM/node.jpg');">IMG</a>
-  </div>
-
-
-    <div class="article-content">
-      
-  
-    <a class="post-link" href="/Evandoz/posts/1AZ97P3.htm">使用 npm 更新 package</a>
-  
-
-
-      <div class="post-excerpt">
-        
-          现实需求：使用vue-cli等脚手架工具创建工程后，当工程中的模块有更新时，如何将工程中的模块都更新到最新？
-
-检查模块更新
-使用 npm 管理工具的检查更新命令能列举出当前工程所有可更新的 node
-        
-      </div>
-      <div class="post-meta">
-        <span class="post-date">
-  <time datetime="2018-04-15T16:00:00.000Z">2 年前</time>
+  <time datetime="2019-03-04T16:00:00.000Z">9 个月前</time>
 </span>
 
         <span class="post-time">时长 3 分钟</span>
@@ -147,33 +115,24 @@
     <div class="article-content">
       
   
-    <a class="post-link" href="/Evandoz/posts/013PYV.htm">CSS 实现图片等比例缩放</a>
+    <a class="post-link" href="/Evandoz/posts/2EF995S.htm">ArchLinux 安装之用户管理</a>
   
 
 
       <div class="post-excerpt">
         
-          对图片使用max-width和max-height，图片会按照父容器宽高自动缩放，并保持图片原本的长宽比，图片相对不变形。
+          1.添加普通用户
+新安装的系统只有一个超级用户 root，使用 root 进行日常操作是不安全的，应当创建普通用户进行日常操作，仅在管理系统时使用 root。
 
-1
-2
-3
-4
-5
-6
-
-
-img{
-  width: auto;
-  h
+执行who命令，可以查看目前已登陆的用
         
       </div>
       <div class="post-meta">
         <span class="post-date">
-  <time datetime="2018-03-17T16:00:00.000Z">2 年前</time>
+  <time datetime="2019-03-03T16:00:00.000Z">9 个月前</time>
 </span>
 
-        <span class="post-time">时长 1 分钟</span>
+        <span class="post-time">时长 2 分钟</span>
 
       </div>
     </div>
@@ -188,23 +147,24 @@ img{
     <div class="article-content">
       
   
-    <a class="post-link" href="/Evandoz/posts/1DXZ6CM.htm">Vue 本地数据请求配置向 webpack-dev-conf.js 迁移</a>
+    <a class="post-link" href="/Evandoz/posts/2Q76PTR.htm">ArchLinux 安装之 GPT+UEFI+Windows10 双系统</a>
   
 
 
       <div class="post-excerpt">
         
-          现实问题：更行后的 vue webpack 模板中没有了 dev-server.js 文件，那么在新版本中如何配置相关文件来完成本地后台模拟数据的访问？
+          参考官方 Wiki：Installation guide
 
-原来的 dev-server.js 文件中的
+1.验证启动模式
+如果以在 UEFI 主板上启用 UEFI 模式，Archiso 将会使用 systemd-boot 来 启动 Arch L
         
       </div>
       <div class="post-meta">
         <span class="post-date">
-  <time datetime="2018-03-10T16:00:00.000Z">2 年前</time>
+  <time datetime="2019-03-02T16:00:00.000Z">9 个月前</time>
 </span>
 
-        <span class="post-time">时长 1 分钟</span>
+        <span class="post-time">时长 7 分钟</span>
 
       </div>
     </div>
@@ -219,21 +179,23 @@ img{
     <div class="article-content">
       
   
-    <a class="post-link" href="/Evandoz/posts/3PWVJXG.htm">Vue+Django 前后分离构建 Web 应用</a>
+    <a class="post-link" href="/Evandoz/posts/3SVV2S6.htm">Node-gyp 使用 VS 2019 构建工具</a>
   
 
 
       <div class="post-excerpt">
         
-          Vue.js是一套用于构建用户界面的渐进式框架，特点是数据驱动，区别传统DOM操作，核心库只关注视图层，易与第三方库或既有项目整合，。而Django由Python的一种经典Web应用框架，采用了MTV
+          使用 Vue-cli 3 创建 Vue 工程后，安装依赖包报错，报错提示是 MSVC 编译器的问题:
+
+NPM fails on msbuild.exe with exit code 1 · Issu
         
       </div>
       <div class="post-meta">
         <span class="post-date">
-  <time datetime="2018-03-08T16:00:00.000Z">2 年前</time>
+  <time datetime="2019-02-26T16:00:00.000Z">9 个月前</time>
 </span>
 
-        <span class="post-time">时长 1 分钟</span>
+        <span class="post-time">时长 2 分钟</span>
 
       </div>
     </div>
@@ -248,27 +210,54 @@ img{
     <div class="article-content">
       
   
-    <a class="post-link" href="/Evandoz/posts/1D7M9WB.htm">Javascript 插件收集</a>
+    <a class="post-link" href="/Evandoz/posts/15KEZDG.htm">使用 bcdboot 重建 Windows 系统引导</a>
   
 
 
       <div class="post-excerpt">
         
-          汇集平时用过的 Javascript 插件，日后持续更新。
-
-Bootstrap 相关
- 1. bootstrap-dualllistbox
-    项目主页：duallistbox
-    
-   
+          Windows 上自带的 bcdboot 应用程序一种用于快速设置系统分区或修复系统分区上的启动环境的工具，它通过从已安装的 Windows 系统文件夹中复制一小部分启动环境文件来设置/修复系统，此外
         
       </div>
       <div class="post-meta">
         <span class="post-date">
-  <time datetime="2018-03-07T16:00:00.000Z">2 年前</time>
+  <time datetime="2019-01-17T16:00:00.000Z">10 个月前</time>
 </span>
 
-        <span class="post-time">时长 1 分钟</span>
+        <span class="post-time">时长 4 分钟</span>
+
+      </div>
+    </div>
+  </div>
+
+
+      
+        
+  <div class="article-item card">
+    
+
+    <div class="article-content">
+      
+  
+    <a class="post-link" href="/Evandoz/posts/3KW5Z9Y.htm">GPT 分区表</a>
+  
+
+
+      <div class="post-excerpt">
+        
+          GPT分区表用于存储GPT硬盘分区信息，分区表中的分区信息中有一段区域用来表示分区类型（16字节，即128位）,用于区别分区的用途。
+
+Windows下常见的GUID分区类型主要有：
+
+GUID分区类
+        
+      </div>
+      <div class="post-meta">
+        <span class="post-date">
+  <time datetime="2019-01-10T16:00:00.000Z">1 年前</time>
+</span>
+
+        <span class="post-time">时长 3 分钟</span>
 
       </div>
     </div>
@@ -279,7 +268,7 @@ Bootstrap 相关
     </div>
     
   <div class="paginator card">
-    <a class="extend prev" rel="prev" href="/Evandoz/page/3/"><ul class="icon prev-icon"><li></li><li></li><li></li></ul></a><a class="page-number" href="/Evandoz/">1</a><span class="space">&hellip;</span><a class="page-number" href="/Evandoz/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/Evandoz/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/Evandoz/page/11/">11</a><a class="extend next" rel="next" href="/Evandoz/page/5/"><ul class="icon next-icon"><li></li><li></li><li></li></ul></a>
+    <a class="extend prev" rel="prev" href="/Evandoz/page/3/"><ul class="icon prev-icon"><li></li><li></li><li></li></ul></a><a class="page-number" href="/Evandoz/">1</a><span class="space">&hellip;</span><a class="page-number" href="/Evandoz/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/Evandoz/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/Evandoz/page/12/">12</a><a class="extend next" rel="next" href="/Evandoz/page/5/"><ul class="icon next-icon"><li></li><li></li><li></li></ul></a>
   </div>
 
 
@@ -288,36 +277,36 @@ Bootstrap 相关
     
       <div class="widget card">
   <div class="widget-content">
-    <span>文章数: 61</span>
-    <span>总字数: 53.2k</span>
+    <span>文章数: 70</span>
+    <span>总字数: 64.3k</span>
   </div>
 </div>
 
     
       
   <div class="widget card">
-    <h3 class="widget-title">分类</h3>
+    <h3 class="widget-title">分类数</h3>
     <div class="widget-content">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/Evandoz/categories/Hexo/">HEXO</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/Evandoz/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/">前端开发</a><span class="category-list-count">15</span></li><li class="category-list-item"><a class="category-list-link" href="/Evandoz/categories/%E5%B7%A5%E5%85%B7%E5%BA%94%E7%94%A8/">工具应用</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/Evandoz/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">操作系统</a><span class="category-list-count">12</span></li><li class="category-list-item"><a class="category-list-link" href="/Evandoz/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构</a><span class="category-list-count">18</span></li><li class="category-list-item"><a class="category-list-link" href="/Evandoz/categories/%E7%B3%BB%E7%BB%9F%E7%BB%93%E6%9E%84/">系统结构</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/Evandoz/categories/%E7%BC%96%E7%A8%8B%E5%BC%80%E5%8F%91/">编程开发</a><span class="category-list-count">7</span></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/Evandoz/categories/Hexo/">HEXO</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/Evandoz/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/">前端开发</a><span class="category-list-count">17</span></li><li class="category-list-item"><a class="category-list-link" href="/Evandoz/categories/%E5%B7%A5%E5%85%B7%E5%BA%94%E7%94%A8/">工具应用</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/Evandoz/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">操作系统</a><span class="category-list-count">14</span></li><li class="category-list-item"><a class="category-list-link" href="/Evandoz/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构</a><span class="category-list-count">18</span></li><li class="category-list-item"><a class="category-list-link" href="/Evandoz/categories/%E7%94%9F%E6%B4%BB%E7%88%B1%E5%A5%BD/">生活爱好</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/Evandoz/categories/%E7%B3%BB%E7%BB%9F%E7%BB%93%E6%9E%84/">系统结构</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/Evandoz/categories/%E7%BC%96%E7%A8%8B%E5%BC%80%E5%8F%91/">编程开发</a><span class="category-list-count">9</span></li><li class="category-list-item"><a class="category-list-link" href="/Evandoz/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">计算机网络</a><span class="category-list-count">2</span></li></ul>
     </div>
   </div>
 
 
     
+      <div class="widget more">
+  <div class="widget-content">
+    <ul class="more-list">
+      <li><a href="/Evandoz/">EXP 技术日常 &copy; 2015 - 2019</a></li>
+      <li>Powered by <a href="https://evandoz.github.io">Hexo · Levan</a></li>
+    </ul>
+  </div>
+</div>
+
+    
   </aside>
 </div>
 </div>
-        <footer id="footer" class="footer">
-  <div class="outer">
-    <div class="copyright">
-      <a href="/Evandoz/">Notes &copy; 2015 - 2019<p></p>
-    </a></div>
-    <div class="navigation">
-      <a href="https://evandoz.github.io">Hexo · Levan</a>
-    </div>
-  </div>
-</footer>
-
+        
       </div>
     </div>
   </div>

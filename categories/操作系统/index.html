@@ -3,7 +3,7 @@
 <head>
   <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
   
-  <title>分类: 操作系统 | Notes</title>
+  <title>分类: 操作系统 | EXP 技术日常</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
     <meta name="author" content="Levan">
@@ -35,11 +35,12 @@
     <div id="hiddenbar" class="hiddenbar">
       <div id="wrapper" class="wrapper">
         
-  <header id="header" class="header is-page">
-    <div class="outer">
-      <div class="logo">
-        <a class="title" href="/Evandoz/">Notes</a>
-      </div>
+<header id="header" class="header is-page">
+  <div class="outer">
+    <div class="logo">
+      <a class="title" href="/Evandoz/">EXP 技术日常</a>
+    </div>
+
 
 
     <div class="nav">
@@ -72,7 +73,8 @@
 
         <div id="content" class="content"><div class="cover" style="background-image: url('/Evandoz/css/images/background.jpg')">
 
-    <h1 class="title">操作系统</h1>
+    <h2 class="title">分类 操作系统</h2>
+    <p class="desc">文章数：6</p>
   </div> <!-- cover -->
   <div class="inner">
     <div class="archive">
@@ -117,21 +119,31 @@
     <div class="article-content">
       
   
-    <a class="post-link" href="/Evandoz/posts/3RG8RQR.htm">ArchLinux 安装之 AUR</a>
+    <a class="post-link" href="/Evandoz/posts/2RND1WZ.htm">ArchLinux 安装之显卡驱动（失败）</a>
   
 
 
       <div class="post-excerpt">
         
-          
+          直接从Nvidia官网下载驱动程序包 .run 运行出错：
+
+注意：运行 .run 之前，请确保已经安装了编译工具，最好先运行
+
+1
+
+
+# pacman -S base-devel
+
+
+来安装编译驱
         
       </div>
       <div class="post-meta">
         <span class="post-date">
-  <time datetime="2019-03-06T16:00:00.000Z">9 个月前</time>
+  <time datetime="2019-05-16T16:00:00.000Z">6 个月前</time>
 </span>
 
-        <span class="post-time">时长 1 分钟</span>
+        <span class="post-time">时长 3 分钟</span>
 
       </div>
     </div>
@@ -146,18 +158,34 @@
     <div class="article-content">
       
   
-    <a class="post-link" href="/Evandoz/posts/9SDJWS.htm">ArchLinux 安装之中文输入法</a>
+    <a class="post-link" href="/Evandoz/posts/2PM5WZ7.htm">ArchLinux 安装之 Deepin 桌面环境</a>
   
 
 
       <div class="post-excerpt">
         
-          
+          安装 Deepin 桌面环境
+
+1
+
+
+$ sudo pacman -S deepin
+
+
+修改 lightdm.conf 使用登录管理器
+
+1
+2
+3
+4
+
+
+$ nano /etc/lightdm
         
       </div>
       <div class="post-meta">
         <span class="post-date">
-  <time datetime="2019-03-06T16:00:00.000Z">9 个月前</time>
+  <time datetime="2019-04-22T16:00:00.000Z">7 个月前</time>
 </span>
 
         <span class="post-time">时长 1 分钟</span>
@@ -181,12 +209,13 @@
 
       <div class="post-excerpt">
         
-          
+          关于 GRUB 配置文件
+GRUB 配置文件为 “/boot/grub/grub.cfg”，因此可以直接编辑该文件来达到我们想要的效果，但是该 grub.cfg 配置文件的起始位置就提示 不要编辑该文
         
       </div>
       <div class="post-meta">
         <span class="post-date">
-  <time datetime="2019-03-05T16:00:00.000Z">9 个月前</time>
+  <time datetime="2019-03-10T16:00:00.000Z">9 个月前</time>
 </span>
 
         <span class="post-time">时长 1 分钟</span>
@@ -204,18 +233,25 @@
     <div class="article-content">
       
   
-    <a class="post-link" href="/Evandoz/posts/3JX9PBE.htm">ArchLinux 安装之显卡驱动</a>
+    <a class="post-link" href="/Evandoz/posts/9SDJWS.htm">ArchLinux 安装之中文输入法</a>
   
 
 
       <div class="post-excerpt">
         
-          
+          1.安装fcitx输入法引擎
+1
+
+
+$ sudo pacman -S fcitx
+
+
+注意：为了在 Gtk+ 和 Qt 上获得更好的体验，还需要安装如下几个包。虽然不安装也可以使用，但很可能出现各种
         
       </div>
       <div class="post-meta">
         <span class="post-date">
-  <time datetime="2019-03-04T16:00:00.000Z">9 个月前</time>
+  <time datetime="2019-03-07T16:00:00.000Z">9 个月前</time>
 </span>
 
         <span class="post-time">时长 1 分钟</span>
@@ -233,18 +269,18 @@
     <div class="article-content">
       
   
-    <a class="post-link" href="/Evandoz/posts/1WNXGVJ.htm">ArchLinux 安装之桌面环境</a>
+    <a class="post-link" href="/Evandoz/posts/3RG8RQR.htm">ArchLinux 安装之 AUR</a>
   
 
 
       <div class="post-excerpt">
         
-          
+          AUR 全称 Arch User Repository，是为用户而建、由用户主导的 Arch 软件仓库，相当于Debian/Ubuntu 下的 PPA。为了简化的AUR软件包的安装流程，随之诞生了AU
         
       </div>
       <div class="post-meta">
         <span class="post-date">
-  <time datetime="2019-03-04T16:00:00.000Z">9 个月前</time>
+  <time datetime="2019-03-06T16:00:00.000Z">9 个月前</time>
 </span>
 
         <span class="post-time">时长 1 分钟</span>
@@ -260,7 +296,7 @@
 
 
   <div class="paginator card">
-    <span class="page-number current">1</span><a class="page-number" href="/Evandoz/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/page/2/">2</a><a class="extend next" rel="next" href="/Evandoz/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/page/2/"><ul class="icon next-icon"><li></li><li></li><li></li></ul></a>
+    <span class="page-number current">1</span><a class="page-number" href="/Evandoz/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/page/2/">2</a><a class="page-number" href="/Evandoz/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/page/3/">3</a><a class="extend next" rel="next" href="/Evandoz/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/page/2/"><ul class="icon next-icon"><li></li><li></li><li></li></ul></a>
   </div>
 
 
@@ -268,10 +304,11 @@
 </div> <!-- inner -->
 
 </div>
-        <footer id="footer" class="footer">
+        
+          <footer id="footer" class="footer">
   <div class="outer">
     <div class="copyright">
-      <a href="/Evandoz/">Notes &copy; 2015 - 2019<p></p>
+      <a href="/Evandoz/">EXP 技术日常 &copy; 2015 - 2019<p></p>
     </a></div>
     <div class="navigation">
       <a href="https://evandoz.github.io">Hexo · Levan</a>
@@ -279,6 +316,7 @@
   </div>
 </footer>
 
+        
       </div>
     </div>
   </div>

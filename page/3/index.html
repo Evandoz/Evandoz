@@ -3,7 +3,7 @@
 <head>
   <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
   
-  <title>Notes - Note and Share</title>
+  <title>EXP 技术日常 - 记录与分享</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
     <meta name="author" content="Levan">
@@ -37,10 +37,11 @@
         
   <header id="header" class="header is-home">
     <div class="cover" style="background-image: url('/Evandoz/css/images/background.jpg')">
-      <h1 class="title">Notes</h1>
+      <h1 class="title">EXP 技术日常</h1>
       <p class="desc">记录与分享</p>
     </div>
     <div class="outer">
+
 
 
     <div class="nav">
@@ -82,18 +83,18 @@
     <div class="article-content">
       
   
-    <a class="post-link" href="/Evandoz/posts/2EF995S.htm">ArchLinux 安装之用户管理</a>
+    <a class="post-link" href="/Evandoz/posts/1KHAY4M.htm">网络安全之非对称加密</a>
   
 
 
       <div class="post-excerpt">
         
-          Archlinux_Postinstallation_User_Management
+          
         
       </div>
       <div class="post-meta">
         <span class="post-date">
-  <time datetime="2019-03-03T16:00:00.000Z">9 个月前</time>
+  <time datetime="2019-03-22T16:00:00.000Z">8 个月前</time>
 </span>
 
         <span class="post-time">时长 1 分钟</span>
@@ -111,23 +112,25 @@
     <div class="article-content">
       
   
-    <a class="post-link" href="/Evandoz/posts/3SVV2S6.htm">Node-gyp 使用 VS 2019 构建工具</a>
+    <a class="post-link" href="/Evandoz/posts/2SP7K3Z.htm">消息机制与 RPC</a>
   
 
 
       <div class="post-excerpt">
         
-          使用 Vue-cli 3 创建 Vue 工程后，安装依赖包报错，报错提示是 MSVC 编译器的问题:
+          消息机制主要用于端到端的延迟通信；而RPC用于端到端的同步通信。
 
-NPM fails on msbuild.exe with exit code 1 · Issu
+在RPC机制下，用于接收数据的进程必须在数据发送时处于执行状态。如果在消息发送过程中，接收进程死掉了，则数据将不能再传输。
+
+相反，
         
       </div>
       <div class="post-meta">
         <span class="post-date">
-  <time datetime="2019-02-26T16:00:00.000Z">9 个月前</time>
+  <time datetime="2019-03-16T16:00:00.000Z">8 个月前</time>
 </span>
 
-        <span class="post-time">时长 2 分钟</span>
+        <span class="post-time">时长 1 分钟</span>
 
       </div>
     </div>
@@ -142,21 +145,22 @@ NPM fails on msbuild.exe with exit code 1 · Issu
     <div class="article-content">
       
   
-    <a class="post-link" href="/Evandoz/posts/15KEZDG.htm">使用 bcdboot 重建 Windows 系统引导</a>
+    <a class="post-link" href="/Evandoz/posts/2B24VQ3.htm">ArchLinux 安装之 GRUB</a>
   
 
 
       <div class="post-excerpt">
         
-          Windows 上自带的 bcdboot 应用程序一种用于快速设置系统分区或修复系统分区上的启动环境的工具，它通过从已安装的 Windows 系统文件夹中复制一小部分启动环境文件来设置/修复系统，此外
+          关于 GRUB 配置文件
+GRUB 配置文件为 “/boot/grub/grub.cfg”，因此可以直接编辑该文件来达到我们想要的效果，但是该 grub.cfg 配置文件的起始位置就提示 不要编辑该文
         
       </div>
       <div class="post-meta">
         <span class="post-date">
-  <time datetime="2019-01-17T16:00:00.000Z">10 个月前</time>
+  <time datetime="2019-03-10T16:00:00.000Z">9 个月前</time>
 </span>
 
-        <span class="post-time">时长 4 分钟</span>
+        <span class="post-time">时长 1 分钟</span>
 
       </div>
     </div>
@@ -171,25 +175,28 @@ NPM fails on msbuild.exe with exit code 1 · Issu
     <div class="article-content">
       
   
-    <a class="post-link" href="/Evandoz/posts/3KW5Z9Y.htm">GPT 分区表</a>
+    <a class="post-link" href="/Evandoz/posts/9SDJWS.htm">ArchLinux 安装之中文输入法</a>
   
 
 
       <div class="post-excerpt">
         
-          GPT分区表用于存储GPT硬盘分区信息，分区表中的分区信息中有一段区域用来表示分区类型（16字节，即128位）,用于区别分区的用途。
+          1.安装fcitx输入法引擎
+1
 
-Windows下常见的GUID分区类型主要有：
 
-GUID分区类
+$ sudo pacman -S fcitx
+
+
+注意：为了在 Gtk+ 和 Qt 上获得更好的体验，还需要安装如下几个包。虽然不安装也可以使用，但很可能出现各种
         
       </div>
       <div class="post-meta">
         <span class="post-date">
-  <time datetime="2019-01-10T16:00:00.000Z">10 个月前</time>
+  <time datetime="2019-03-07T16:00:00.000Z">9 个月前</time>
 </span>
 
-        <span class="post-time">时长 3 分钟</span>
+        <span class="post-time">时长 1 分钟</span>
 
       </div>
     </div>
@@ -204,23 +211,21 @@ GUID分区类
     <div class="article-content">
       
   
-    <a class="post-link" href="/Evandoz/posts/3RGNXMW.htm">使用 DiskPart 自定义 Windows 分区类型及大小</a>
+    <a class="post-link" href="/Evandoz/posts/3RG8RQR.htm">ArchLinux 安装之 AUR</a>
   
 
 
       <div class="post-excerpt">
         
-          使用优启安装 Windows 时，创建系统引导分区一般有两种方法：
-
- 1. 从优盘启动后，直接使用 Windows 的自动创建功能，它默认会创建相应大小的分区，其大小一般如下（Windows 10）
+          AUR 全称 Arch User Repository，是为用户而建、由用户主导的 Arch 软件仓库，相当于Debian/Ubuntu 下的 PPA。为了简化的AUR软件包的安装流程，随之诞生了AU
         
       </div>
       <div class="post-meta">
         <span class="post-date">
-  <time datetime="2019-01-09T16:00:00.000Z">1 年前</time>
+  <time datetime="2019-03-06T16:00:00.000Z">9 个月前</time>
 </span>
 
-        <span class="post-time">时长 3 分钟</span>
+        <span class="post-time">时长 1 分钟</span>
 
       </div>
     </div>
@@ -235,20 +240,26 @@ GUID分区类
     <div class="article-content">
       
   
-    <a class="post-link" href="/Evandoz/posts/1TQS3HD.htm">在 ArchLinux 中使用 Secure Boot</a>
+    <a class="post-link" href="/Evandoz/posts/3JX9PBE.htm">ArchLinux 安装之显卡驱动</a>
   
 
 
       <div class="post-excerpt">
         
-          在预装了 Winodws 10 的笔记本上装上了 Archlinux (GPT + UEFI)，由于数字签名信任的问题，无法使用 Secure Boot，不过可以使用可信任的数字签名来解决问题。
+          1.获取显卡情况
+1
 
-介
+
+# lspci -k | grep -A 2 -E "(VGA|3D)"
+
+
+2.选择合适的显卡驱动
+本机显卡 NVIDIA Corporation GF119 [GeFor
         
       </div>
       <div class="post-meta">
         <span class="post-date">
-  <time datetime="2018-06-29T16:00:00.000Z">1 年前</time>
+  <time datetime="2019-03-04T16:00:00.000Z">9 个月前</time>
 </span>
 
         <span class="post-time">时长 1 分钟</span>
@@ -262,7 +273,7 @@ GUID分区类
     </div>
     
   <div class="paginator card">
-    <a class="extend prev" rel="prev" href="/Evandoz/page/2/"><ul class="icon prev-icon"><li></li><li></li><li></li></ul></a><a class="page-number" href="/Evandoz/">1</a><a class="page-number" href="/Evandoz/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/Evandoz/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/Evandoz/page/11/">11</a><a class="extend next" rel="next" href="/Evandoz/page/4/"><ul class="icon next-icon"><li></li><li></li><li></li></ul></a>
+    <a class="extend prev" rel="prev" href="/Evandoz/page/2/"><ul class="icon prev-icon"><li></li><li></li><li></li></ul></a><a class="page-number" href="/Evandoz/">1</a><a class="page-number" href="/Evandoz/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/Evandoz/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/Evandoz/page/12/">12</a><a class="extend next" rel="next" href="/Evandoz/page/4/"><ul class="icon next-icon"><li></li><li></li><li></li></ul></a>
   </div>
 
 
@@ -271,36 +282,36 @@ GUID分区类
     
       <div class="widget card">
   <div class="widget-content">
-    <span>文章数: 61</span>
-    <span>总字数: 53.2k</span>
+    <span>文章数: 70</span>
+    <span>总字数: 64.3k</span>
   </div>
 </div>
 
     
       
   <div class="widget card">
-    <h3 class="widget-title">分类</h3>
+    <h3 class="widget-title">分类数</h3>
     <div class="widget-content">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/Evandoz/categories/Hexo/">HEXO</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/Evandoz/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/">前端开发</a><span class="category-list-count">15</span></li><li class="category-list-item"><a class="category-list-link" href="/Evandoz/categories/%E5%B7%A5%E5%85%B7%E5%BA%94%E7%94%A8/">工具应用</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/Evandoz/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">操作系统</a><span class="category-list-count">12</span></li><li class="category-list-item"><a class="category-list-link" href="/Evandoz/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构</a><span class="category-list-count">18</span></li><li class="category-list-item"><a class="category-list-link" href="/Evandoz/categories/%E7%B3%BB%E7%BB%9F%E7%BB%93%E6%9E%84/">系统结构</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/Evandoz/categories/%E7%BC%96%E7%A8%8B%E5%BC%80%E5%8F%91/">编程开发</a><span class="category-list-count">7</span></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/Evandoz/categories/Hexo/">HEXO</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/Evandoz/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/">前端开发</a><span class="category-list-count">17</span></li><li class="category-list-item"><a class="category-list-link" href="/Evandoz/categories/%E5%B7%A5%E5%85%B7%E5%BA%94%E7%94%A8/">工具应用</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/Evandoz/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">操作系统</a><span class="category-list-count">14</span></li><li class="category-list-item"><a class="category-list-link" href="/Evandoz/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构</a><span class="category-list-count">18</span></li><li class="category-list-item"><a class="category-list-link" href="/Evandoz/categories/%E7%94%9F%E6%B4%BB%E7%88%B1%E5%A5%BD/">生活爱好</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/Evandoz/categories/%E7%B3%BB%E7%BB%9F%E7%BB%93%E6%9E%84/">系统结构</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/Evandoz/categories/%E7%BC%96%E7%A8%8B%E5%BC%80%E5%8F%91/">编程开发</a><span class="category-list-count">9</span></li><li class="category-list-item"><a class="category-list-link" href="/Evandoz/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">计算机网络</a><span class="category-list-count">2</span></li></ul>
     </div>
   </div>
 
 
     
+      <div class="widget more">
+  <div class="widget-content">
+    <ul class="more-list">
+      <li><a href="/Evandoz/">EXP 技术日常 &copy; 2015 - 2019</a></li>
+      <li>Powered by <a href="https://evandoz.github.io">Hexo · Levan</a></li>
+    </ul>
+  </div>
+</div>
+
+    
   </aside>
 </div>
 </div>
-        <footer id="footer" class="footer">
-  <div class="outer">
-    <div class="copyright">
-      <a href="/Evandoz/">Notes &copy; 2015 - 2019<p></p>
-    </a></div>
-    <div class="navigation">
-      <a href="https://evandoz.github.io">Hexo · Levan</a>
-    </div>
-  </div>
-</footer>
-
+        
       </div>
     </div>
   </div>

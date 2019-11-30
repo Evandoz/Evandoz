@@ -3,7 +3,7 @@
 <head>
   <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
   
-  <title>Notes - Note and Share</title>
+  <title>EXP 技术日常 - 记录与分享</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
     <meta name="author" content="Levan">
@@ -37,10 +37,11 @@
         
   <header id="header" class="header is-home">
     <div class="cover" style="background-image: url('/Evandoz/css/images/background.jpg')">
-      <h1 class="title">Notes</h1>
+      <h1 class="title">EXP 技术日常</h1>
       <p class="desc">记录与分享</p>
     </div>
     <div class="outer">
+
 
 
     <div class="nav">
@@ -82,18 +83,54 @@
     <div class="article-content">
       
   
-    <a class="post-link" href="/Evandoz/posts/3RG8RQR.htm">ArchLinux 安装之 AUR</a>
+    <a class="post-link" href="/Evandoz/posts/WKM731.htm">花式咖啡</a>
   
 
 
       <div class="post-excerpt">
         
-          
+          花式咖啡就是在浓缩咖啡的基础上按照不同比例加入了各种调味品以及其他饮品的咖啡，掺入的调味品包括牛奶、奶油、巧克力、冰淇淋、各种洋酒、果汁等。
+
+1. 浓缩咖啡 Espresso
+介绍：即意式浓缩咖啡，
         
       </div>
       <div class="post-meta">
         <span class="post-date">
-  <time datetime="2019-03-06T16:00:00.000Z">9 个月前</time>
+  <time datetime="2019-05-25T16:00:00.000Z">6 个月前</time>
+</span>
+
+        <span class="post-time">时长 6 分钟</span>
+
+      </div>
+    </div>
+  </div>
+
+
+      
+        
+  <div class="article-item card">
+    
+
+    <div class="article-content">
+      
+  
+    <a class="post-link" href="/Evandoz/posts/JCZZ3K.htm">ArchLinux 安装之 Sogou 输入法异常</a>
+  
+
+
+      <div class="post-excerpt">
+        
+          Archlinux 安装好搜狗输入法，重启之后出现消息提示：
+
+搜狗输入法异常！请删除.config/SogouPY 并重启
+
+经查询是因为缺少 fcitx-qt4 导致搜狗输入法无法工作，而 Arc
+        
+      </div>
+      <div class="post-meta">
+        <span class="post-date">
+  <time datetime="2019-05-22T16:00:00.000Z">6 个月前</time>
 </span>
 
         <span class="post-time">时长 1 分钟</span>
@@ -111,18 +148,73 @@
     <div class="article-content">
       
   
-    <a class="post-link" href="/Evandoz/posts/9SDJWS.htm">ArchLinux 安装之中文输入法</a>
+    <a class="post-link" href="/Evandoz/posts/2RND1WZ.htm">ArchLinux 安装之显卡驱动（失败）</a>
   
 
 
       <div class="post-excerpt">
         
-          
+          直接从Nvidia官网下载驱动程序包 .run 运行出错：
+
+注意：运行 .run 之前，请确保已经安装了编译工具，最好先运行
+
+1
+
+
+# pacman -S base-devel
+
+
+来安装编译驱
         
       </div>
       <div class="post-meta">
         <span class="post-date">
-  <time datetime="2019-03-06T16:00:00.000Z">9 个月前</time>
+  <time datetime="2019-05-16T16:00:00.000Z">6 个月前</time>
+</span>
+
+        <span class="post-time">时长 3 分钟</span>
+
+      </div>
+    </div>
+  </div>
+
+
+      
+        
+  <div class="article-item card">
+    
+
+    <div class="article-content">
+      
+  
+    <a class="post-link" href="/Evandoz/posts/2PM5WZ7.htm">ArchLinux 安装之 Deepin 桌面环境</a>
+  
+
+
+      <div class="post-excerpt">
+        
+          安装 Deepin 桌面环境
+
+1
+
+
+$ sudo pacman -S deepin
+
+
+修改 lightdm.conf 使用登录管理器
+
+1
+2
+3
+4
+
+
+$ nano /etc/lightdm
+        
+      </div>
+      <div class="post-meta">
+        <span class="post-date">
+  <time datetime="2019-04-22T16:00:00.000Z">7 个月前</time>
 </span>
 
         <span class="post-time">时长 1 分钟</span>
@@ -140,18 +232,30 @@
     <div class="article-content">
       
   
-    <a class="post-link" href="/Evandoz/posts/2B24VQ3.htm">ArchLinux 安装之 GRUB</a>
+    <a class="post-link" href="/Evandoz/posts/39XGE4E.htm">使用 yarn 更新 package</a>
   
 
 
       <div class="post-excerpt">
         
-          
+          方案一
+使用命令
+
+1
+
+
+yarn upgrade-interactive --latest
+
+
+进入手动选择模式，手动选择升级的依赖包，按空格键选择，a 键切换所有，i 键反选选择。
+
+方案二
+使
         
       </div>
       <div class="post-meta">
         <span class="post-date">
-  <time datetime="2019-03-05T16:00:00.000Z">9 个月前</time>
+  <time datetime="2019-04-15T16:00:00.000Z">7 个月前</time>
 </span>
 
         <span class="post-time">时长 1 分钟</span>
@@ -169,76 +273,27 @@
     <div class="article-content">
       
   
-    <a class="post-link" href="/Evandoz/posts/3JX9PBE.htm">ArchLinux 安装之显卡驱动</a>
+    <a class="post-link" href="/Evandoz/posts/Q8NM3R.htm">网络安全之对称加密</a>
   
 
 
       <div class="post-excerpt">
         
-          
+          对称密钥密码体制
+所谓常规密钥密码体制，即加密密钥与解密密钥是相同的密码体制。
+这种加密系统又称为对称密钥系统。
+
+优点 效率高
+
+缺点 秘钥不适合在网上传输、秘钥维护、麻烦
+
+数据加密标准 DES
+
         
       </div>
       <div class="post-meta">
         <span class="post-date">
-  <time datetime="2019-03-04T16:00:00.000Z">9 个月前</time>
-</span>
-
-        <span class="post-time">时长 1 分钟</span>
-
-      </div>
-    </div>
-  </div>
-
-
-      
-        
-  <div class="article-item card">
-    
-
-    <div class="article-content">
-      
-  
-    <a class="post-link" href="/Evandoz/posts/1WNXGVJ.htm">ArchLinux 安装之桌面环境</a>
-  
-
-
-      <div class="post-excerpt">
-        
-          
-        
-      </div>
-      <div class="post-meta">
-        <span class="post-date">
-  <time datetime="2019-03-04T16:00:00.000Z">9 个月前</time>
-</span>
-
-        <span class="post-time">时长 1 分钟</span>
-
-      </div>
-    </div>
-  </div>
-
-
-      
-        
-  <div class="article-item card">
-    
-
-    <div class="article-content">
-      
-  
-    <a class="post-link" href="/Evandoz/posts/2Q76PTR.htm">ArchLinux 安装之 GPT+UEFI+Windows10 双系统</a>
-  
-
-
-      <div class="post-excerpt">
-        
-          写在前面：
-        
-      </div>
-      <div class="post-meta">
-        <span class="post-date">
-  <time datetime="2019-03-03T16:00:00.000Z">9 个月前</time>
+  <time datetime="2019-03-22T16:00:00.000Z">8 个月前</time>
 </span>
 
         <span class="post-time">时长 1 分钟</span>
@@ -252,7 +307,7 @@
     </div>
     
   <div class="paginator card">
-    <a class="extend prev" rel="prev" href="/Evandoz/"><ul class="icon prev-icon"><li></li><li></li><li></li></ul></a><a class="page-number" href="/Evandoz/">1</a><span class="page-number current">2</span><a class="page-number" href="/Evandoz/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/Evandoz/page/11/">11</a><a class="extend next" rel="next" href="/Evandoz/page/3/"><ul class="icon next-icon"><li></li><li></li><li></li></ul></a>
+    <a class="extend prev" rel="prev" href="/Evandoz/"><ul class="icon prev-icon"><li></li><li></li><li></li></ul></a><a class="page-number" href="/Evandoz/">1</a><span class="page-number current">2</span><a class="page-number" href="/Evandoz/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/Evandoz/page/12/">12</a><a class="extend next" rel="next" href="/Evandoz/page/3/"><ul class="icon next-icon"><li></li><li></li><li></li></ul></a>
   </div>
 
 
@@ -261,36 +316,36 @@
     
       <div class="widget card">
   <div class="widget-content">
-    <span>文章数: 61</span>
-    <span>总字数: 53.2k</span>
+    <span>文章数: 70</span>
+    <span>总字数: 64.3k</span>
   </div>
 </div>
 
     
       
   <div class="widget card">
-    <h3 class="widget-title">分类</h3>
+    <h3 class="widget-title">分类数</h3>
     <div class="widget-content">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/Evandoz/categories/Hexo/">HEXO</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/Evandoz/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/">前端开发</a><span class="category-list-count">15</span></li><li class="category-list-item"><a class="category-list-link" href="/Evandoz/categories/%E5%B7%A5%E5%85%B7%E5%BA%94%E7%94%A8/">工具应用</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/Evandoz/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">操作系统</a><span class="category-list-count">12</span></li><li class="category-list-item"><a class="category-list-link" href="/Evandoz/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构</a><span class="category-list-count">18</span></li><li class="category-list-item"><a class="category-list-link" href="/Evandoz/categories/%E7%B3%BB%E7%BB%9F%E7%BB%93%E6%9E%84/">系统结构</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/Evandoz/categories/%E7%BC%96%E7%A8%8B%E5%BC%80%E5%8F%91/">编程开发</a><span class="category-list-count">7</span></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/Evandoz/categories/Hexo/">HEXO</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/Evandoz/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/">前端开发</a><span class="category-list-count">17</span></li><li class="category-list-item"><a class="category-list-link" href="/Evandoz/categories/%E5%B7%A5%E5%85%B7%E5%BA%94%E7%94%A8/">工具应用</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/Evandoz/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">操作系统</a><span class="category-list-count">14</span></li><li class="category-list-item"><a class="category-list-link" href="/Evandoz/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构</a><span class="category-list-count">18</span></li><li class="category-list-item"><a class="category-list-link" href="/Evandoz/categories/%E7%94%9F%E6%B4%BB%E7%88%B1%E5%A5%BD/">生活爱好</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/Evandoz/categories/%E7%B3%BB%E7%BB%9F%E7%BB%93%E6%9E%84/">系统结构</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/Evandoz/categories/%E7%BC%96%E7%A8%8B%E5%BC%80%E5%8F%91/">编程开发</a><span class="category-list-count">9</span></li><li class="category-list-item"><a class="category-list-link" href="/Evandoz/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">计算机网络</a><span class="category-list-count">2</span></li></ul>
     </div>
   </div>
 
 
     
+      <div class="widget more">
+  <div class="widget-content">
+    <ul class="more-list">
+      <li><a href="/Evandoz/">EXP 技术日常 &copy; 2015 - 2019</a></li>
+      <li>Powered by <a href="https://evandoz.github.io">Hexo · Levan</a></li>
+    </ul>
+  </div>
+</div>
+
+    
   </aside>
 </div>
 </div>
-        <footer id="footer" class="footer">
-  <div class="outer">
-    <div class="copyright">
-      <a href="/Evandoz/">Notes &copy; 2015 - 2019<p></p>
-    </a></div>
-    <div class="navigation">
-      <a href="https://evandoz.github.io">Hexo · Levan</a>
-    </div>
-  </div>
-</footer>
-
+        
       </div>
     </div>
   </div>

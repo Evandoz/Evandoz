@@ -3,8 +3,106 @@
 
 
     <url>
+        <loc>https://evandoz.github.io/Evandoz/tags/%25E8%258A%25B1%25E5%25BC%258F%25E5%2592%2596%25E5%2595%25A1/</loc>
+        <lastmod>2019-11-30T18:37:11.240Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://evandoz.github.io/Evandoz/tags/ArchLinux/</loc>
+        <lastmod>2019-11-30T14:20:45.550Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://evandoz.github.io/Evandoz/tags/DDE/</loc>
+        <lastmod>2019-11-30T14:15:30.604Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://evandoz.github.io/Evandoz/tags/GRUB/</loc>
+        <lastmod>2019-11-30T14:11:22.095Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://evandoz.github.io/Evandoz/tags/CSS/</loc>
+        <lastmod>2019-11-30T14:07:50.845Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://evandoz.github.io/Evandoz/tags/AUR/</loc>
+        <lastmod>2019-11-30T14:02:04.460Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://evandoz.github.io/Evandoz/tags/KDE/</loc>
+        <lastmod>2019-11-30T13:55:45.660Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://evandoz.github.io/Evandoz/tags/Xorg/</loc>
+        <lastmod>2019-11-30T13:55:45.660Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://evandoz.github.io/Evandoz/tags/%25E8%25A7%25A3%25E9%2587%258A%25E6%2580%25A7%25E8%2584%259A%25E6%259C%25AC%25E8%25AF%25AD%25E8%25A8%2580/</loc>
+        <lastmod>2019-11-30T13:09:34.421Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://evandoz.github.io/Evandoz/tags/%25E9%259D%259E%25E5%25AF%25B9%25E7%25A7%25B0%25E5%258A%25A0%25E5%25AF%2586/</loc>
+        <lastmod>2019-11-30T13:02:56.647Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://evandoz.github.io/Evandoz/tags/%25E7%25BD%2591%25E7%25BB%259C%25E5%25AE%2589%25E5%2585%25A8/</loc>
+        <lastmod>2019-11-30T13:02:56.647Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://evandoz.github.io/Evandoz/tags/%25E5%25AF%25B9%25E7%25A7%25B0%25E5%258A%25A0%25E5%25AF%2586/</loc>
+        <lastmod>2019-11-30T13:00:55.522Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
         <loc>https://evandoz.github.io/Evandoz/tags/%25E9%2598%259F%25E5%2588%2597/</loc>
-        <lastmod>2019-11-25T08:14:53.843Z</lastmod>
+        <lastmod>2019-11-30T12:59:59.518Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://evandoz.github.io/Evandoz/tags/RPC/</loc>
+        <lastmod>2019-11-30T12:51:10.218Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://evandoz.github.io/Evandoz/tags/%25E6%25B6%2588%25E6%2581%25AF%25E6%259C%25BA%25E5%2588%25B6/</loc>
+        <lastmod>2019-11-30T12:51:10.218Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
@@ -145,13 +243,6 @@
     <url>
         <loc>https://evandoz.github.io/Evandoz/tags/git/</loc>
         <lastmod>2019-11-14T12:33:27.153Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://evandoz.github.io/Evandoz/tags/CSS/</loc>
-        <lastmod>2019-10-09T11:40:48.443Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
@@ -320,41 +411,6 @@
     <url>
         <loc>https://evandoz.github.io/Evandoz/tags/DiskPart/</loc>
         <lastmod>2019-09-19T11:03:46.264Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://evandoz.github.io/Evandoz/tags/ArchLinux/</loc>
-        <lastmod>2019-09-19T11:03:13.275Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://evandoz.github.io/Evandoz/tags/AUR/</loc>
-        <lastmod>2019-09-19T11:03:07.961Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://evandoz.github.io/Evandoz/tags/GRUB/</loc>
-        <lastmod>2019-09-19T11:03:05.269Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://evandoz.github.io/Evandoz/tags/DDE/</loc>
-        <lastmod>2019-09-19T11:03:01.971Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://evandoz.github.io/Evandoz/tags/Xorg/</loc>
-        <lastmod>2019-09-19T11:03:01.971Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>

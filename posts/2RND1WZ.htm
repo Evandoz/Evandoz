@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+  
+  <title>ArchLinux 安装之显卡驱动（失败） | EXP 技术日常</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+    <meta name="author" content="Levan">
+  
+  
+    <meta name="description" content="记录与分享">
+  
+  
+    <meta name="keywords" content="ArchLinux,显卡驱动,NVIDIA">
+  
+  
+    <meta name="google-site-verification" content="W2AVg5n_ALo21rl9n3ZwS8AuEanZfJkirzrRGLLYvn4">
+  
+  
+    <meta name="baidu-site-verification" content="BM2Q3xLpPJ">
+  
+  
+    <meta name="360-site-verification" content="573211edf2de02c99d7b255b2c56513c">
+  
+  
+    <link rel="short icon" type="image/x-icon" href="/Evandoz/css/images/favicon.ico">
+  
+  <link rel="canonical" href="https://evandoz.github.io/Evandoz/posts/2rnd1wz.htm">
+  <link rel="stylesheet" href="/Evandoz/css/style.css"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</head>
+
+<body>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="overflow" class="overflow">
+    <div id="hiddenbar" class="hiddenbar">
+      <div id="wrapper" class="wrapper">
+        
+<header id="header" class="header is-post">
+  <div class="outer">
+    <div class="logo">
+      <a class="title" href="/Evandoz/">EXP 技术日常</a>
+    </div>
+
+
+
+    <div class="nav">
+      <ul id="nav-icon" class="nav-icon">
+        <li></li><li></li><li></li>
+      </ul>
+      <ul class="nav-menu">
+        
+          <li class="nav-item">
+            <a href="/Evandoz/archives">归档</a>
+          </li>
+        
+          <li class="nav-item">
+            <a href="/Evandoz/categories">分类</a>
+          </li>
+        
+          <li class="nav-item">
+            <a href="/Evandoz/tags">标签</a>
+          </li>
+        
+          <li class="nav-item">
+            <a href="/Evandoz/about">关于</a>
+          </li>
+        
+      </ul>
+    </div>
+
+  </div>
+</header>
+
+        <div id="content" class="content">
+  <div class="outer">
+    <main class="main">
+      <article id="操作系统/ArchLinux/20190517-ArchLinux 安装之显卡驱动失败经历" class="article card">
+        
+  
+  	<h1 class="post-title">ArchLinux 安装之显卡驱动（失败）</h1>
+  
+
+
+        <div class="post-meta">
+          <span class="post-date">
+  <time datetime="2019-05-16T16:00:00.000Z">2019-05-17</time>
+</span>
+
+          
+  <span class="post-category">
+    <a class="category-link" href="/Evandoz/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">操作系统</a> · <a class="category-link" href="/Evandoz/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/ArchLinux/">ArchLinux</a>
+  </span>
+
+
+        </div>
+        <div id="post-content" class="post-content">
+          <p>直接从Nvidia官网下载驱动程序包 .run 运行出错：</p>
+<p>注意：运行 .run 之前，请确保已经安装了编译工具，最好先运行</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># pacman -S base-devel</span></span><br></pre></td></tr></table></figure>
+<p>来安装编译驱动需要的配置和工具等。</p>
+<p>根据报错信息得知，系统已经使用了Nouveau 驱动，导致不兼容致使安装失败，需要手动禁用Nouveau之后重新安装。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">ERROR: The Nouveau kernel driver is currrently in use by your system.</span><br><span class="line">This driver is incompatible with the NVIDIA driver, and must be disabled before proceeding.</span><br><span class="line">Please consult the NVIDIA driver REMADE and your Linux distribution&apos;s documentation</span><br><span class="line">for details on how to correctly disable the Nouveau kernel driver.</span><br></pre></td></tr></table></figure>
+<p>并且在接下来的WARING信息中得知，关于禁用Nouveau的配置文件已经写好，即 nvidia-installer-disable-nouveau.conf。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">WARING: One or more modprobe configuration files to disable Nouveau are already present</span><br><span class="line">at: /usr/lib/modprobe.d/nvidia-installer-disable-nouveau.conf, /etc/modprobe.d/nvidia-installer-disable-nouveau.conf.</span><br><span class="line">Please be sure you have rebooted your system since these files were written. ........</span><br></pre></td></tr></table></figure>
+<p>现在需要根据这个配置文件来重新生成 initramfs image file 。查询官方 WIKI得知，使用 mkinitcpio 来重建 initramfs 镜像文件，而它的主配置文件是 /etc/mkinitcpio.conf ，在这个文件中，用户可以编辑配置文件中的六个变量。</p>
+<ul>
+<li>MODULES 在钩子扩展运行前需要加载的内核模块。</li>
+<li>BINARIES 内存盘镜像中包含的额外的二进制文件</li>
+<li>FILES  内存盘镜像中包含的其他文件。</li>
+<li>HOOKS  要执行的钩子扩展。</li>
+<li>COMPRESSION  内存盘镜像的压缩方式。</li>
+<li>COMPRESSION_OPTIONS  传递给压缩工具的额外参数，不建议使用，可以自动根据压缩算法传递需要的参数(例如对 xz 传递 --check=crc32 to xz), 手动设置了错误的参数可能导致系统无法启动。</li>
+</ul>
+<p>在这里需要使用的就是 FILES 变量，这个选项允许用户添加任何文件到镜像中。FILES数组指定了要加入内存盘镜像的文件，可以覆盖钩子扩展提供的文件。</p>
+<p>于是就可以把上面的 nvidia-installer-disable-nouveau.conf 文件路径填入到该变量数组中。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">FILES: [/etc/modprobe.d/nvidia-installer-disable-nouveau.conf]</span><br></pre></td></tr></table></figure>
+<p>接下来使用mkinitcpio 重新构建 镜像文件。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># mkinitcpio -p linux</span><br></pre></td></tr></table></figure>
+<p>上述命令使用 Arch 默认的内核 linux ，-p 选项定义了要使用的预配置（preset）；多数内核软件包都会提供一套mkinitcpio预配置文件，放在/etc/mkinitcpio.d目录（比如，linux内核是/etc/mkinitcpio.d/linux.preset）。预配置文件中包含内存盘镜像的基本配置。</p>
+<p>再次运行 .run 文件，又出现新的错误，无法找到内核源码路径，因为编译驱动是需要内核源码头文件的。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Unable to find the kernel source tree for the currently running kernel.</span><br><span class="line">Please make sure you have installed the kernel source files for your kernel and that they are properly configuration;.....</span><br><span class="line">If you know the current kernel source files are installed, you may specify the kernel source path with the &apos;--kernel-source-path&apos; command line option.</span><br></pre></td></tr></table></figure>
+<p>于是下载和当前系统一致的内核源码（wget下载工具），解压后放到 /usr/src/ 目录下面。</p>
+<p>再次运行 .run 并添加 —kernel-source-path 参数，然而再次报错，提示 version.h 文件不存在。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Neither the &apos;usr/src/linux-5.0.2/include/linux/version.h&apos; nor the /usr/src/linux-5.0.2/include/generated/uapi/linux/version.h&apos; kernel header file exists. ....</span><br></pre></td></tr></table></figure>
+<p>经过查询知道，内核版本是通过 KERNEL_VERSION 宏来确定的，而它是定义在 version.h 头文件中的，而这个头文件是可以直接通过make来生成的。在内核源码目录(/usr/src/)执行：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">make include/linux/version.h</span><br></pre></td></tr></table></figure>
+<p>就能生成version.h文件了。</p>
+<p>重启后检查 nouveau drive r确保没有被加载</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># lsmod | grep nouveau</span><br></pre></td></tr></table></figure>
+<p>参考文章：</p>
+<p><a href="https://wiki.archlinux.org/index.php/Nouveau" target="_blank" rel="external nofollow noopener noreferrer">https://wiki.archlinux.org/index.php/Nouveau</a></p>
+<p><a href="https://wiki.archlinux.org/index.php/Mkinitcpio" target="_blank" rel="external nofollow noopener noreferrer">https://wiki.archlinux.org/index.php/Mkinitcpio</a></p>
+
+        </div>
+        <div class="post-footer">
+          <div class="post-copyright">&copy; 除特殊声明外，文章著作权归作者所有，转载请注明作者及出处</div>
+        </div>
+      </article>
+      <!-- Pagination -->
+      
+        <div class="nagination card">
+          
+            <a href="/Evandoz/posts/JCZZ3K.htm" class="nagination-link">上篇: ArchLinux 安装之 Sogou 输入法异常</a>
+          
+          
+            <a href="/Evandoz/posts/2PM5WZ7.htm" class="nagination-link">下篇: ArchLinux 安装之 Deepin 桌面环境</a>
+          
+        </div>
+      
+      <!-- Comment -->
+      <!-- 
+        <div id="article-comment" class="article-comment card"></div>
+
+       -->
+    </main>
+    <aside class="aside post">
+      <div class="widget card">
+  <div class="widget-content">
+    <span>文章数: 70</span>
+    <span>总字数: 64.3k</span>
+  </div>
+</div>
+
+      <div id="toc" class="toc">
+        
+          <h3 class="toc-title" style="text-align: center;">无目录</h3>
+        
+      </div>
+    </aside>
+  </div>
+
+
+</div>
+        
+      </div>
+    </div>
+  </div>
+  <div id="top-anchor" class="top-anchor">
+  <ul><li></li><li></li></ul>
+</div>
+
+  <div id="mobile-nav" class="mobile-nav">
+  
+    <a class="menu-item" href="/Evandoz/archives">归档</a>
+  
+    <a class="menu-item" href="/Evandoz/categories">分类</a>
+  
+    <a class="menu-item" href="/Evandoz/tags">标签</a>
+  
+    <a class="menu-item" href="/Evandoz/about">关于</a>
+  
+</div>
+
+<div id="over-layer" class="over-layer"></div>
+
+  <script src="/Evandoz/js/jquery.js"></script>
+<script src="/Evandoz/js/velocity.js"></script>
+<script src="/Evandoz/js/plugins.js"></script>
+<script src="/Evandoz/js/script.js"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+
+
+</body>
+</html>

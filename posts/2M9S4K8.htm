@@ -3,7 +3,7 @@
 <head>
   <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
   
-  <title>使用 flow.ci 自动部署 Hexo | Notes</title>
+  <title>使用 flow.ci 自动部署 Hexo | EXP 技术日常</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
     <meta name="author" content="Levan">
@@ -35,11 +35,12 @@
     <div id="hiddenbar" class="hiddenbar">
       <div id="wrapper" class="wrapper">
         
-  <header id="header" class="header is-page">
-    <div class="outer">
-      <div class="logo">
-        <a class="title" href="/Evandoz/">Notes</a>
-      </div>
+<header id="header" class="header is-post">
+  <div class="outer">
+    <div class="logo">
+      <a class="title" href="/Evandoz/">EXP 技术日常</a>
+    </div>
+
 
 
     <div class="nav">
@@ -149,15 +150,22 @@
         </div>
       
       <!-- Comment -->
-      
+      <!-- 
         <div id="article-comment" class="article-comment card"></div>
 
-      
+       -->
     </main>
-    <aside class="aside">
+    <aside class="aside post">
+      <div class="widget card">
+  <div class="widget-content">
+    <span>文章数: 70</span>
+    <span>总字数: 64.3k</span>
+  </div>
+</div>
+
       <div id="toc" class="toc">
-        <h3 class="toc-title">目录</h3>
         
+          <h3 class="toc-title">目录</h3>
           <ol class="toc-content"><li class="toc-content-item toc-content-level-2"><a class="toc-content-link" href="#认识-flow-ci"><span class="toc-content-text">认识 flow.ci</span></a></li><li class="toc-content-item toc-content-level-2"><a class="toc-content-link" href="#配置步骤"><span class="toc-content-text">配置步骤</span></a><ol class="toc-content-child"><li class="toc-content-item toc-content-level-3"><a class="toc-content-link" href="#注册-flow-ci"><span class="toc-content-text">注册 flow.ci</span></a></li><li class="toc-content-item toc-content-level-3"><a class="toc-content-link" href="#创建项目"><span class="toc-content-text">创建项目</span></a></li><li class="toc-content-item toc-content-level-3"><a class="toc-content-link" href="#设置触发器"><span class="toc-content-text">设置触发器</span></a></li><li class="toc-content-item toc-content-level-3"><a class="toc-content-link" href="#配置工作流"><span class="toc-content-text">配置工作流</span></a></li><li class="toc-content-item toc-content-level-3"><a class="toc-content-link" href="#配置-token"><span class="toc-content-text">配置 Token</span></a></li><li class="toc-content-item toc-content-level-3"><a class="toc-content-link" href="#测试"><span class="toc-content-text">测试</span></a></li></ol></li><li class="toc-content-item toc-content-level-2"><a class="toc-content-link" href="#总结"><span class="toc-content-text">总结</span></a></li></ol>
         
       </div>
@@ -166,17 +174,7 @@
 
 
 </div>
-        <footer id="footer" class="footer">
-  <div class="outer">
-    <div class="copyright">
-      <a href="/Evandoz/">Notes &copy; 2015 - 2019<p></p>
-    </a></div>
-    <div class="navigation">
-      <a href="https://evandoz.github.io">Hexo · Levan</a>
-    </div>
-  </div>
-</footer>
-
+        
       </div>
     </div>
   </div>

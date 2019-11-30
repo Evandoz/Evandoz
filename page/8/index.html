@@ -3,7 +3,7 @@
 <head>
   <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
   
-  <title>Notes - Note and Share</title>
+  <title>EXP 技术日常 - 记录与分享</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
     <meta name="author" content="Levan">
@@ -37,10 +37,11 @@
         
   <header id="header" class="header is-home">
     <div class="cover" style="background-image: url('/Evandoz/css/images/background.jpg')">
-      <h1 class="title">Notes</h1>
+      <h1 class="title">EXP 技术日常</h1>
       <p class="desc">记录与分享</p>
     </div>
     <div class="outer">
+
 
 
     <div class="nav">
@@ -82,22 +83,27 @@
     <div class="article-content">
       
   
-    <a class="post-link" href="/Evandoz/posts/1HPFD1A.htm">基数排序</a>
+    <a class="post-link" href="/Evandoz/posts/2M9S4K8.htm">使用 flow.ci 自动部署 Hexo</a>
   
 
 
       <div class="post-excerpt">
         
-          分配排序
-分配排序（Distributive Sort）：排序过程无须比较关键字，而是通过“分配”和“收集”操作来实现排序，它们的时间复杂度可达到线性阶：O(n)，典型的计数排序、桶排序以及基数排序等
+          国内持续集成工具flow.ci上线，尝试将其用于Coding.net仓库代码的构建与测试。
+
+认识 flow.ci
+
+
+
+flow.ci 采用工作流机制，功能与 Travis CI 差不多，被称为国内
         
       </div>
       <div class="post-meta">
         <span class="post-date">
-  <time datetime="2016-09-22T16:00:00.000Z">3 年前</time>
+  <time datetime="2016-11-18T16:00:00.000Z">3 年前</time>
 </span>
 
-        <span class="post-time">时长 16 分钟</span>
+        <span class="post-time">时长 2 分钟</span>
 
       </div>
     </div>
@@ -112,24 +118,27 @@
     <div class="article-content">
       
   
-    <a class="post-link" href="/Evandoz/posts/ASKFZY.htm">归并排序</a>
+    <a class="post-link" href="/Evandoz/posts/KG82GQ.htm">空数据段引发的问题及思考</a>
   
 
 
       <div class="post-excerpt">
         
-          基本概念
-归并（Merge）排序是将两个或两个以上的有序表合并成一个新的有序表，即把待排序序列分为若干个子序列，每个子序列是有序的。然后再把有序子序列合并为整体有序序列。
+          之前使用Dosbox环境编写汇编程序遇到的一个问题，经过摸索已基本搞清楚原因。
 
-2-路归并排序（Mergi
+问题引入
+
+
+
+原题目很简单，就是将 00F~0FH 共 16 个数字写入内存 3000H 开始的连续 16 个存储单
         
       </div>
       <div class="post-meta">
         <span class="post-date">
-  <time datetime="2016-09-17T16:00:00.000Z">3 年前</time>
+  <time datetime="2016-11-10T16:00:00.000Z">3 年前</time>
 </span>
 
-        <span class="post-time">时长 7 分钟</span>
+        <span class="post-time">时长 5 分钟</span>
 
       </div>
     </div>
@@ -144,24 +153,27 @@
     <div class="article-content">
       
   
-    <a class="post-link" href="/Evandoz/posts/11X02MS.htm">选择排序</a>
+    <a class="post-link" href="/Evandoz/posts/3D8RH6C.htm">8086 通用寄存器的专用功能</a>
   
 
 
       <div class="post-excerpt">
         
-          基本概念
-每一趟在 n-i+1(i=1,2,…,n-1) 个元素中选择最小的作为有序序列的第 i 个元素，进行这样操作的的排序称为选择排序。
+          根据汇编学习经历和编程经验总结一下8086系统通用寄存器的专用功能。
 
-简单选择排序（Simple Selection Sort
+引子
+
+
+
+8086 系统中有 8 个通用寄存器。虽然叫作通用寄存器，但它们却都有自己专门的名字，这是因为它们都有自己专门的功能
         
       </div>
       <div class="post-meta">
         <span class="post-date">
-  <time datetime="2016-09-14T16:00:00.000Z">3 年前</time>
+  <time datetime="2016-11-08T16:00:00.000Z">3 年前</time>
 </span>
 
-        <span class="post-time">时长 13 分钟</span>
+        <span class="post-time">时长 5 分钟</span>
 
       </div>
     </div>
@@ -176,27 +188,24 @@
     <div class="article-content">
       
   
-    <a class="post-link" href="/Evandoz/posts/5YC30H.htm">交换排序（二）</a>
+    <a class="post-link" href="/Evandoz/posts/B5HTR6.htm">汇编语言实现进制转换</a>
   
 
 
       <div class="post-excerpt">
         
-          基本概念
-根据待排序列中两个元素的比较结果来交换两个元素的位置，这样的排序称为交换排序，主要包括冒泡排序和快速排序。
+          8086 汇编是一种经典的底层语言，本文将结合代码简单介绍使用汇编语言来实现子程序的设计，以十六进制显示输出寄存器中二进制内容。
 
-冒泡排序（Bubble Sort）
-冒泡排序见交换排序（一）
-
-快速排序（Qui
+题目要求
+编制一个过程把AL寄存器内的二进制数用十六进制的形式在屏幕
         
       </div>
       <div class="post-meta">
         <span class="post-date">
-  <time datetime="2016-09-10T16:00:00.000Z">3 年前</time>
+  <time datetime="2016-11-04T16:00:00.000Z">3 年前</time>
 </span>
 
-        <span class="post-time">时长 10 分钟</span>
+        <span class="post-time">时长 2 分钟</span>
 
       </div>
     </div>
@@ -211,26 +220,27 @@
     <div class="article-content">
       
   
-    <a class="post-link" href="/Evandoz/posts/XZ1R69.htm">交换排序（一）</a>
+    <a class="post-link" href="/Evandoz/posts/1ZQE2XS.htm">汇编语言实现冒泡排序</a>
   
 
 
       <div class="post-excerpt">
         
-          基本概念
-根据待排序列中两个元素的比较结果来交换两个元素的位置，这样的排序称为交换排序，主要包括冒泡排序和快速排序。
+          8086 汇编是一种经典的底层语言，本文将结合代码介绍使用汇编语言来实现冒泡排序。
 
-冒泡排序（Bubble Sort）
-基本思想
-在要排序的一组数中，对当前还未排好
+题目要求
+
+
+
+数据区存放一组数据，要求采用冒泡法对数据区的数据按递增排序，并且从最后一位开始向前比较，排序完成后
         
       </div>
       <div class="post-meta">
         <span class="post-date">
-  <time datetime="2016-09-10T16:00:00.000Z">3 年前</time>
+  <time datetime="2016-10-27T16:00:00.000Z">3 年前</time>
 </span>
 
-        <span class="post-time">时长 6 分钟</span>
+        <span class="post-time">时长 2 分钟</span>
 
       </div>
     </div>
@@ -245,24 +255,28 @@
     <div class="article-content">
       
   
-    <a class="post-link" href="/Evandoz/posts/1BZ3SG1.htm">插入排序（一）</a>
+    <a class="post-link" href="/Evandoz/posts/2SDDXZX.htm">8086 指令系统寻址</a>
   
 
 
       <div class="post-excerpt">
         
-          基本概念
-一种简单直观的排序方法，基本思想是 每一次将一个待排序的元素，按照大小插入到前面已排好序的子序列中去，知道全部元素排序完成，这样的操作称为插入排序，包括直接插入排序和希尔排序等。
+          Intel 8086 是因特尔早期研制的一款16位经典微处理器芯片，是x86架构的鼻祖。
+为深入学习该系列处理器汇编语言，本文将总结 8086 指令系统的寻址方式。
 
-直接插入
+寻址与指令
+
+
+
+寻址方式（Ad
         
       </div>
       <div class="post-meta">
         <span class="post-date">
-  <time datetime="2016-09-08T16:00:00.000Z">3 年前</time>
+  <time datetime="2016-10-17T16:00:00.000Z">3 年前</time>
 </span>
 
-        <span class="post-time">时长 6 分钟</span>
+        <span class="post-time">时长 8 分钟</span>
 
       </div>
     </div>
@@ -273,7 +287,7 @@
     </div>
     
   <div class="paginator card">
-    <a class="extend prev" rel="prev" href="/Evandoz/page/7/"><ul class="icon prev-icon"><li></li><li></li><li></li></ul></a><a class="page-number" href="/Evandoz/">1</a><span class="space">&hellip;</span><a class="page-number" href="/Evandoz/page/7/">7</a><span class="page-number current">8</span><a class="page-number" href="/Evandoz/page/9/">9</a><span class="space">&hellip;</span><a class="page-number" href="/Evandoz/page/11/">11</a><a class="extend next" rel="next" href="/Evandoz/page/9/"><ul class="icon next-icon"><li></li><li></li><li></li></ul></a>
+    <a class="extend prev" rel="prev" href="/Evandoz/page/7/"><ul class="icon prev-icon"><li></li><li></li><li></li></ul></a><a class="page-number" href="/Evandoz/">1</a><span class="space">&hellip;</span><a class="page-number" href="/Evandoz/page/7/">7</a><span class="page-number current">8</span><a class="page-number" href="/Evandoz/page/9/">9</a><span class="space">&hellip;</span><a class="page-number" href="/Evandoz/page/12/">12</a><a class="extend next" rel="next" href="/Evandoz/page/9/"><ul class="icon next-icon"><li></li><li></li><li></li></ul></a>
   </div>
 
 
@@ -282,36 +296,36 @@
     
       <div class="widget card">
   <div class="widget-content">
-    <span>文章数: 61</span>
-    <span>总字数: 53.2k</span>
+    <span>文章数: 70</span>
+    <span>总字数: 64.3k</span>
   </div>
 </div>
 
     
       
   <div class="widget card">
-    <h3 class="widget-title">分类</h3>
+    <h3 class="widget-title">分类数</h3>
     <div class="widget-content">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/Evandoz/categories/Hexo/">HEXO</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/Evandoz/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/">前端开发</a><span class="category-list-count">15</span></li><li class="category-list-item"><a class="category-list-link" href="/Evandoz/categories/%E5%B7%A5%E5%85%B7%E5%BA%94%E7%94%A8/">工具应用</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/Evandoz/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">操作系统</a><span class="category-list-count">12</span></li><li class="category-list-item"><a class="category-list-link" href="/Evandoz/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构</a><span class="category-list-count">18</span></li><li class="category-list-item"><a class="category-list-link" href="/Evandoz/categories/%E7%B3%BB%E7%BB%9F%E7%BB%93%E6%9E%84/">系统结构</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/Evandoz/categories/%E7%BC%96%E7%A8%8B%E5%BC%80%E5%8F%91/">编程开发</a><span class="category-list-count">7</span></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/Evandoz/categories/Hexo/">HEXO</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/Evandoz/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/">前端开发</a><span class="category-list-count">17</span></li><li class="category-list-item"><a class="category-list-link" href="/Evandoz/categories/%E5%B7%A5%E5%85%B7%E5%BA%94%E7%94%A8/">工具应用</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/Evandoz/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">操作系统</a><span class="category-list-count">14</span></li><li class="category-list-item"><a class="category-list-link" href="/Evandoz/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构</a><span class="category-list-count">18</span></li><li class="category-list-item"><a class="category-list-link" href="/Evandoz/categories/%E7%94%9F%E6%B4%BB%E7%88%B1%E5%A5%BD/">生活爱好</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/Evandoz/categories/%E7%B3%BB%E7%BB%9F%E7%BB%93%E6%9E%84/">系统结构</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/Evandoz/categories/%E7%BC%96%E7%A8%8B%E5%BC%80%E5%8F%91/">编程开发</a><span class="category-list-count">9</span></li><li class="category-list-item"><a class="category-list-link" href="/Evandoz/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">计算机网络</a><span class="category-list-count">2</span></li></ul>
     </div>
   </div>
 
 
     
+      <div class="widget more">
+  <div class="widget-content">
+    <ul class="more-list">
+      <li><a href="/Evandoz/">EXP 技术日常 &copy; 2015 - 2019</a></li>
+      <li>Powered by <a href="https://evandoz.github.io">Hexo · Levan</a></li>
+    </ul>
+  </div>
+</div>
+
+    
   </aside>
 </div>
 </div>
-        <footer id="footer" class="footer">
-  <div class="outer">
-    <div class="copyright">
-      <a href="/Evandoz/">Notes &copy; 2015 - 2019<p></p>
-    </a></div>
-    <div class="navigation">
-      <a href="https://evandoz.github.io">Hexo · Levan</a>
-    </div>
-  </div>
-</footer>
-
+        
       </div>
     </div>
   </div>

@@ -3,7 +3,7 @@
 <head>
   <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
   
-  <title>ArchLinux 安装之 AUR | Notes</title>
+  <title>ArchLinux 安装之 AUR | EXP 技术日常</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
     <meta name="author" content="Levan">
@@ -35,11 +35,12 @@
     <div id="hiddenbar" class="hiddenbar">
       <div id="wrapper" class="wrapper">
         
-  <header id="header" class="header is-page">
-    <div class="outer">
-      <div class="logo">
-        <a class="title" href="/Evandoz/">Notes</a>
-      </div>
+<header id="header" class="header is-post">
+  <div class="outer">
+    <div class="logo">
+      <a class="title" href="/Evandoz/">EXP 技术日常</a>
+    </div>
+
 
 
     <div class="nav">
@@ -93,7 +94,14 @@
 
         </div>
         <div id="post-content" class="post-content">
-          
+          <p>AUR 全称 Arch User Repository，是为用户而建、由用户主导的 Arch 软件仓库，相当于Debian/Ubuntu 下的 PPA。为了简化的AUR软件包的安装流程，随之诞生了AUR工具，称之为AUR Helper。</p>
+<p>在使用 Arch 用户软件仓库时，AUR 工具可以自动完成某些任务。大多数工具可以自动下载包的 PKGBUILD 并构建软件包。大多数情况下，pacman 不会为 AUR 软件包检查更新，所以一些工具也可以自动从 AUR 检查更新并再次构建新版本的软件包。</p>
+<p>注意，即使软件包自身并没有更新，但由于某些库文件的更新，您可能仍需重新构建某些软件包。由于AUR工具并不被官方支持，所以它们不在官方软件仓库中提供。</p>
+<p>Archlinux 官方文档中列举了相应的 AUR 工具：</p>
+<p><a href="https://wiki.archlinux.org/index.php/AUR_helpers" target="_blank" rel="external nofollow noopener noreferrer">https://wiki.archlinux.org/index.php/AUR_helpers</a></p>
+<p>另外，来自 Linux 中国的推荐与介绍：</p>
+<p><a href="https://linux.cn/article-9925-1.html" target="_blank" rel="external nofollow noopener noreferrer">Yaourt 已死！在 Arch 上使用这些替代品</a></p>
+
         </div>
         <div class="post-footer">
           <div class="post-copyright">&copy; 除特殊声明外，文章著作权归作者所有，转载请注明作者及出处</div>
@@ -103,24 +111,30 @@
       
         <div class="nagination card">
           
-            <a href="/Evandoz/posts/39XGE4E.htm" class="nagination-link">上篇: 使用 yarn 更新 package</a>
+            <a href="/Evandoz/posts/9SDJWS.htm" class="nagination-link">上篇: ArchLinux 安装之中文输入法</a>
           
           
-            <a href="/Evandoz/posts/9SDJWS.htm" class="nagination-link">下篇: ArchLinux 安装之中文输入法</a>
+            <a href="/Evandoz/posts/3JX9PBE.htm" class="nagination-link">下篇: ArchLinux 安装之显卡驱动</a>
           
         </div>
       
       <!-- Comment -->
-      
+      <!-- 
         <div id="article-comment" class="article-comment card"></div>
 
-      
+       -->
     </main>
-    <aside class="aside">
+    <aside class="aside post">
+      <div class="widget card">
+  <div class="widget-content">
+    <span>文章数: 70</span>
+    <span>总字数: 64.3k</span>
+  </div>
+</div>
+
       <div id="toc" class="toc">
-        <h3 class="toc-title">目录</h3>
         
-        <ol class="toc-content"><li class="toc-content-item none">无</li></ol>
+          <h3 class="toc-title" style="text-align: center;">无目录</h3>
         
       </div>
     </aside>
@@ -128,17 +142,7 @@
 
 
 </div>
-        <footer id="footer" class="footer">
-  <div class="outer">
-    <div class="copyright">
-      <a href="/Evandoz/">Notes &copy; 2015 - 2019<p></p>
-    </a></div>
-    <div class="navigation">
-      <a href="https://evandoz.github.io">Hexo · Levan</a>
-    </div>
-  </div>
-</footer>
-
+        
       </div>
     </div>
   </div>
