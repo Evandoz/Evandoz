@@ -8,6 +8,20 @@
     </url>
 
     <url>
+        <loc>https://evandoz.github.io/Evandoz/categories/%25E6%2595%25B0%25E6%258D%25AE%25E7%25BB%2593%25E6%259E%2584/%25E5%259B%25BE/</loc>
+        <lastmod>2019-12-04T09:03:59.418Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://evandoz.github.io/Evandoz/categories/%25E6%2595%25B0%25E6%258D%25AE%25E7%25BB%2593%25E6%259E%2584/</loc>
+        <lastmod>2019-12-04T09:03:59.418Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
         <loc>https://evandoz.github.io/Evandoz/categories/%25E7%2594%259F%25E6%25B4%25BB%25E7%2588%25B1%25E5%25A5%25BD/</loc>
         <lastmod>2019-11-30T18:37:11.240Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -71,13 +85,6 @@
     </url>
 
     <url>
-        <loc>https://evandoz.github.io/Evandoz/categories/%25E6%2595%25B0%25E6%258D%25AE%25E7%25BB%2593%25E6%259E%2584/</loc>
-        <lastmod>2019-11-30T12:59:59.518Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
         <loc>https://evandoz.github.io/Evandoz/categories/%25E6%2595%25B0%25E6%258D%25AE%25E7%25BB%2593%25E6%259E%2584/%25E7%25BA%25BF%25E6%2580%25A7%25E8%25A1%25A8/</loc>
         <lastmod>2019-11-25T08:14:28.182Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -108,13 +115,6 @@
     <url>
         <loc>https://evandoz.github.io/Evandoz/categories/Hexo/</loc>
         <lastmod>2019-09-22T08:50:19.669Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://evandoz.github.io/Evandoz/categories/%25E6%2595%25B0%25E6%258D%25AE%25E7%25BB%2593%25E6%259E%2584/%25E5%259B%25BE/</loc>
-        <lastmod>2019-09-20T06:40:47.292Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>

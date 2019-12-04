@@ -3,7 +3,6 @@ body {
   -webkit-text-size-adjust: 100%;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background: color-grey-background;
 }
 * {
   color: inherit;
@@ -47,8 +46,8 @@ a:focus {
   padding: 30px;
   box-sizing: border-box;
   border-radius: 2px;
-  background: color-white-background;
-  box-shadow: 0 0 10px rgba(0,0,0,0.02);
+  background: #fff;
+  box-shadow: 0 0 15px 5px rgba(0,0,0,0.035);
 }
 @media mq-mobile {
   .card {

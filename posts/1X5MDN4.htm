@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+  
+  <title>图的关节点问题 | EXP</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+    <meta name="author" content="Levan">
+  
+  
+    <meta name="description" content="日常记录与分享">
+  
+  
+    <meta name="keywords" content="数据结构,关节点">
+  
+  
+    <meta name="google-site-verification" content="W2AVg5n_ALo21rl9n3ZwS8AuEanZfJkirzrRGLLYvn4">
+  
+  
+    <meta name="baidu-site-verification" content="BM2Q3xLpPJ">
+  
+  
+    <meta name="360-site-verification" content="573211edf2de02c99d7b255b2c56513c">
+  
+  
+    <link rel="short icon" type="image/x-icon" href="/Evandoz/css/images/favicon.ico">
+  
+  <link rel="canonical" href="https://evandoz.github.io/Evandoz/posts/1x5mdn4.htm">
+  <link rel="stylesheet" href="/Evandoz/css/style.css"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</head>
+
+<body>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="overflow" class="overflow">
+    <div id="hiddenbar" class="hiddenbar">
+      <div id="wrapper" class="wrapper">
+        
+<header id="header" class="header is-post">
+  <div class="outer">
+    <div class="logo">
+      <a class="title" href="/Evandoz/">EXP</a>
+    </div>
+
+
+
+    <div class="nav">
+      <ul id="nav-icon" class="nav-icon">
+        <li></li><li></li><li></li>
+      </ul>
+      <ul class="nav-menu">
+        
+          <li class="nav-item">
+            <a href="/Evandoz/archives">归档</a>
+          </li>
+        
+          <li class="nav-item">
+            <a href="/Evandoz/categories">分类</a>
+          </li>
+        
+          <li class="nav-item">
+            <a href="/Evandoz/tags">标签</a>
+          </li>
+        
+          <li class="nav-item">
+            <a href="/Evandoz/about">关于</a>
+          </li>
+        
+      </ul>
+    </div>
+
+  </div>
+</header>
+
+        <div id="content" class="content">
+  <div class="outer">
+    <main class="main">
+      <article id="数据结构/图/20160815-图的关节点问题" class="article card">
+        
+  
+  	<h1 class="post-title">图的关节点问题</h1>
+  
+
+
+        <div class="post-meta">
+          <span class="post-date">
+  <time datetime="2016-08-14T16:00:00.000Z">2016-08-15</time>
+</span>
+
+          
+  <span class="post-category">
+    <a class="category-link" href="/Evandoz/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构</a> · <a class="category-link" href="/Evandoz/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E5%9B%BE/">图</a>
+  </span>
+
+
+        </div>
+        <div id="post-content" class="post-content">
+          <h2 id="基本概念"><a class="headerlink" href="#基本概念"></a>基本概念</h2>
+<p>假如删除顶点 v 以及与 v 相关联的各边之后，将图的一个连通分量分割成两个或者更多的连通分量，则称顶点 v 为该图的一个关节点。<br>
+一个没有关节点的连通图称为<strong>重连通图</strong>，显然，在重连通图中，任意两个顶点之间至少存在两条路径，那么在删去某个顶点以及依附于该顶点的边时不会破坏图的连通性。<br>
+如果在连通图中至少删去 k 个顶点才会破坏图的连通性，则称此图的连通度为 k。</p>
+<p>关节点和重连通图在实际中有较多应用，一个简单的例子，一个表示通信网的图的连通度越高，系统就越可靠，当某个站点出现故障或遭到破坏时，不会影响整个系统的工作。</p>
+<h2 id="求解原理"><a class="headerlink" href="#求解原理"></a>求解原理</h2>
+<p>利用深度优先搜索便可求的图的关节点，并由此判断图是否是重连通的。</p>
+<p>从图 G 的一个顶点 A 出发，通过深度优先遍历建立深度优先生成树，显然生成树中的边是原来图 G 中边的一部分，称其为<strong>树边</strong>，而除去树边剩余的边称为<strong>回边</strong>。</p>
+<p>于是，对于树中任一顶点 v 而言，其<strong>孩子节点</strong>是在它<strong>之后</strong>搜索到的邻接点，而其<strong>双亲节点</strong>和<strong>由回边连接的祖先节点</strong>是在它<strong>之前</strong>搜索到的邻接点。</p>
+<p>因此，由深度优先生成树可以总结出两类关节点的特性，进而求解关节点：</p>
+<p>（1）如果生成树的<strong>根 r</strong> 有<strong>两棵或两棵以上的子树</strong>，那么该根顶点 r 是关节点；<br>
+（2）如果生成树的<strong>某非叶子顶点 v</strong>，它的<strong>某棵子树的根和子树的其他节点均没有指向 v 的祖先的回边</strong>，那么该顶点 v 是关节点。</p>
+<h2 id="具体操作"><a class="headerlink" href="#具体操作"></a>具体操作</h2>
+<p>结合图本身的结构，使用一个数组来记录各个顶点访问顺序，通过判断访问顺序的前后关系来判断关节点。</p>
+<p>修改 visited 数组为深度优先搜索遍历连通图时访问节点的顺序编号；</p>
+<p>定义数组 low，用于表示 当前节点 v 、后代节点（递归定义，包含后代的后代和回边连接的祖先） w+ 和回边连接祖先节点 k 的遍历顺序号的最小值，即</p>
+<p><strong>low[v] = Min { visited[v], low[w], visited[k] }，</strong></p>
+<p>其中 w 是顶点 v 在深度优先生成树上的孩子节点；k 是顶点 v 在深度优先生成树上由回边连接的祖先节点；(v, w) ∈ E(G)；(v, k) ∈ E(G)。</p>
+<p>于是，</p>
+<p><strong>根据前面求解关节点（2）判定非叶节点是否为关节点：</strong></p>
+<p>对于某个顶点 v，若存在孩子节点 w，并且 low[w] ≥ visited[v] 时，则可以判定 v 是关节点，因为 low[w] ≥ visited[v] 表示 v 的后代 w 及其后代没有指回祖先的回边，那么一旦删除节点 v，后代 w 及其后代将独立称为一个连通分量，故判定 v 是关节点。</p>
+<p>其中，visited[v] 是顶点 v 在深度优先生成树的前序序列编号，只需要增加计数变量并赋值给 visited[v] 即可；</p>
+<p>low[v] 可以在深度优先生成树的后序遍历过程中求得，而后序序列中的次序恰好和递归退出 DFS 函数次序一致，因此可修改深度优先搜索，递归调用推出时计算 low[v]。</p>
+<p><strong>根据前面求解关节点（1）判定根节点是否为关节点：</strong></p>
+<p>深度优先搜索从根节点的一支返回时，根据计数变量，判断是否还有节点没有访问，如果有，则说明根节点至少有两棵子树，即根顶点有至少两个邻接点，于是可以判定根顶点为关节点。</p>
+<h2 id="代码实现-邻接表"><a class="headerlink" href="#代码实现-邻接表"></a>代码实现（邻接表）</h2>
+<p>递归判断非叶节点中的关节点</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 深度优先搜索求关节点</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">DFSArticul</span><span class="params">(ALGraph *G, <span class="keyword">int</span> i, <span class="keyword">int</span> *c, <span class="keyword">int</span> *visited, <span class="keyword">int</span> *low)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    visited[i] = ++(*c);</span><br><span class="line">    <span class="keyword">int</span> w, minv = visited[i]; <span class="comment">// min&#123;visited[i], low[w], visited[k]&#125;</span></span><br><span class="line">    ArcNode *p = G-&gt;vertices[i].firstarc;</span><br><span class="line">    <span class="keyword">while</span> (p) <span class="comment">// 遍历 i 所有邻接点（孩子）计算 low[i]</span></span><br><span class="line">    &#123;</span><br><span class="line">        w = p-&gt;adjvex; <span class="comment">// 邻接点 w</span></span><br><span class="line">        <span class="comment">// w 未访问，是 i 的孩子</span></span><br><span class="line">        <span class="keyword">if</span> (<span class="number">0</span> == visited[w])</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="comment">// 判断 w 为根的子树是否有回边</span></span><br><span class="line">            DFSArticul(G, w, c, visited, low); <span class="comment">// 计算 low[w]</span></span><br><span class="line">            <span class="keyword">if</span> (low[w] &lt; minv) minv = low[w]; <span class="comment">// w 子树中有回边</span></span><br><span class="line">            <span class="comment">// 指回双亲也当作回边不做区分，因此取等于</span></span><br><span class="line">            <span class="keyword">if</span> (low[w] &gt;= visited[i]) <span class="built_in">printf</span>(<span class="string">"(%d)%c"</span>, i, G-&gt;vertices[i].data);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// w 已访问，说明这是条回边 visited[k]</span></span><br><span class="line">        <span class="comment">// 指回双亲也当作回边，但是不影响判断关键点，因此不做区分</span></span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (minv &gt; visited[w])</span><br><span class="line">        &#123;</span><br><span class="line">            minv = visited[w];</span><br><span class="line">        &#125;</span><br><span class="line">        p = p-&gt;nextarc;</span><br><span class="line">    &#125;</span><br><span class="line">    low[i] = minv; <span class="comment">// 计算 low[i]</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>从一支递归返回后再判断根节点是否关节点，完成所有关节点的判断</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 求关节点</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">FindArticul</span><span class="params">(ALGraph *G)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i, w, c = <span class="number">1</span>, visited[MAX_VERTEX_NUM], low[MAX_VERTEX_NUM];</span><br><span class="line">    <span class="comment">// 初始化 visited</span></span><br><span class="line">    visited[<span class="number">0</span>] = <span class="number">1</span>; <span class="comment">// 选取 0 作为根出发</span></span><br><span class="line">    low[<span class="number">0</span>] = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">1</span>; i &lt; G-&gt;vexnum; ++i) visited[i] = <span class="number">0</span>;</span><br><span class="line">    <span class="comment">// 深度优先</span></span><br><span class="line">    ArcNode *p = G-&gt;vertices[<span class="number">0</span>].firstarc;</span><br><span class="line">    w = p-&gt;adjvex; <span class="comment">// 邻接点</span></span><br><span class="line">    DFSArticul(G, w, &amp;c, visited, low);</span><br><span class="line">    <span class="comment">// 判断根节点是不是关节点（子树个数）</span></span><br><span class="line">    <span class="comment">// 从根 0 的一个邻接点（孩子）出发深度遍历</span></span><br><span class="line">    <span class="comment">// 若返回时仍有节点没有访问</span></span><br><span class="line">    <span class="comment">// 说明根节点至少两棵子树，需要从根的另个邻接点（孩子）出发进行遍历</span></span><br><span class="line">    <span class="comment">// 可判定为关节点</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (c &lt; G-&gt;vexnum)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"(0)%c"</span>, G-&gt;vertices[<span class="number">0</span>].data);</span><br><span class="line">        p = p-&gt;nextarc;</span><br><span class="line">        <span class="keyword">while</span>(p)</span><br><span class="line">        &#123;</span><br><span class="line">            w = p-&gt;adjvex; <span class="comment">// 邻接点</span></span><br><span class="line">            <span class="keyword">if</span> (<span class="number">0</span> == visited[w]) DFSArticul(G, w, &amp;c, visited, low);</span><br><span class="line">            p = p-&gt;nextarc;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>完整代码可参见：<a href="https://github.com/Evandoz/Data-Structures/tree/master/Graph/MGraph.h" target="_blank" rel="external nofollow noopener noreferrer">GitHub</a></p>
+<p><strong>DONE！</strong></p>
+
+        </div>
+        <div class="post-footer">
+          <div class="post-copyright">&copy; 除特殊声明外，文章著作权归作者所有，转载请注明作者及出处</div>
+        </div>
+      </article>
+      <!-- Pagination -->
+      
+        <div class="nagination card">
+          
+            <a href="/Evandoz/posts/1P369C4.htm" class="nagination-link">上篇: 使用 Travis CI 自动部署 Hexo</a>
+          
+          
+            <a href="/Evandoz/posts/3PZJ4YK.htm" class="nagination-link">下篇: 图的最小生成树</a>
+          
+        </div>
+      
+      <!-- Comment -->
+      <!-- 
+        <div id="article-comment" class="article-comment card"></div>
+
+       -->
+    </main>
+    <aside class="aside post">
+      <div class="widget card">
+  <div class="widget-content">
+    <span>文章数: 75</span>
+    <span>总字数: 69.1k</span>
+  </div>
+</div>
+
+      <div id="toc" class="toc">
+        
+          <h3 class="toc-title">目录</h3>
+          <ol class="toc-content"><li class="toc-content-item toc-content-level-2"><a class="toc-content-link" href="#基本概念"><span class="toc-content-text">基本概念</span></a></li><li class="toc-content-item toc-content-level-2"><a class="toc-content-link" href="#求解原理"><span class="toc-content-text">求解原理</span></a></li><li class="toc-content-item toc-content-level-2"><a class="toc-content-link" href="#具体操作"><span class="toc-content-text">具体操作</span></a></li><li class="toc-content-item toc-content-level-2"><a class="toc-content-link" href="#代码实现-邻接表"><span class="toc-content-text">代码实现（邻接表）</span></a></li></ol>
+        
+      </div>
+    </aside>
+  </div>
+
+
+</div>
+        <footer id="footer" class="footer">
+  <div class="outer">
+    <div class="copyright">
+      <a href="/Evandoz/">EXP &copy; 2015 - 2019<p></p>
+    </a></div>
+    <div class="navigation">
+      <a href="https://evandoz.github.io">Hexo · Levan</a>
+    </div>
+  </div>
+</footer>
+
+      </div>
+    </div>
+  </div>
+  <div id="top-anchor" class="top-anchor">
+  <ul><li></li><li></li></ul>
+</div>
+
+  <div id="mobile-nav" class="mobile-nav">
+  
+    <a class="menu-item" href="/Evandoz/archives">归档</a>
+  
+    <a class="menu-item" href="/Evandoz/categories">分类</a>
+  
+    <a class="menu-item" href="/Evandoz/tags">标签</a>
+  
+    <a class="menu-item" href="/Evandoz/about">关于</a>
+  
+</div>
+
+<div id="over-layer" class="over-layer"></div>
+
+  <script src="/Evandoz/js/jquery.js"></script>
+<script src="/Evandoz/js/velocity.js"></script>
+<script src="/Evandoz/js/plugins.js"></script>
+<script src="/Evandoz/js/script.js"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+
+
+</body>
+</html>
