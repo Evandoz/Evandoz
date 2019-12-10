@@ -1,1 +1,248 @@
-<!DOCTYPE html><html><head><meta charset="utf-8"><title>图的最小生成树 | EXP</title><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1"><meta name="author" content="Levan"><meta name="description" content="日常记录与分享"><meta name="keywords" content="数据结构,最小生成树"><meta name="google-site-verification" content="W2AVg5n_ALo21rl9n3ZwS8AuEanZfJkirzrRGLLYvn4"><meta name="baidu-site-verification" content="BM2Q3xLpPJ"><meta name="360-site-verification" content="573211edf2de02c99d7b255b2c56513c"><link rel="short icon" type="image/x-icon" href="/Evandoz/css/images/favicon.ico"><link rel="canonical" href="https://evandoz.github.io/Evandoz/posts/3pzj4yk.htm"><link rel="stylesheet" href="/Evandoz/css/style.css"><meta name="generator" content="Hexo 4.1.0"></head><body><div id="overflow" class="overflow"><div id="hiddenbar" class="hiddenbar"><div id="wrapper" class="wrapper"><header id="header" class="header is-post"><div class="outer"><div class="logo"><a class="title" href="/Evandoz/">EXP</a></div><div class="nav"><ul id="nav-icon" class="nav-icon"><li></li><li></li><li></li></ul><ul class="nav-menu"><li class="nav-item"><a href="/Evandoz/archives">归档</a></li><li class="nav-item"><a href="/Evandoz/categories">分类</a></li><li class="nav-item"><a href="/Evandoz/tags">标签</a></li><li class="nav-item"><a href="/Evandoz/about">关于</a></li></ul></div></div></header><div id="content" class="content"><div class="outer"><main class="main"><article id="数据结构/图/20160812-图的最小生成树" class="article card"><h1 class="post-title">图的最小生成树</h1><div class="post-meta"><span class="post-date"><time datetime="2016-08-11T16:00:00.000Z">2016-08-12</time></span> <span class="post-category"><a class="category-link" href="/Evandoz/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构</a> · <a class="category-link" href="/Evandoz/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E5%9B%BE/">图</a></span></div><div id="post-content" class="post-content"><h2 id="基本概念"><a class="headerlink" href="#基本概念"></a>基本概念</h2><p>图的最小生成树问题在现实生活中有重要应用，譬如在 n 个城市之间搭建通信网。<br>对于 n 个节点的连通图，可以建立很多不同的生成树，每个生成树都可以是一个通信网，要是通信网总的耗费最小（衡量标准根据具体情况而定，可能是距离、价格等等），就是要找到一棵最小生成树，这就是最小生成树问题(Minimum Cost Spanning Tree, MST)。一棵生成树的代价就是各边的代价之和。</p><h2 id="算法原理"><a class="headerlink" href="#算法原理"></a>算法原理</h2><p>构造生成树有很多算法，多数算法都用到一条 MST 的性质：</p><p>假设 N = (V, {E}) 是一个连通网，U 是顶点集 V 的一个非空子集，如果 (u, v) 是一条具有最小权值（代价）的边，其中 u∈U, v∈V-U，那么一定存在一棵包含边 (u, v) 的最小生成树。</p><p>该性质可以用反证法加以证明。</p><h2 id="普利姆算法-prim"><a class="headerlink" href="#普利姆算法-prim"></a>普利姆算法(Prim)</h2><h3 id="算法过程"><a class="headerlink" href="#算法过程"></a>算法过程</h3><p>假设 N = (V, {E}) 是连通网，TE 是 N 上最小生成树中变得合集。<br>算法从 U = {u<sub>0</sub>}(u<sub>0</sub>∈V), TE = {} 开始，重复如下操作：<br>在所有 u∈U, v∈V-U 的边 (u, v)∈E 中找一条代价最小的边 (u<sub>0</sub>, v<sub>0</sub>) 并入集合 TE，同时 v<sub>0</sub> 并入 U ，直至 U=V 为止。<br>此时 TE 中必有 n-1 条边，则 T = (V, {TE}) 为 N 的最小生成树。</p><p>为了实现算法，需要一个辅助数组 <code>closedge</code>，用来<strong>记录从 U 到 V-U 具有最小代价的边</strong>。<br>对每个顶点 v<sub>i</sub>∈V-U，在辅助数组中存在一个分量 closedge[i]，它包含两个域，<br>其中 <code>lowcost域</code> <strong>存储该边上的权</strong>，<code>vex 域</code> <strong>存储该边依附在 U 中的顶点</strong>。</p><h3 id="算法实现-邻接矩阵"><a class="headerlink" href="#算法实现-邻接矩阵"></a>算法实现（邻接矩阵）</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// Prim</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">MiniSpanTree_Prim</span><span class="params">(MGraph *G, VertexType v)</span></span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="function"></span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">int</span> i, j, k;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">    ArcType minicost;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">    <span class="comment">// 定义辅助数组，记录当前最小生成树与树外节点的最小距离及关联的树内顶点</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">    <span class="class"><span class="keyword">struct</span> &#123;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">        VertexType adjvex; <span class="comment">// 用于复原</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">        ArcType lowcost;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">    &#125;closedge[MAX_VERTEX_NUM];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">    <span class="comment">// 初始化 closedge</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">    k = LocateVex(G, v);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; G-&gt;vexnum; ++i)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">    &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">if</span> (G-&gt;vexs[i] == v)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">            closedge[i].lowcost = <span class="number">0</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">else</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">        &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line">            closedge[i].adjvex = v;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line">            closedge[i].lowcost = G-&gt;arcs[k][i];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">22</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">23</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">24</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">25</span></pre></td><td class="code"><pre><span class="line">    <span class="comment">// Prim 算法运行 G-&gt;vexnum -1 次</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">26</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">for</span> (i = <span class="number">1</span>; i &lt; G-&gt;vexnum; ++i)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">27</span></pre></td><td class="code"><pre><span class="line">    &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">28</span></pre></td><td class="code"><pre><span class="line">        <span class="comment">// 计算最小，得到k，k为最顶距离对应的节点（位置下标）</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">29</span></pre></td><td class="code"><pre><span class="line">        minicost = INF;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">30</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">for</span> (j = <span class="number">0</span>; j &lt; G-&gt;vexnum; ++j)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">31</span></pre></td><td class="code"><pre><span class="line">        &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">32</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">if</span> (closedge[j].lowcost != <span class="number">0</span> &amp;&amp; closedge[j].lowcost &lt; minicost)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">33</span></pre></td><td class="code"><pre><span class="line">            &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">34</span></pre></td><td class="code"><pre><span class="line">                minicost = closedge[j].lowcost;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">35</span></pre></td><td class="code"><pre><span class="line">                k = j;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">36</span></pre></td><td class="code"><pre><span class="line">            &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">37</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">38</span></pre></td><td class="code"><pre><span class="line">        <span class="built_in">printf</span>(<span class="string">"%c-[%d]-%c\t"</span>, closedge[k].adjvex, G-&gt;arcs[LocateVex(G, closedge[k].adjvex)][k], G-&gt;vexs[k]);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">39</span></pre></td><td class="code"><pre><span class="line">        <span class="comment">// 将节点 G-&gt;vexs[k] 纳入生成树</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">40</span></pre></td><td class="code"><pre><span class="line">        closedge[k].lowcost = <span class="number">0</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">41</span></pre></td><td class="code"><pre><span class="line">        <span class="comment">// 更新 closedge</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">42</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">for</span> (j = <span class="number">0</span>; j &lt; G-&gt;vexnum; ++j)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">43</span></pre></td><td class="code"><pre><span class="line">        &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">44</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">if</span> (G-&gt;arcs[k][j] &lt; closedge[j].lowcost)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">45</span></pre></td><td class="code"><pre><span class="line">            &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">46</span></pre></td><td class="code"><pre><span class="line">                closedge[j].adjvex = G-&gt;vexs[k];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">47</span></pre></td><td class="code"><pre><span class="line">                closedge[j].lowcost = G-&gt;arcs[k][j];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">48</span></pre></td><td class="code"><pre><span class="line">            &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">49</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">50</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">51</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure><h3 id="复杂度分析"><a class="headerlink" href="#复杂度分析"></a>复杂度分析</h3><p>算法实现中有两个内循环，第 1 个内循环是在 closedge 中选择 lowcost 最小值，时间为 O(n-1)；<br>第 2 个内循环更新 closedge 中的 lowcost 和 vex，时间为 O(n)。</p><p>因此，普利姆算法时间复杂度为 <strong>O(n<sup>2</sup>)</strong>，与图的顶点数有关，而与图中的边数无关，所以适用于求 <strong>边稠密</strong> 的网的最小生成树。</p><h2 id="克鲁斯卡尔算法-kruskal"><a class="headerlink" href="#克鲁斯卡尔算法-kruskal"></a>克鲁斯卡尔算法(Kruskal)</h2><h3 id="算法过程-v2"><a class="headerlink" href="#算法过程-v2"></a>算法过程</h3><p>普利姆从顶点角度建立最小生成树，而克鲁斯卡尔算法则从边的角度求解。</p><p>假设连通网 N = (V, {E})，则令最小生成树的初始状态为 <strong>只有 n 个顶点而无边的非连通图 T = (V, {})</strong>，网中每个顶底啊都自成一个连通分量，在 E 中选择代价最小的边，如果该边依附的顶点落在 T 中不同的连通分量中，则将此边加入到 T 中，否则舍去选择下一条代价最小的边。<br>依此类推，直到 T 中所有顶点都在同一个连通分量上为止。</p><p>连通分量可以用 <code>并查集 MFSet</code> 来表示，每一轮选择最小代价的边可以用 <code>堆</code> 来实现。</p><h3 id="算法实现-邻接矩阵-v2"><a class="headerlink" href="#算法实现-邻接矩阵-v2"></a>算法实现（邻接矩阵）</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// Kruskal</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">MiniSpanTree_Kruskal</span><span class="params">(MGraph *G)</span></span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="function"></span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    <span class="comment">// k 用于取当前权值最小边</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">    <span class="comment">// m, n 用于取顶点所在的连通分量</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">int</span> i, k = G-&gt;arcnum, m, n;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">int</span> AS[MAX_VERTEX_NUM]; <span class="comment">// 用并查集表示连通分量</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">    ArcHeap AH[MAX_VERTEX_NUM]; <span class="comment">// 用边集堆选择最小权值边</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">    InitMFSet(AS, G-&gt;vexnum);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">    InitArcHeap(AH, G-&gt;arcs, G-&gt;arcnum, G-&gt;vexnum);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; G-&gt;arcnum; ++i)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">    &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">        k = GetRoot(AH, k);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">        m = Fix_MFSet(AS, AH[k].vex_1);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">        n = Fix_MFSet(AS, AH[k].vex_2);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">        <span class="comment">// 属于不同的连通分量，将其加入</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">if</span> (m != n)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">        &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line">            <span class="comment">// 合并连通分量</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line">            Mix_MFSet(AS, m, n);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">22</span></pre></td><td class="code"><pre><span class="line">            <span class="built_in">printf</span>(<span class="string">"%c-[%d]-%c\t"</span>, G-&gt;vexs[AH[k].vex_1], G-&gt;arcs[AH[k].vex_1][AH[k].vex_2], G-&gt;vexs[AH[k].vex_2]);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">23</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">24</span></pre></td><td class="code"><pre><span class="line">        --k;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">25</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">26</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure><h3 id="复杂度分析-v2"><a class="headerlink" href="#复杂度分析-v2"></a>复杂度分析</h3><p>算法实现中至多对 e 条边各扫描一次，用堆来存放边，则每次选择除最小代价的边仅需要 O(loge) 的时间（第一次为 O(e)）；<br>网中的连通分量是等价类，用并查集来描述，构造并查集需要 O(eloge) 的时间。</p><p>因此，克鲁斯卡尔算法时间复杂度为 <strong>O(eloge)</strong>，与图的顶点数无关，而与图的边数有关，所以适用于求 <strong>边稀疏</strong> 的网的最小生成树。</p><p>完整代码可参见：<a href="https://github.com/Evandoz/Data-Structures/tree/master/Graph/MGraph.h" target="_blank" rel="external nofollow noopener noreferrer">GitHub</a></p><p><strong>DONE！</strong></p></div><div class="post-footer"><div class="post-copyright">&copy; 除特殊声明外，文章著作权归作者所有，转载请注明作者及出处</div></div></article><div class="nagination card"><a href="/Evandoz/posts/1X5MDN4.htm" class="nagination-link">上篇: 图的关节点问题</a> <a href="/Evandoz/posts/RHJG1M.htm" class="nagination-link">下篇: 有向图的强连通分量</a></div></main><aside class="aside post"><div class="widget profile card"><div class="widget-cover" style="background-image:url(/Evandoz/css/images/background.jpg)"><div class="avatar"><img width="100%" height="100%" src="/Evandoz/css/images/logo.png"></div></div><div class="widget-content"><div class="author">Levan</div><div class="site-meta"><a class="col" href="/Evandoz/archives"><span class="amount">79</span> <span class="text">文章</span> </a><a class="col" href="/Evandoz/categories"><span class="amount">23</span> <span class="text">分类</span> </a><a class="col" href="/Evandoz/tags"><span class="amount">77</span> <span class="text">标签</span> </a><a class="col" href="/Evandoz/archives"><span class="amount">75.3k</span> <span class="text">字数</span></a></div></div></div><div id="toc" class="toc"><h3 class="toc-title">目录</h3><ol class="toc-content"><li class="toc-content-item toc-content-level-2"><a class="toc-content-link" href="#基本概念"><span class="toc-content-text">基本概念</span></a></li><li class="toc-content-item toc-content-level-2"><a class="toc-content-link" href="#算法原理"><span class="toc-content-text">算法原理</span></a></li><li class="toc-content-item toc-content-level-2"><a class="toc-content-link" href="#普利姆算法-prim"><span class="toc-content-text">普利姆算法(Prim)</span></a><ol class="toc-content-child"><li class="toc-content-item toc-content-level-3"><a class="toc-content-link" href="#算法过程"><span class="toc-content-text">算法过程</span></a></li><li class="toc-content-item toc-content-level-3"><a class="toc-content-link" href="#算法实现-邻接矩阵"><span class="toc-content-text">算法实现（邻接矩阵）</span></a></li><li class="toc-content-item toc-content-level-3"><a class="toc-content-link" href="#复杂度分析"><span class="toc-content-text">复杂度分析</span></a></li></ol></li><li class="toc-content-item toc-content-level-2"><a class="toc-content-link" href="#克鲁斯卡尔算法-kruskal"><span class="toc-content-text">克鲁斯卡尔算法(Kruskal)</span></a><ol class="toc-content-child"><li class="toc-content-item toc-content-level-3"><a class="toc-content-link" href="#算法过程-v2"><span class="toc-content-text">算法过程</span></a></li><li class="toc-content-item toc-content-level-3"><a class="toc-content-link" href="#算法实现-邻接矩阵-v2"><span class="toc-content-text">算法实现（邻接矩阵）</span></a></li><li class="toc-content-item toc-content-level-3"><a class="toc-content-link" href="#复杂度分析-v2"><span class="toc-content-text">复杂度分析</span></a></li></ol></li></ol></div></aside></div></div><footer id="footer" class="footer"><div class="outer"><div class="copyright"><p><span>EXP</span> &copy; 2015 - 2019</p></div><div class="navigation"><a href="/Evandoz/https:/evandoz.github.io">Hexo · Levan</a></div></div></footer></div></div></div><div id="top-anchor" class="top-anchor"><ul><li></li><li></li></ul></div><div id="mobile-nav" class="mobile-nav"><a class="menu-item" href="/Evandoz/archives">归档</a> <a class="menu-item" href="/Evandoz/categories">分类</a> <a class="menu-item" href="/Evandoz/tags">标签</a> <a class="menu-item" href="/Evandoz/about">关于</a></div><div id="over-layer" class="over-layer"></div><script src="/Evandoz/js/jquery.js"></script><script src="/Evandoz/js/velocity.js"></script><script src="/Evandoz/js/plugins.js"></script><script src="/Evandoz/js/script.js"></script></body></html>
+<!DOCTYPE html>
+<html>
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+  
+  <title>图的最小生成树 | EXP</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+    <meta name="author" content="Levan">
+  
+  
+    <meta name="description" content="日常记录与分享">
+  
+  
+    <meta name="keywords" content="数据结构,最小生成树">
+  
+  
+    <meta name="google-site-verification" content="W2AVg5n_ALo21rl9n3ZwS8AuEanZfJkirzrRGLLYvn4">
+  
+  
+    <meta name="baidu-site-verification" content="BM2Q3xLpPJ">
+  
+  
+    <meta name="360-site-verification" content="573211edf2de02c99d7b255b2c56513c">
+  
+  
+    <link rel="short icon" type="image/x-icon" href="/Evandoz/css/images/favicon.ico">
+  
+  <link rel="canonical" href="https://evandoz.github.io/Evandoz/posts/3pzj4yk.htm">
+  
+<link rel="stylesheet" href="/Evandoz/css/style.css">
+
+<meta name="generator" content="Hexo 4.1.0"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
+
+<body>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="overflow" class="overflow">
+    <div id="hiddenbar" class="hiddenbar">
+      <div id="wrapper" class="wrapper">
+        <header id="header" class="header is-post">
+  <div class="outer">
+    
+      <div class="logo">
+        <a class="title" href="/Evandoz/">EXP</a>
+      </div>
+    
+
+    <div class="nav">
+      <ul id="nav-icon" class="nav-icon">
+        <li></li><li></li><li></li>
+      </ul>
+      <ul class="nav-menu">
+        
+          <li class="nav-item">
+            <a href="/Evandoz/archives">归档</a>
+          </li>
+        
+          <li class="nav-item">
+            <a href="/Evandoz/categories">分类</a>
+          </li>
+        
+          <li class="nav-item">
+            <a href="/Evandoz/tags">标签</a>
+          </li>
+        
+          <li class="nav-item">
+            <a href="/Evandoz/about">关于</a>
+          </li>
+        
+      </ul>
+    </div>
+
+  </div>
+</header>
+
+        <div id="content" class="content">
+  <div class="outer">
+    <main class="main">
+      <article id="数据结构/图/20160812-图的最小生成树" class="article card">
+        
+  
+  	<h1 class="post-title">图的最小生成树</h1>
+  
+
+
+        <div class="post-meta">
+          <span class="post-date">
+  <time datetime="2016-08-11T16:00:00.000Z">2016-08-12</time>
+</span>
+
+          
+  <span class="post-category">
+    <a class="category-link" href="/Evandoz/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构</a> · <a class="category-link" href="/Evandoz/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E5%9B%BE/">图</a>
+  </span>
+
+
+        </div>
+        <div id="post-content" class="post-content">
+          <h2 id="基本概念"><a class="headerlink" href="#基本概念"></a>基本概念</h2>
+<p>图的最小生成树问题在现实生活中有重要应用，譬如在 n 个城市之间搭建通信网。<br>
+对于 n 个节点的连通图，可以建立很多不同的生成树，每个生成树都可以是一个通信网，要是通信网总的耗费最小（衡量标准根据具体情况而定，可能是距离、价格等等），就是要找到一棵最小生成树，这就是最小生成树问题(Minimum Cost Spanning Tree, MST)。一棵生成树的代价就是各边的代价之和。</p>
+<h2 id="算法原理"><a class="headerlink" href="#算法原理"></a>算法原理</h2>
+<p>构造生成树有很多算法，多数算法都用到一条 MST 的性质：</p>
+<p>假设 N = (V, {E}) 是一个连通网，U 是顶点集 V 的一个非空子集，如果 (u, v) 是一条具有最小权值（代价）的边，其中 u∈U, v∈V-U，那么一定存在一棵包含边 (u, v) 的最小生成树。</p>
+<p>该性质可以用反证法加以证明。</p>
+<h2 id="普利姆算法-prim"><a class="headerlink" href="#普利姆算法-prim"></a>普利姆算法(Prim)</h2>
+<h3 id="算法过程"><a class="headerlink" href="#算法过程"></a>算法过程</h3>
+<p>假设 N = (V, {E}) 是连通网，TE 是 N 上最小生成树中变得合集。<br>
+算法从 U = {u<sub>0</sub>}(u<sub>0</sub>∈V), TE = {} 开始，重复如下操作：<br>
+在所有 u∈U, v∈V-U 的边 (u, v)∈E 中找一条代价最小的边 (u<sub>0</sub>, v<sub>0</sub>) 并入集合 TE，同时 v<sub>0</sub> 并入 U ，直至 U=V 为止。<br>
+此时 TE 中必有 n-1 条边，则 T = (V, {TE}) 为 N 的最小生成树。</p>
+<p>为了实现算法，需要一个辅助数组 <code>closedge</code>，用来<strong>记录从 U 到 V-U 具有最小代价的边</strong>。<br>
+对每个顶点 v<sub>i</sub>∈V-U，在辅助数组中存在一个分量 closedge[i]，它包含两个域，<br>
+其中 <code>lowcost域</code>  <strong>存储该边上的权</strong>，<code>vex 域</code> <strong>存储该边依附在 U 中的顶点</strong>。</p>
+<h3 id="算法实现-邻接矩阵"><a class="headerlink" href="#算法实现-邻接矩阵"></a>算法实现（邻接矩阵）</h3>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// Prim</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">MiniSpanTree_Prim</span><span class="params">(MGraph *G, VertexType v)</span></span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="function"></span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">int</span> i, j, k;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">    ArcType minicost;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">    <span class="comment">// 定义辅助数组，记录当前最小生成树与树外节点的最小距离及关联的树内顶点</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">    <span class="class"><span class="keyword">struct</span> &#123;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">        VertexType adjvex; <span class="comment">// 用于复原</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">        ArcType lowcost;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">    &#125;closedge[MAX_VERTEX_NUM];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">    <span class="comment">// 初始化 closedge</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">    k = LocateVex(G, v);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; G-&gt;vexnum; ++i)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">    &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">if</span> (G-&gt;vexs[i] == v)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">            closedge[i].lowcost = <span class="number">0</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">else</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">        &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line">            closedge[i].adjvex = v;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line">            closedge[i].lowcost = G-&gt;arcs[k][i];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">22</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">23</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">24</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">25</span></pre></td><td class="code"><pre><span class="line">    <span class="comment">// Prim 算法运行 G-&gt;vexnum -1 次</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">26</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">for</span> (i = <span class="number">1</span>; i &lt; G-&gt;vexnum; ++i)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">27</span></pre></td><td class="code"><pre><span class="line">    &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">28</span></pre></td><td class="code"><pre><span class="line">        <span class="comment">// 计算最小，得到k，k为最顶距离对应的节点（位置下标）</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">29</span></pre></td><td class="code"><pre><span class="line">        minicost = INF;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">30</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">for</span> (j = <span class="number">0</span>; j &lt; G-&gt;vexnum; ++j)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">31</span></pre></td><td class="code"><pre><span class="line">        &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">32</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">if</span> (closedge[j].lowcost != <span class="number">0</span> &amp;&amp; closedge[j].lowcost &lt; minicost)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">33</span></pre></td><td class="code"><pre><span class="line">            &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">34</span></pre></td><td class="code"><pre><span class="line">                minicost = closedge[j].lowcost;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">35</span></pre></td><td class="code"><pre><span class="line">                k = j;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">36</span></pre></td><td class="code"><pre><span class="line">            &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">37</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">38</span></pre></td><td class="code"><pre><span class="line">        <span class="built_in">printf</span>(<span class="string">"%c-[%d]-%c\t"</span>, closedge[k].adjvex, G-&gt;arcs[LocateVex(G, closedge[k].adjvex)][k], G-&gt;vexs[k]);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">39</span></pre></td><td class="code"><pre><span class="line">        <span class="comment">// 将节点 G-&gt;vexs[k] 纳入生成树</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">40</span></pre></td><td class="code"><pre><span class="line">        closedge[k].lowcost = <span class="number">0</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">41</span></pre></td><td class="code"><pre><span class="line">        <span class="comment">// 更新 closedge</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">42</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">for</span> (j = <span class="number">0</span>; j &lt; G-&gt;vexnum; ++j)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">43</span></pre></td><td class="code"><pre><span class="line">        &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">44</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">if</span> (G-&gt;arcs[k][j] &lt; closedge[j].lowcost)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">45</span></pre></td><td class="code"><pre><span class="line">            &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">46</span></pre></td><td class="code"><pre><span class="line">                closedge[j].adjvex = G-&gt;vexs[k];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">47</span></pre></td><td class="code"><pre><span class="line">                closedge[j].lowcost = G-&gt;arcs[k][j];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">48</span></pre></td><td class="code"><pre><span class="line">            &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">49</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">50</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">51</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+<h3 id="复杂度分析"><a class="headerlink" href="#复杂度分析"></a>复杂度分析</h3>
+<p>算法实现中有两个内循环，第 1 个内循环是在 closedge 中选择 lowcost 最小值，时间为 O(n-1)；<br>
+第 2 个内循环更新 closedge 中的 lowcost 和 vex，时间为 O(n)。</p>
+<p>因此，普利姆算法时间复杂度为 <strong>O(n<sup>2</sup>)</strong>，与图的顶点数有关，而与图中的边数无关，所以适用于求 <strong>边稠密</strong> 的网的最小生成树。</p>
+<h2 id="克鲁斯卡尔算法-kruskal"><a class="headerlink" href="#克鲁斯卡尔算法-kruskal"></a>克鲁斯卡尔算法(Kruskal)</h2>
+<h3 id="算法过程-v2"><a class="headerlink" href="#算法过程-v2"></a>算法过程</h3>
+<p>普利姆从顶点角度建立最小生成树，而克鲁斯卡尔算法则从边的角度求解。</p>
+<p>假设连通网 N = (V, {E})，则令最小生成树的初始状态为 <strong>只有 n 个顶点而无边的非连通图 T = (V, {})</strong>，网中每个顶底啊都自成一个连通分量，在 E 中选择代价最小的边，如果该边依附的顶点落在 T 中不同的连通分量中，则将此边加入到 T 中，否则舍去选择下一条代价最小的边。<br>
+依此类推，直到 T 中所有顶点都在同一个连通分量上为止。</p>
+<p>连通分量可以用 <code>并查集 MFSet</code> 来表示，每一轮选择最小代价的边可以用 <code>堆</code> 来实现。</p>
+<h3 id="算法实现-邻接矩阵-v2"><a class="headerlink" href="#算法实现-邻接矩阵-v2"></a>算法实现（邻接矩阵）</h3>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// Kruskal</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">MiniSpanTree_Kruskal</span><span class="params">(MGraph *G)</span></span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="function"></span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    <span class="comment">// k 用于取当前权值最小边</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">    <span class="comment">// m, n 用于取顶点所在的连通分量</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">int</span> i, k = G-&gt;arcnum, m, n;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">int</span> AS[MAX_VERTEX_NUM]; <span class="comment">// 用并查集表示连通分量</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">    ArcHeap AH[MAX_VERTEX_NUM]; <span class="comment">// 用边集堆选择最小权值边</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">    InitMFSet(AS, G-&gt;vexnum);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">    InitArcHeap(AH, G-&gt;arcs, G-&gt;arcnum, G-&gt;vexnum);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; G-&gt;arcnum; ++i)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">    &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">        k = GetRoot(AH, k);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">        m = Fix_MFSet(AS, AH[k].vex_1);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">        n = Fix_MFSet(AS, AH[k].vex_2);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">        <span class="comment">// 属于不同的连通分量，将其加入</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">if</span> (m != n)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">        &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line">            <span class="comment">// 合并连通分量</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line">            Mix_MFSet(AS, m, n);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">22</span></pre></td><td class="code"><pre><span class="line">            <span class="built_in">printf</span>(<span class="string">"%c-[%d]-%c\t"</span>, G-&gt;vexs[AH[k].vex_1], G-&gt;arcs[AH[k].vex_1][AH[k].vex_2], G-&gt;vexs[AH[k].vex_2]);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">23</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">24</span></pre></td><td class="code"><pre><span class="line">        --k;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">25</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">26</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+<h3 id="复杂度分析-v2"><a class="headerlink" href="#复杂度分析-v2"></a>复杂度分析</h3>
+<p>算法实现中至多对 e 条边各扫描一次，用堆来存放边，则每次选择除最小代价的边仅需要 O(loge) 的时间（第一次为 O(e)）；<br>
+网中的连通分量是等价类，用并查集来描述，构造并查集需要 O(eloge) 的时间。</p>
+<p>因此，克鲁斯卡尔算法时间复杂度为 <strong>O(eloge)</strong>，与图的顶点数无关，而与图的边数有关，所以适用于求 <strong>边稀疏</strong> 的网的最小生成树。</p>
+<p>完整代码可参见：<a href="https://github.com/Evandoz/Data-Structures/tree/master/Graph/MGraph.h" target="_blank" rel="external nofollow noopener noreferrer">GitHub</a></p>
+<p><strong>DONE！</strong></p>
+
+        </div>
+        <div class="post-footer">
+          <div class="post-copyright">&copy; 除特殊声明外，文章著作权归作者所有，转载请注明作者及出处</div>
+        </div>
+      </article>
+      <!-- Pagination -->
+      
+        <div class="nagination card">
+          
+            <a href="/Evandoz/posts/1X5MDN4.htm" class="nagination-link">上篇: 图的关节点问题</a>
+          
+          
+            <a href="/Evandoz/posts/RHJG1M.htm" class="nagination-link">下篇: 有向图的强连通分量</a>
+          
+        </div>
+      
+      <!-- Comment -->
+      <!-- 
+        <div id="article-comment" class="article-comment card"></div>
+
+       -->
+    </main>
+    <aside class="aside post">
+      <div class="widget profile card">
+  <div class="widget-cover" style="background-image: url('/Evandoz/css/images/background.jpg')">
+    <div class="avatar">
+      <img width="100%" height="100%" src="/Evandoz/css/images/logo.png">
+    </div>
+  </div>
+  <div class="widget-content">
+    <div class="author">
+      Levan
+    </div>
+    <div class="site-meta">
+      <a class="col" href="/Evandoz/archives">
+        <span class="amount">79</span>
+        <span class="text">文章</span>
+      </a>
+      <a class="col" href="/Evandoz/categories">
+        <span class="amount">23</span>
+        <span class="text">分类</span>
+      </a>
+      <a class="col" href="/Evandoz/tags">
+        <span class="amount">77</span>
+        <span class="text">标签</span>
+      </a>
+      <a class="col" href="/Evandoz/archives">
+        <span class="amount">75.5k</span>
+        <span class="text">字数</span>
+      </a>
+    </div>
+  </div>
+</div>
+
+      <div id="toc" class="toc">
+        
+          <h3 class="toc-title">目录</h3>
+          <ol class="toc-content"><li class="toc-content-item toc-content-level-2"><a class="toc-content-link" href="#基本概念"><span class="toc-content-text">基本概念</span></a></li><li class="toc-content-item toc-content-level-2"><a class="toc-content-link" href="#算法原理"><span class="toc-content-text">算法原理</span></a></li><li class="toc-content-item toc-content-level-2"><a class="toc-content-link" href="#普利姆算法-prim"><span class="toc-content-text">普利姆算法(Prim)</span></a><ol class="toc-content-child"><li class="toc-content-item toc-content-level-3"><a class="toc-content-link" href="#算法过程"><span class="toc-content-text">算法过程</span></a></li><li class="toc-content-item toc-content-level-3"><a class="toc-content-link" href="#算法实现-邻接矩阵"><span class="toc-content-text">算法实现（邻接矩阵）</span></a></li><li class="toc-content-item toc-content-level-3"><a class="toc-content-link" href="#复杂度分析"><span class="toc-content-text">复杂度分析</span></a></li></ol></li><li class="toc-content-item toc-content-level-2"><a class="toc-content-link" href="#克鲁斯卡尔算法-kruskal"><span class="toc-content-text">克鲁斯卡尔算法(Kruskal)</span></a><ol class="toc-content-child"><li class="toc-content-item toc-content-level-3"><a class="toc-content-link" href="#算法过程-v2"><span class="toc-content-text">算法过程</span></a></li><li class="toc-content-item toc-content-level-3"><a class="toc-content-link" href="#算法实现-邻接矩阵-v2"><span class="toc-content-text">算法实现（邻接矩阵）</span></a></li><li class="toc-content-item toc-content-level-3"><a class="toc-content-link" href="#复杂度分析-v2"><span class="toc-content-text">复杂度分析</span></a></li></ol></li></ol>
+        
+      </div>
+    </aside>
+  </div>
+
+
+</div>
+        <footer id="footer" class="footer">
+  <div class="outer">
+    <div class="copyright">
+      <p><span>EXP</span> &copy; 2015 - 2019</p>
+    </div>
+    <div class="navigation">
+      <a href="/Evandoz/https:/evandoz.github.io">Hexo · Levan</a>
+    </div>
+  </div>
+</footer>
+
+      </div>
+    </div>
+  </div>
+  <div id="top-anchor" class="top-anchor">
+  <ul><li></li><li></li></ul>
+</div>
+
+  <div id="mobile-nav" class="mobile-nav">
+  
+    <a class="menu-item" href="/Evandoz/archives">归档</a>
+  
+    <a class="menu-item" href="/Evandoz/categories">分类</a>
+  
+    <a class="menu-item" href="/Evandoz/tags">标签</a>
+  
+    <a class="menu-item" href="/Evandoz/about">关于</a>
+  
+</div>
+
+<div id="over-layer" class="over-layer"></div>
+
+  
+<script src="/Evandoz/js/jquery.js"></script>
+
+
+<script src="/Evandoz/js/velocity.js"></script>
+
+
+<script src="/Evandoz/js/plugins.js"></script>
+
+
+<script src="/Evandoz/js/script.js"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+
+
+
+</body>
+</html>

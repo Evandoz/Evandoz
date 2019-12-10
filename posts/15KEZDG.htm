@@ -1,1 +1,322 @@
-<!DOCTYPE html><html><head><meta charset="utf-8"><title>使用 bcdboot 重建 Windows 系统引导 | EXP</title><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1"><meta name="author" content="Levan"><meta name="description" content="日常记录与分享"><meta name="keywords" content="bcdboot,Windows,系统引导"><meta name="google-site-verification" content="W2AVg5n_ALo21rl9n3ZwS8AuEanZfJkirzrRGLLYvn4"><meta name="baidu-site-verification" content="BM2Q3xLpPJ"><meta name="360-site-verification" content="573211edf2de02c99d7b255b2c56513c"><link rel="short icon" type="image/x-icon" href="/Evandoz/css/images/favicon.ico"><link rel="canonical" href="https://evandoz.github.io/Evandoz/posts/15kezdg.htm"><link rel="stylesheet" href="/Evandoz/css/style.css"><meta name="generator" content="Hexo 4.1.0"></head><body><div id="overflow" class="overflow"><div id="hiddenbar" class="hiddenbar"><div id="wrapper" class="wrapper"><header id="header" class="header is-post"><div class="outer"><div class="logo"><a class="title" href="/Evandoz/">EXP</a></div><div class="nav"><ul id="nav-icon" class="nav-icon"><li></li><li></li><li></li></ul><ul class="nav-menu"><li class="nav-item"><a href="/Evandoz/archives">归档</a></li><li class="nav-item"><a href="/Evandoz/categories">分类</a></li><li class="nav-item"><a href="/Evandoz/tags">标签</a></li><li class="nav-item"><a href="/Evandoz/about">关于</a></li></ul></div></div></header><div id="content" class="content"><div class="outer"><main class="main"><article id="操作系统/Windows/20190118-使用 bcdboot 重建 Windows 系统引导" class="article card"><h1 class="post-title">使用 bcdboot 重建 Windows 系统引导</h1><div class="post-meta"><span class="post-date"><time datetime="2019-01-17T16:00:00.000Z">2019-01-18</time></span> <span class="post-category"><a class="category-link" href="/Evandoz/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">操作系统</a> · <a class="category-link" href="/Evandoz/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Windows/">Windows</a></span></div><div id="post-content" class="post-content"><p>Windows 上自带的 bcdboot 应用程序一种用于快速设置系统分区或修复系统分区上的启动环境的工具，它通过从已安装的 Windows 系统文件夹中复制一小部分启动环境文件来设置/修复系统，此外，它还能够在系统分区上创建引导配置 BCD 文件，该文件存储了启动引导项，用于选择引导已安装的 Windows。</p><h2 id="bcdboot-工作原理"><a class="headerlink" href="#bcdboot-工作原理"></a>bcdboot 工作原理</h2><p>bcdboot 程序通常在 %WINDIR%\System32 文件夹内，运行后它从已有的 Windows 映像复制一套启动环境文件到<code>启动分区或目录</code><sup class="footnote-ref"><a href="#fn1" id="fnref1">[1]</a></sup>中，该启动环境文件包括：</p><p><code>%WINDIR%\boot\efi</code> 文件夹和 <code>%WINDIR%\System32\boot</code> 文件夹</p><p>此外，bcdboot 以 <code>%WINDIR%\System32\Config\BCD-Template</code> 文件为模板，在系统启动分区上创建新的 BCD（启动菜单）文件，并初始化 BCD 启动环境文件，可在 BCD-Template 文件中定义特定的 BCD 设置（需要BCB文件编辑器）。</p><ol><li>BIOS 引导的系统</li></ol><p>固件标识的系统启动分区是 MBR 格式磁盘上的<code>活动分区</code><sup class="footnote-ref"><a href="#fn2" id="fnref2">[2]</a></sup>，bcdboot 会在分区上创建 \Boot 目录，并将所有需要的引导环境文件复制到该目录中。</p><ol start="2"><li>UEFI 引导的系统</li></ol><p>固件标识的系统启动分区为 GPT 格式磁盘上的<code>EFI 系统分区（ESP）</code><sup class="footnote-ref"><a href="#fn3" id="fnref3">[3]</a></sup>，bcdboot 会在分区上创建 \EFI\Microsoft\Boot 目录，并将所有需要的引导环境文件复制到该目录中。</p><p>bcdboot 可将现有的启动环境更新到系统分区，Windows 映像中较新的文件版本会复制到系统分区中。</p><p>如果系统分区中已存在 BCD 存储，</p><ol><li><p>bcdboot 将根据 BCD-Template 文件中的设置，在现有的 BCD 存储中创建一个新启动项，并删除引用同一个 Windows 映像的所有重复的启动项。</p></li><li><p>如果已存在 Windows 映像的启动项，并且除了默认值以外还对该启动项启用了其他 BCD 设置，则下次运行 BCDboot 时，可使用 /m 选项将 OS 加载程序 GUID 所标识的现有启动项合并到 BCDboot 创建的新启动项，以此来保留这些设置。</p></li></ol><h2 id="bcdboot-命令-bcdboot-exe-程序"><a class="headerlink" href="#bcdboot-命令-bcdboot-exe-程序"></a>bcdboot 命令（bcdboot.exe 程序）</h2><p>bcdboot 命令格式</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">bcdboot &lt;source&gt; [&#x2F;l &lt;locale&gt;] [&#x2F;s &lt;volume-letter&gt; [&#x2F;f &lt;firmware&gt;]]</span></pre></td></tr></table></figure><p>bcdboot 命令选项（只列举常用选项，更多选项可在 Windows 终端中输入<code>bcdboot</code>查看）</p><table><thead><tr><th style="text-align:left">选项</th><th style="text-align:left">描述</th></tr></thead><tbody><tr><td style="text-align:left">source</td><td style="text-align:left">指定作为源的 Windows 根目录的位置，将从该目录中复制启动环境文件</td></tr><tr><td style="text-align:left">/l</td><td style="text-align:left">可选，指定初始化 BCD 存储时可选区域设置，默认值为英语（美国）</td></tr><tr><td style="text-align:left">/s</td><td style="text-align:left">可选，指定复制引导文件目标系统分区的卷号，默认值是固件所标识的系统分区</td></tr><tr><td style="text-align:left">/f</td><td style="text-align:left">与 /s 一起使用，指定目标系统分区的固件类型，选项有<code>UEFI</code>、<code>BIOS</code> 或<code>全部</code></td></tr><tr><td style="text-align:left">/v</td><td style="text-align:left">可选，启用详细模式</td></tr><tr><td style="text-align:left">/m</td><td style="text-align:left">可选，如果指定了 OS Loader GUID，则合并给定的加载程序对象和系统模板，以生成可启动项，默认情况下，只合并全局对象</td></tr><tr><td style="text-align:left">/p</td><td style="text-align:left">可选，指定 Windows 引导管理器固件项应保留位置。如果条目不存在，新条目将添加到第一个位置</td></tr><tr><td style="text-align:left">/c</td><td style="text-align:left">可选，指定由模板描述的任何现有对象不应迁移</td></tr></tbody></table><p>示例：</p><ol><li>BIOS+MBR 常用</li></ol><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">bcdboot C:\Windows &#x2F;l zh-cn</span></pre></td></tr></table></figure><p>从系统盘 C:\Windows 目录中复制启动文件，并创建 BCD（中文）启动菜单。</p><ol start="2"><li>UEFI+GPT 常用</li></ol><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">bcdboot C:\Windows &#x2F;s H: &#x2F;f UEFI &#x2F;l zh-cn</span></pre></td></tr></table></figure><p>从系统盘 C:\Windows 目录中复制启动文件到 ESP 中，使用 UEFI 引导。<br>此处指定了 ESP 的驱动器号 H（可选），前提是已经使用 DiskPart 等工具将 ESP 分区装载为 H 盘。</p><h2 id="bcdboot-使用条件"><a class="headerlink" href="#bcdboot-使用条件"></a>bcdboot 使用条件</h2><ol><li><p>系统启动分区存在（可以通过 Diskpart 工具创建，可参见<a href="/Evandoz/2019/DiskPart_Custom_Partition_Type_Size/">使用 DiskPart 自定义 Windows 分区大小</a>）</p></li><li><p>windows安装盘中启动文件存在（一般系统本身正常，没要遭到破坏的话，启动文件就是正常存在的）</p></li></ol><h2 id="bcdboot-使用场景"><a class="headerlink" href="#bcdboot-使用场景"></a>bcdboot 使用场景</h2><ol><li>无法进入系统</li></ol><p>优盘启动至选择分区时，Shift + F10 可打开 CMD 终端，然后就能够使用 bcdboot 工具。</p><ol start="2"><li>已经进入系统</li></ol><p>直接打开终端，使用 bcdboot 工具。</p><hr class="footnotes-sep"><section class="footnotes"><ol class="footnotes-list"><li id="fn1" class="footnote-item"><p>系统分区可通过 Windows 系统自带 DiskPart 创建，且不必为其指定驱动器号，bcdboot 工具可以自动识别查找系统分区。 <a href="#fnref1" class="footnote-backref">↩</a></p></li><li id="fn2" class="footnote-item"><p>BIOS 无法识别 GPT 磁盘，所以 BIOS 下 GPT 磁盘不能用于启动操作系统，在操作系统提供支持的情况下可用于数据存储，故只见于 MBR 磁盘。 <a href="#fnref2" class="footnote-backref">↩</a></p></li><li id="fn3" class="footnote-item"><p>UEFI 可同时识别 MBR 和 GPT 磁盘，所以 UEFI下 MBR 磁盘和 GPT 磁盘都可用于启动操作系统和数据存储。但由于微软限制，UEFI 下使用 Windows 安装程序只能将系统安装在 GPT 磁盘中，故只见于 GPT 磁盘。 <a href="#fnref3" class="footnote-backref">↩</a></p></li></ol></section></div><div class="post-footer"><div class="post-copyright">&copy; 除特殊声明外，文章著作权归作者所有，转载请注明作者及出处</div></div></article><div class="nagination card"><a href="/Evandoz/posts/3SVV2S6.htm" class="nagination-link">上篇: Node-gyp 使用 VS 2019 构建工具</a> <a href="/Evandoz/posts/3KW5Z9Y.htm" class="nagination-link">下篇: GPT 分区表</a></div></main><aside class="aside post"><div class="widget profile card"><div class="widget-cover" style="background-image:url(/Evandoz/css/images/background.jpg)"><div class="avatar"><img width="100%" height="100%" src="/Evandoz/css/images/logo.png"></div></div><div class="widget-content"><div class="author">Levan</div><div class="site-meta"><a class="col" href="/Evandoz/archives"><span class="amount">79</span> <span class="text">文章</span> </a><a class="col" href="/Evandoz/categories"><span class="amount">23</span> <span class="text">分类</span> </a><a class="col" href="/Evandoz/tags"><span class="amount">77</span> <span class="text">标签</span> </a><a class="col" href="/Evandoz/archives"><span class="amount">75.3k</span> <span class="text">字数</span></a></div></div></div><div id="toc" class="toc"><h3 class="toc-title">目录</h3><ol class="toc-content"><li class="toc-content-item toc-content-level-2"><a class="toc-content-link" href="#bcdboot-工作原理"><span class="toc-content-text">bcdboot 工作原理</span></a></li><li class="toc-content-item toc-content-level-2"><a class="toc-content-link" href="#bcdboot-命令-bcdboot-exe-程序"><span class="toc-content-text">bcdboot 命令（bcdboot.exe 程序）</span></a></li><li class="toc-content-item toc-content-level-2"><a class="toc-content-link" href="#bcdboot-使用条件"><span class="toc-content-text">bcdboot 使用条件</span></a></li><li class="toc-content-item toc-content-level-2"><a class="toc-content-link" href="#bcdboot-使用场景"><span class="toc-content-text">bcdboot 使用场景</span></a></li></ol></div></aside></div></div><footer id="footer" class="footer"><div class="outer"><div class="copyright"><p><span>EXP</span> &copy; 2015 - 2019</p></div><div class="navigation"><a href="/Evandoz/https:/evandoz.github.io">Hexo · Levan</a></div></div></footer></div></div></div><div id="top-anchor" class="top-anchor"><ul><li></li><li></li></ul></div><div id="mobile-nav" class="mobile-nav"><a class="menu-item" href="/Evandoz/archives">归档</a> <a class="menu-item" href="/Evandoz/categories">分类</a> <a class="menu-item" href="/Evandoz/tags">标签</a> <a class="menu-item" href="/Evandoz/about">关于</a></div><div id="over-layer" class="over-layer"></div><script src="/Evandoz/js/jquery.js"></script><script src="/Evandoz/js/velocity.js"></script><script src="/Evandoz/js/plugins.js"></script><script src="/Evandoz/js/script.js"></script></body></html>
+<!DOCTYPE html>
+<html>
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+  
+  <title>使用 bcdboot 重建 Windows 系统引导 | EXP</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+    <meta name="author" content="Levan">
+  
+  
+    <meta name="description" content="日常记录与分享">
+  
+  
+    <meta name="keywords" content="bcdboot,Windows,系统引导">
+  
+  
+    <meta name="google-site-verification" content="W2AVg5n_ALo21rl9n3ZwS8AuEanZfJkirzrRGLLYvn4">
+  
+  
+    <meta name="baidu-site-verification" content="BM2Q3xLpPJ">
+  
+  
+    <meta name="360-site-verification" content="573211edf2de02c99d7b255b2c56513c">
+  
+  
+    <link rel="short icon" type="image/x-icon" href="/Evandoz/css/images/favicon.ico">
+  
+  <link rel="canonical" href="https://evandoz.github.io/Evandoz/posts/15kezdg.htm">
+  
+<link rel="stylesheet" href="/Evandoz/css/style.css">
+
+<meta name="generator" content="Hexo 4.1.0"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
+
+<body>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="overflow" class="overflow">
+    <div id="hiddenbar" class="hiddenbar">
+      <div id="wrapper" class="wrapper">
+        <header id="header" class="header is-post">
+  <div class="outer">
+    
+      <div class="logo">
+        <a class="title" href="/Evandoz/">EXP</a>
+      </div>
+    
+
+    <div class="nav">
+      <ul id="nav-icon" class="nav-icon">
+        <li></li><li></li><li></li>
+      </ul>
+      <ul class="nav-menu">
+        
+          <li class="nav-item">
+            <a href="/Evandoz/archives">归档</a>
+          </li>
+        
+          <li class="nav-item">
+            <a href="/Evandoz/categories">分类</a>
+          </li>
+        
+          <li class="nav-item">
+            <a href="/Evandoz/tags">标签</a>
+          </li>
+        
+          <li class="nav-item">
+            <a href="/Evandoz/about">关于</a>
+          </li>
+        
+      </ul>
+    </div>
+
+  </div>
+</header>
+
+        <div id="content" class="content">
+  <div class="outer">
+    <main class="main">
+      <article id="操作系统/Windows/20190118-使用 bcdboot 重建 Windows 系统引导" class="article card">
+        
+  
+  	<h1 class="post-title">使用 bcdboot 重建 Windows 系统引导</h1>
+  
+
+
+        <div class="post-meta">
+          <span class="post-date">
+  <time datetime="2019-01-17T16:00:00.000Z">2019-01-18</time>
+</span>
+
+          
+  <span class="post-category">
+    <a class="category-link" href="/Evandoz/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">操作系统</a> · <a class="category-link" href="/Evandoz/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Windows/">Windows</a>
+  </span>
+
+
+        </div>
+        <div id="post-content" class="post-content">
+          <p>Windows 上自带的 bcdboot 应用程序一种用于快速设置系统分区或修复系统分区上的启动环境的工具，它通过从已安装的 Windows 系统文件夹中复制一小部分启动环境文件来设置/修复系统，此外，它还能够在系统分区上创建引导配置 BCD 文件，该文件存储了启动引导项，用于选择引导已安装的 Windows。</p>
+<h2 id="bcdboot-工作原理"><a class="headerlink" href="#bcdboot-工作原理"></a>bcdboot 工作原理</h2>
+<p>bcdboot 程序通常在 %WINDIR%\System32 文件夹内，运行后它从已有的 Windows 映像复制一套启动环境文件到<code>启动分区或目录</code><sup class="footnote-ref"><a href="#fn1" id="fnref1">[1]</a></sup>中，该启动环境文件包括：</p>
+<p><code>%WINDIR%\boot\efi</code> 文件夹和 <code>%WINDIR%\System32\boot</code> 文件夹</p>
+<p>此外，bcdboot 以 <code>%WINDIR%\System32\Config\BCD-Template</code> 文件为模板，在系统启动分区上创建新的 BCD（启动菜单）文件，并初始化 BCD 启动环境文件，可在 BCD-Template 文件中定义特定的 BCD 设置（需要BCB文件编辑器）。</p>
+<ol>
+<li>BIOS 引导的系统</li>
+</ol>
+<p>固件标识的系统启动分区是 MBR 格式磁盘上的<code>活动分区</code><sup class="footnote-ref"><a href="#fn2" id="fnref2">[2]</a></sup>，bcdboot 会在分区上创建 \Boot 目录，并将所有需要的引导环境文件复制到该目录中。</p>
+<ol start="2">
+<li>UEFI 引导的系统</li>
+</ol>
+<p>固件标识的系统启动分区为 GPT 格式磁盘上的<code>EFI 系统分区（ESP）</code><sup class="footnote-ref"><a href="#fn3" id="fnref3">[3]</a></sup>，bcdboot 会在分区上创建 \EFI\Microsoft\Boot 目录，并将所有需要的引导环境文件复制到该目录中。</p>
+<p>bcdboot 可将现有的启动环境更新到系统分区，Windows 映像中较新的文件版本会复制到系统分区中。</p>
+<p>如果系统分区中已存在 BCD 存储，</p>
+<ol>
+<li>
+<p>bcdboot 将根据 BCD-Template 文件中的设置，在现有的 BCD 存储中创建一个新启动项，并删除引用同一个 Windows 映像的所有重复的启动项。</p>
+</li>
+<li>
+<p>如果已存在 Windows 映像的启动项，并且除了默认值以外还对该启动项启用了其他 BCD 设置，则下次运行 BCDboot 时，可使用 /m 选项将 OS 加载程序 GUID 所标识的现有启动项合并到 BCDboot 创建的新启动项，以此来保留这些设置。</p>
+</li>
+</ol>
+<h2 id="bcdboot-命令-bcdboot-exe-程序"><a class="headerlink" href="#bcdboot-命令-bcdboot-exe-程序"></a>bcdboot 命令（bcdboot.exe 程序）</h2>
+<p>bcdboot 命令格式</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">bcdboot &lt;source&gt; [&#x2F;l &lt;locale&gt;] [&#x2F;s &lt;volume-letter&gt; [&#x2F;f &lt;firmware&gt;]]</span></pre></td></tr></table></figure>
+<p>bcdboot 命令选项（只列举常用选项，更多选项可在 Windows 终端中输入<code>bcdboot</code>查看）</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">选项</th>
+<th style="text-align:left">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">source</td>
+<td style="text-align:left">指定作为源的 Windows 根目录的位置，将从该目录中复制启动环境文件</td>
+</tr>
+<tr>
+<td style="text-align:left">/l</td>
+<td style="text-align:left">可选，指定初始化 BCD 存储时可选区域设置，默认值为英语（美国）</td>
+</tr>
+<tr>
+<td style="text-align:left">/s</td>
+<td style="text-align:left">可选，指定复制引导文件目标系统分区的卷号，默认值是固件所标识的系统分区</td>
+</tr>
+<tr>
+<td style="text-align:left">/f</td>
+<td style="text-align:left">与 /s 一起使用，指定目标系统分区的固件类型，选项有<code>UEFI</code>、<code>BIOS</code> 或<code>全部</code></td>
+</tr>
+<tr>
+<td style="text-align:left">/v</td>
+<td style="text-align:left">可选，启用详细模式</td>
+</tr>
+<tr>
+<td style="text-align:left">/m</td>
+<td style="text-align:left">可选，如果指定了 OS Loader GUID，则合并给定的加载程序对象和系统模板，以生成可启动项，默认情况下，只合并全局对象</td>
+</tr>
+<tr>
+<td style="text-align:left">/p</td>
+<td style="text-align:left">可选，指定 Windows 引导管理器固件项应保留位置。如果条目不存在，新条目将添加到第一个位置</td>
+</tr>
+<tr>
+<td style="text-align:left">/c</td>
+<td style="text-align:left">可选，指定由模板描述的任何现有对象不应迁移</td>
+</tr>
+</tbody>
+</table>
+<p>示例：</p>
+<ol>
+<li>BIOS+MBR 常用</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">bcdboot C:\Windows &#x2F;l zh-cn</span></pre></td></tr></table></figure>
+<p>从系统盘 C:\Windows 目录中复制启动文件，并创建 BCD（中文）启动菜单。</p>
+<ol start="2">
+<li>UEFI+GPT 常用</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">bcdboot C:\Windows &#x2F;s H: &#x2F;f UEFI &#x2F;l zh-cn</span></pre></td></tr></table></figure>
+<p>从系统盘 C:\Windows 目录中复制启动文件到 ESP 中，使用 UEFI 引导。<br>
+此处指定了 ESP 的驱动器号 H（可选），前提是已经使用 DiskPart 等工具将 ESP 分区装载为 H 盘。</p>
+<h2 id="bcdboot-使用条件"><a class="headerlink" href="#bcdboot-使用条件"></a>bcdboot 使用条件</h2>
+<ol>
+<li>
+<p>系统启动分区存在（可以通过 Diskpart 工具创建，可参见<a href="/Evandoz/2019/DiskPart_Custom_Partition_Type_Size/">使用 DiskPart 自定义 Windows 分区大小</a>）</p>
+</li>
+<li>
+<p>windows安装盘中启动文件存在（一般系统本身正常，没要遭到破坏的话，启动文件就是正常存在的）</p>
+</li>
+</ol>
+<h2 id="bcdboot-使用场景"><a class="headerlink" href="#bcdboot-使用场景"></a>bcdboot 使用场景</h2>
+<ol>
+<li>无法进入系统</li>
+</ol>
+<p>优盘启动至选择分区时，Shift + F10 可打开 CMD 终端，然后就能够使用 bcdboot 工具。</p>
+<ol start="2">
+<li>已经进入系统</li>
+</ol>
+<p>直接打开终端，使用 bcdboot 工具。</p>
+<hr class="footnotes-sep">
+<section class="footnotes">
+<ol class="footnotes-list">
+<li id="fn1" class="footnote-item"><p>系统分区可通过 Windows 系统自带 DiskPart 创建，且不必为其指定驱动器号，bcdboot 工具可以自动识别查找系统分区。 <a href="#fnref1" class="footnote-backref">↩</a></p>
+</li>
+<li id="fn2" class="footnote-item"><p>BIOS 无法识别 GPT 磁盘，所以 BIOS 下 GPT 磁盘不能用于启动操作系统，在操作系统提供支持的情况下可用于数据存储，故只见于 MBR 磁盘。 <a href="#fnref2" class="footnote-backref">↩</a></p>
+</li>
+<li id="fn3" class="footnote-item"><p>UEFI 可同时识别 MBR 和 GPT 磁盘，所以 UEFI下 MBR 磁盘和 GPT 磁盘都可用于启动操作系统和数据存储。但由于微软限制，UEFI 下使用 Windows 安装程序只能将系统安装在 GPT 磁盘中，故只见于 GPT 磁盘。 <a href="#fnref3" class="footnote-backref">↩</a></p>
+</li>
+</ol>
+</section>
+
+        </div>
+        <div class="post-footer">
+          <div class="post-copyright">&copy; 除特殊声明外，文章著作权归作者所有，转载请注明作者及出处</div>
+        </div>
+      </article>
+      <!-- Pagination -->
+      
+        <div class="nagination card">
+          
+            <a href="/Evandoz/posts/3SVV2S6.htm" class="nagination-link">上篇: Node-gyp 使用 VS 2019 构建工具</a>
+          
+          
+            <a href="/Evandoz/posts/3KW5Z9Y.htm" class="nagination-link">下篇: GPT 分区表</a>
+          
+        </div>
+      
+      <!-- Comment -->
+      <!-- 
+        <div id="article-comment" class="article-comment card"></div>
+
+       -->
+    </main>
+    <aside class="aside post">
+      <div class="widget profile card">
+  <div class="widget-cover" style="background-image: url('/Evandoz/css/images/background.jpg')">
+    <div class="avatar">
+      <img width="100%" height="100%" src="/Evandoz/css/images/logo.png">
+    </div>
+  </div>
+  <div class="widget-content">
+    <div class="author">
+      Levan
+    </div>
+    <div class="site-meta">
+      <a class="col" href="/Evandoz/archives">
+        <span class="amount">79</span>
+        <span class="text">文章</span>
+      </a>
+      <a class="col" href="/Evandoz/categories">
+        <span class="amount">23</span>
+        <span class="text">分类</span>
+      </a>
+      <a class="col" href="/Evandoz/tags">
+        <span class="amount">77</span>
+        <span class="text">标签</span>
+      </a>
+      <a class="col" href="/Evandoz/archives">
+        <span class="amount">75.5k</span>
+        <span class="text">字数</span>
+      </a>
+    </div>
+  </div>
+</div>
+
+      <div id="toc" class="toc">
+        
+          <h3 class="toc-title">目录</h3>
+          <ol class="toc-content"><li class="toc-content-item toc-content-level-2"><a class="toc-content-link" href="#bcdboot-工作原理"><span class="toc-content-text">bcdboot 工作原理</span></a></li><li class="toc-content-item toc-content-level-2"><a class="toc-content-link" href="#bcdboot-命令-bcdboot-exe-程序"><span class="toc-content-text">bcdboot 命令（bcdboot.exe 程序）</span></a></li><li class="toc-content-item toc-content-level-2"><a class="toc-content-link" href="#bcdboot-使用条件"><span class="toc-content-text">bcdboot 使用条件</span></a></li><li class="toc-content-item toc-content-level-2"><a class="toc-content-link" href="#bcdboot-使用场景"><span class="toc-content-text">bcdboot 使用场景</span></a></li></ol>
+        
+      </div>
+    </aside>
+  </div>
+
+
+</div>
+        <footer id="footer" class="footer">
+  <div class="outer">
+    <div class="copyright">
+      <p><span>EXP</span> &copy; 2015 - 2019</p>
+    </div>
+    <div class="navigation">
+      <a href="/Evandoz/https:/evandoz.github.io">Hexo · Levan</a>
+    </div>
+  </div>
+</footer>
+
+      </div>
+    </div>
+  </div>
+  <div id="top-anchor" class="top-anchor">
+  <ul><li></li><li></li></ul>
+</div>
+
+  <div id="mobile-nav" class="mobile-nav">
+  
+    <a class="menu-item" href="/Evandoz/archives">归档</a>
+  
+    <a class="menu-item" href="/Evandoz/categories">分类</a>
+  
+    <a class="menu-item" href="/Evandoz/tags">标签</a>
+  
+    <a class="menu-item" href="/Evandoz/about">关于</a>
+  
+</div>
+
+<div id="over-layer" class="over-layer"></div>
+
+  
+<script src="/Evandoz/js/jquery.js"></script>
+
+
+<script src="/Evandoz/js/velocity.js"></script>
+
+
+<script src="/Evandoz/js/plugins.js"></script>
+
+
+<script src="/Evandoz/js/script.js"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+
+
+
+</body>
+</html>

@@ -1,1 +1,230 @@
-<!DOCTYPE html><html><head><meta charset="utf-8"><title>ArchLinux 安装之显卡驱动 | EXP</title><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1"><meta name="author" content="Levan"><meta name="description" content="日常记录与分享"><meta name="keywords" content="ArchLinux,显卡驱动,NVIDIA"><meta name="google-site-verification" content="W2AVg5n_ALo21rl9n3ZwS8AuEanZfJkirzrRGLLYvn4"><meta name="baidu-site-verification" content="BM2Q3xLpPJ"><meta name="360-site-verification" content="573211edf2de02c99d7b255b2c56513c"><link rel="short icon" type="image/x-icon" href="/Evandoz/css/images/favicon.ico"><link rel="canonical" href="https://evandoz.github.io/Evandoz/posts/3jx9pbe.htm"><link rel="stylesheet" href="/Evandoz/css/style.css"><meta name="generator" content="Hexo 4.1.0"></head><body><div id="overflow" class="overflow"><div id="hiddenbar" class="hiddenbar"><div id="wrapper" class="wrapper"><header id="header" class="header is-post"><div class="outer"><div class="logo"><a class="title" href="/Evandoz/">EXP</a></div><div class="nav"><ul id="nav-icon" class="nav-icon"><li></li><li></li><li></li></ul><ul class="nav-menu"><li class="nav-item"><a href="/Evandoz/archives">归档</a></li><li class="nav-item"><a href="/Evandoz/categories">分类</a></li><li class="nav-item"><a href="/Evandoz/tags">标签</a></li><li class="nav-item"><a href="/Evandoz/about">关于</a></li></ul></div></div></header><div id="content" class="content"><div class="outer"><main class="main"><article id="操作系统/ArchLinux/20190305-ArchLinux 安装之显卡驱动" class="article card"><h1 class="post-title">ArchLinux 安装之显卡驱动</h1><div class="post-meta"><span class="post-date"><time datetime="2019-03-04T16:00:00.000Z">2019-03-05</time></span> <span class="post-category"><a class="category-link" href="/Evandoz/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">操作系统</a> · <a class="category-link" href="/Evandoz/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/ArchLinux/">ArchLinux</a></span></div><div id="post-content" class="post-content"><h2 id="1-获取显卡情况"><a class="headerlink" href="#1-获取显卡情况"></a>1.获取显卡情况</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment"># lspci -k | grep -A 2 -E "(VGA|3D)"</span></span></pre></td></tr></table></figure><h2 id="2-选择合适的显卡驱动"><a class="headerlink" href="#2-选择合适的显卡驱动"></a>2.选择合适的显卡驱动</h2><p>本机显卡 NVIDIA Corporation GF119 [GeForce GT 705]</p><p>选择驱动并安装：nvidia-390xx-lts（或者nvidia-390xx）</p><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment"># pacman -S nvidia-390xx</span></span></pre></td></tr></table></figure><p>官方提供了显卡驱动列表：</p><p><a href="https://wiki.archlinux.org/index.php/NVIDIA_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)" target="_blank" rel="external nofollow noopener noreferrer">NVIDIA (简体中文) - ArchWiki</a></p><p><a href="https://wiki.archlinux.org/index.php/NVIDIA" target="_blank" rel="external nofollow noopener noreferrer">NVIDIA - ArchWiki</a></p><h2 id="3-64位系统运行32位程序"><a class="headerlink" href="#3-64位系统运行32位程序"></a>3.64位系统运行32位程序</h2><p>在64位的操作系统上，让32位的程序发挥好nvidia-utils的优势，还必须启用multilib源来安装lib32的包（例如lib32-nvidia-utils, lib32-nvidia-340xx-utils 或者 lib32-nvidia-304xx-utils）</p><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment"># nano /etc/pacman.conf</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">[multilib]</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">Include = /etc/pacman.d/mirrorlist</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"><span class="comment"># pacman -Sy</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"><span class="comment"># pacman -S lib32-nvidia-390xx-utils</span></span></pre></td></tr></table></figure><h2 id="4-重启并配置显卡驱动"><a class="headerlink" href="#4-重启并配置显卡驱动"></a>4.重启并配置显卡驱动</h2><p>重启计算机， 使 NVIDIA 的黑名单生效，该名单禁用了 nouveau 模块。</p><p>手动配置</p><p>自动配置</p><p>使用 NVIDIA 提供的配置命令</p><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment"># nvidia-xconfig</span></span></pre></td></tr></table></figure></div><div class="post-footer"><div class="post-copyright">&copy; 除特殊声明外，文章著作权归作者所有，转载请注明作者及出处</div></div></article><div class="nagination card"><a href="/Evandoz/posts/1WNXGVJ.htm" class="nagination-link">上篇: ArchLinux 安装之桌面环境</a> <a href="/Evandoz/posts/2EF995S.htm" class="nagination-link">下篇: ArchLinux 安装之用户管理</a></div></main><aside class="aside post"><div class="widget profile card"><div class="widget-cover" style="background-image:url(/Evandoz/css/images/background.jpg)"><div class="avatar"><img width="100%" height="100%" src="/Evandoz/css/images/logo.png"></div></div><div class="widget-content"><div class="author">Levan</div><div class="site-meta"><a class="col" href="/Evandoz/archives"><span class="amount">79</span> <span class="text">文章</span> </a><a class="col" href="/Evandoz/categories"><span class="amount">23</span> <span class="text">分类</span> </a><a class="col" href="/Evandoz/tags"><span class="amount">77</span> <span class="text">标签</span> </a><a class="col" href="/Evandoz/archives"><span class="amount">75.3k</span> <span class="text">字数</span></a></div></div></div><div id="toc" class="toc"><h3 class="toc-title">目录</h3><ol class="toc-content"><li class="toc-content-item toc-content-level-2"><a class="toc-content-link" href="#1-获取显卡情况"><span class="toc-content-text">1.获取显卡情况</span></a></li><li class="toc-content-item toc-content-level-2"><a class="toc-content-link" href="#2-选择合适的显卡驱动"><span class="toc-content-text">2.选择合适的显卡驱动</span></a></li><li class="toc-content-item toc-content-level-2"><a class="toc-content-link" href="#3-64位系统运行32位程序"><span class="toc-content-text">3.64位系统运行32位程序</span></a></li><li class="toc-content-item toc-content-level-2"><a class="toc-content-link" href="#4-重启并配置显卡驱动"><span class="toc-content-text">4.重启并配置显卡驱动</span></a></li></ol></div></aside></div></div><footer id="footer" class="footer"><div class="outer"><div class="copyright"><p><span>EXP</span> &copy; 2015 - 2019</p></div><div class="navigation"><a href="/Evandoz/https:/evandoz.github.io">Hexo · Levan</a></div></div></footer></div></div></div><div id="top-anchor" class="top-anchor"><ul><li></li><li></li></ul></div><div id="mobile-nav" class="mobile-nav"><a class="menu-item" href="/Evandoz/archives">归档</a> <a class="menu-item" href="/Evandoz/categories">分类</a> <a class="menu-item" href="/Evandoz/tags">标签</a> <a class="menu-item" href="/Evandoz/about">关于</a></div><div id="over-layer" class="over-layer"></div><script src="/Evandoz/js/jquery.js"></script><script src="/Evandoz/js/velocity.js"></script><script src="/Evandoz/js/plugins.js"></script><script src="/Evandoz/js/script.js"></script></body></html>
+<!DOCTYPE html>
+<html>
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+  
+  <title>ArchLinux 安装之显卡驱动 | EXP</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+    <meta name="author" content="Levan">
+  
+  
+    <meta name="description" content="日常记录与分享">
+  
+  
+    <meta name="keywords" content="ArchLinux,显卡驱动,NVIDIA">
+  
+  
+    <meta name="google-site-verification" content="W2AVg5n_ALo21rl9n3ZwS8AuEanZfJkirzrRGLLYvn4">
+  
+  
+    <meta name="baidu-site-verification" content="BM2Q3xLpPJ">
+  
+  
+    <meta name="360-site-verification" content="573211edf2de02c99d7b255b2c56513c">
+  
+  
+    <link rel="short icon" type="image/x-icon" href="/Evandoz/css/images/favicon.ico">
+  
+  <link rel="canonical" href="https://evandoz.github.io/Evandoz/posts/3jx9pbe.htm">
+  
+<link rel="stylesheet" href="/Evandoz/css/style.css">
+
+<meta name="generator" content="Hexo 4.1.0"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
+
+<body>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="overflow" class="overflow">
+    <div id="hiddenbar" class="hiddenbar">
+      <div id="wrapper" class="wrapper">
+        <header id="header" class="header is-post">
+  <div class="outer">
+    
+      <div class="logo">
+        <a class="title" href="/Evandoz/">EXP</a>
+      </div>
+    
+
+    <div class="nav">
+      <ul id="nav-icon" class="nav-icon">
+        <li></li><li></li><li></li>
+      </ul>
+      <ul class="nav-menu">
+        
+          <li class="nav-item">
+            <a href="/Evandoz/archives">归档</a>
+          </li>
+        
+          <li class="nav-item">
+            <a href="/Evandoz/categories">分类</a>
+          </li>
+        
+          <li class="nav-item">
+            <a href="/Evandoz/tags">标签</a>
+          </li>
+        
+          <li class="nav-item">
+            <a href="/Evandoz/about">关于</a>
+          </li>
+        
+      </ul>
+    </div>
+
+  </div>
+</header>
+
+        <div id="content" class="content">
+  <div class="outer">
+    <main class="main">
+      <article id="操作系统/ArchLinux/20190305-ArchLinux 安装之显卡驱动" class="article card">
+        
+  
+  	<h1 class="post-title">ArchLinux 安装之显卡驱动</h1>
+  
+
+
+        <div class="post-meta">
+          <span class="post-date">
+  <time datetime="2019-03-04T16:00:00.000Z">2019-03-05</time>
+</span>
+
+          
+  <span class="post-category">
+    <a class="category-link" href="/Evandoz/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">操作系统</a> · <a class="category-link" href="/Evandoz/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/ArchLinux/">ArchLinux</a>
+  </span>
+
+
+        </div>
+        <div id="post-content" class="post-content">
+          <h2 id="1-获取显卡情况"><a class="headerlink" href="#1-获取显卡情况"></a>1.获取显卡情况</h2>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment"># lspci -k | grep -A 2 -E "(VGA|3D)"</span></span></pre></td></tr></table></figure>
+<h2 id="2-选择合适的显卡驱动"><a class="headerlink" href="#2-选择合适的显卡驱动"></a>2.选择合适的显卡驱动</h2>
+<p>本机显卡 NVIDIA Corporation GF119 [GeForce GT 705]</p>
+<p>选择驱动并安装：nvidia-390xx-lts（或者nvidia-390xx）</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment"># pacman -S nvidia-390xx</span></span></pre></td></tr></table></figure>
+<p>官方提供了显卡驱动列表：</p>
+<p><a href="https://wiki.archlinux.org/index.php/NVIDIA_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)" target="_blank" rel="external nofollow noopener noreferrer">NVIDIA (简体中文) - ArchWiki</a></p>
+<p><a href="https://wiki.archlinux.org/index.php/NVIDIA" target="_blank" rel="external nofollow noopener noreferrer">NVIDIA - ArchWiki</a></p>
+<h2 id="3-64位系统运行32位程序"><a class="headerlink" href="#3-64位系统运行32位程序"></a>3.64位系统运行32位程序</h2>
+<p>在64位的操作系统上，让32位的程序发挥好nvidia-utils的优势，还必须启用multilib源来安装lib32的包（例如lib32-nvidia-utils, lib32-nvidia-340xx-utils 或者 lib32-nvidia-304xx-utils）</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment"># nano /etc/pacman.conf</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">[multilib]</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">Include = /etc/pacman.d/mirrorlist</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"><span class="comment"># pacman -Sy</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"><span class="comment"># pacman -S lib32-nvidia-390xx-utils</span></span></pre></td></tr></table></figure>
+<h2 id="4-重启并配置显卡驱动"><a class="headerlink" href="#4-重启并配置显卡驱动"></a>4.重启并配置显卡驱动</h2>
+<p>重启计算机， 使 NVIDIA 的黑名单生效，该名单禁用了 nouveau 模块。</p>
+<p>手动配置</p>
+<p>自动配置</p>
+<p>使用 NVIDIA 提供的配置命令</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment"># nvidia-xconfig</span></span></pre></td></tr></table></figure>
+
+        </div>
+        <div class="post-footer">
+          <div class="post-copyright">&copy; 除特殊声明外，文章著作权归作者所有，转载请注明作者及出处</div>
+        </div>
+      </article>
+      <!-- Pagination -->
+      
+        <div class="nagination card">
+          
+            <a href="/Evandoz/posts/3RG8RQR.htm" class="nagination-link">上篇: ArchLinux 安装之 AUR</a>
+          
+          
+            <a href="/Evandoz/posts/1WNXGVJ.htm" class="nagination-link">下篇: ArchLinux 安装之桌面环境</a>
+          
+        </div>
+      
+      <!-- Comment -->
+      <!-- 
+        <div id="article-comment" class="article-comment card"></div>
+
+       -->
+    </main>
+    <aside class="aside post">
+      <div class="widget profile card">
+  <div class="widget-cover" style="background-image: url('/Evandoz/css/images/background.jpg')">
+    <div class="avatar">
+      <img width="100%" height="100%" src="/Evandoz/css/images/logo.png">
+    </div>
+  </div>
+  <div class="widget-content">
+    <div class="author">
+      Levan
+    </div>
+    <div class="site-meta">
+      <a class="col" href="/Evandoz/archives">
+        <span class="amount">79</span>
+        <span class="text">文章</span>
+      </a>
+      <a class="col" href="/Evandoz/categories">
+        <span class="amount">23</span>
+        <span class="text">分类</span>
+      </a>
+      <a class="col" href="/Evandoz/tags">
+        <span class="amount">77</span>
+        <span class="text">标签</span>
+      </a>
+      <a class="col" href="/Evandoz/archives">
+        <span class="amount">75.5k</span>
+        <span class="text">字数</span>
+      </a>
+    </div>
+  </div>
+</div>
+
+      <div id="toc" class="toc">
+        
+          <h3 class="toc-title">目录</h3>
+          <ol class="toc-content"><li class="toc-content-item toc-content-level-2"><a class="toc-content-link" href="#1-获取显卡情况"><span class="toc-content-text">1.获取显卡情况</span></a></li><li class="toc-content-item toc-content-level-2"><a class="toc-content-link" href="#2-选择合适的显卡驱动"><span class="toc-content-text">2.选择合适的显卡驱动</span></a></li><li class="toc-content-item toc-content-level-2"><a class="toc-content-link" href="#3-64位系统运行32位程序"><span class="toc-content-text">3.64位系统运行32位程序</span></a></li><li class="toc-content-item toc-content-level-2"><a class="toc-content-link" href="#4-重启并配置显卡驱动"><span class="toc-content-text">4.重启并配置显卡驱动</span></a></li></ol>
+        
+      </div>
+    </aside>
+  </div>
+
+
+</div>
+        <footer id="footer" class="footer">
+  <div class="outer">
+    <div class="copyright">
+      <p><span>EXP</span> &copy; 2015 - 2019</p>
+    </div>
+    <div class="navigation">
+      <a href="/Evandoz/https:/evandoz.github.io">Hexo · Levan</a>
+    </div>
+  </div>
+</footer>
+
+      </div>
+    </div>
+  </div>
+  <div id="top-anchor" class="top-anchor">
+  <ul><li></li><li></li></ul>
+</div>
+
+  <div id="mobile-nav" class="mobile-nav">
+  
+    <a class="menu-item" href="/Evandoz/archives">归档</a>
+  
+    <a class="menu-item" href="/Evandoz/categories">分类</a>
+  
+    <a class="menu-item" href="/Evandoz/tags">标签</a>
+  
+    <a class="menu-item" href="/Evandoz/about">关于</a>
+  
+</div>
+
+<div id="over-layer" class="over-layer"></div>
+
+  
+<script src="/Evandoz/js/jquery.js"></script>
+
+
+<script src="/Evandoz/js/velocity.js"></script>
+
+
+<script src="/Evandoz/js/plugins.js"></script>
+
+
+<script src="/Evandoz/js/script.js"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+
+
+
+</body>
+</html>

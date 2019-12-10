@@ -1,1 +1,228 @@
-<!DOCTYPE html><html><head><meta charset="utf-8"><title>更换畅言评论系统 | EXP</title><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1"><meta name="author" content="Levan"><meta name="description" content="日常记录与分享"><meta name="keywords" content="畅言,友言"><meta name="google-site-verification" content="W2AVg5n_ALo21rl9n3ZwS8AuEanZfJkirzrRGLLYvn4"><meta name="baidu-site-verification" content="BM2Q3xLpPJ"><meta name="360-site-verification" content="573211edf2de02c99d7b255b2c56513c"><link rel="short icon" type="image/x-icon" href="/Evandoz/css/images/favicon.ico"><link rel="canonical" href="https://evandoz.github.io/Evandoz/posts/2bhtdzv.htm"><link rel="stylesheet" href="/Evandoz/css/style.css"><meta name="generator" content="Hexo 4.1.0"></head><body><div id="overflow" class="overflow"><div id="hiddenbar" class="hiddenbar"><div id="wrapper" class="wrapper"><header id="header" class="header is-post"><div class="outer"><div class="logo"><a class="title" href="/Evandoz/">EXP</a></div><div class="nav"><ul id="nav-icon" class="nav-icon"><li></li><li></li><li></li></ul><ul class="nav-menu"><li class="nav-item"><a href="/Evandoz/archives">归档</a></li><li class="nav-item"><a href="/Evandoz/categories">分类</a></li><li class="nav-item"><a href="/Evandoz/tags">标签</a></li><li class="nav-item"><a href="/Evandoz/about">关于</a></li></ul></div></div></header><div id="content" class="content"><div class="outer"><main class="main"><article id="Hexo/20170731-更换畅言评论系统" class="article card"><h1 class="post-title">更换畅言评论系统</h1><div class="post-meta"><span class="post-date"><time datetime="2017-07-30T16:00:00.000Z">2017-07-31</time></span> <span class="post-category"><a class="category-link" href="/Evandoz/categories/Hexo/">Hexo</a></span></div><div id="post-content" class="post-content"><p>多说等第三方评论系统纷纷停止服务，遂将评论系统迁徙至搜狐畅言系统，以下为畅言配置过程记录。</p><a id="more"></a><h2 id="畅言配置"><a class="headerlink" href="#畅言配置"></a>畅言配置</h2><p>使用畅言系统必须提供网站的备案号，否则只能使用 15 天。毕竟现在国家网络信息管的紧，网站都需要备案的，使用独立的域名的司机们应该都备过案了。另外的福利是畅言有广告服务，同意其广告协议可以有广告收入，当然如果你不需要可以不用管它。</p><h3 id="注册获取通用代码"><a class="headerlink" href="#注册获取通用代码"></a>注册获取通用代码</h3><p>畅言提供了桌面端、移动端、自适应等几类代码，可根据需要选择自己需要的。本站使用的是自适应的代码，就以此为例说明几点情况。</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">&lt;!--PC和WAP自适应版--&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">&lt;div id=<span class="string">"SOHUCS"</span> sid=<span class="string">"请将此处替换为配置SourceID的语句"</span> &gt;<span class="xml"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">&lt;script type=<span class="string">"text/javascript"</span>&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> appid = <span class="string">'你的APPID'</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> conf = <span class="string">'你的APPKEY'</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> width = <span class="built_in">window</span>.innerWidth || <span class="built_in">document</span>.documentElement.clientWidth;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (width &lt; <span class="number">960</span>) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.document.write(<span class="string">'&lt;script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id='</span> + appid + <span class="string">'&amp;conf='</span> + conf + <span class="string">'"&gt;&lt;\/script&gt;'</span>); &#125; <span class="keyword">else</span> &#123; <span class="keyword">var</span> loadJs=<span class="function"><span class="keyword">function</span>(<span class="params">d,a</span>)</span>&#123;<span class="keyword">var</span> c=<span class="built_in">document</span>.getElementsByTagName(<span class="string">"head"</span>)[<span class="number">0</span>]||<span class="built_in">document</span>.head||<span class="built_in">document</span>.documentElement;<span class="keyword">var</span> b=<span class="built_in">document</span>.createElement(<span class="string">"script"</span>);b.setAttribute(<span class="string">"type"</span>,<span class="string">"text/javascript"</span>);b.setAttribute(<span class="string">"charset"</span>,<span class="string">"UTF-8"</span>);b.setAttribute(<span class="string">"src"</span>,d);<span class="keyword">if</span>(<span class="keyword">typeof</span> a===<span class="string">"function"</span>)&#123;<span class="keyword">if</span>(<span class="built_in">window</span>.attachEvent)&#123;b.onreadystatechange=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;<span class="keyword">var</span> e=b.readyState;<span class="keyword">if</span>(e===<span class="string">"loaded"</span>||e===<span class="string">"complete"</span>)&#123;b.onreadystatechange=<span class="literal">null</span>;a()&#125;&#125;&#125;<span class="keyword">else</span>&#123;b.onload=a&#125;&#125;c.appendChild(b)&#125;;loadJs(<span class="string">"https://changyan.sohu.com/upload/changyan.js"</span>,<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;<span class="built_in">window</span>.changyan.api.config(&#123;<span class="attr">appid</span>:appid,<span class="attr">conf</span>:conf&#125;)&#125;); &#125; &#125;)(); <span class="xml"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></span></pre></td></tr></table></figure><p>上面的代码中需要替换的有三处：SourceID、APPID、APPKEY：</p><ol><li>SourceID 就是文章获页面的唯一标识，就是数据库表中的(类似)主键，因为评论在数据库中存储要与对应的文章会页面匹配，否则会出现评论的混乱。对于 Hexo，可以把相关页的链接（如page.path/url_for(page.path)）或者标题（如page.title）作为 SourceID。</li><li>APPID和APPKEY在畅言的后台都可以获取。需要注意的是 APPKEY，在后台给的代码中，APPKEY 位置给出的是以<code>prod</code>开头的一串代码，而在其帮助文档中写的是 APPKEY ，虽然两串代码不相同，但都能实现功能，任选一种即可，建议使用 APPKEY。</li></ol><h3 id="安装其他插件"><a class="headerlink" href="#安装其他插件"></a>安装其他插件</h3><p>除主体评论框外，畅言还提供了诸如评论数目、热门评论、热评用户等插件，可根据需要自行选择，本站只安装了评论数目，简单说一下注意事项。</p><p>关于评论数目的代码，畅言官方提供了三种，详情可访问<a href="http://changyan.kuaizhan.com/install/code/comment-count-code" target="_blank" rel="external nofollow noopener noreferrer">获取评论数代码</a>。主要就是两种情况：含评论框的页面和不含评论框的页面，前者适用于列表页，后者适用于详情页，至于原因那就是不言而喻了。经本站测试其实都使用<code>不含评论框那种代码</code>即可，不过<strong>需要注意</strong>的是，不要更改的标签名称，否则会出问题，这是本站已经测试过的，也是不得不吐槽的一点了。</p><p>更多插件可登录<a href="http://changyan.kuaizhan.com/labs/list" target="_blank" rel="external nofollow noopener noreferrer">畅言后台</a>获取。</p></div><div class="post-footer"><div class="post-copyright">&copy; 除特殊声明外，文章著作权归作者所有，转载请注明作者及出处</div></div></article><div class="nagination card"><a href="/Evandoz/posts/22CYSA2.htm" class="nagination-link">上篇: 计算机系统中的字长</a> <a href="/Evandoz/posts/43ZHPY.htm" class="nagination-link">下篇: 在前端开发中使用谷歌字体</a></div></main><aside class="aside post"><div class="widget profile card"><div class="widget-cover" style="background-image:url(/Evandoz/css/images/background.jpg)"><div class="avatar"><img width="100%" height="100%" src="/Evandoz/css/images/logo.png"></div></div><div class="widget-content"><div class="author">Levan</div><div class="site-meta"><a class="col" href="/Evandoz/archives"><span class="amount">79</span> <span class="text">文章</span> </a><a class="col" href="/Evandoz/categories"><span class="amount">23</span> <span class="text">分类</span> </a><a class="col" href="/Evandoz/tags"><span class="amount">77</span> <span class="text">标签</span> </a><a class="col" href="/Evandoz/archives"><span class="amount">75.3k</span> <span class="text">字数</span></a></div></div></div><div id="toc" class="toc"><h3 class="toc-title">目录</h3><ol class="toc-content"><li class="toc-content-item toc-content-level-2"><a class="toc-content-link" href="#畅言配置"><span class="toc-content-text">畅言配置</span></a><ol class="toc-content-child"><li class="toc-content-item toc-content-level-3"><a class="toc-content-link" href="#注册获取通用代码"><span class="toc-content-text">注册获取通用代码</span></a></li><li class="toc-content-item toc-content-level-3"><a class="toc-content-link" href="#安装其他插件"><span class="toc-content-text">安装其他插件</span></a></li></ol></li></ol></div></aside></div></div><footer id="footer" class="footer"><div class="outer"><div class="copyright"><p><span>EXP</span> &copy; 2015 - 2019</p></div><div class="navigation"><a href="/Evandoz/https:/evandoz.github.io">Hexo · Levan</a></div></div></footer></div></div></div><div id="top-anchor" class="top-anchor"><ul><li></li><li></li></ul></div><div id="mobile-nav" class="mobile-nav"><a class="menu-item" href="/Evandoz/archives">归档</a> <a class="menu-item" href="/Evandoz/categories">分类</a> <a class="menu-item" href="/Evandoz/tags">标签</a> <a class="menu-item" href="/Evandoz/about">关于</a></div><div id="over-layer" class="over-layer"></div><script src="/Evandoz/js/jquery.js"></script><script src="/Evandoz/js/velocity.js"></script><script src="/Evandoz/js/plugins.js"></script><script src="/Evandoz/js/script.js"></script></body></html>
+<!DOCTYPE html>
+<html>
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+  
+  <title>更换畅言评论系统 | EXP</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+    <meta name="author" content="Levan">
+  
+  
+    <meta name="description" content="日常记录与分享">
+  
+  
+    <meta name="keywords" content="畅言,友言">
+  
+  
+    <meta name="google-site-verification" content="W2AVg5n_ALo21rl9n3ZwS8AuEanZfJkirzrRGLLYvn4">
+  
+  
+    <meta name="baidu-site-verification" content="BM2Q3xLpPJ">
+  
+  
+    <meta name="360-site-verification" content="573211edf2de02c99d7b255b2c56513c">
+  
+  
+    <link rel="short icon" type="image/x-icon" href="/Evandoz/css/images/favicon.ico">
+  
+  <link rel="canonical" href="https://evandoz.github.io/Evandoz/posts/2bhtdzv.htm">
+  
+<link rel="stylesheet" href="/Evandoz/css/style.css">
+
+<meta name="generator" content="Hexo 4.1.0"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
+
+<body>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="overflow" class="overflow">
+    <div id="hiddenbar" class="hiddenbar">
+      <div id="wrapper" class="wrapper">
+        <header id="header" class="header is-post">
+  <div class="outer">
+    
+      <div class="logo">
+        <a class="title" href="/Evandoz/">EXP</a>
+      </div>
+    
+
+    <div class="nav">
+      <ul id="nav-icon" class="nav-icon">
+        <li></li><li></li><li></li>
+      </ul>
+      <ul class="nav-menu">
+        
+          <li class="nav-item">
+            <a href="/Evandoz/archives">归档</a>
+          </li>
+        
+          <li class="nav-item">
+            <a href="/Evandoz/categories">分类</a>
+          </li>
+        
+          <li class="nav-item">
+            <a href="/Evandoz/tags">标签</a>
+          </li>
+        
+          <li class="nav-item">
+            <a href="/Evandoz/about">关于</a>
+          </li>
+        
+      </ul>
+    </div>
+
+  </div>
+</header>
+
+        <div id="content" class="content">
+  <div class="outer">
+    <main class="main">
+      <article id="Hexo/20170731-更换畅言评论系统" class="article card">
+        
+  
+  	<h1 class="post-title">更换畅言评论系统</h1>
+  
+
+
+        <div class="post-meta">
+          <span class="post-date">
+  <time datetime="2017-07-30T16:00:00.000Z">2017-07-31</time>
+</span>
+
+          
+  <span class="post-category">
+    <a class="category-link" href="/Evandoz/categories/Hexo/">Hexo</a>
+  </span>
+
+
+        </div>
+        <div id="post-content" class="post-content">
+          <p>多说等第三方评论系统纷纷停止服务，遂将评论系统迁徙至搜狐畅言系统，以下为畅言配置过程记录。</p>
+<a id="more"></a>
+<h2 id="畅言配置"><a class="headerlink" href="#畅言配置"></a>畅言配置</h2>
+<p>使用畅言系统必须提供网站的备案号，否则只能使用 15 天。毕竟现在国家网络信息管的紧，网站都需要备案的，使用独立的域名的司机们应该都备过案了。另外的福利是畅言有广告服务，同意其广告协议可以有广告收入，当然如果你不需要可以不用管它。</p>
+<h3 id="注册获取通用代码"><a class="headerlink" href="#注册获取通用代码"></a>注册获取通用代码</h3>
+<p>畅言提供了桌面端、移动端、自适应等几类代码，可根据需要选择自己需要的。本站使用的是自适应的代码，就以此为例说明几点情况。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">&lt;!--PC和WAP自适应版--&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">&lt;div id=<span class="string">"SOHUCS"</span> sid=<span class="string">"请将此处替换为配置SourceID的语句"</span> &gt;<span class="xml"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">&lt;script type=<span class="string">"text/javascript"</span>&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> appid = <span class="string">'你的APPID'</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> conf = <span class="string">'你的APPKEY'</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> width = <span class="built_in">window</span>.innerWidth || <span class="built_in">document</span>.documentElement.clientWidth;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (width &lt; <span class="number">960</span>) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.document.write(<span class="string">'&lt;script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id='</span> + appid + <span class="string">'&amp;conf='</span> + conf + <span class="string">'"&gt;&lt;\/script&gt;'</span>); &#125; <span class="keyword">else</span> &#123; <span class="keyword">var</span> loadJs=<span class="function"><span class="keyword">function</span>(<span class="params">d,a</span>)</span>&#123;<span class="keyword">var</span> c=<span class="built_in">document</span>.getElementsByTagName(<span class="string">"head"</span>)[<span class="number">0</span>]||<span class="built_in">document</span>.head||<span class="built_in">document</span>.documentElement;<span class="keyword">var</span> b=<span class="built_in">document</span>.createElement(<span class="string">"script"</span>);b.setAttribute(<span class="string">"type"</span>,<span class="string">"text/javascript"</span>);b.setAttribute(<span class="string">"charset"</span>,<span class="string">"UTF-8"</span>);b.setAttribute(<span class="string">"src"</span>,d);<span class="keyword">if</span>(<span class="keyword">typeof</span> a===<span class="string">"function"</span>)&#123;<span class="keyword">if</span>(<span class="built_in">window</span>.attachEvent)&#123;b.onreadystatechange=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;<span class="keyword">var</span> e=b.readyState;<span class="keyword">if</span>(e===<span class="string">"loaded"</span>||e===<span class="string">"complete"</span>)&#123;b.onreadystatechange=<span class="literal">null</span>;a()&#125;&#125;&#125;<span class="keyword">else</span>&#123;b.onload=a&#125;&#125;c.appendChild(b)&#125;;loadJs(<span class="string">"https://changyan.sohu.com/upload/changyan.js"</span>,<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;<span class="built_in">window</span>.changyan.api.config(&#123;<span class="attr">appid</span>:appid,<span class="attr">conf</span>:conf&#125;)&#125;); &#125; &#125;)(); <span class="xml"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></span></pre></td></tr></table></figure>
+<p>上面的代码中需要替换的有三处：SourceID、APPID、APPKEY：</p>
+<ol>
+<li>SourceID 就是文章获页面的唯一标识，就是数据库表中的(类似)主键，因为评论在数据库中存储要与对应的文章会页面匹配，否则会出现评论的混乱。对于 Hexo，可以把相关页的链接（如page.path/url_for(page.path)）或者标题（如page.title）作为 SourceID。</li>
+<li>APPID和APPKEY在畅言的后台都可以获取。需要注意的是 APPKEY，在后台给的代码中，APPKEY 位置给出的是以<code>prod</code>开头的一串代码，而在其帮助文档中写的是 APPKEY ，虽然两串代码不相同，但都能实现功能，任选一种即可，建议使用 APPKEY。</li>
+</ol>
+<h3 id="安装其他插件"><a class="headerlink" href="#安装其他插件"></a>安装其他插件</h3>
+<p>除主体评论框外，畅言还提供了诸如评论数目、热门评论、热评用户等插件，可根据需要自行选择，本站只安装了评论数目，简单说一下注意事项。</p>
+<p>关于评论数目的代码，畅言官方提供了三种，详情可访问<a href="http://changyan.kuaizhan.com/install/code/comment-count-code" target="_blank" rel="external nofollow noopener noreferrer">获取评论数代码</a>。主要就是两种情况：含评论框的页面和不含评论框的页面，前者适用于列表页，后者适用于详情页，至于原因那就是不言而喻了。经本站测试其实都使用<code>不含评论框那种代码</code>即可，不过<strong>需要注意</strong>的是，不要更改的标签名称，否则会出问题，这是本站已经测试过的，也是不得不吐槽的一点了。</p>
+<p>更多插件可登录<a href="http://changyan.kuaizhan.com/labs/list" target="_blank" rel="external nofollow noopener noreferrer">畅言后台</a>获取。</p>
+
+        </div>
+        <div class="post-footer">
+          <div class="post-copyright">&copy; 除特殊声明外，文章著作权归作者所有，转载请注明作者及出处</div>
+        </div>
+      </article>
+      <!-- Pagination -->
+      
+        <div class="nagination card">
+          
+            <a href="/Evandoz/posts/22CYSA2.htm" class="nagination-link">上篇: 计算机系统中的字长</a>
+          
+          
+            <a href="/Evandoz/posts/43ZHPY.htm" class="nagination-link">下篇: 在前端开发中使用谷歌字体</a>
+          
+        </div>
+      
+      <!-- Comment -->
+      <!-- 
+        <div id="article-comment" class="article-comment card"></div>
+
+       -->
+    </main>
+    <aside class="aside post">
+      <div class="widget profile card">
+  <div class="widget-cover" style="background-image: url('/Evandoz/css/images/background.jpg')">
+    <div class="avatar">
+      <img width="100%" height="100%" src="/Evandoz/css/images/logo.png">
+    </div>
+  </div>
+  <div class="widget-content">
+    <div class="author">
+      Levan
+    </div>
+    <div class="site-meta">
+      <a class="col" href="/Evandoz/archives">
+        <span class="amount">79</span>
+        <span class="text">文章</span>
+      </a>
+      <a class="col" href="/Evandoz/categories">
+        <span class="amount">23</span>
+        <span class="text">分类</span>
+      </a>
+      <a class="col" href="/Evandoz/tags">
+        <span class="amount">77</span>
+        <span class="text">标签</span>
+      </a>
+      <a class="col" href="/Evandoz/archives">
+        <span class="amount">75.5k</span>
+        <span class="text">字数</span>
+      </a>
+    </div>
+  </div>
+</div>
+
+      <div id="toc" class="toc">
+        
+          <h3 class="toc-title">目录</h3>
+          <ol class="toc-content"><li class="toc-content-item toc-content-level-2"><a class="toc-content-link" href="#畅言配置"><span class="toc-content-text">畅言配置</span></a><ol class="toc-content-child"><li class="toc-content-item toc-content-level-3"><a class="toc-content-link" href="#注册获取通用代码"><span class="toc-content-text">注册获取通用代码</span></a></li><li class="toc-content-item toc-content-level-3"><a class="toc-content-link" href="#安装其他插件"><span class="toc-content-text">安装其他插件</span></a></li></ol></li></ol>
+        
+      </div>
+    </aside>
+  </div>
+
+
+</div>
+        <footer id="footer" class="footer">
+  <div class="outer">
+    <div class="copyright">
+      <p><span>EXP</span> &copy; 2015 - 2019</p>
+    </div>
+    <div class="navigation">
+      <a href="/Evandoz/https:/evandoz.github.io">Hexo · Levan</a>
+    </div>
+  </div>
+</footer>
+
+      </div>
+    </div>
+  </div>
+  <div id="top-anchor" class="top-anchor">
+  <ul><li></li><li></li></ul>
+</div>
+
+  <div id="mobile-nav" class="mobile-nav">
+  
+    <a class="menu-item" href="/Evandoz/archives">归档</a>
+  
+    <a class="menu-item" href="/Evandoz/categories">分类</a>
+  
+    <a class="menu-item" href="/Evandoz/tags">标签</a>
+  
+    <a class="menu-item" href="/Evandoz/about">关于</a>
+  
+</div>
+
+<div id="over-layer" class="over-layer"></div>
+
+  
+<script src="/Evandoz/js/jquery.js"></script>
+
+
+<script src="/Evandoz/js/velocity.js"></script>
+
+
+<script src="/Evandoz/js/plugins.js"></script>
+
+
+<script src="/Evandoz/js/script.js"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+
+
+
+</body>
+</html>

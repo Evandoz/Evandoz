@@ -1,1 +1,240 @@
-<!DOCTYPE html><html><head><meta charset="utf-8"><title>Vue Router+Element UI 实现导航实例 | EXP</title><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1"><meta name="author" content="Levan"><meta name="description" content="日常记录与分享"><meta name="keywords" content="vue-router,Element UI"><meta name="google-site-verification" content="W2AVg5n_ALo21rl9n3ZwS8AuEanZfJkirzrRGLLYvn4"><meta name="baidu-site-verification" content="BM2Q3xLpPJ"><meta name="360-site-verification" content="573211edf2de02c99d7b255b2c56513c"><link rel="short icon" type="image/x-icon" href="/Evandoz/css/images/favicon.ico"><link rel="canonical" href="https://evandoz.github.io/Evandoz/posts/20adb3m.htm"><link rel="stylesheet" href="/Evandoz/css/style.css"><meta name="generator" content="Hexo 4.1.0"></head><body><div id="overflow" class="overflow"><div id="hiddenbar" class="hiddenbar"><div id="wrapper" class="wrapper"><header id="header" class="header is-post"><div class="outer"><div class="logo"><a class="title" href="/Evandoz/">EXP</a></div><div class="nav"><ul id="nav-icon" class="nav-icon"><li></li><li></li><li></li></ul><ul class="nav-menu"><li class="nav-item"><a href="/Evandoz/archives">归档</a></li><li class="nav-item"><a href="/Evandoz/categories">分类</a></li><li class="nav-item"><a href="/Evandoz/tags">标签</a></li><li class="nav-item"><a href="/Evandoz/about">关于</a></li></ul></div></div></header><div id="content" class="content"><div class="outer"><main class="main"><article id="前端开发/Vue/20180302-Vue Router+Element UI 实现导航实例" class="article card"><h1 class="post-title">Vue Router+Element UI 实现导航实例</h1><div class="post-meta"><span class="post-date"><time datetime="2018-03-01T16:00:00.000Z">2018-03-02</time></span> <span class="post-category"><a class="category-link" href="/Evandoz/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/">前端开发</a> · <a class="category-link" href="/Evandoz/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/Vue/">Vue</a></span></div><div id="post-content" class="post-content"><p>Element UI是饿了么团队打造的一个前端UI库，其中实现了很多常用的组件，导航栏或者叫菜单栏就属于一种。</p><a id="more"></a><p>在Element UI提供的NavMenu组件中，其提供了一个属性：default-active，它表示当前激活菜单的index。使用该属性可以保持菜单中当前激活的项与当前的页面是一致的，而这其中的关键就在于设置该属性的值。由于页面跳转变化，所以这个属性的值也需要随着当前页面路由的改变而改变，Vue.js官方提供的vue-router刚好可以解决此问题。</p><p>vue-router中提供了一个路由对象(route object)，它表示当前激活的路由的状态信息，包含了当前URL解析得到的信息，还有URL 匹配到的路由记录(route records)。该路由对象有很多属性，诸如$route.path，$route.params，$route.query等，更多详情可以参见<a href="https://router.vuejs.org/zh-cn/api/route-object.html" target="_blank" rel="external nofollow noopener noreferrer">官方文档</a>。在这里我们使用$route.path即可，返回值位字符串(string)，对应当前路由的路径，然后将NavMenu中各项的index值设置为相应的路由即可。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">:default-active&#x3D;&quot;$route.path&quot;</span></pre></td></tr></table></figure><p><strong>注意</strong>：</p><ol><li>冒号(:)不可少，这属于Vue.js的语法问题，不再赘述</li><li>不设置default-active属性时，点击菜单项虽然当前点击项会被激活，但刷新页面后其选中效果就会丢失，页面跟菜单项无法保持一致。</li></ol><p>完整代码实例如下：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">&lt;el-menu :default-active&#x3D;&quot;$route.path&quot; class&#x3D;&quot;el-menu-demo&quot; mode&#x3D;&quot;horizontal&quot;&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  &lt;el-menu-item index&#x3D;&quot;&#x2F;page1&quot;&gt;page1&lt;&#x2F;el-menu-item&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">  &lt;el-menu-item index&#x3D;&quot;&#x2F;page2&quot;&gt;page2&lt;&#x2F;el-menu-item&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">  &lt;el-menu-item index&#x3D;&quot;&#x2F;page3&quot;&gt;page3&lt;&#x2F;el-menu-item&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">  &lt;el-menu-item index&#x3D;&quot;&#x2F;page4&quot;&gt;page4&lt;&#x2F;el-menu-item&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">&lt;&#x2F;el-menu&gt;</span></pre></td></tr></table></figure></div><div class="post-footer"><div class="post-copyright">&copy; 除特殊声明外，文章著作权归作者所有，转载请注明作者及出处</div></div></article><div class="nagination card"><a href="/Evandoz/posts/1D7M9WB.htm" class="nagination-link">上篇: Javascript 插件收集</a> <a href="/Evandoz/posts/12M0GGB.htm" class="nagination-link">下篇: Gitment 解决 Validation Failed 问题</a></div></main><aside class="aside post"><div class="widget profile card"><div class="widget-cover" style="background-image:url(/Evandoz/css/images/background.jpg)"><div class="avatar"><img width="100%" height="100%" src="/Evandoz/css/images/logo.png"></div></div><div class="widget-content"><div class="author">Levan</div><div class="site-meta"><a class="col" href="/Evandoz/archives"><span class="amount">79</span> <span class="text">文章</span> </a><a class="col" href="/Evandoz/categories"><span class="amount">23</span> <span class="text">分类</span> </a><a class="col" href="/Evandoz/tags"><span class="amount">77</span> <span class="text">标签</span> </a><a class="col" href="/Evandoz/archives"><span class="amount">75.3k</span> <span class="text">字数</span></a></div></div></div><div id="toc" class="toc"><h3 class="toc-title" style="text-align:center">无目录</h3></div></aside></div></div><footer id="footer" class="footer"><div class="outer"><div class="copyright"><p><span>EXP</span> &copy; 2015 - 2019</p></div><div class="navigation"><a href="/Evandoz/https:/evandoz.github.io">Hexo · Levan</a></div></div></footer></div></div></div><div id="top-anchor" class="top-anchor"><ul><li></li><li></li></ul></div><div id="mobile-nav" class="mobile-nav"><a class="menu-item" href="/Evandoz/archives">归档</a> <a class="menu-item" href="/Evandoz/categories">分类</a> <a class="menu-item" href="/Evandoz/tags">标签</a> <a class="menu-item" href="/Evandoz/about">关于</a></div><div id="over-layer" class="over-layer"></div><script src="/Evandoz/js/jquery.js"></script><script src="/Evandoz/js/velocity.js"></script><script src="/Evandoz/js/plugins.js"></script><script src="/Evandoz/js/script.js"></script></body></html>
+<!DOCTYPE html>
+<html>
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+  
+  <title>Vue Router+Element UI 实现导航实例 | EXP</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+    <meta name="author" content="Levan">
+  
+  
+    <meta name="description" content="日常记录与分享">
+  
+  
+    <meta name="keywords" content="vue-router,Element UI">
+  
+  
+    <meta name="google-site-verification" content="W2AVg5n_ALo21rl9n3ZwS8AuEanZfJkirzrRGLLYvn4">
+  
+  
+    <meta name="baidu-site-verification" content="BM2Q3xLpPJ">
+  
+  
+    <meta name="360-site-verification" content="573211edf2de02c99d7b255b2c56513c">
+  
+  
+    <link rel="short icon" type="image/x-icon" href="/Evandoz/css/images/favicon.ico">
+  
+  <link rel="canonical" href="https://evandoz.github.io/Evandoz/posts/20adb3m.htm">
+  
+<link rel="stylesheet" href="/Evandoz/css/style.css">
+
+<meta name="generator" content="Hexo 4.1.0"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
+
+<body>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="overflow" class="overflow">
+    <div id="hiddenbar" class="hiddenbar">
+      <div id="wrapper" class="wrapper">
+        <header id="header" class="header is-post">
+  <div class="outer">
+    
+      <div class="logo">
+        <a class="title" href="/Evandoz/">EXP</a>
+      </div>
+    
+
+    <div class="nav">
+      <ul id="nav-icon" class="nav-icon">
+        <li></li><li></li><li></li>
+      </ul>
+      <ul class="nav-menu">
+        
+          <li class="nav-item">
+            <a href="/Evandoz/archives">归档</a>
+          </li>
+        
+          <li class="nav-item">
+            <a href="/Evandoz/categories">分类</a>
+          </li>
+        
+          <li class="nav-item">
+            <a href="/Evandoz/tags">标签</a>
+          </li>
+        
+          <li class="nav-item">
+            <a href="/Evandoz/about">关于</a>
+          </li>
+        
+      </ul>
+    </div>
+
+  </div>
+</header>
+
+        <div id="content" class="content">
+  <div class="outer">
+    <main class="main">
+      <article id="前端开发/Vue/20180302-Vue Router+Element UI 实现导航实例" class="article card">
+        
+  
+  	<h1 class="post-title">Vue Router+Element UI 实现导航实例</h1>
+  
+
+
+        <div class="post-meta">
+          <span class="post-date">
+  <time datetime="2018-03-01T16:00:00.000Z">2018-03-02</time>
+</span>
+
+          
+  <span class="post-category">
+    <a class="category-link" href="/Evandoz/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/">前端开发</a> · <a class="category-link" href="/Evandoz/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/Vue/">Vue</a>
+  </span>
+
+
+        </div>
+        <div id="post-content" class="post-content">
+          <p>Element UI是饿了么团队打造的一个前端UI库，其中实现了很多常用的组件，导航栏或者叫菜单栏就属于一种。</p>
+<a id="more"></a>
+<p>在Element UI提供的NavMenu组件中，其提供了一个属性：default-active，它表示当前激活菜单的index。使用该属性可以保持菜单中当前激活的项与当前的页面是一致的，而这其中的关键就在于设置该属性的值。由于页面跳转变化，所以这个属性的值也需要随着当前页面路由的改变而改变，Vue.js官方提供的vue-router刚好可以解决此问题。</p>
+<p>vue-router中提供了一个路由对象(route object)，它表示当前激活的路由的状态信息，包含了当前URL解析得到的信息，还有URL 匹配到的路由记录(route records)。该路由对象有很多属性，诸如$route.path，$route.params，$route.query等，更多详情可以参见<a href="https://router.vuejs.org/zh-cn/api/route-object.html" target="_blank" rel="external nofollow noopener noreferrer">官方文档</a>。在这里我们使用$route.path即可，返回值位字符串(string)，对应当前路由的路径，然后将NavMenu中各项的index值设置为相应的路由即可。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">:default-active&#x3D;&quot;$route.path&quot;</span></pre></td></tr></table></figure>
+<p><strong>注意</strong>：</p>
+<ol>
+<li>冒号(:)不可少，这属于Vue.js的语法问题，不再赘述</li>
+<li>不设置default-active属性时，点击菜单项虽然当前点击项会被激活，但刷新页面后其选中效果就会丢失，页面跟菜单项无法保持一致。</li>
+</ol>
+<p>完整代码实例如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">&lt;el-menu :default-active&#x3D;&quot;$route.path&quot; class&#x3D;&quot;el-menu-demo&quot; mode&#x3D;&quot;horizontal&quot;&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  &lt;el-menu-item index&#x3D;&quot;&#x2F;page1&quot;&gt;page1&lt;&#x2F;el-menu-item&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">  &lt;el-menu-item index&#x3D;&quot;&#x2F;page2&quot;&gt;page2&lt;&#x2F;el-menu-item&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">  &lt;el-menu-item index&#x3D;&quot;&#x2F;page3&quot;&gt;page3&lt;&#x2F;el-menu-item&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">  &lt;el-menu-item index&#x3D;&quot;&#x2F;page4&quot;&gt;page4&lt;&#x2F;el-menu-item&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">&lt;&#x2F;el-menu&gt;</span></pre></td></tr></table></figure>
+
+        </div>
+        <div class="post-footer">
+          <div class="post-copyright">&copy; 除特殊声明外，文章著作权归作者所有，转载请注明作者及出处</div>
+        </div>
+      </article>
+      <!-- Pagination -->
+      
+        <div class="nagination card">
+          
+            <a href="/Evandoz/posts/1D7M9WB.htm" class="nagination-link">上篇: Javascript 插件收集</a>
+          
+          
+            <a href="/Evandoz/posts/12M0GGB.htm" class="nagination-link">下篇: Gitment 解决 Validation Failed 问题</a>
+          
+        </div>
+      
+      <!-- Comment -->
+      <!-- 
+        <div id="article-comment" class="article-comment card"></div>
+
+       -->
+    </main>
+    <aside class="aside post">
+      <div class="widget profile card">
+  <div class="widget-cover" style="background-image: url('/Evandoz/css/images/background.jpg')">
+    <div class="avatar">
+      <img width="100%" height="100%" src="/Evandoz/css/images/logo.png">
+    </div>
+  </div>
+  <div class="widget-content">
+    <div class="author">
+      Levan
+    </div>
+    <div class="site-meta">
+      <a class="col" href="/Evandoz/archives">
+        <span class="amount">79</span>
+        <span class="text">文章</span>
+      </a>
+      <a class="col" href="/Evandoz/categories">
+        <span class="amount">23</span>
+        <span class="text">分类</span>
+      </a>
+      <a class="col" href="/Evandoz/tags">
+        <span class="amount">77</span>
+        <span class="text">标签</span>
+      </a>
+      <a class="col" href="/Evandoz/archives">
+        <span class="amount">75.5k</span>
+        <span class="text">字数</span>
+      </a>
+    </div>
+  </div>
+</div>
+
+      <div id="toc" class="toc">
+        
+          <h3 class="toc-title" style="text-align: center;">无目录</h3>
+        
+      </div>
+    </aside>
+  </div>
+
+
+</div>
+        <footer id="footer" class="footer">
+  <div class="outer">
+    <div class="copyright">
+      <p><span>EXP</span> &copy; 2015 - 2019</p>
+    </div>
+    <div class="navigation">
+      <a href="/Evandoz/https:/evandoz.github.io">Hexo · Levan</a>
+    </div>
+  </div>
+</footer>
+
+      </div>
+    </div>
+  </div>
+  <div id="top-anchor" class="top-anchor">
+  <ul><li></li><li></li></ul>
+</div>
+
+  <div id="mobile-nav" class="mobile-nav">
+  
+    <a class="menu-item" href="/Evandoz/archives">归档</a>
+  
+    <a class="menu-item" href="/Evandoz/categories">分类</a>
+  
+    <a class="menu-item" href="/Evandoz/tags">标签</a>
+  
+    <a class="menu-item" href="/Evandoz/about">关于</a>
+  
+</div>
+
+<div id="over-layer" class="over-layer"></div>
+
+  
+<script src="/Evandoz/js/jquery.js"></script>
+
+
+<script src="/Evandoz/js/velocity.js"></script>
+
+
+<script src="/Evandoz/js/plugins.js"></script>
+
+
+<script src="/Evandoz/js/script.js"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config("");
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+
+
+
+</body>
+</html>

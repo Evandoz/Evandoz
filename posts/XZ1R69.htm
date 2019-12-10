@@ -1,1 +1,271 @@
-<!DOCTYPE html><html><head><meta charset="utf-8"><title>交换排序（一） | EXP</title><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1"><meta name="author" content="Levan"><meta name="description" content="日常记录与分享"><meta name="keywords" content="交换排序,冒泡排序"><meta name="google-site-verification" content="W2AVg5n_ALo21rl9n3ZwS8AuEanZfJkirzrRGLLYvn4"><meta name="baidu-site-verification" content="BM2Q3xLpPJ"><meta name="360-site-verification" content="573211edf2de02c99d7b255b2c56513c"><link rel="short icon" type="image/x-icon" href="/Evandoz/css/images/favicon.ico"><link rel="canonical" href="https://evandoz.github.io/Evandoz/posts/xz1r69.htm"><link rel="stylesheet" href="/Evandoz/css/style.css"><meta name="generator" content="Hexo 4.1.0"></head><body><div id="overflow" class="overflow"><div id="hiddenbar" class="hiddenbar"><div id="wrapper" class="wrapper"><header id="header" class="header is-post"><div class="outer"><div class="logo"><a class="title" href="/Evandoz/">EXP</a></div><div class="nav"><ul id="nav-icon" class="nav-icon"><li></li><li></li><li></li></ul><ul class="nav-menu"><li class="nav-item"><a href="/Evandoz/archives">归档</a></li><li class="nav-item"><a href="/Evandoz/categories">分类</a></li><li class="nav-item"><a href="/Evandoz/tags">标签</a></li><li class="nav-item"><a href="/Evandoz/about">关于</a></li></ul></div></div></header><div id="content" class="content"><div class="outer"><main class="main"><article id="数据结构/排序/20160911-交换排序（一）" class="article card"><h1 class="post-title">交换排序（一）</h1><div class="post-meta"><span class="post-date"><time datetime="2016-09-10T16:00:00.000Z">2016-09-11</time></span> <span class="post-category"><a class="category-link" href="/Evandoz/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构</a> · <a class="category-link" href="/Evandoz/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E6%8E%92%E5%BA%8F/">排序</a></span></div><div id="post-content" class="post-content"><h2 id="基本概念"><a class="headerlink" href="#基本概念"></a>基本概念</h2><p>根据待排序列中两个元素的比较结果来交换两个元素的位置，这样的排序称为<strong>交换排序</strong>，主要包括<strong>冒泡排序</strong>和<strong>快速排序</strong>。</p><h2 id="冒泡排序-bubble-sort"><a class="headerlink" href="#冒泡排序-bubble-sort"></a>冒泡排序（Bubble Sort）</h2><h3 id="基本思想"><a class="headerlink" href="#基本思想"></a>基本思想</h3><p>在要排序的一组数中，对当前还未排好序的范围内的全部数，自上而下对相邻的两个数依次进行比较和调整，让较大的数往下沉，较小的往上冒。即：每当两相邻的数比较后发现它们的排序与排序要求相反时，就将它们互换。</p><h3 id="代码实现"><a class="headerlink" href="#代码实现"></a>代码实现</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">BubbleSort</span><span class="params">(<span class="keyword">int</span> L[], <span class="keyword">int</span> n)</span></span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="function"></span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">int</span> i, j, flag;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    <span class="comment">// flag变量记录是否发生交换</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">for</span> (i = <span class="number">1</span>; i &lt; n; ++i) <span class="comment">// n-1趟</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">    &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">        flag = <span class="number">0</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">        <span class="comment">// 第 i 趟时，已有 i-1 个元素沉底，不再次参与排序，</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">        <span class="comment">// 剩余 j-(i-1) 个元素进行 j-(i-1)-1 次比较</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">for</span> (j = <span class="number">1</span>; j &lt; n-i+<span class="number">1</span>; ++j)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">        &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">if</span> (L[j] &gt; L[j+<span class="number">1</span>]) <span class="comment">// 大值沉底</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">            &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">                swap(&amp;L[j], &amp;L[j+<span class="number">1</span>]);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">                flag = <span class="number">1</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">            &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">        &#125; <span class="comment">// 一趟排序</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">if</span> (flag == <span class="number">0</span>) <span class="keyword">return</span>; <span class="comment">// 若一趟排序未发生交换，说明已经有序，不需再排序</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure><h3 id="归纳分析"><a class="headerlink" href="#归纳分析"></a>归纳分析</h3><ol><li>稳定排序（stable sort）</li></ol><p>当 i &gt; j ，L[i] = L[j] 时，不会交换元素，故冒泡排序是<strong>稳定排序</strong>。</p><ol start="2"><li>空间复杂度 （in-place 原地算法，O(1)）</li></ol><p>交换元素需要 1 个辅助空间，冒泡排序的空间复杂度为 O(1)。</p><ol start="3"><li>时间复杂度</li></ol><p><strong>最好</strong>情况下，时间复杂度为 O(n)，此时待排序列有序；</p><p>不过仍然需要一趟冒泡进行比较验证，此后 flag=false，直接跳出循环，结束排序，因此，比较次数为 n-1 次，移动次数为 0。</p><p><strong>最坏</strong>情况下，时间复杂度为 O(n<sup>2</sup>)，此时待排序列逆序；</p><p>需要进行 n-1 趟冒泡，第 i 趟冒泡 n-(i-1) 个元素进行 n-i 次比较，每次比较后需要移动 3 次来交换元素，于是</p><p>比较次数为 Σ(n-i)= n(n-1)/2，i = {1,…,n-1}；<br>移动次数为 Σ3(n-i)= 3n(n-1)/2，i = {1,…,n-1}。</p><p><strong>平均</strong>情况下，冒泡排序的时间复杂度也为 O(n<sup>2</sup>)。</p><ol start="4"><li>初态影响</li></ol><p>由3分析可知，复杂度受到初始状态影响。</p><ol start="5"><li>过程特征</li></ol><p>一趟排序可以确定一个元素的最终位置（最值），会产生<strong>全局有序</strong>的有序子序列。</p><p><strong>全局有序</strong>：每一趟排序结束后都会有一个元素会落到其最终的位置上，有序子序列中的所有元素一定小于或大于无序子序列中的所有元素（直接插入排序是局部有序）。</p><ol start="6"><li>适用性</li></ol><p>插入排序比较适合用于“基本有序”的序列和“数据量不大（不大于50）”的序列，并且冒泡排序移动操作比较少，所以也适合元素本身信息量较大的情况，但不适合用直接插入排序（移动操作较多）。不过元素本身信息量较大时，为避免大量移动操作，可改用<em>链表</em>*来存储。</p><h3 id="算法证明-来自算法导论"><a class="headerlink" href="#算法证明-来自算法导论"></a>算法证明（来自算法导论）</h3><p>运用两次循环，先证内循环，再证明外循环。</p><p>内循环：在每次循环开始前，A[j]是A[j…n]中最小的元素。</p><p>初始：j=n，因此A[n]是A[n…n]的最小元素。<br>保持：当循环开始时，已知A[j]是A[j…n]的最小元素，将A[j]与A[j-1]比较，并将较小者放在j-1位置，因此能够说明A[j-1]是A[j-1…n]的最小元素，因此循环不变式保持。<br>终止：j=i，已知A[i]是A[i…n]中最小的元素，证毕。</p><p>外循环：在每次循环之前，A[1…i-1]包含了A中最小的i-1个元素，且已排序：A[1]&lt;=A[2]&lt;=…&lt;=A[i-1]。</p><p>初始：i=1，因此A[1…0]=空，因此成立。<br>保持：当循环开始时，已知A[1…i-1]是A中最小的i-1个元素，且A[1]&lt;=A[2]&lt;=…&lt;=A[i-1]，根据内循环不变式，终止时A[i]是A[i…n]中最小的元素，因此A[1…i]包含了A中最小的i个元素，且A[1]&lt;=A[2]&lt;=…&lt;=A[i-1]&lt;=A[i]<br>终止：i=n+1，已知A[1…n]是A中最小的n个元素，且A[1]&lt;=A[2]&lt;=…&lt;=A[n]，得证。</p><h3 id="问题"><a class="headerlink" href="#问题"></a>问题</h3><p>冒泡排序和插入排序哪个更快？</p><p><strong>插入排序中移动</strong>的次数直接是逆序对的个数，而<strong>冒泡排序中交换</strong>的次数是逆序对的个数，由前面的分析可知，一次交换需要移动3次元素，因此冒泡排序执行的时间至少是逆序对的个数，因此插入排序的执行时间至少比冒泡排序快。</p><h3 id="算法改进"><a class="headerlink" href="#算法改进"></a>算法改进</h3><p>改进 1．设置一标志性变量 pos，用于记录每趟排序中最后一次进行交换的位置。由于 pos 位置之后的记录均已交换到位，故在进行下一趟排序时只要扫描到 pos 位置即可。</p><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 代码中数组元素从 L[1] 开始，故用 L[0] 来存储标识位置</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">BubbleSort_1</span><span class="params">(<span class="keyword">int</span> L[], <span class="keyword">int</span> n)</span></span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="function"></span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">int</span> i = n, j; <span class="comment">// //初始时，比较的最后位置仍为 n</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">while</span> (i &gt; <span class="number">1</span>) <span class="comment">// 仅代表排序趟数，没有其他含义（n-1趟）</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">    &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">        L[<span class="number">0</span>] = <span class="number">1</span>; <span class="comment">// 每趟开始时，无记录交换</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">for</span> (j = <span class="number">1</span>; j &lt; i; ++j) <span class="comment">// [1,...,i-1, i]</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">        &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">if</span> (L[j] &gt; L[j+<span class="number">1</span>])</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">            &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">                swap(&amp;L[j], &amp;L[j+<span class="number">1</span>]);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">                L[<span class="number">0</span>] = j; <span class="comment">// 保存最后一次发生交换的位置</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">            &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">        &#125; <span class="comment">// 一趟排序</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">        i = L[<span class="number">0</span>]; <span class="comment">// 下一次比较到 L[0] 即停止</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure><p>改进 2．传统冒泡排序中每一趟排序操作只能找到一个最大值或最小值，考虑利用在每趟排序中进行正向和反向两遍冒泡的方法一次可以得到两个最终值(最大者和最小者) , 从而使排序趟数几乎减少了一半。</p><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">BubbleSort_2</span><span class="params">(<span class="keyword">int</span> L[], <span class="keyword">int</span> n)</span></span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="function"></span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">int</span> i, low = <span class="number">1</span>, high = n; <span class="comment">// 设置变量的初始值</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">while</span> (low &lt; high)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">    &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">for</span> (i = low; i &lt; high; ++i) <span class="comment">// 正向冒泡，找到最大者</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">if</span> (L[i] &gt; L[i+<span class="number">1</span>])</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">                swap(&amp;L[i], &amp;L[i+<span class="number">1</span>]);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">        --high; <span class="comment">// 修改high值，前移一位</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">for</span> (i = high; i &gt; low; --i) <span class="comment">// 反向冒泡，找到最小者</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">if</span> (L[i] &lt; L[i<span class="number">-1</span>])</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">                swap(&amp;L[i], &amp;L[i<span class="number">-1</span>]);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">        ++low; <span class="comment">// 修改low值，后移一位</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure><h2 id="快速排序-quick-sort"><a class="headerlink" href="#快速排序-quick-sort"></a>快速排序（Quick Sort）</h2><p>快速排序见交换排序（二）</p></div><div class="post-footer"><div class="post-copyright">&copy; 除特殊声明外，文章著作权归作者所有，转载请注明作者及出处</div></div></article><div class="nagination card"><a href="/Evandoz/posts/11X02MS.htm" class="nagination-link">上篇: 选择排序</a> <a href="/Evandoz/posts/5YC30H.htm" class="nagination-link">下篇: 交换排序（二）</a></div></main><aside class="aside post"><div class="widget profile card"><div class="widget-cover" style="background-image:url(/Evandoz/css/images/background.jpg)"><div class="avatar"><img width="100%" height="100%" src="/Evandoz/css/images/logo.png"></div></div><div class="widget-content"><div class="author">Levan</div><div class="site-meta"><a class="col" href="/Evandoz/archives"><span class="amount">79</span> <span class="text">文章</span> </a><a class="col" href="/Evandoz/categories"><span class="amount">23</span> <span class="text">分类</span> </a><a class="col" href="/Evandoz/tags"><span class="amount">77</span> <span class="text">标签</span> </a><a class="col" href="/Evandoz/archives"><span class="amount">75.3k</span> <span class="text">字数</span></a></div></div></div><div id="toc" class="toc"><h3 class="toc-title">目录</h3><ol class="toc-content"><li class="toc-content-item toc-content-level-2"><a class="toc-content-link" href="#基本概念"><span class="toc-content-text">基本概念</span></a></li><li class="toc-content-item toc-content-level-2"><a class="toc-content-link" href="#冒泡排序-bubble-sort"><span class="toc-content-text">冒泡排序（Bubble Sort）</span></a><ol class="toc-content-child"><li class="toc-content-item toc-content-level-3"><a class="toc-content-link" href="#基本思想"><span class="toc-content-text">基本思想</span></a></li><li class="toc-content-item toc-content-level-3"><a class="toc-content-link" href="#代码实现"><span class="toc-content-text">代码实现</span></a></li><li class="toc-content-item toc-content-level-3"><a class="toc-content-link" href="#归纳分析"><span class="toc-content-text">归纳分析</span></a></li><li class="toc-content-item toc-content-level-3"><a class="toc-content-link" href="#算法证明-来自算法导论"><span class="toc-content-text">算法证明（来自算法导论）</span></a></li><li class="toc-content-item toc-content-level-3"><a class="toc-content-link" href="#问题"><span class="toc-content-text">问题</span></a></li><li class="toc-content-item toc-content-level-3"><a class="toc-content-link" href="#算法改进"><span class="toc-content-text">算法改进</span></a></li></ol></li><li class="toc-content-item toc-content-level-2"><a class="toc-content-link" href="#快速排序-quick-sort"><span class="toc-content-text">快速排序（Quick Sort）</span></a></li></ol></div></aside></div></div><footer id="footer" class="footer"><div class="outer"><div class="copyright"><p><span>EXP</span> &copy; 2015 - 2019</p></div><div class="navigation"><a href="/Evandoz/https:/evandoz.github.io">Hexo · Levan</a></div></div></footer></div></div></div><div id="top-anchor" class="top-anchor"><ul><li></li><li></li></ul></div><div id="mobile-nav" class="mobile-nav"><a class="menu-item" href="/Evandoz/archives">归档</a> <a class="menu-item" href="/Evandoz/categories">分类</a> <a class="menu-item" href="/Evandoz/tags">标签</a> <a class="menu-item" href="/Evandoz/about">关于</a></div><div id="over-layer" class="over-layer"></div><script src="/Evandoz/js/jquery.js"></script><script src="/Evandoz/js/velocity.js"></script><script src="/Evandoz/js/plugins.js"></script><script src="/Evandoz/js/script.js"></script></body></html>
+<!DOCTYPE html>
+<html>
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+  
+  <title>交换排序（一） | EXP</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+    <meta name="author" content="Levan">
+  
+  
+    <meta name="description" content="日常记录与分享">
+  
+  
+    <meta name="keywords" content="交换排序,冒泡排序">
+  
+  
+    <meta name="google-site-verification" content="W2AVg5n_ALo21rl9n3ZwS8AuEanZfJkirzrRGLLYvn4">
+  
+  
+    <meta name="baidu-site-verification" content="BM2Q3xLpPJ">
+  
+  
+    <meta name="360-site-verification" content="573211edf2de02c99d7b255b2c56513c">
+  
+  
+    <link rel="short icon" type="image/x-icon" href="/Evandoz/css/images/favicon.ico">
+  
+  <link rel="canonical" href="https://evandoz.github.io/Evandoz/posts/xz1r69.htm">
+  
+<link rel="stylesheet" href="/Evandoz/css/style.css">
+
+<meta name="generator" content="Hexo 4.1.0"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
+
+<body>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="overflow" class="overflow">
+    <div id="hiddenbar" class="hiddenbar">
+      <div id="wrapper" class="wrapper">
+        <header id="header" class="header is-post">
+  <div class="outer">
+    
+      <div class="logo">
+        <a class="title" href="/Evandoz/">EXP</a>
+      </div>
+    
+
+    <div class="nav">
+      <ul id="nav-icon" class="nav-icon">
+        <li></li><li></li><li></li>
+      </ul>
+      <ul class="nav-menu">
+        
+          <li class="nav-item">
+            <a href="/Evandoz/archives">归档</a>
+          </li>
+        
+          <li class="nav-item">
+            <a href="/Evandoz/categories">分类</a>
+          </li>
+        
+          <li class="nav-item">
+            <a href="/Evandoz/tags">标签</a>
+          </li>
+        
+          <li class="nav-item">
+            <a href="/Evandoz/about">关于</a>
+          </li>
+        
+      </ul>
+    </div>
+
+  </div>
+</header>
+
+        <div id="content" class="content">
+  <div class="outer">
+    <main class="main">
+      <article id="数据结构/排序/20160911-交换排序（一）" class="article card">
+        
+  
+  	<h1 class="post-title">交换排序（一）</h1>
+  
+
+
+        <div class="post-meta">
+          <span class="post-date">
+  <time datetime="2016-09-10T16:00:00.000Z">2016-09-11</time>
+</span>
+
+          
+  <span class="post-category">
+    <a class="category-link" href="/Evandoz/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构</a> · <a class="category-link" href="/Evandoz/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E6%8E%92%E5%BA%8F/">排序</a>
+  </span>
+
+
+        </div>
+        <div id="post-content" class="post-content">
+          <h2 id="基本概念"><a class="headerlink" href="#基本概念"></a>基本概念</h2>
+<p>根据待排序列中两个元素的比较结果来交换两个元素的位置，这样的排序称为<strong>交换排序</strong>，主要包括<strong>冒泡排序</strong>和<strong>快速排序</strong>。</p>
+<h2 id="冒泡排序-bubble-sort"><a class="headerlink" href="#冒泡排序-bubble-sort"></a>冒泡排序（Bubble Sort）</h2>
+<h3 id="基本思想"><a class="headerlink" href="#基本思想"></a>基本思想</h3>
+<p>在要排序的一组数中，对当前还未排好序的范围内的全部数，自上而下对相邻的两个数依次进行比较和调整，让较大的数往下沉，较小的往上冒。即：每当两相邻的数比较后发现它们的排序与排序要求相反时，就将它们互换。</p>
+<h3 id="代码实现"><a class="headerlink" href="#代码实现"></a>代码实现</h3>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">BubbleSort</span><span class="params">(<span class="keyword">int</span> L[], <span class="keyword">int</span> n)</span></span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="function"></span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">int</span> i, j, flag;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    <span class="comment">// flag变量记录是否发生交换</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">for</span> (i = <span class="number">1</span>; i &lt; n; ++i) <span class="comment">// n-1趟</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">    &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">        flag = <span class="number">0</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">        <span class="comment">// 第 i 趟时，已有 i-1 个元素沉底，不再次参与排序，</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">        <span class="comment">// 剩余 j-(i-1) 个元素进行 j-(i-1)-1 次比较</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">for</span> (j = <span class="number">1</span>; j &lt; n-i+<span class="number">1</span>; ++j)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">        &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">if</span> (L[j] &gt; L[j+<span class="number">1</span>]) <span class="comment">// 大值沉底</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">            &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">                swap(&amp;L[j], &amp;L[j+<span class="number">1</span>]);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">                flag = <span class="number">1</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">            &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">        &#125; <span class="comment">// 一趟排序</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">if</span> (flag == <span class="number">0</span>) <span class="keyword">return</span>; <span class="comment">// 若一趟排序未发生交换，说明已经有序，不需再排序</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+<h3 id="归纳分析"><a class="headerlink" href="#归纳分析"></a>归纳分析</h3>
+<ol>
+<li>稳定排序（stable sort）</li>
+</ol>
+<p>当 i &gt; j ，L[i] = L[j] 时，不会交换元素，故冒泡排序是<strong>稳定排序</strong>。</p>
+<ol start="2">
+<li>空间复杂度 （in-place 原地算法，O(1)）</li>
+</ol>
+<p>交换元素需要 1 个辅助空间，冒泡排序的空间复杂度为 O(1)。</p>
+<ol start="3">
+<li>时间复杂度</li>
+</ol>
+<p><strong>最好</strong>情况下，时间复杂度为 O(n)，此时待排序列有序；</p>
+<p>不过仍然需要一趟冒泡进行比较验证，此后 flag=false，直接跳出循环，结束排序，因此，比较次数为 n-1 次，移动次数为 0。</p>
+<p><strong>最坏</strong>情况下，时间复杂度为 O(n<sup>2</sup>)，此时待排序列逆序；</p>
+<p>需要进行 n-1 趟冒泡，第 i 趟冒泡 n-(i-1) 个元素进行 n-i 次比较，每次比较后需要移动 3 次来交换元素，于是</p>
+<p>比较次数为 Σ(n-i)= n(n-1)/2，i = {1,…,n-1}；<br>
+移动次数为 Σ3(n-i)= 3n(n-1)/2，i = {1,…,n-1}。</p>
+<p><strong>平均</strong>情况下，冒泡排序的时间复杂度也为 O(n<sup>2</sup>)。</p>
+<ol start="4">
+<li>初态影响</li>
+</ol>
+<p>由3分析可知，复杂度受到初始状态影响。</p>
+<ol start="5">
+<li>过程特征</li>
+</ol>
+<p>一趟排序可以确定一个元素的最终位置（最值），会产生<strong>全局有序</strong>的有序子序列。</p>
+<p><strong>全局有序</strong>：每一趟排序结束后都会有一个元素会落到其最终的位置上，有序子序列中的所有元素一定小于或大于无序子序列中的所有元素（直接插入排序是局部有序）。</p>
+<ol start="6">
+<li>适用性</li>
+</ol>
+<p>插入排序比较适合用于“基本有序”的序列和“数据量不大（不大于50）”的序列，并且冒泡排序移动操作比较少，所以也适合元素本身信息量较大的情况，但不适合用直接插入排序（移动操作较多）。不过元素本身信息量较大时，为避免大量移动操作，可改用<em>链表</em>*来存储。</p>
+<h3 id="算法证明-来自算法导论"><a class="headerlink" href="#算法证明-来自算法导论"></a>算法证明（来自算法导论）</h3>
+<p>运用两次循环，先证内循环，再证明外循环。</p>
+<p>内循环：在每次循环开始前，A[j]是A[j…n]中最小的元素。</p>
+<p>初始：j=n，因此A[n]是A[n…n]的最小元素。<br>
+保持：当循环开始时，已知A[j]是A[j…n]的最小元素，将A[j]与A[j-1]比较，并将较小者放在j-1位置，因此能够说明A[j-1]是A[j-1…n]的最小元素，因此循环不变式保持。<br>
+终止：j=i，已知A[i]是A[i…n]中最小的元素，证毕。</p>
+<p>外循环：在每次循环之前，A[1…i-1]包含了A中最小的i-1个元素，且已排序：A[1]&lt;=A[2]&lt;=…&lt;=A[i-1]。</p>
+<p>初始：i=1，因此A[1…0]=空，因此成立。<br>
+保持：当循环开始时，已知A[1…i-1]是A中最小的i-1个元素，且A[1]&lt;=A[2]&lt;=…&lt;=A[i-1]，根据内循环不变式，终止时A[i]是A[i…n]中最小的元素，因此A[1…i]包含了A中最小的i个元素，且A[1]&lt;=A[2]&lt;=…&lt;=A[i-1]&lt;=A[i]<br>
+终止：i=n+1，已知A[1…n]是A中最小的n个元素，且A[1]&lt;=A[2]&lt;=…&lt;=A[n]，得证。</p>
+<h3 id="问题"><a class="headerlink" href="#问题"></a>问题</h3>
+<p>冒泡排序和插入排序哪个更快？</p>
+<p><strong>插入排序中移动</strong>的次数直接是逆序对的个数，而<strong>冒泡排序中交换</strong>的次数是逆序对的个数，由前面的分析可知，一次交换需要移动3次元素，因此冒泡排序执行的时间至少是逆序对的个数，因此插入排序的执行时间至少比冒泡排序快。</p>
+<h3 id="算法改进"><a class="headerlink" href="#算法改进"></a>算法改进</h3>
+<p>改进 1．设置一标志性变量 pos，用于记录每趟排序中最后一次进行交换的位置。由于 pos 位置之后的记录均已交换到位，故在进行下一趟排序时只要扫描到 pos 位置即可。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 代码中数组元素从 L[1] 开始，故用 L[0] 来存储标识位置</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">BubbleSort_1</span><span class="params">(<span class="keyword">int</span> L[], <span class="keyword">int</span> n)</span></span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="function"></span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">int</span> i = n, j; <span class="comment">// //初始时，比较的最后位置仍为 n</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">while</span> (i &gt; <span class="number">1</span>) <span class="comment">// 仅代表排序趟数，没有其他含义（n-1趟）</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">    &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">        L[<span class="number">0</span>] = <span class="number">1</span>; <span class="comment">// 每趟开始时，无记录交换</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">for</span> (j = <span class="number">1</span>; j &lt; i; ++j) <span class="comment">// [1,...,i-1, i]</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">        &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">if</span> (L[j] &gt; L[j+<span class="number">1</span>])</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">            &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">                swap(&amp;L[j], &amp;L[j+<span class="number">1</span>]);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">                L[<span class="number">0</span>] = j; <span class="comment">// 保存最后一次发生交换的位置</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">            &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">        &#125; <span class="comment">// 一趟排序</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">        i = L[<span class="number">0</span>]; <span class="comment">// 下一次比较到 L[0] 即停止</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+<p>改进 2．传统冒泡排序中每一趟排序操作只能找到一个最大值或最小值，考虑利用在每趟排序中进行正向和反向两遍冒泡的方法一次可以得到两个最终值(最大者和最小者) , 从而使排序趟数几乎减少了一半。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">BubbleSort_2</span><span class="params">(<span class="keyword">int</span> L[], <span class="keyword">int</span> n)</span></span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="function"></span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">int</span> i, low = <span class="number">1</span>, high = n; <span class="comment">// 设置变量的初始值</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">while</span> (low &lt; high)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">    &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">for</span> (i = low; i &lt; high; ++i) <span class="comment">// 正向冒泡，找到最大者</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">if</span> (L[i] &gt; L[i+<span class="number">1</span>])</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">                swap(&amp;L[i], &amp;L[i+<span class="number">1</span>]);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">        --high; <span class="comment">// 修改high值，前移一位</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">for</span> (i = high; i &gt; low; --i) <span class="comment">// 反向冒泡，找到最小者</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">if</span> (L[i] &lt; L[i<span class="number">-1</span>])</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">                swap(&amp;L[i], &amp;L[i<span class="number">-1</span>]);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">        ++low; <span class="comment">// 修改low值，后移一位</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+<h2 id="快速排序-quick-sort"><a class="headerlink" href="#快速排序-quick-sort"></a>快速排序（Quick Sort）</h2>
+<p>快速排序见交换排序（二）</p>
+
+        </div>
+        <div class="post-footer">
+          <div class="post-copyright">&copy; 除特殊声明外，文章著作权归作者所有，转载请注明作者及出处</div>
+        </div>
+      </article>
+      <!-- Pagination -->
+      
+        <div class="nagination card">
+          
+            <a href="/Evandoz/posts/11X02MS.htm" class="nagination-link">上篇: 选择排序</a>
+          
+          
+            <a href="/Evandoz/posts/5YC30H.htm" class="nagination-link">下篇: 交换排序（二）</a>
+          
+        </div>
+      
+      <!-- Comment -->
+      <!-- 
+        <div id="article-comment" class="article-comment card"></div>
+
+       -->
+    </main>
+    <aside class="aside post">
+      <div class="widget profile card">
+  <div class="widget-cover" style="background-image: url('/Evandoz/css/images/background.jpg')">
+    <div class="avatar">
+      <img width="100%" height="100%" src="/Evandoz/css/images/logo.png">
+    </div>
+  </div>
+  <div class="widget-content">
+    <div class="author">
+      Levan
+    </div>
+    <div class="site-meta">
+      <a class="col" href="/Evandoz/archives">
+        <span class="amount">79</span>
+        <span class="text">文章</span>
+      </a>
+      <a class="col" href="/Evandoz/categories">
+        <span class="amount">23</span>
+        <span class="text">分类</span>
+      </a>
+      <a class="col" href="/Evandoz/tags">
+        <span class="amount">77</span>
+        <span class="text">标签</span>
+      </a>
+      <a class="col" href="/Evandoz/archives">
+        <span class="amount">75.5k</span>
+        <span class="text">字数</span>
+      </a>
+    </div>
+  </div>
+</div>
+
+      <div id="toc" class="toc">
+        
+          <h3 class="toc-title">目录</h3>
+          <ol class="toc-content"><li class="toc-content-item toc-content-level-2"><a class="toc-content-link" href="#基本概念"><span class="toc-content-text">基本概念</span></a></li><li class="toc-content-item toc-content-level-2"><a class="toc-content-link" href="#冒泡排序-bubble-sort"><span class="toc-content-text">冒泡排序（Bubble Sort）</span></a><ol class="toc-content-child"><li class="toc-content-item toc-content-level-3"><a class="toc-content-link" href="#基本思想"><span class="toc-content-text">基本思想</span></a></li><li class="toc-content-item toc-content-level-3"><a class="toc-content-link" href="#代码实现"><span class="toc-content-text">代码实现</span></a></li><li class="toc-content-item toc-content-level-3"><a class="toc-content-link" href="#归纳分析"><span class="toc-content-text">归纳分析</span></a></li><li class="toc-content-item toc-content-level-3"><a class="toc-content-link" href="#算法证明-来自算法导论"><span class="toc-content-text">算法证明（来自算法导论）</span></a></li><li class="toc-content-item toc-content-level-3"><a class="toc-content-link" href="#问题"><span class="toc-content-text">问题</span></a></li><li class="toc-content-item toc-content-level-3"><a class="toc-content-link" href="#算法改进"><span class="toc-content-text">算法改进</span></a></li></ol></li><li class="toc-content-item toc-content-level-2"><a class="toc-content-link" href="#快速排序-quick-sort"><span class="toc-content-text">快速排序（Quick Sort）</span></a></li></ol>
+        
+      </div>
+    </aside>
+  </div>
+
+
+</div>
+        <footer id="footer" class="footer">
+  <div class="outer">
+    <div class="copyright">
+      <p><span>EXP</span> &copy; 2015 - 2019</p>
+    </div>
+    <div class="navigation">
+      <a href="/Evandoz/https:/evandoz.github.io">Hexo · Levan</a>
+    </div>
+  </div>
+</footer>
+
+      </div>
+    </div>
+  </div>
+  <div id="top-anchor" class="top-anchor">
+  <ul><li></li><li></li></ul>
+</div>
+
+  <div id="mobile-nav" class="mobile-nav">
+  
+    <a class="menu-item" href="/Evandoz/archives">归档</a>
+  
+    <a class="menu-item" href="/Evandoz/categories">分类</a>
+  
+    <a class="menu-item" href="/Evandoz/tags">标签</a>
+  
+    <a class="menu-item" href="/Evandoz/about">关于</a>
+  
+</div>
+
+<div id="over-layer" class="over-layer"></div>
+
+  
+<script src="/Evandoz/js/jquery.js"></script>
+
+
+<script src="/Evandoz/js/velocity.js"></script>
+
+
+<script src="/Evandoz/js/plugins.js"></script>
+
+
+<script src="/Evandoz/js/script.js"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+
+
+
+</body>
+</html>
