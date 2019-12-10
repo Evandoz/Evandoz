@@ -1,17 +1,4 @@
 (function($){
-  // QR
-  var $qrcode = $('#qrcode');
-  if ($qrcode) {
-    $qrcode.on('click', function(){
-      if ($qrcode.hasClass('on')) {
-        $('#qr').fadeToggle(300);
-      } else {
-        $qrcode.addClass('on')
-        $('#qr').qrcode({ size: 120, text: location.href}).fadeToggle(300);
-      }
-    });
-  }
-
   //Scroll
   var $viewport = $(window),
     $topAnchor = $('#top-anchor');
@@ -20,7 +7,7 @@
     $(this).scrollTop() > $(this).height() ? $topAnchor.addClass('on') : $topAnchor.removeClass('on');
   });
   $topAnchor.click(function() {
-    $viewport.animate({scrollTop: 0}, 600);
+    $("html, body").animate({scrollTop: 0}, 500);
   });
 
   // Toc

@@ -1,8 +1,13 @@
+html,
 body {
   font: font-size font-sans;
   -webkit-text-size-adjust: 100%;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  scroll-behavior: smooth;
+}
+body {
+  background: #fbfcfd;
 }
 * {
   color: inherit;
@@ -18,7 +23,7 @@ a:focus {
   position: relative;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
   height: 70px;
   margin-top: -60px;
@@ -40,26 +45,26 @@ a:focus {
   position: relative;
   margin: 0;
   color: #fff;
-  font-size: 2rem;
+  font-size: 1.65rem;
 }
 .cover .desc {
   position: relative;
   color: rgba(255,255,255,0.75);
-  font-size: 1.2rem;
+  font-size: 1.15rem;
 }
 .outer {
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
-  max-width: 1040px;
+  max-width: 1080px;
   margin: 0 auto;
-  padding: 0 20px;
+  padding: 0 15px;
 }
 .outer .main {
-  width: calc(100% - 280px);
+  width: calc(100% - 320px);
 }
 .outer .aside {
-  width: 260px;
+  width: 300px;
 }
 @media mq-mobile {
   .outer .main,
@@ -68,9 +73,9 @@ a:focus {
   }
 }
 .inner {
-  max-width: 840px;
+  max-width: 860px;
   margin: 0 auto;
-  padding: 0 20px;
+  padding: 0 15px;
 }
 .inner .main {
   width: 100%;
@@ -80,7 +85,7 @@ a:focus {
   box-sizing: border-box;
   border-radius: 2px;
   background: #fff;
-  box-shadow: 0 0 15px 5px rgba(0,0,0,0.035);
+  box-shadow: 0 5px 45px -5px rgba(158,158,158,0.22);
 }
 @media mq-mobile {
   .card {
@@ -88,13 +93,13 @@ a:focus {
   }
 }
 .content {
-  min-height: calc(100vh - 60px);
-  padding-bottom: 60px;
+  min-height: calc(100vh - 100px);
+  padding-bottom: 100px;
 }
 .content .outer,
 .content .inner {
-  padding-top: 30px;
-  padding-bottom: 30px;
+  padding-top: 20px;
+  padding-bottom: 35px;
 }
 .overflow {
   overflow: hidden;
