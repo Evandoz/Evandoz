@@ -1527,7 +1527,7 @@ a:focus {
   height: 24px;
   line-height: 24px;
   margin: 0;
-  padding: 6px 10px;
+  padding: 8px 12px;
   font-size: 1.1rem;
   font-weight: 500;
 }
@@ -1557,7 +1557,7 @@ a:focus {
 .archive-item:before {
   content: "";
   position: absolute;
-  top: 20px;
+  top: 22px;
   left: 4px;
   display: block;
   height: 12px;
@@ -1865,14 +1865,15 @@ a:focus {
 }
 .highlight {
   position: relative;
+  padding-top: 20px;
 }
 .highlight pre,
 .highlight code {
   font-family: "Source Code Pro", Consolas, Monaco, Menlo, Consolas, monospace;
 }
 .highlight pre {
+  display: block;
   margin: 0;
-  padding: 10px 0;
   border: none;
 }
 .highlight code {
@@ -1882,7 +1883,7 @@ a:focus {
 }
 .highlight table {
   margin: 0;
-  width: auto;
+  width: inherit;
 }
 .highlight td {
   border: none;
@@ -1961,56 +1962,67 @@ a:focus {
 .highlight .gist .gist-file .gist-meta a:hover {
   text-decoration: underline;
 }
-.highlight .code:before {
+.highlight:before {
   position: absolute;
-  top: 4px;
-  right: 4px;
-  line-height: 1.2;
+  top: 0;
+  right: 0;
+  padding: 0 5px;
+  line-height: 20px;
   font-size: 0.875em;
   color: #4d4d4c;
   font-family: "Source Code Pro", Consolas, Monaco, Menlo, Consolas, monospace;
-  text-align: right;
+  text-align: center;
+  z-index: 9;
 }
-.highlight.xml .code:before {
+.highlight:after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 20px;
+  width: 100%;
+  background: #eff2f3;
+}
+.highlight.xml:before {
   content: "XML";
 }
-.highlight.html .code:before {
+.highlight.html:before {
   content: "HTML";
 }
-.highlight.css .code:before {
+.highlight.css:before {
   content: "CSS";
 }
-.highlight.javascript .code:before {
+.highlight.javascript:before {
   content: "Javascript";
 }
-.highlight.ruby .code:before {
+.highlight.ruby:before {
   content: "Ruby";
 }
-.highlight.python .code:before {
+.highlight.python:before {
   content: "Python";
 }
-.highlight.perl .code:before {
+.highlight.perl:before {
   content: "Perl";
 }
-.highlight.tex .code:before {
+.highlight.tex:before {
   content: "Tex";
 }
-.highlight.c .code:before {
+.highlight.c:before {
   content: "C";
 }
-.highlight.java .code:before {
+.highlight.java:before {
   content: "Java";
 }
-.highlight.vue .code:before {
+.highlight.vue:before {
   content: "Vue";
 }
-.highlight.stylus .code:before {
+.highlight.stylus:before {
   content: "stylus";
 }
-.highlight.less .code:before {
+.highlight.less:before {
   content: "less";
 }
-.highlight.scss .code:before {
+.highlight.scss:before {
   content: "SCSS";
 }
 pre .comment,
