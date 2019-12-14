@@ -7,7 +7,7 @@ body {
   scroll-behavior: smooth;
 }
 body {
-  background: #fbfcfd;
+  background: #fafbfc;
 }
 * {
   color: inherit;
@@ -27,8 +27,9 @@ a:focus {
   align-items: center;
   height: 70px;
   margin-top: -60px;
-  padding: calc(17vh - 60px) 0 17vh;
+  padding: calc(18vh - 50px) 0 18vh;
   z-index: -1;
+  background-color: #343434;
   background: 50%/cover no-repeat rgba(0,0,0,0.96);
 }
 .cover:before {
@@ -85,7 +86,7 @@ a:focus {
   box-sizing: border-box;
   border-radius: 2px;
   background: #fff;
-  box-shadow: 0 5px 45px -5px rgba(158,158,158,0.22);
+  box-shadow: 0 5px 25px -5px rgba(158,158,158,0.12);
 }
 @media mq-mobile {
   .card {

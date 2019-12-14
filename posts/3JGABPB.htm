@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+  
+  <title>二叉排序树 | EXP</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+    <meta name="author" content="Levan">
+  
+  
+    <meta name="description" content="日常记录与分享">
+  
+  
+    <meta name="keywords" content="数据结构,二叉排序树,二叉查找树,Binary Sort Tree,BST">
+  
+  
+    <meta name="google-site-verification" content="W2AVg5n_ALo21rl9n3ZwS8AuEanZfJkirzrRGLLYvn4">
+  
+  
+    <meta name="baidu-site-verification" content="BM2Q3xLpPJ">
+  
+  
+    <meta name="360-site-verification" content="573211edf2de02c99d7b255b2c56513c">
+  
+  
+    <link rel="short icon" type="image/x-icon" href="/Evandoz/css/images/favicon.ico">
+  
+  <link rel="canonical" href="https://evandoz.github.io/Evandoz/posts/3jgabpb.htm">
+  
+<link rel="stylesheet" href="/Evandoz/css/style.css">
+
+<meta name="generator" content="Hexo 4.1.0"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
+
+<body>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="overflow" class="overflow">
+    <div id="hiddenbar" class="hiddenbar">
+      <div id="wrapper" class="wrapper">
+        <header id="header" class="header is-post">
+  <div class="outer">
+    
+      <div class="logo">
+        <a class="title" href="/Evandoz/">EXP</a>
+      </div>
+    
+
+    <div class="nav">
+      <ul id="nav-icon" class="nav-icon">
+        <li></li><li></li><li></li>
+      </ul>
+      <ul class="nav-menu">
+        
+          <li class="nav-item">
+            <a href="/Evandoz/archives">归档</a>
+          </li>
+        
+          <li class="nav-item">
+            <a href="/Evandoz/categories">分类</a>
+          </li>
+        
+          <li class="nav-item">
+            <a href="/Evandoz/tags">标签</a>
+          </li>
+        
+          <li class="nav-item">
+            <a href="/Evandoz/about">关于</a>
+          </li>
+        
+      </ul>
+    </div>
+
+  </div>
+</header>
+
+        <div id="content" class="content">
+  <div class="outer">
+    <main class="main">
+      <article id="数据结构/查找表/20160702-二叉排序树" class="article card">
+        
+  
+  	<h1 class="post-title">二叉排序树</h1>
+  
+
+
+        <div class="post-meta">
+          <span class="post-date">
+  <time datetime="2016-07-01T16:00:00.000Z">2016-07-02</time>
+</span>
+
+          
+  <span class="post-category">
+    <a class="category-link" href="/Evandoz/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构</a> · <a class="category-link" href="/Evandoz/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E6%9F%A5%E6%89%BE%E8%A1%A8/">查找表</a>
+  </span>
+
+
+        </div>
+        <div id="post-content" class="post-content">
+          <h2 id="二叉排序树"><a class="headerlink" href="#二叉排序树"></a>二叉排序树</h2>
+<p>二叉排序树(Binary Sort Tree)或者是一棵空树，或者是具有如下性质的非空二叉树：<br>
+(1) 若其左子树不空，则左子树上<strong>所有</strong>节点的值<strong>均小于</strong>它的根节点的值；<br>
+(2) 若其右子树不空，则右子树上<strong>所有</strong>节点的值<strong>均大于</strong>它的根节点的值；<br>
+(3) 其左、右子树也分别是二叉排序树。</p>
+<p>可见，二叉排序树是一个递归的数据结构，可以方便地使用递归算法对二叉排序树进行各种运算。此外，根据定义可知</p>
+<p>$$ 左子树节点值 &lt; 根节点值 &lt; 右子树节点值 $$</p>
+<p>因此，对二叉排序树进行<strong>中序遍历</strong>，可以得到一个<strong>递增</strong>的有序序列，<strong>序列中不存在相等的元素</strong>。</p>
+<h2 id="二叉排序树的查找"><a class="headerlink" href="#二叉排序树的查找"></a>二叉排序树的查找</h2>
+<p>二叉排序树（查找树）的查找从根节点开始，沿着某一分支向下进行比较。<br>
+若二叉排序树非空，先将给定值与根节点关键字比较，若相等则成功；<br>
+若不等，当给定值小于根节点关键字时，在根节点左子树中查找；<br>
+否则，当给定值大于根节点关键字时，在根节点右子树中查找；<br>
+显然，这是个递归的过程。<br>
+用二叉链表作为二叉排序树的存储结构，则该查找过程的算法实现如下：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="function">BSTree <span class="title">SearchBST_Recursion</span><span class="params">(BSTree T, TElemType key)</span></span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="function"></span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">if</span> (T == <span class="literal">NULL</span> || key == T-&gt;data) <span class="keyword">return</span> T;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span> (key &lt; T-&gt;data) <span class="keyword">return</span> SearchBST(T-&gt;lchild, key);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">else</span> <span class="keyword">return</span> SearchBST(T-&gt;rchild, key);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+<p>也可以用非递归来实现：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="function">BSTree <span class="title">SearchBST_Non_Recursion</span><span class="params">(BSTree T, TElemType key)</span></span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="function"></span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    BSTNode *p = T;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">while</span> (p &amp;&amp; p-&gt;data != key)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">    &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">if</span> (key &lt; p-&gt;data) p = p-&gt;lchild;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">else</span> p = p-&gt;rchild;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">return</span> p;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+<h2 id="二叉排序树的插入"><a class="headerlink" href="#二叉排序树的插入"></a>二叉排序树的插入</h2>
+<p>二叉排序树是动态查找表，它的树结构通常不是一次性生成的，而是在查找过程中，当树中不存在关键字值等于给定值的节点时再进行插入。<br>
+新插入的节点一定是一个新添加的<strong>叶子节点</strong>，并且是查找不成功时<strong>查找路径上最后一个访问的节点</strong>的<strong>孩子节点</strong></p>
+<p>可见，插入过程也需要进行查找，可以到待查值时，则返回所得节点；没有找到时，ze返回最后一个访问的节点，以便进行后续插入<br>
+为了能在查找失败时，返回最后一个访问的节点，在查找过程中需要一个指针 f 记录一下上一个访问的节点，即当前访问节点的双亲，起始 f = NULL。</p>
+<p>因此，对之前的查找进行修改，增加一个指针 f 指向上一个访问的节点（双亲）</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 返回值修改为布尔量，标识是否找到待查值，由 p 指向返回的节点</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="function">Status <span class="title">SearchBST_Non_Recursion</span><span class="params">(BSTree T, TElemType key, BSTree *p)</span></span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="function"></span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    BSTNode *f = <span class="literal">NULL</span>, *t = T;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">while</span> (t &amp;&amp; key != t-&gt;data)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">    &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">        f = t;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">if</span> (key &lt; t-&gt;data)  t = t-&gt;lchild;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">else</span> t = t-&gt;rchild;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">if</span> (t) &#123; (*p) = t; <span class="keyword">return</span> <span class="number">1</span>; &#125; <span class="comment">// 找到</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">else</span> &#123; (*p) = f; <span class="keyword">return</span> <span class="number">0</span>; &#125; <span class="comment">// 未找到</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+<p>于是二叉排序树的插入算法如下：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="function">Status <span class="title">InsertBST</span><span class="params">(BSTree *T, TElemType key)</span></span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="function"></span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    BSTNode *p, *s;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">if</span> (<span class="number">0</span> == SearchBST_Non_Recursion(*T, key, &amp;p))</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">    &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">        <span class="comment">// 生成新结点</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">        s = (BSTNode *)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(BSTNode));</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">        s-&gt;data = key; s-&gt;lchild = s-&gt;rchild = <span class="literal">NULL</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">        <span class="comment">// 插入</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">if</span> (p == <span class="literal">NULL</span>) (*T) = s; <span class="comment">// 空树</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (key &lt; p-&gt;data) p-&gt;lchild = s;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">else</span> p-&gt;rchild = s;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">return</span> <span class="number">1</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">else</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+<h2 id="二叉排序树的构造"><a class="headerlink" href="#二叉排序树的构造"></a>二叉排序树的构造</h2>
+<p>二叉排序树是动态查找表，构造一棵二叉排序树就是不断插入新节点的过程，因此**二叉排序树中一定没有相同元素，**这符合二叉排序树的定义。<br>
+根据二叉排序树性质，中序遍历可以得到一个递增的有序序列，也就是说一个无序序列可以通过构造二叉排序树变成一个有序序列，构造树的过程也就是排序过程。<br>
+因为插入操作均发生在叶子节点，它不需要移动其他节点，只需要修改指针，这就相当于在有序序列上插入一个新元素却不需要移动其他元素，<br>
+可见，<strong>二叉排序树既能像顺序表一样进行折半查找（类似），又能进行链式结构的插入操作，不需要大量移动元素</strong>，因此二叉排序树是动态查找表一种经典实用的表示方式。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 通过节点插入新建一棵二叉树</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="function">Status <span class="title">InitBST</span><span class="params">(BSTree *T, TElemType *key, <span class="keyword">int</span> n)</span></span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="function"></span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">int</span> i;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">    (*T) = <span class="literal">NULL</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; n; ++i)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">    &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">        InsertBST(T, key[i]);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">return</span> <span class="number">1</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+<h2 id="二叉排序树的删除"><a class="headerlink" href="#二叉排序树的删除"></a>二叉排序树的删除</h2>
+<p>在二叉排序树中删除一个节点时，不能把以该节点为根的子树上的所有节点都删除，只能删除这个节点本身，然后将其断开的子树重新链接到原来的排序上，并且要确保重新链接的排序树的性质特性不会丢失。<br>
+二叉排序树的性质与中序遍历序列紧密相关，因此要确保重新链接的排序树特性不丢失，可以从中序遍历的角度思考，即用删除节点的中序前驱或后继顶替她原本的位置即可。</p>
+<p>具体地，有如下三种情形：<br>
+(1) 被删除节点 p 是叶子节点，则直接删除即可；<br>
+(2) 被删除节点 p 只有左或右子树，则让它的子树顶替它的位置，即让它的子树链接到它的双亲；<br>
+(3) 被删除节点 p 有左、右子树，则让它的<strong>直接中序前驱或后继顶替它的位置</strong>，然后删除该前驱或后继；</p>
+<p>(Ⅰ) <strong>用前驱顶替</strong>，即用其左子树最右下节点 s 顶替 p，由于 s 没有右子树，所以只需再将 s 的左子树链接到 s 的双亲上，最后删除 s；<br>
+处理一个特殊情形：p 的左孩子就是其前驱 s，即 p 的左孩子没有右子树，这是(2)的场景，按(2)处理即可；<br>
+(Ⅱ) <strong>用后继顶替</strong>，即用其右子树最左下节点 s 顶替 p，由于 s 没有左子树，所以只需再将 s 的右子树链接到 s 的双亲上，最后删除 s；<br>
+处理一个特殊情形：p 的左孩子就是其前驱 s，即 p 的右孩子没有左子树，这是(2)的场景，按(2)处理即可；</p>
+<p>可见，前驱顶替和后继顶替的操作是刚好对称的。</p>
+<p><strong>除了用直接前驱或后继替换外，还有其他思路也能完成删除操作，譬如</strong></p>
+<blockquote>
+<p>将待删除节点 p 的左子树链接到它的双亲 f 顶替自己，而将 p 的右子树链接到 p 直接前驱 s，作为 s 的右子树。</p>
+</blockquote>
+<p>根据中序操作的对称性，也可以用右子树顶替自己。</p>
+<p><strong>技巧：在进行子树或节点移动使，可以直接将子树当作节点处理，原因在于二叉排序树是一个递归结构，排序子树的内部结构不会因为（其双亲）根节点被删除而破坏。</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">void Delete(BSTree *p)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    BSTNode *q, *s;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    &#x2F;&#x2F; 右空用左顶替</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">    if ((*p)-&gt;rchild &#x3D;&#x3D; NULL)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">    &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">        q &#x3D; (*p); (*p) &#x3D; (*p)-&gt;lchild; free(q);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">    &#x2F;&#x2F; 左空用右顶替</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">    else if ((*p)-&gt;lchild &#x3D;&#x3D; NULL)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">    &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">        q &#x3D; (*p); (*p) &#x3D; (*p)-&gt;rchild; free(q);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">    &#x2F;&#x2F; 左右都不空</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">    else</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">    &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">        q &#x3D; *p; s &#x3D; (*p)-&gt;lchild;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">        &#x2F;&#x2F; 左子树右下找前驱</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">        while(s-&gt;rchild)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line">        &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line">            q &#x3D; s;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">22</span></pre></td><td class="code"><pre><span class="line">            s &#x3D; s-&gt;rchild;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">23</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">24</span></pre></td><td class="code"><pre><span class="line">        &#x2F;&#x2F; s 顶替 p</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">25</span></pre></td><td class="code"><pre><span class="line">        (*p)-&gt;data &#x3D; s-&gt;data;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">26</span></pre></td><td class="code"><pre><span class="line">        &#x2F;&#x2F; 处理特殊情形</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">27</span></pre></td><td class="code"><pre><span class="line">        if (q &#x3D;&#x3D; (*p))</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">28</span></pre></td><td class="code"><pre><span class="line">            q-&gt;lchild &#x3D; s-&gt;lchild;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">29</span></pre></td><td class="code"><pre><span class="line">        &#x2F;&#x2F; 处理一般情形</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">30</span></pre></td><td class="code"><pre><span class="line">        else</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">31</span></pre></td><td class="code"><pre><span class="line">            q-&gt;rchild &#x3D; s-&gt;lchild;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">32</span></pre></td><td class="code"><pre><span class="line">        free(s);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">33</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">34</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+<p>另一种思路：(2)(3)可以合并</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Delete_2</span><span class="params">(BSTree *p)</span></span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="function"></span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    BSTNode *q, *s;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">if</span> ((*p)-&gt;rchild == <span class="literal">NULL</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">    &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">        q = (*p); (*p) = (*p)-&gt;lchild; <span class="built_in">free</span>(q);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">else</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">    &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">        <span class="comment">// 左树右下找 p 的前驱 s</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">        q = (*p); s = (*p)-&gt;lchild;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">while</span>(s-&gt;rchild)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">            s = s-&gt;rchild;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">        <span class="comment">// (*p) 的右子树作为 s 的右子树</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">        s-&gt;rchild = (*p)-&gt;rchild;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">        <span class="comment">// (*p) 的左孩子顶替自己</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">        (*p) = (*p)-&gt;lchild;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">        <span class="built_in">free</span>(q);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+<p><strong>关于删除再插入的问题：</strong><br>
+如果在二叉排序树中先删除再插入一个节点，得到的排序树是否与原来相同？<br>
+答案是<strong>不一定</strong>！！原因在于<strong>删除</strong>操作可以发生在<strong>叶子节点和非叶子节点</strong>，而<strong>插入</strong>操作只发生在<strong>叶子节点</strong>，如果删除和插入的位置不同，得到的树也一定与之前不同。<br>
+当被删除节点是非叶子节点，那么重新插入时该节点就成了叶子节点，显然前后两个二叉树不一样；<br>
+但是，还需要注意的是，<strong>虽然树结构不同，但是中序序列是相同的</strong>，这是由二叉排序树的特性决定的。</p>
+<h2 id="二叉排序树的查找分析"><a class="headerlink" href="#二叉排序树的查找分析"></a>二叉排序树的查找分析</h2>
+<p>和折半查找类似，二叉排序树的进行查找比较的次数不超过树的深度 h，不过折半查找长度为 n 的表的判定树是唯一的，而含有 n 个节点的二叉排序树却不是唯一的，相同的关键字插入的顺序（时间点）不同就可能生成不同的二叉排序树。</p>
+<p>因此不同的二叉排序树，它的平均查找长度也就不同。也就是说，<strong>含有 n 个节点的二叉排序树，它的平均查找长度和树的形态有关。</strong></p>
+<p>最坏的情况下，先后插入的关键字有序时，构造出的二叉排序树就蜕变成一棵单支树，树的深度增加为元素数量 n，平均查找长度为 \(\frac {n+1}{2}\)；<br>
+最好的情况下，二叉排序树的形态和折半查找判定树相同，这时平均查找长度和 \(\log_2 n\) 成正比。</p>
+<p>随机的情况下，二叉排序树的平均查找长度和 \(\log_2 n\) 是等数量级的，但在某些情况下，尚需要在构成二叉排序树的过程中进行“平衡化”操作，得到<strong>二叉平衡树</strong>。</p>
+<p><strong>与折半查找对比（二分查找）：</strong></p>
+<p>就维护查找表的有序性而言，二叉排序树进行插入和删除时，不需要移动节点，只需要修改指针，平均执行时间为 \(O(\log_2 n)\)；<br>
+折半查找的存储结构是顺序表，进行插入和删除时，需要（大量）移动节点，需要的代价时 \(O(n)\)。</p>
+<p>静态查找表，宜采用顺序表作为存储结构，使用折半查找策略；<br>
+动态查找表，宜采用二叉排序树作为逻辑结构。</p>
+
+        </div>
+        <div class="post-footer">
+          <div class="post-copyright">&copy; 除特殊声明外，文章著作权归作者所有，转载请注明作者及出处</div>
+        </div>
+      </article>
+      <!-- Pagination -->
+      
+        <div class="nagination card">
+          
+            <a href="/Evandoz/posts/1167X21.htm" class="nagination-link">上篇: 平衡二叉树</a>
+          
+          
+            <a href="/Evandoz/posts/34W023S.htm" class="nagination-link">下篇: 回溯法与树的遍历</a>
+          
+        </div>
+      
+      <!-- Comment -->
+      <!-- 
+        <div id="article-comment" class="article-comment card"></div>
+
+       -->
+    </main>
+    <aside class="aside post">
+      <div class="widget profile card">
+  <div class="widget-cover" style="background-image: url('/Evandoz/css/images/background.jpg')">
+    <div class="avatar">
+      <img width="100%" height="100%" src="/Evandoz/css/images/avatar.png">
+    </div>
+  </div>
+  <div class="widget-content">
+    <div class="author">
+      Levan
+    </div>
+    <div class="site-meta">
+      <a class="col" href="/Evandoz/archives">
+        <span class="amount">85</span>
+        <span class="text">文章</span>
+      </a>
+      <a class="col" href="/Evandoz/categories">
+        <span class="amount">24</span>
+        <span class="text">分类</span>
+      </a>
+      <a class="col" href="/Evandoz/tags">
+        <span class="amount">82</span>
+        <span class="text">标签</span>
+      </a>
+      <a class="col" href="/Evandoz/archives">
+        <span class="amount">86.2k</span>
+        <span class="text">字数</span>
+      </a>
+    </div>
+  </div>
+</div>
+
+      <div id="toc" class="toc">
+        
+          <h3 class="toc-title">目录</h3>
+          <ol class="toc-content"><li class="toc-content-item toc-content-level-2"><a class="toc-content-link" href="#二叉排序树"><span class="toc-content-text">二叉排序树</span></a></li><li class="toc-content-item toc-content-level-2"><a class="toc-content-link" href="#二叉排序树的查找"><span class="toc-content-text">二叉排序树的查找</span></a></li><li class="toc-content-item toc-content-level-2"><a class="toc-content-link" href="#二叉排序树的插入"><span class="toc-content-text">二叉排序树的插入</span></a></li><li class="toc-content-item toc-content-level-2"><a class="toc-content-link" href="#二叉排序树的构造"><span class="toc-content-text">二叉排序树的构造</span></a></li><li class="toc-content-item toc-content-level-2"><a class="toc-content-link" href="#二叉排序树的删除"><span class="toc-content-text">二叉排序树的删除</span></a></li><li class="toc-content-item toc-content-level-2"><a class="toc-content-link" href="#二叉排序树的查找分析"><span class="toc-content-text">二叉排序树的查找分析</span></a></li></ol>
+        
+      </div>
+    </aside>
+  </div>
+
+
+</div>
+        <footer id="footer" class="footer">
+  <div class="outer">
+    <div class="copyright">
+      <p><span>EXP</span> &copy; 2015 - 2019</p>
+    </div>
+    <div class="navigation">
+      <a href="/Evandoz/https:/evandoz.github.io">Hexo · Levan</a>
+    </div>
+  </div>
+</footer>
+
+      </div>
+    </div>
+  </div>
+  <div id="top-anchor" class="top-anchor">
+  <ul><li></li><li></li></ul>
+</div>
+
+  <div id="mobile-nav" class="mobile-nav">
+  
+    <a class="menu-item" href="/Evandoz/archives">归档</a>
+  
+    <a class="menu-item" href="/Evandoz/categories">分类</a>
+  
+    <a class="menu-item" href="/Evandoz/tags">标签</a>
+  
+    <a class="menu-item" href="/Evandoz/about">关于</a>
+  
+</div>
+
+<div id="over-layer" class="over-layer"></div>
+
+  
+<script src="/Evandoz/js/jquery.js"></script>
+
+
+<script src="/Evandoz/js/velocity.js"></script>
+
+
+<script src="/Evandoz/js/plugins.js"></script>
+
+
+<script src="/Evandoz/js/script.js"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config("");
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+
+
+
+</body>
+</html>

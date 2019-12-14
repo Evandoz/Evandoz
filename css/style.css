@@ -337,7 +337,7 @@ body {
   scroll-behavior: smooth;
 }
 body {
-  background: #fbfcfd;
+  background: #fafbfc;
 }
 * {
   color: inherit;
@@ -374,8 +374,9 @@ a:focus {
   align-items: center;
   height: 70px;
   margin-top: -60px;
-  padding: calc(17vh - 60px) 0 17vh;
+  padding: calc(18vh - 50px) 0 18vh;
   z-index: -1;
+  background-color: #343434;
   background: 50%/cover no-repeat rgba(0,0,0,0.96);
 }
 .cover:before {
@@ -447,8 +448,8 @@ a:focus {
   box-sizing: border-box;
   border-radius: 2px;
   background: #fff;
-  -webkit-box-shadow: 0 5px 45px -5px rgba(158,158,158,0.22);
-  box-shadow: 0 5px 45px -5px rgba(158,158,158,0.22);
+  -webkit-box-shadow: 0 5px 25px -5px rgba(158,158,158,0.12);
+  box-shadow: 0 5px 25px -5px rgba(158,158,158,0.12);
 }
 @media screen and (max-width: 860px) {
   .card {
@@ -484,7 +485,7 @@ a:focus {
 }
 .header.is-home .outer {
   position: relative;
-  top: calc(34vh - 100px);
+  top: calc(36vh - 90px);
   z-index: 4;
 }
 @media screen and (max-width: 860px) {
@@ -731,12 +732,11 @@ a:focus {
   transform: translate3d(-50%, 75%, 0);
   width: 80px;
   height: 80px;
-  padding: 8px;
-  background: #fff;
+  padding: 5px;
+  background: #253b56;
+  overflow: hidden;
   border-radius: 50%;
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
+  border: 3px solid #fff;
 }
 .profile {
   padding: 0 !important;
@@ -1179,13 +1179,13 @@ a:focus {
   background: #f6f6f6;
 }
 .post-content code {
-  padding: 0.05em 0.5em;
-  color: #ff502c;
-  font-size: 0.9em;
-  font-family: "Source Code Pro", Consolas, Monaco, Menlo, Consolas, monospace;
+  padding: 0.2em 0.4em;
+  line-height: 1.4;
+  color: #000;
+  font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", "Helvetica", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
   word-wrap: break-word;
   text-shadow: none;
-  background: #f6f6f6;
+  background: #eee;
   border-radius: 2px;
   overflow-x: auto;
 }
@@ -1230,11 +1230,9 @@ a:focus {
 .post-content blockquote {
   margin: 20px 0;
   padding: 15px 20px;
-  font-family: Georgia, "Times New Roman", serif;
-  font-size: 1.25em;
-  color: #222;
-  border: 1px solid #eee;
-  border-radius: 1px;
+  color: #444;
+  border: 2px dashed #666;
+  border-radius: 4px;
   background: #f6f6f6;
 }
 .post-content blockquote p {
@@ -1748,8 +1746,8 @@ a:focus {
 .paginator .extend {
   background: #fff;
   border-radius: 4px;
-  -webkit-box-shadow: 0 4px 30px rgba(0,0,0,0.1);
-  box-shadow: 0 4px 30px rgba(0,0,0,0.1);
+  -webkit-box-shadow: 0 5px 30px rgba(0,0,0,0.05);
+  box-shadow: 0 5px 30px rgba(0,0,0,0.05);
 }
 .paginator .page-number:hover,
 .paginator .extend:hover {
@@ -2085,8 +2083,8 @@ pre .javascript .function {
 }
 .footer {
   background: #fff;
-  -webkit-box-shadow: 0 5px 45px -10px rgba(158,158,158,0.22);
-  box-shadow: 0 5px 45px -10px rgba(158,158,158,0.22);
+  -webkit-box-shadow: 0 6px 30px -6px rgba(158,158,158,0.06);
+  box-shadow: 0 6px 30px -6px rgba(158,158,158,0.06);
   margin-top: -100px;
   text-align: center;
 }

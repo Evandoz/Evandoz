@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+  
+  <title>平衡二叉树 | EXP</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+    <meta name="author" content="Levan">
+  
+  
+    <meta name="description" content="日常记录与分享">
+  
+  
+    <meta name="keywords" content="数据结构,平衡二叉树,Balanced Binary Tree,Height-Balanced Tree,BBT">
+  
+  
+    <meta name="google-site-verification" content="W2AVg5n_ALo21rl9n3ZwS8AuEanZfJkirzrRGLLYvn4">
+  
+  
+    <meta name="baidu-site-verification" content="BM2Q3xLpPJ">
+  
+  
+    <meta name="360-site-verification" content="573211edf2de02c99d7b255b2c56513c">
+  
+  
+    <link rel="short icon" type="image/x-icon" href="/Evandoz/css/images/favicon.ico">
+  
+  <link rel="canonical" href="https://evandoz.github.io/Evandoz/posts/1167x21.htm">
+  
+<link rel="stylesheet" href="/Evandoz/css/style.css">
+
+<meta name="generator" content="Hexo 4.1.0"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
+
+<body>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="overflow" class="overflow">
+    <div id="hiddenbar" class="hiddenbar">
+      <div id="wrapper" class="wrapper">
+        <header id="header" class="header is-post">
+  <div class="outer">
+    
+      <div class="logo">
+        <a class="title" href="/Evandoz/">EXP</a>
+      </div>
+    
+
+    <div class="nav">
+      <ul id="nav-icon" class="nav-icon">
+        <li></li><li></li><li></li>
+      </ul>
+      <ul class="nav-menu">
+        
+          <li class="nav-item">
+            <a href="/Evandoz/archives">归档</a>
+          </li>
+        
+          <li class="nav-item">
+            <a href="/Evandoz/categories">分类</a>
+          </li>
+        
+          <li class="nav-item">
+            <a href="/Evandoz/tags">标签</a>
+          </li>
+        
+          <li class="nav-item">
+            <a href="/Evandoz/about">关于</a>
+          </li>
+        
+      </ul>
+    </div>
+
+  </div>
+</header>
+
+        <div id="content" class="content">
+  <div class="outer">
+    <main class="main">
+      <article id="数据结构/查找表/20160708-平衡二叉树" class="article card">
+        
+  
+  	<h1 class="post-title">平衡二叉树</h1>
+  
+
+
+        <div class="post-meta">
+          <span class="post-date">
+  <time datetime="2016-07-07T16:00:00.000Z">2016-07-08</time>
+</span>
+
+          
+  <span class="post-category">
+    <a class="category-link" href="/Evandoz/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构</a> · <a class="category-link" href="/Evandoz/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E6%9F%A5%E6%89%BE%E8%A1%A8/">查找表</a>
+  </span>
+
+
+        </div>
+        <div id="post-content" class="post-content">
+          <h2 id="平衡二叉树"><a class="headerlink" href="#平衡二叉树"></a>平衡二叉树</h2>
+<p>为了避免树的高（深）度增长过快，降低二叉排序树的性能，规定在插入和删除节点时，要保证任意节点的左、右子树高度差的绝对值不超过 1，称这样的二叉排序树为<code>平衡二叉树</code>(Balanced Binary Tree 或 Height-Balanced Tree)又称 <code>AVL 树</code>。</p>
+<blockquote>
+<p>AVL 树得名于它的发明者 G. M. Adelson-Velsky 和 Evgenii Landis，他们在1962年的论文《An algorithm for the organization of information》中公开了这一数据结构。<br>
+按发明者来命名的情况很常见，典型的还有 KMP、RSA 等。</p>
+</blockquote>
+<p>节点定义左、右子树的高度差为该节点的<code>平衡因子 BF</code>(Balanced Factor)，则平衡二叉树<strong>所有</strong>节点的平衡因子只可能为 -1、0、1。只要有一个节点的平衡因子的绝对值大于 1，该二叉排序树就是不平衡的。</p>
+<p>由此，平衡二叉树可定义为或是一棵空树，或是具有如下特征：其左、右子树均为平衡二叉树，并且左、右子树高度差的绝对值不超过 1。</p>
+<p>平衡二叉树是二叉排序树<code>平衡化</code>的结果，<strong>它仍属于二叉排序树</strong>，二叉排序树的各种性质和操作同样适用于平衡二叉树。</p>
+<p>由于要存储节点的平衡因子，所以平衡二叉树的树节点定义相较于一般排序树需增加 bf 变量。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 平衡二叉树 AVL</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">BBSTNode</span></span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="class">&#123;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    TElemType data;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">BBSTNode</span> *<span class="title">lchild</span>, *<span class="title">rchild</span>;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">int</span> bf; <span class="comment">//平衡因子</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">&#125; BBSTNode, *BBSTree;</span></pre></td></tr></table></figure>
+<h2 id="平衡二叉树的插入"><a class="headerlink" href="#平衡二叉树的插入"></a>平衡二叉树的插入</h2>
+<h3 id="再平衡基本思想"><a class="headerlink" href="#再平衡基本思想"></a>再平衡基本思想</h3>
+<p>相比于二叉排序树的插入，平衡二叉树在插入新节点时，需要确保二叉树的平衡。<br>
+二叉排序树保证平衡的基本思想如下：<br>
+(1) 首先检查插入路径上的节点是否因为此次插入导致不平衡（检查平衡因子）；<br>
+(2) 如果导致了不平衡，则先找到 <strong>插入路径上离插入节点最近的的平衡因子的绝对值大于 1 的节点 p</strong>；<br>
+(3) 然后对以 p 为根的子树，在保证二叉排序树特性的前提下，调整相关节点的位置关系，使其重新达到平衡。</p>
+<blockquote>
+<p><strong>注意</strong>：<br>
+每次失衡后调整的对象都是最小不平衡子树，即 以插入路径上离插入节点最近的的平衡因子的绝对值大于 1 的节点 p 为根 的子树</p>
+</blockquote>
+<h3 id="再平衡调整规则"><a class="headerlink" href="#再平衡调整规则"></a>再平衡调整规则</h3>
+<p>具体地，失去平衡后进行调整的规律有如下四种：<br>
+<strong>(1) LL 平衡旋转（单向右旋）</strong>  在节点 p 的左孩子(<strong>L</strong>)的左子树(<strong>L</strong>)上插入新节点，使 p 的平衡因子由 1 增为 2（左高），导致以 p 为根的子树失去平衡。<br>
+此时需<strong>一次右旋</strong>，将 p 的左孩子 s 向右上旋转代替 p 作为该子树的根，p 向右下旋转成为 s 的右孩子，原来 s 的右子树作为 p 的左子树；</p>
+<p><img src="https://raw.githubusercontent.com/Evandoz/blob/master/AVL/LL.gif" alt></p>
+<blockquote>
+<p>单向右旋后，S(旋转后的根) 和 P(旋转后的根的右孩子) 的平衡因子均变为 0，树的高度不变</p>
+</blockquote>
+<p><strong>(2) RR 平衡旋转（单向左旋）</strong>  在节点 p 的右孩子(<strong>R</strong>)的右子树(<strong>R</strong>)上插入新节点，使 p 的平衡因子由 -1 减为 -2（右高），导致以 p 为根的子树失去平衡。<br>
+此时需<strong>一次左旋</strong>，将 p 的右孩子 s 向左上旋转代替 p 作为该子树的根，p 向左下旋转成为 s 的左孩子，原来 s 的左子树作为 p 的右子树；</p>
+<p><img src="https://raw.githubusercontent.com/Evandoz/blob/master/AVL/RR.gif" alt></p>
+<blockquote>
+<p>单向左旋后，S(旋转后的根) 和 P(旋转后的根的左孩子) 的平衡因子均变为 0，树的高度不变</p>
+</blockquote>
+<p><strong>(3) LR 平衡旋转（双向旋转，先左后右）</strong>  在节点 p 的左孩子(<strong>L</strong>)的右子树(<strong>R</strong>)上插入新节点，使 p 的平衡因子由 1 增为 2（左高），导致以 p 为根的子树失去平衡。<br>
+此时需<strong>两次旋转</strong>，先左旋 p 的左子树，将 p 的左孩子 s 的右子树的根 c 向左上旋转代替 s；再右旋以 p 根的子树，将左旋后的 c 向右上旋转代替 p 作为该子树的根；</p>
+<blockquote>
+<p>此种情形导致失衡的因素是 p 左孩子 s 的右子树，如果单纯的右旋，s 的右子树会变成 p 的左子树，它仍然是影响平衡的因素，子树的平衡因子由 2 变成 -2（右高），依旧不平衡。</p>
+</blockquote>
+<p><img src="https://raw.githubusercontent.com/Evandoz/blob/master/AVL/LR.gif" alt></p>
+<blockquote>
+<p>图中深色块之一为新插入导致失衡的节点，可以看到 C 上的插入位置会影响旋转后树的形态，也就是会影响相关节点的平衡因子的变化。</p>
+</blockquote>
+<p><strong>(4) RL 平衡旋转（双向旋转，先右后左）</strong>  在节点 p 的右孩子(<strong>R</strong>)的左子树(<strong>L</strong>)上插入新节点，使 p 的平衡因子由 -1 减为 -2（右高），导致以 p 为根的子树失去平衡。<br>
+此时需<strong>两次旋转</strong>，先右旋 p 的右子树，将 p 的右孩子 s 的左子树的根 c 向右上旋转代替 s；再左旋以 p 根的子树，将右旋后的 c 向左上旋转代替 p 作为该子树的根；</p>
+<blockquote>
+<p>此种情形导致失衡的因素是 p 右孩子 s 的左子树，如果单纯的左旋，s 的左子树会变成 p 的右子树，它仍然是影响平衡的因素，子树的平衡因子由 -2 变成 2（左高），依旧不平衡。</p>
+</blockquote>
+<p><img src="https://raw.githubusercontent.com/Evandoz/blob/master/AVL/RL.gif" alt></p>
+<blockquote>
+<p>图中深色块之一为新插入导致失衡的节点，与 LR 相对称，在 RL 中 C 上的插入位置也会影响旋转后树的形态，也就是会影响相关节点的平衡因子的变化。</p>
+</blockquote>
+<p>上述四种情形，(1) 和 (2) 对称，(3) 和 (4) 对称，另外，容易发现无论哪种再平衡情形，进行旋转调整后，新的子树的深度和原来一致。<br>
+因此，当平衡二叉树因为新插入节点而失去平衡时，<strong>仅需要对最小不平衡子树</strong> 进行平衡旋转处理即可，印证了之前的再平衡的基本思想。</p>
+<blockquote>
+<p><strong>因为经过旋转处理后的子树深度和插入节点之前相同，因此不影响插入路径上所有祖先节点的平衡度。</strong></p>
+</blockquote>
+<h3 id="平衡树插入算法描述"><a class="headerlink" href="#平衡树插入算法描述"></a>平衡树插入算法描述</h3>
+<p>平衡二叉排序树 BBST 上新插入一个节点 e 的递归算法描述：<br>
+<strong>(Ⅰ)</strong> BBST 为空树，则新节点 e 作为 BBST 的根节点，树的深度增 1；<br>
+<strong>(Ⅱ)</strong> 新节点 e 的关键字和 BBST 根节点关键字相同，则不插入，树深度不变<br>
+<strong>(Ⅲ)</strong> 新节点 e 的关键字小于 BBST 根节点关键字，而且 BBST 左子树中不存在和 e 相同关键字的节点，则将新节点 e 插在 BBST 左子树上，并且<strong>当插入后左子树深度增加 (+1)时</strong>，有如下三种情形：<br>
+(1) BBST 根节点的平衡因子为 -1（右高）：则将根节点平衡因子改为 0，BBST 的深度不变；<br>
+(2) BBST 根节点的平衡因子为 0（等高）：则将根节点平衡因子改为 1，BBST 的深度增加 1；<br>
+(3) <strong>BBST 根节点的平衡因子为 1（左高）：</strong><br>
+若 BBST 左子树的平衡因子为 1 (LL)，则需要<strong>单向右旋处理，并将（新）根节点（原 s）及其右子树（原 p）的平衡因子更新为 0，树的深度不变</strong>；<br>
+若 BBST 左子树的平衡因子为 -1 (LR)，则需要<strong>先左旋后右旋处理，并将（新）根节点（原 c）的平衡因子更新为 0，而其左、右子树（原s、p）的平衡因子要根据左孩子的右子树（原 c）的平衡因子判断，树的深度不变；</strong></p>
+<p><img src="https://raw.githubusercontent.com/Evandoz/blob/master/AVL/LR.png" alt></p>
+<p><strong>(Ⅳ)</strong> 新节点 e 的关键字大于 BBST 根节点关键字，而且 BBST 右子树中不存在和 e 相同关键字的节点，则将新节点 e 插在 BBST 右子树上，并且<strong>当插入后右子树深度增加 (+1)时</strong>，有如下三种情形：<br>
+(1) BBST 根节点的平衡因子为 1（左高）：则将根节点平衡因子改为 0，BBST 的深度不变；<br>
+(2) BBST 根节点的平衡因子为 0（等高）：则将根节点平衡因子改为 -1，BBST 的深度增加 1；<br>
+(3) <strong>BBST 根节点的平衡因子为 -1（右高）：</strong><br>
+若 BBST 右子树的平衡因子为 -1 (RR)，则需要<strong>单向左旋处理，并将（新）根节点（原 s）及其左子树（原 p）的平衡因子更新为 0，树的深度不变</strong>；<br>
+若 BBST 右子树的平衡因子为 1 (RL)，则需要<strong>先右旋后左旋处理，并将（新）根节点（原 c）的平衡因子更新为 0，而其左、右子树（原p、s）的平衡因子要根据右孩子的左子树（原 c）的平衡因子判断，树的深度不变；</strong></p>
+<p><img src="https://raw.githubusercontent.com/Evandoz/blob/master/AVL/RL.png" alt></p>
+<blockquote>
+<p><strong>注意：</strong><br>
+平衡二叉树是递归结构，并且我们每次只对最小不平衡子树进行调整，所以<strong>在更新子树根节点的平衡因子时，只需要更新参与旋转的子树根（节点关键字和指针发生变化）的平衡因子即可</strong>，其余部分在旋转时都作为整体处理，平衡因子不受影响。</p>
+</blockquote>
+<h3 id="平衡插入算法实现"><a class="headerlink" href="#平衡插入算法实现"></a>平衡插入算法实现</h3>
+<p>再平衡的基本操作是子树旋转，于是提取出<strong>原子操作左旋和右旋</strong>。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 以 *p 为根的子树左旋</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">L_Rotate</span><span class="params">(BBSTree *p)</span></span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="function"></span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    BBSTNode *s = (*p)-&gt;rchild;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">    (*p)-&gt;rchild = s-&gt;lchild;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">    s-&gt;lchild = (*p);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">    (*p) = s;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 以 *p 为根的子树右旋</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">R_Rotate</span><span class="params">(BBSTree *p)</span></span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line"><span class="function"></span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">    BBSTNode *s = (*p)-&gt;lchild;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">    (*p)-&gt;lchild = s-&gt;rchild;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">    s-&gt;rchild = (*p);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">    (*p) = s;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+<p>左平衡 LeftBalance，对应算法描述 (Ⅲ)(3) 的情形，解决左子树插入导致失衡的问题，右平衡 RightBalance 刚好与左平衡对称。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">LeftBalance</span><span class="params">(BBSTree *p)</span></span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="function"></span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    BBSTNode *s = (*p)-&gt;lchild;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">switch</span>(s-&gt;bf)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">    &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">case</span> <span class="number">1</span>: <span class="comment">// LL</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">        (*p)-&gt;bf = <span class="number">0</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">        s-&gt;bf = <span class="number">0</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">        R_Rotate(p);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">break</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">case</span> <span class="number">-1</span>: <span class="comment">// LR</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">        BBSTNode *t = s-&gt;rchild;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">switch</span>(t-&gt;bf)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">        &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">case</span> <span class="number">1</span>: <span class="comment">// 插在 C 的左子树上</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">            (*p)-&gt;bf = <span class="number">-1</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">            s-&gt;bf = <span class="number">0</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">break</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">case</span> <span class="number">0</span>:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line">            (*p)-&gt;bf = <span class="number">0</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line">            s-&gt;bf = <span class="number">0</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">22</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">break</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">23</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">case</span> <span class="number">-1</span>:  <span class="comment">// 插在 C 的右子树上</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">24</span></pre></td><td class="code"><pre><span class="line">            (*p)-&gt;bf = <span class="number">0</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">25</span></pre></td><td class="code"><pre><span class="line">            s-&gt;bf = <span class="number">1</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">26</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">break</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">27</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">28</span></pre></td><td class="code"><pre><span class="line">        L_Rotate(&amp;s);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">29</span></pre></td><td class="code"><pre><span class="line">        R_Rotata(p);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">30</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">break</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">31</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">32</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+<p>于是，平衡二叉树在插入实现即如下：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 插入</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// taller 变量用于标识以 *T 为根的子树是否长高</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="function">Status <span class="title">InsertAVL</span><span class="params">(BBSTree *T, TElemType key, <span class="keyword">int</span> *taller)</span></span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="function"></span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">if</span> ((*T) == <span class="literal">NULL</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">    &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">        (*T) = (BBSTNode *)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(BBSTNode));</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">        (*T)-&gt;data = key;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">        (*T)-&gt;lchild = (*T)-&gt;rchild = <span class="literal">NULL</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">        (*T)-&gt;bf = <span class="number">0</span>; <span class="comment">// 只有根</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">        (*taller) = <span class="number">1</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">else</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">    &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">if</span> (key == (*T)-&gt;data)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">        &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">            (*taller) = <span class="number">0</span>; <span class="comment">// 已存在不需要插入</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">return</span> <span class="number">-1</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (key &lt; (*T)-&gt;data)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">22</span></pre></td><td class="code"><pre><span class="line">        &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">23</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">if</span> (InsertAVL(&amp;((*T)-&gt;lchild), key, taller) == <span class="number">-1</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">24</span></pre></td><td class="code"><pre><span class="line">                <span class="keyword">return</span> <span class="number">-1</span>; <span class="comment">// 已存在没插入</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">25</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">if</span> (*taller) <span class="comment">// 插入新元素后，检查树是否长高，以便于计算bf，进而进行平衡调整</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">26</span></pre></td><td class="code"><pre><span class="line">            &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">27</span></pre></td><td class="code"><pre><span class="line">                <span class="keyword">switch</span> ((*T)-&gt;bf)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">28</span></pre></td><td class="code"><pre><span class="line">                &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">29</span></pre></td><td class="code"><pre><span class="line">                <span class="keyword">case</span> <span class="number">1</span>: <span class="comment">// 原本是左高，现在左边又插入新节点，不再平衡,需要调整</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">30</span></pre></td><td class="code"><pre><span class="line">                    LeftBalance(T); <span class="comment">// 左平衡</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">31</span></pre></td><td class="code"><pre><span class="line">                    (*taller) = <span class="number">0</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">32</span></pre></td><td class="code"><pre><span class="line">                    <span class="keyword">break</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">33</span></pre></td><td class="code"><pre><span class="line">                <span class="keyword">case</span> <span class="number">0</span>: <span class="comment">// 原本是同高，现在左边又插入新节点，因此变成左高</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">34</span></pre></td><td class="code"><pre><span class="line">                    (*T)-&gt;bf = <span class="number">1</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">35</span></pre></td><td class="code"><pre><span class="line">                    (*taller) = <span class="number">1</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">36</span></pre></td><td class="code"><pre><span class="line">                    <span class="keyword">break</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">37</span></pre></td><td class="code"><pre><span class="line">                <span class="keyword">case</span> <span class="number">-1</span>: <span class="comment">// 原本是右高，现在左边又插入新节点，因此变成同高</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">38</span></pre></td><td class="code"><pre><span class="line">                    (*T)-&gt;bf = <span class="number">0</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">39</span></pre></td><td class="code"><pre><span class="line">                    (*taller) = <span class="number">0</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">40</span></pre></td><td class="code"><pre><span class="line">                    <span class="keyword">break</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">41</span></pre></td><td class="code"><pre><span class="line">                &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">42</span></pre></td><td class="code"><pre><span class="line">            &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">43</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">44</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">else</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">45</span></pre></td><td class="code"><pre><span class="line">        &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">46</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">if</span> (InsertAVL(&amp;((*T)-&gt;rchild), key, taller) == <span class="number">-1</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">47</span></pre></td><td class="code"><pre><span class="line">                <span class="keyword">return</span> <span class="number">-1</span>; <span class="comment">// 已存在没插入</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">48</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">if</span> (*taller) <span class="comment">// 检查树是否长高，以便于计算bf，进而进行平衡调整</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">49</span></pre></td><td class="code"><pre><span class="line">            &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">50</span></pre></td><td class="code"><pre><span class="line">                <span class="comment">// 与左插情形相反</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">51</span></pre></td><td class="code"><pre><span class="line">                <span class="keyword">switch</span> ((*T)-&gt;bf)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">52</span></pre></td><td class="code"><pre><span class="line">                &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">53</span></pre></td><td class="code"><pre><span class="line">                <span class="keyword">case</span> <span class="number">1</span>: <span class="comment">// 原本是左高，现在右边又插入新节点，因此变成同高</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">54</span></pre></td><td class="code"><pre><span class="line">                    (*T)-&gt;bf = <span class="number">0</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">55</span></pre></td><td class="code"><pre><span class="line">                    (*taller) = <span class="number">0</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">56</span></pre></td><td class="code"><pre><span class="line">                    <span class="keyword">break</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">57</span></pre></td><td class="code"><pre><span class="line">                <span class="keyword">case</span> <span class="number">0</span>:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">58</span></pre></td><td class="code"><pre><span class="line">                    (*T)-&gt;bf = <span class="number">-1</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">59</span></pre></td><td class="code"><pre><span class="line">                    (*taller) = <span class="number">1</span>; <span class="comment">// 长高</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">60</span></pre></td><td class="code"><pre><span class="line">                    <span class="keyword">break</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">61</span></pre></td><td class="code"><pre><span class="line">                <span class="keyword">case</span> <span class="number">-1</span>:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">62</span></pre></td><td class="code"><pre><span class="line">                    RightBalance(T); <span class="comment">// 右平衡</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">63</span></pre></td><td class="code"><pre><span class="line">                    (*taller) = <span class="number">0</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">64</span></pre></td><td class="code"><pre><span class="line">                    <span class="keyword">break</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">65</span></pre></td><td class="code"><pre><span class="line">                &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">66</span></pre></td><td class="code"><pre><span class="line">            &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">67</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">68</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">69</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">70</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+<h2 id="平衡二叉树的删除"><a class="headerlink" href="#平衡二叉树的删除"></a>平衡二叉树的删除</h2>
+<p>平衡二叉树的删除和二叉查找树的删除操作情况一致，也分为三种情况：<br>
+(1) 被删节点是叶子节点；<br>
+(2) 被删节点只有左或右子树；<br>
+(3) 被删节点既有左子树又有右子树；</p>
+<p>当然，和插入一样，平衡二叉树在删除节点后也需要平衡检验和再平衡。对于删除操作进行的再平衡可以理解为：对左或右子树的删除操作相当于对右或左子树的插入，然后根据插入时的各种情况进行相应的旋转即可。</p>
+<h2 id="平衡二叉树的查找分析"><a class="headerlink" href="#平衡二叉树的查找分析"></a>平衡二叉树的查找分析</h2>
+<p>平衡二叉树的旋转再平衡的可行性在于它的实质仍然是排序树中使用中序前驱或后继代替自己，以确保二叉排序树的根本性质。</p>
+<p>平衡二叉树旋转之后，新的根节点的平衡因子一定是 0，因为正常平衡树失衡时左右高度差一定是 2，因此旋转之后一增一减刚好消除。</p>
+<p>平衡二叉树上的查找过程和排序树一样，因此在查找工程中和给定值进行的关键字比较的个数不超过树的高度。</p>
+<p>假设以 \(n_h\) 表示给定高度为 \(h\) 的平衡树中含有的最少节点数。显然有<br>
+$$<br>
+n_0 = 0\\<br>
+n_1 = 1\\<br>
+n_2 = 2\\<br>
+n_h = n_h-1 + n_h-2 + 1\\<br>
+$$</p>
+<p>此时，平衡树中所有非叶子节点的平衡因子均为 1 或 -1。</p>
+<p>反之，通过该结论也可以求解，给定节点数的平衡树的查找所需要进行的最大比较次数或者平衡树的最大高度。</p>
+<p>将该递推公式再往前推两步：<br>
+$$<br>
+n_3 = 4\\<br>
+n_4 = 7\\<br>
+n_5 = 12\\<br>
+$$</p>
+<p>于是，可以得到，含有 12 个节点的平衡树查找某节点所需要进行的关键字最大比较次数为 5；<br>
+或者说，高度为 5 的平衡树最少含有 12 个节点。</p>
+<p>可以证明含有 n 个节点的平衡二叉树的最大深度为 \(0(log_2 n)\)。</p>
+<p><strong>扩展</strong></p>
+<p>折半查找的判定树是一棵平衡二叉树。<br>
+根据折半查找定义，每次把一个数组从中间分割时，总是把数组分割为节点数相差不超过 1 的两个数组，从而使得到的判定树的两棵子树的高度差的绝对值不超过 1，因此它是一棵平衡二叉树。</p>
+
+        </div>
+        <div class="post-footer">
+          <div class="post-copyright">&copy; 除特殊声明外，文章著作权归作者所有，转载请注明作者及出处</div>
+        </div>
+      </article>
+      <!-- Pagination -->
+      
+        <div class="nagination card">
+          
+            <a href="/Evandoz/posts/1220XB3.htm" class="nagination-link">上篇: 图的邻接矩阵存储和遍历</a>
+          
+          
+            <a href="/Evandoz/posts/3JGABPB.htm" class="nagination-link">下篇: 二叉排序树</a>
+          
+        </div>
+      
+      <!-- Comment -->
+      <!-- 
+        <div id="article-comment" class="article-comment card"></div>
+
+       -->
+    </main>
+    <aside class="aside post">
+      <div class="widget profile card">
+  <div class="widget-cover" style="background-image: url('/Evandoz/css/images/background.jpg')">
+    <div class="avatar">
+      <img width="100%" height="100%" src="/Evandoz/css/images/avatar.png">
+    </div>
+  </div>
+  <div class="widget-content">
+    <div class="author">
+      Levan
+    </div>
+    <div class="site-meta">
+      <a class="col" href="/Evandoz/archives">
+        <span class="amount">85</span>
+        <span class="text">文章</span>
+      </a>
+      <a class="col" href="/Evandoz/categories">
+        <span class="amount">24</span>
+        <span class="text">分类</span>
+      </a>
+      <a class="col" href="/Evandoz/tags">
+        <span class="amount">82</span>
+        <span class="text">标签</span>
+      </a>
+      <a class="col" href="/Evandoz/archives">
+        <span class="amount">86.2k</span>
+        <span class="text">字数</span>
+      </a>
+    </div>
+  </div>
+</div>
+
+      <div id="toc" class="toc">
+        
+          <h3 class="toc-title">目录</h3>
+          <ol class="toc-content"><li class="toc-content-item toc-content-level-2"><a class="toc-content-link" href="#平衡二叉树"><span class="toc-content-text">平衡二叉树</span></a></li><li class="toc-content-item toc-content-level-2"><a class="toc-content-link" href="#平衡二叉树的插入"><span class="toc-content-text">平衡二叉树的插入</span></a><ol class="toc-content-child"><li class="toc-content-item toc-content-level-3"><a class="toc-content-link" href="#再平衡基本思想"><span class="toc-content-text">再平衡基本思想</span></a></li><li class="toc-content-item toc-content-level-3"><a class="toc-content-link" href="#再平衡调整规则"><span class="toc-content-text">再平衡调整规则</span></a></li><li class="toc-content-item toc-content-level-3"><a class="toc-content-link" href="#平衡树插入算法描述"><span class="toc-content-text">平衡树插入算法描述</span></a></li><li class="toc-content-item toc-content-level-3"><a class="toc-content-link" href="#平衡插入算法实现"><span class="toc-content-text">平衡插入算法实现</span></a></li></ol></li><li class="toc-content-item toc-content-level-2"><a class="toc-content-link" href="#平衡二叉树的删除"><span class="toc-content-text">平衡二叉树的删除</span></a></li><li class="toc-content-item toc-content-level-2"><a class="toc-content-link" href="#平衡二叉树的查找分析"><span class="toc-content-text">平衡二叉树的查找分析</span></a></li></ol>
+        
+      </div>
+    </aside>
+  </div>
+
+
+</div>
+        <footer id="footer" class="footer">
+  <div class="outer">
+    <div class="copyright">
+      <p><span>EXP</span> &copy; 2015 - 2019</p>
+    </div>
+    <div class="navigation">
+      <a href="/Evandoz/https:/evandoz.github.io">Hexo · Levan</a>
+    </div>
+  </div>
+</footer>
+
+      </div>
+    </div>
+  </div>
+  <div id="top-anchor" class="top-anchor">
+  <ul><li></li><li></li></ul>
+</div>
+
+  <div id="mobile-nav" class="mobile-nav">
+  
+    <a class="menu-item" href="/Evandoz/archives">归档</a>
+  
+    <a class="menu-item" href="/Evandoz/categories">分类</a>
+  
+    <a class="menu-item" href="/Evandoz/tags">标签</a>
+  
+    <a class="menu-item" href="/Evandoz/about">关于</a>
+  
+</div>
+
+<div id="over-layer" class="over-layer"></div>
+
+  
+<script src="/Evandoz/js/jquery.js"></script>
+
+
+<script src="/Evandoz/js/velocity.js"></script>
+
+
+<script src="/Evandoz/js/plugins.js"></script>
+
+
+<script src="/Evandoz/js/script.js"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config("");
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+
+
+
+</body>
+</html>

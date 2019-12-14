@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+  
+  <title>赫夫曼树及应用 | EXP</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+    <meta name="author" content="Levan">
+  
+  
+    <meta name="description" content="日常记录与分享">
+  
+  
+    <meta name="keywords" content="数据结构,赫夫曼树,哈夫曼树,赫夫曼编码,哈夫曼编码">
+  
+  
+    <meta name="google-site-verification" content="W2AVg5n_ALo21rl9n3ZwS8AuEanZfJkirzrRGLLYvn4">
+  
+  
+    <meta name="baidu-site-verification" content="BM2Q3xLpPJ">
+  
+  
+    <meta name="360-site-verification" content="573211edf2de02c99d7b255b2c56513c">
+  
+  
+    <link rel="short icon" type="image/x-icon" href="/Evandoz/css/images/favicon.ico">
+  
+  <link rel="canonical" href="https://evandoz.github.io/Evandoz/posts/2d0ks5r.htm">
+  
+<link rel="stylesheet" href="/Evandoz/css/style.css">
+
+<meta name="generator" content="Hexo 4.1.0"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
+
+<body>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="overflow" class="overflow">
+    <div id="hiddenbar" class="hiddenbar">
+      <div id="wrapper" class="wrapper">
+        <header id="header" class="header is-post">
+  <div class="outer">
+    
+      <div class="logo">
+        <a class="title" href="/Evandoz/">EXP</a>
+      </div>
+    
+
+    <div class="nav">
+      <ul id="nav-icon" class="nav-icon">
+        <li></li><li></li><li></li>
+      </ul>
+      <ul class="nav-menu">
+        
+          <li class="nav-item">
+            <a href="/Evandoz/archives">归档</a>
+          </li>
+        
+          <li class="nav-item">
+            <a href="/Evandoz/categories">分类</a>
+          </li>
+        
+          <li class="nav-item">
+            <a href="/Evandoz/tags">标签</a>
+          </li>
+        
+          <li class="nav-item">
+            <a href="/Evandoz/about">关于</a>
+          </li>
+        
+      </ul>
+    </div>
+
+  </div>
+</header>
+
+        <div id="content" class="content">
+  <div class="outer">
+    <main class="main">
+      <article id="数据结构/树与二叉树/20160619赫夫曼树及应用" class="article card">
+        
+  
+  	<h1 class="post-title">赫夫曼树及应用</h1>
+  
+
+
+        <div class="post-meta">
+          <span class="post-date">
+  <time datetime="2016-06-18T16:00:00.000Z">2016-06-19</time>
+</span>
+
+          
+  <span class="post-category">
+    <a class="category-link" href="/Evandoz/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构</a> · <a class="category-link" href="/Evandoz/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E6%A0%91%E4%B8%8E%E4%BA%8C%E5%8F%89%E6%A0%91/">树与二叉树</a>
+  </span>
+
+
+        </div>
+        <div id="post-content" class="post-content">
+          <h2 id="最优二叉树-赫夫曼树"><a class="headerlink" href="#最优二叉树-赫夫曼树"></a>最优二叉树（赫夫曼树）</h2>
+<p>路径</p>
+<p>路径长度 树的路径长度 节点的带权路径长度 树的带权路径长度</p>
+<p>带权路径长度 WPL 最小的二叉树称为<code>最优二叉树</code>或<code>赫夫曼树</code>(Huffman Tree)。</p>
+<h2 id="赫夫曼算法"><a class="headerlink" href="#赫夫曼算法"></a>赫夫曼算法</h2>
+<p>赫夫曼最早给出了构建赫夫曼树的一个带有一般规律的算法，俗称赫夫曼算法，其过程如下：</p>
+<p>(1) 根据给定的 n 个权值 { w<sub>1</sub>,w<sub>2</sub>,…,w<sub>n</sub> } 构成 n 棵二叉树的集合 F = { T<sub>1</sub>,T<sub>2</sub>,…,T<sub>n</sub> }，其中每棵二叉树 T<sub>i</sub> 中只有一个带权为 w<sub>i</sub> 的根节点；<br>
+(2) 在 F 中选取两棵根节点的权值最小的树作为左右子树构造一棵新的二叉树，且将新的二叉树根节点的权值设置为其左、右子树上根节点的权值之和。<br>
+(3) 在 F 中删除这两棵树，同时将新得到的二叉树加入 F 中；<br>
+(4) 重复 (2) 和 (3)，直到 F 只含一棵树为止。<br>
+这棵树便是赫夫曼树(Huffman Tree)。</p>
+<p>根据这一过程可以发现，最终形成的赫夫曼树总共右 2n-1 个节点，其中 n 个叶子节点，n-1 个非终端节点，这 n-1 个节点的度均为 1，也就是说赫夫曼树中没有度为 1 的节点，这种树又称为<code>严格的（正则的）二叉树</code>，这种规范的结构便于赫夫曼树的存储，可以直接使用紧凑的顺序存储。</p>
+<h2 id="赫夫曼编码"><a class="headerlink" href="#赫夫曼编码"></a>赫夫曼编码</h2>
+<p>编码长度尽可能短</p>
+<p>不定长编码</p>
+<p>前缀编码</p>
+<p>二进制前缀编码</p>
+<p>设计最短的二进制前缀编码可等效为以 n 种字符出现的频率作权，设计一棵赫夫曼树的问题，由此得到的二进制前缀编码即称为赫夫曼编码。</p>
+<h2 id="编码实现"><a class="headerlink" href="#编码实现"></a>编码实现</h2>
+<p>因为赫夫曼树中是严格的二叉树，共有 2n-1 个节点，于是可以将其存储在大小为 2n-1 的一维数组中。<br>
+至于树节点的结构，由于在构成赫夫曼树之后，需要从叶子出发从叶子到根逆向求解编码；而进行译码时又需要从跟出发从根到叶子进行搜索，因此每个树节点既需要知道双亲信息，又需要知道孩子节点的信息。于是，赫夫曼树节点的存储结构为：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 定义 Huffman 树节点</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span></span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="class">&#123;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">int</span> weight;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">int</span> parent, lchild, rchild;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">&#125;HTNode, *HuffmanTree; <span class="comment">// 动态分配数组存储 Huffman 树</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 动态分配数组存储 Huffman 编码，不定长编码，指针数组</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="keyword">char</span> * *HuffmanCode;</span></pre></td></tr></table></figure>
+<p>求解赫夫曼编码的代码实现如下：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 从叶子到根，求解 Huffman 编码</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// w 存放 n 个字符的权值(&gt;0)，从叶子到根构建 Huffman 树并求得 Huffman 编码</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 也可以从根到叶子向下搜索来求编码</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">HuffmanCoding</span><span class="params">(HuffmanTree *HT, HuffmanCode *HC, <span class="keyword">int</span> *w, <span class="keyword">int</span> n)</span></span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="function"></span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">if</span> (n &lt; <span class="number">1</span>) <span class="keyword">return</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">    <span class="comment">// 根据字符数量 n 分配 2n 个树节点空间（一维数组，0号未使用）</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">int</span> i, m = <span class="number">2</span> * n <span class="number">-1</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">    (*HT) = (HTNode *)<span class="built_in">malloc</span>((m+<span class="number">1</span>) * <span class="keyword">sizeof</span>(HTNode));</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">    <span class="comment">// 定义一个 (*HT) 树的游标指针</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">    HTNode *p;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">    <span class="comment">// 初始化 n 个叶子节点，0 号空间未使用，p = (*HT)+1 开始，[1~n]</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">for</span> (i = <span class="number">1</span>, p = (*HT)+<span class="number">1</span>; i &lt;= n; ++i, ++w, ++p)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">    &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">        (*p).weight = *w; (*p).parent = <span class="number">0</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">        (*p).lchild = <span class="number">0</span>; (*p).rchild = <span class="number">0</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">    <span class="comment">// 初始化剩下 n-1 个非终端节点，[n+1~2n-1]</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">for</span> (; i &lt;= m; ++i, ++p) <span class="comment">// i = n+1</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line">    &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line">        (*p).weight = <span class="number">0</span>; (*p).parent = <span class="number">0</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">22</span></pre></td><td class="code"><pre><span class="line">        (*p).lchild = <span class="number">0</span>; (*p).rchild = <span class="number">0</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">23</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">24</span></pre></td><td class="code"><pre><span class="line">    <span class="comment">// 每次选取两个最小节点，从叶子到根建立 Huffman 树</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">25</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">int</span> <span class="built_in">min</span>, sec;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">26</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">for</span> (i = n+<span class="number">1</span>; i &lt;= m; ++i)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">27</span></pre></td><td class="code"><pre><span class="line">    &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">28</span></pre></td><td class="code"><pre><span class="line">        Select((*HT), &amp;<span class="built_in">min</span>, &amp;sec, i<span class="number">-1</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">29</span></pre></td><td class="code"><pre><span class="line">        <span class="comment">// 两个当前最小</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">30</span></pre></td><td class="code"><pre><span class="line">        (*HT)[<span class="built_in">min</span>].parent = i; (*HT)[sec].parent = i;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">31</span></pre></td><td class="code"><pre><span class="line">        <span class="comment">// 更新根节点</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">32</span></pre></td><td class="code"><pre><span class="line">        (*HT)[i].lchild = <span class="built_in">min</span>; (*HT)[i].rchild = sec;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">33</span></pre></td><td class="code"><pre><span class="line">        (*HT)[i].weight = (*HT)[<span class="built_in">min</span>].weight + (*HT)[sec].weight;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">34</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">35</span></pre></td><td class="code"><pre><span class="line">    <span class="comment">// 从叶子到根，逆向求每个字符的 Huffman 编码（也可以正向遍历求解）</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">36</span></pre></td><td class="code"><pre><span class="line">    <span class="comment">// n 个指针向量，不定长编码（一维数组）</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">37</span></pre></td><td class="code"><pre><span class="line">    (*HC) = (HuffmanCode)<span class="built_in">malloc</span>((n+<span class="number">1</span>) * <span class="keyword">sizeof</span>(<span class="keyword">char</span> *));</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">38</span></pre></td><td class="code"><pre><span class="line">    <span class="comment">// 每个字符的编码的工作空间，不是编码最终存储位置</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">39</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">char</span> *cd = (<span class="keyword">char</span> *)<span class="built_in">malloc</span>(n * <span class="keyword">sizeof</span>(<span class="keyword">char</span>));</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">40</span></pre></td><td class="code"><pre><span class="line">    cd[n<span class="number">-1</span>] = <span class="string">'\0'</span>; <span class="comment">// 编码（字符串）结束符</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">41</span></pre></td><td class="code"><pre><span class="line">    <span class="comment">// n 个字符逆向求编码</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">42</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">int</span> start = n<span class="number">-1</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">43</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">int</span> j, pa; <span class="comment">// 当前和 parent</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">44</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">for</span> (i = <span class="number">1</span>; i &lt;= n; ++i)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">45</span></pre></td><td class="code"><pre><span class="line">    &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">46</span></pre></td><td class="code"><pre><span class="line">        start = n<span class="number">-1</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">47</span></pre></td><td class="code"><pre><span class="line">        <span class="comment">// 从叶子向根逆向求编码，j 指向当前节点，p 指向双亲；逆向搜索，所以逆着存</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">48</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">for</span> (j = i, pa = (*HT)[j].parent; pa != <span class="number">0</span>; j = pa, pa = (*HT)[pa].parent)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">49</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">if</span> ((*HT)[pa].lchild == j) cd[--start] = <span class="string">'0'</span>; <span class="comment">// 左 0</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">50</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">else</span> cd[--start] = <span class="string">'1'</span>; <span class="comment">// 右 1</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">51</span></pre></td><td class="code"><pre><span class="line">        <span class="comment">// 不定长编码，动态分配空间</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">52</span></pre></td><td class="code"><pre><span class="line">        (*HC)[i] = (<span class="keyword">char</span> *)<span class="built_in">malloc</span>((n-start) * <span class="keyword">sizeof</span>(<span class="keyword">char</span>));</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">53</span></pre></td><td class="code"><pre><span class="line">        <span class="built_in">strcpy</span>((*HC)[i], &amp;(cd[start]));</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">54</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">55</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+
+        </div>
+        <div class="post-footer">
+          <div class="post-copyright">&copy; 除特殊声明外，文章著作权归作者所有，转载请注明作者及出处</div>
+        </div>
+      </article>
+      <!-- Pagination -->
+      
+        <div class="nagination card">
+          
+            <a href="/Evandoz/posts/34W023S.htm" class="nagination-link">上篇: 回溯法与树的遍历</a>
+          
+          
+            <a href="/Evandoz/posts/2VENZPG.htm" class="nagination-link">下篇: 树的应用--并查集</a>
+          
+        </div>
+      
+      <!-- Comment -->
+      <!-- 
+        <div id="article-comment" class="article-comment card"></div>
+
+       -->
+    </main>
+    <aside class="aside post">
+      <div class="widget profile card">
+  <div class="widget-cover" style="background-image: url('/Evandoz/css/images/background.jpg')">
+    <div class="avatar">
+      <img width="100%" height="100%" src="/Evandoz/css/images/avatar.png">
+    </div>
+  </div>
+  <div class="widget-content">
+    <div class="author">
+      Levan
+    </div>
+    <div class="site-meta">
+      <a class="col" href="/Evandoz/archives">
+        <span class="amount">85</span>
+        <span class="text">文章</span>
+      </a>
+      <a class="col" href="/Evandoz/categories">
+        <span class="amount">24</span>
+        <span class="text">分类</span>
+      </a>
+      <a class="col" href="/Evandoz/tags">
+        <span class="amount">82</span>
+        <span class="text">标签</span>
+      </a>
+      <a class="col" href="/Evandoz/archives">
+        <span class="amount">86.2k</span>
+        <span class="text">字数</span>
+      </a>
+    </div>
+  </div>
+</div>
+
+      <div id="toc" class="toc">
+        
+          <h3 class="toc-title">目录</h3>
+          <ol class="toc-content"><li class="toc-content-item toc-content-level-2"><a class="toc-content-link" href="#最优二叉树-赫夫曼树"><span class="toc-content-text">最优二叉树（赫夫曼树）</span></a></li><li class="toc-content-item toc-content-level-2"><a class="toc-content-link" href="#赫夫曼算法"><span class="toc-content-text">赫夫曼算法</span></a></li><li class="toc-content-item toc-content-level-2"><a class="toc-content-link" href="#赫夫曼编码"><span class="toc-content-text">赫夫曼编码</span></a></li><li class="toc-content-item toc-content-level-2"><a class="toc-content-link" href="#编码实现"><span class="toc-content-text">编码实现</span></a></li></ol>
+        
+      </div>
+    </aside>
+  </div>
+
+
+</div>
+        <footer id="footer" class="footer">
+  <div class="outer">
+    <div class="copyright">
+      <p><span>EXP</span> &copy; 2015 - 2019</p>
+    </div>
+    <div class="navigation">
+      <a href="/Evandoz/https:/evandoz.github.io">Hexo · Levan</a>
+    </div>
+  </div>
+</footer>
+
+      </div>
+    </div>
+  </div>
+  <div id="top-anchor" class="top-anchor">
+  <ul><li></li><li></li></ul>
+</div>
+
+  <div id="mobile-nav" class="mobile-nav">
+  
+    <a class="menu-item" href="/Evandoz/archives">归档</a>
+  
+    <a class="menu-item" href="/Evandoz/categories">分类</a>
+  
+    <a class="menu-item" href="/Evandoz/tags">标签</a>
+  
+    <a class="menu-item" href="/Evandoz/about">关于</a>
+  
+</div>
+
+<div id="over-layer" class="over-layer"></div>
+
+  
+<script src="/Evandoz/js/jquery.js"></script>
+
+
+<script src="/Evandoz/js/velocity.js"></script>
+
+
+<script src="/Evandoz/js/plugins.js"></script>
+
+
+<script src="/Evandoz/js/script.js"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+
+
+
+</body>
+</html>
