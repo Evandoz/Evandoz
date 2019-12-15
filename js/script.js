@@ -7,22 +7,40 @@
     $(this).scrollTop() > $(this).height() ? $topAnchor.addClass('on') : $topAnchor.removeClass('on');
   });
   $topAnchor.click(function() {
-    $("html, body").animate({scrollTop: 0}, 500);
+    $("html, body").animate({scrollTop: 0}, 0);
   });
 
-  // Toc
-  var $toc = $("#toc"),
+  // Scroll
+  var $header = $("#header"),
+    $headerPH = $("#header-placeholder"),
+    $side = $("#side"),
+    $toc = $("#toc"),
     $headerlinks = $(".headerlink");
-  if ($toc.length) {
-    var tocPosTop = $toc.offset().top;
-    $viewport.scroll(function (event) {
-      var scrollTop = $viewport.scrollTop();
-      if (scrollTop > tocPosTop) {
-        $toc.addClass("sticky");
-      } else {
-        $toc.removeClass("sticky");
-      }
+  // 双击回顶
+  $header.dblclick(function () {
+    $("html, body").animate({ scrollTop: 0 }, 0);
+  });
+  if ($side.length > 0) {
+    var sidePosTop = $side.offset().top,
+      sidePosLeft = $side.offset().left;
+  }
+  $viewport.scroll(function (event) {
+    var scrollTop = $viewport.scrollTop(), $marginTop = 0;
+    if (scrollTop > 60) {
+      $headerPH.css("position", "relative");
+      $header.addClass("sticky");
+    } else if (scrollTop <= 0) {
+      $headerPH.css("position", "fixed");
+      $header.removeClass("sticky");
+    }
+    if (sidePosTop > 80) $marginTop = 70;
+    if (scrollTop > sidePosTop - $marginTop) {
+      $side.addClass("sticky").css("left", sidePosLeft);
+    } else {
+      $side.removeClass("sticky").css("left", null);
+    }
 
+    if ($toc.length) {
       $headerlinks.each(function () {
         var $m = $(this),
           $mParent = $m.parent(),
@@ -57,8 +75,8 @@
           return false;
         }
       });
-    })
-  }
+    }
+  });
 
   //Fit Vids
   $("body").fitVids();
