@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+  
+  <title>B 树 | EXP</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+    <meta name="author" content="Levan">
+  
+  
+    <meta name="description" content="日常记录与分享">
+  
+  
+    <meta name="keywords" content="数据结构,B 树,B-Tree">
+  
+  
+    <meta name="google-site-verification" content="W2AVg5n_ALo21rl9n3ZwS8AuEanZfJkirzrRGLLYvn4">
+  
+  
+    <meta name="baidu-site-verification" content="BM2Q3xLpPJ">
+  
+  
+    <meta name="360-site-verification" content="573211edf2de02c99d7b255b2c56513c">
+  
+  
+    <link rel="short icon" type="image/x-icon" href="/Evandoz/css/images/favicon.ico">
+  
+  <link rel="canonical" href="https://evandoz.github.io/Evandoz/posts/3047r13.htm">
+  
+<link rel="stylesheet" href="/Evandoz/css/style.css">
+
+<meta name="generator" content="Hexo 4.1.0"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
+
+<body>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="overflow" class="overflow">
+    <div id="hiddenbar" class="hiddenbar">
+      <div id="wrapper" class="wrapper">
+        <header id="header" class="header is-post">
+  <div class="outer">
+    
+      <div class="logo">
+        <a class="title" href="/Evandoz/">EXP</a>
+      </div>
+    
+
+    <div class="nav">
+      <ul id="nav-icon" class="nav-icon">
+        <li></li><li></li><li></li>
+      </ul>
+      <ul class="nav-menu">
+        
+          <li class="nav-item">
+            <a href="/Evandoz/archives">归档</a>
+          </li>
+        
+          <li class="nav-item">
+            <a href="/Evandoz/categories">分类</a>
+          </li>
+        
+          <li class="nav-item">
+            <a href="/Evandoz/tags">标签</a>
+          </li>
+        
+          <li class="nav-item">
+            <a href="/Evandoz/about">关于</a>
+          </li>
+        
+      </ul>
+    </div>
+
+  </div>
+</header>
+
+<div id="header-placeholder" class="header-placeholder"></div>
+
+        <div id="content" class="content">
+  <div class="outer">
+    <main class="main">
+      <article id="数据结构/查找表/20160723-B 树" class="article card">
+        
+  
+  	<h1 class="post-title">B 树</h1>
+  
+
+
+        <div class="post-meta">
+          <span class="post-date">
+  <time datetime="2016-07-22T16:00:00.000Z">2016-07-23</time>
+</span>
+
+          
+  <span class="post-category">
+    <a class="category-link" href="/Evandoz/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构</a> · <a class="category-link" href="/Evandoz/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E6%9F%A5%E6%89%BE%E8%A1%A8/">查找表</a>
+  </span>
+
+
+        </div>
+        <div id="post-content" class="post-content">
+          <p>1970年，Rudolf Bayer 和 E.Mccreight 提出了 B 树。</p>
+<h2 id="b-树"><a class="headerlink" href="#b-树"></a>B 树</h2>
+<p>B 树是一种<strong>自平衡的多路查找树</strong>，名副其实的树状数据结构，基本的查找流程与二叉平衡树很相似（仍属于查找树），它与平衡二叉树明显在于，它的节点可以拥有多个关键字，可以最优化大块数据的读写操作，在<strong>文件系统和数据库</strong>中很实用。</p>
+<blockquote>
+<p>B 树的标准英文名 B-Tree，“-”是专有名词的连字符，而多数国内书籍僵硬的翻译为 B-树，又因为还有 B+ Tree, 容易让人误以为是 “B减树”，从而导致信息混乱，以为有三种 B 树，因此<strong>根本没有“B减树”之说</strong>。从标准做起，<strong>只说或写作 B 树，不要中间的连字符，防止误解</strong>。</p>
+</blockquote>
+<p>一棵 \(m\) 阶的 B 树，或为空树，或为满足下列特性的 \(m\) 叉树（阶数 m 是是指每个节点最多拥有的子树数量）：<br>
+(1) 树中每个节点<strong>至多</strong>有 \(m\) 棵子树（至多有 \(m-1\) 个关键字）；<br>
+(2) 若根节点不是叶子节点，则至多有两棵子树；<br>
+(3) <strong>除根之外</strong>的所有非终端节点<strong>至少</strong>有 \(⌈\frac{m}{2}⌉\) 棵子树（除根外至少 \(⌈\frac{m}{2}⌉-1\) 个关键字）；<br>
+(4) 所有非终端节点中包含如下信息数据</p>
+<p>$$(n,A_0,K_1,A_1,K_2,…,K_n,A_n)$$</p>
+<p>其中，\(K_i (i = 1,…n)\) 是<strong>关键字</strong>，且 \(K_i &lt; K_i+1(i = 1,…,n-1)\)；\(A_i (i = 0,1,…n)\) 是<strong>指向子树的指针</strong>，且指针 \(A_{i-1}\) 所指子树中的所有节点的关键字均小于 \(K_i\)，\(A_i\) 所指子树中的所有节点的关键字均大于 \(K_i\)；\(n\) 是<strong>关键字的个数</strong>，\(n\) 的取值范围为 \(⌈\frac{m}{2}⌉-1 ≤ n ≤ m-1\)。</p>
+<p><strong>容易看到，所有节点中任一关键字 \(K_i\) 和子树指针 \(A_i\) 是对应的；每个节点的子树（指针）数量等于比关键字数量 +1，即每个子树中有 \(n+1\) 棵子树；同理整个 B 树中叶子节点（空指针）的数量等于 B 树关键字数量 +1，即 B 树共中有 \(n+1\) 个叶子（不存信息，不算入高度）</strong>。</p>
+<blockquote>
+<p>实际应用中 B 树每个节点中还应包含 n 个指向每个关键字的具体文件数据记录的指针，B 树只是关键字索引，本身不存放数据信息。例如，内存管理中页块置换操作，构造的B 树中不会直接存储页数据，而是保存关联页块副本的链接。</p>
+</blockquote>
+<p>(5) <strong>所有叶子节点</strong>都出现在 <strong>同一层次（最底）</strong> 上（自平衡），并且不带信息（可以看作外部节点或查找失败的节点，实际上这些节点并不存在，指向这些节点的指针为空）。</p>
+<blockquote>
+<p>B 树相当于 m 叉平衡树进一步加强限制 —— 节点平衡因子均为 0，所有叶子节点均在最下面一层。</p>
+</blockquote>
+<p>忽略具体应用中的复杂链接，B 树节点的定义可进行如下描述：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 一般 3 阶起步，即 2-3 树</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> m 3</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// B 树 Node</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">BTNode</span> &#123;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">int</span> keynum; <span class="comment">// 关键字数量（节点大小）</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">BTNode</span> *<span class="title">parent</span>;</span> <span class="comment">// 双亲指针，插入和删除中的拆分合并操作会用到</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">    KeyType key[m+<span class="number">1</span>]; <span class="comment">// 关键字向量，0 号空闲</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">    <span class="class"><span class="keyword">struct</span> *<span class="title">ptr</span>[<span class="title">m</span>+1];</span> <span class="comment">// 子树指针向量（指针数组）</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">    <span class="comment">// Record *recptr[m+1]; // 关键字关联的记录指针</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">&#125;BTNode, *BTree;</span></pre></td></tr></table></figure>
+<h2 id="b-树的查找"><a class="headerlink" href="#b-树的查找"></a>B 树的查找</h2>
+<p>B 树上的查找与排序树相似，只不过 B 树种每个节点都是多关键字组成的有序表，往下的走向也不止 2 路，即多路查找，具体走向与关键字相关。</p>
+<p>具体地，设待查关键字为 k：<br>
+(1) k 与根结点中的关键字比较，若存在 key[i] == k，则查找成功；<br>
+(2) 否则，若存在 key[i]、key[i+1]，使 key[i] &lt; k &lt; key[i+1]，则进入 ptr[i] 所指子树继续查找；<br>
+(3) 当遇到空指针时，即到达叶子节点，则查找失败（后续可进行新关键字插入）。</p>
+<p>实践中，在 B 树查找关键字有两个基本操作：(1)是<strong>在树中顺着指针找节点</strong>；(2)是<strong>在节点内有序表找关键字</strong>，B 树的查找过程就是这两个基本操作<strong>交叉进行</strong>的过程。<br>
+一般系统中构造的 B 树存放在磁盘上，因此先在磁盘中寻找节点，将节点信息读入内存，然后利用顺序查找或折半查找得到相关的关键字，要么当前关键字就是待找关键字，要么根据该关键字继续找子树节点，最终找到关键字或查找失败。</p>
+<p>显然，在磁盘中进行一次查找要比在内存中查找更耗费时间，因此在磁盘上查找的次数（待查关键字在 B 树上的深度）是决定 B 树查找效率的首要因素。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="function">Result <span class="title">SerachBTree</span><span class="params">(BTree T, KeyType k)</span></span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="function"></span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    <span class="comment">// f 指向双亲，用于查找失败时新关键字的插入位置</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    BTNode *p = T, *f = <span class="literal">NULL</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">int</span> i = <span class="number">0</span>, found = <span class="number">0</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">while</span>(p &amp;&amp; found == <span class="number">0</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">    &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">        i = Search(p-&gt;key, k);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">if</span> (i &gt; <span class="number">0</span> &amp;&amp; p-&gt;key[i] == k)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">            found = <span class="number">1</span>; <span class="comment">// 找到</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">else</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">        &#123;   f = p; p = p-&gt;ptr[i];   &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">if</span> (found) <span class="keyword">return</span> (p, i, <span class="number">1</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">else</span> <span class="keyword">return</span> (f, i, <span class="number">0</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">    <span class="comment">// 查找失败，返回插入位置</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+<h2 id="b-树的高度"><a class="headerlink" href="#b-树的高度"></a>B 树的高度</h2>
+<p>对任意一棵包含 \(n(n≥1)\) 个关键字、高度为 h、阶数为 m 的 B 树：（h 不包括最下层叶子）<br>
+(1) 当每个节点的关键字数量为最大值 \({m-1}\) 时（子树的数量为最大值 \(m\)），高度 \(h\) 与关键字数量 \(n\) 之间关系为：</p>
+<p>$$n ≤ (m-1)(1 + m + m^2 +…+ m^{h-1}) = m^h-1$$</p>
+<p>$$h ≥ log_m (n+1)$$</p>
+<p><strong>结论：</strong>(Ⅰ) 含 n 个节点的 B 树，其高度至少为 \(log_m (n+1)\)；<br>
+(Ⅱ) 高度为 h 的 B 树，其关键字至多为 \((m^h-1)\)。</p>
+<p>(2) 当每个非终端节点的关键字数量为最小值 \(⌈\frac{m}{2}⌉-1\) 时（子树的数量为最大值 \(⌈\frac{m}{2}⌉\)），根节点 1 个关键字，根据 B 树的定义可得：第 1 层有 1 个节点，第 2 层有 2 个节点，第 3 层有 \(2⌈\frac{m}{2}⌉\) 个节点，第 4 层有 \(2(⌈\frac{m}{2}⌉)^2\) 个节点，…… 第 h+1 层有 \(2(⌈\frac{m}{2}⌉)^{h-1}\) 个节点，其中第 h+1 层是不含信息的叶子节点。对于含有 n 个关键字的 B 树，叶子节点数量即查找不成功的节点有 \(n+1\) 个。于是，高度 h 与关键字数量 n 之间关系为：</p>
+<p>$$n+1 ≥ 2(⌈\frac{m}{2}⌉)^{h-1}$$</p>
+<p>$$h ≤ log_{⌈\frac{m}{2}⌉} (\frac{n+1}{2}) + 1$$</p>
+<p><strong>结论：</strong><br>
+(Ⅰ) 含 n 个节点的 B 树，其高度 h 取值范围为</p>
+<p>$$log_m (n+1) ≤ h ≤ log_{⌈\frac{m}{2}⌉} (\frac{n+1}{2}) + 1$$</p>
+<p>(Ⅱ) 高度为 h 的 B 树，其关键字数量 n 取值范围为</p>
+<p>$$2(⌈\frac{m}{2}⌉)^{h-1}-1 ≤ n ≤ m^h-1$$</p>
+<h2 id="b-树的插入"><a class="headerlink" href="#b-树的插入"></a>B 树的插入</h2>
+<p>B 树的生成同样从空树开始，逐个插入关键字得到。但是 B 树节点中的关键字个数必须 \(≥⌈\frac{m}{2}⌉-1\)，所以每次插入关键字时不是在树中添加一个叶子节点，而是首先在最底层的某个非终端节点中添加一个关键字，如果该节点的关键字数量没有超过 \(m-1\)，则插入完成，否则要“分裂节点”。</p>
+<blockquote>
+<p>B 树中的<strong>新节点不是直接插入得到的</strong>，而是<strong>节点中的关键字数量超标分裂得到的</strong>，树增高发生在根节点。</p>
+</blockquote>
+<p>分裂节点的具体场景是：<br>
+假设节点 p 中已经有 \(m-1\) 个关键字，当心插入一个节点后，该节点中的信息为</p>
+<p>$$m,A_0,(K_1,A_1),…(K_m,A_m) \ \ 其中\ K_i &lt; K_{i+1}，1≤i&lt;m $$</p>
+<p>先将 p 从中间分裂成两个节点 p 和 p*，其中 p 信息为</p>
+<p>$$⌈m/2⌉-1,A_0,(K_1,A_1),…,(K_{⌈m/2⌉-1},A_{⌈m/2⌉-1})$$</p>
+<p>p* 信息为</p>
+<p>$$m-⌈m/2⌉,A_{⌈m/2⌉},(K_{⌈m/2⌉+1},A_{⌈m/2⌉+1}),…,(K_{m},A_{m})$$</p>
+<p>而关键字 \(K_{⌈m/2⌉}\) 和指针 p* 作为一对依赖插入到双亲节点合适的位置中。</p>
+<h2 id="b-树的删除"><a class="headerlink" href="#b-树的删除"></a>B 树的删除</h2>
+<p>关键字数量小于 \(⌈\frac{m}{2}⌉-1\)，合并</p>
+<p>未完待续</p>
+
+        </div>
+        <div class="post-footer">
+          <div class="post-copyright">&copy; 除特殊声明外，文章著作权归作者所有，转载请注明作者及出处</div>
+        </div>
+      </article>
+      <!-- Pagination -->
+      
+        <div class="nagination card">
+          
+            <a href="/Evandoz/posts/1GH2266.htm" class="nagination-link">上篇: B+ 树</a>
+          
+          
+            <a href="/Evandoz/posts/3W9SDG3.htm" class="nagination-link">下篇: 红黑树</a>
+          
+        </div>
+      
+      <!-- Comment -->
+      <!-- 
+        <div id="article-comment" class="article-comment card"></div>
+
+       -->
+    </main>
+    <aside id="side" class="aside post">
+      <div class="widget profile card">
+  <div class="widget-cover" style="background-image: url('/Evandoz/css/images/background.jpg')">
+    <div class="avatar">
+      <img width="100%" height="100%" src="/Evandoz/css/images/avatar.png">
+    </div>
+  </div>
+  <div class="widget-content">
+    <div class="author">
+      Levan
+    </div>
+    <div class="site-meta">
+      <a class="col" href="/Evandoz/archives">
+        <span class="amount">88</span>
+        <span class="text">文章</span>
+      </a>
+      <a class="col" href="/Evandoz/categories">
+        <span class="amount">24</span>
+        <span class="text">分类</span>
+      </a>
+      <a class="col" href="/Evandoz/tags">
+        <span class="amount">85</span>
+        <span class="text">标签</span>
+      </a>
+      <a class="col" href="/Evandoz/archives">
+        <span class="amount">88.8k</span>
+        <span class="text">字数</span>
+      </a>
+    </div>
+  </div>
+</div>
+
+      <div id="toc" class="toc">
+        
+          <h3 class="toc-title">目录</h3>
+          <ol class="toc-content"><li class="toc-content-item toc-content-level-2"><a class="toc-content-link" href="#b-树"><span class="toc-content-text">B 树</span></a></li><li class="toc-content-item toc-content-level-2"><a class="toc-content-link" href="#b-树的查找"><span class="toc-content-text">B 树的查找</span></a></li><li class="toc-content-item toc-content-level-2"><a class="toc-content-link" href="#b-树的高度"><span class="toc-content-text">B 树的高度</span></a></li><li class="toc-content-item toc-content-level-2"><a class="toc-content-link" href="#b-树的插入"><span class="toc-content-text">B 树的插入</span></a></li><li class="toc-content-item toc-content-level-2"><a class="toc-content-link" href="#b-树的删除"><span class="toc-content-text">B 树的删除</span></a></li></ol>
+        
+      </div>
+    </aside>
+  </div>
+
+
+</div>
+        <footer id="footer" class="footer">
+  <div class="outer">
+    <div class="copyright">
+      <p><span>EXP</span> &copy; 2015 - 2019</p>
+    </div>
+    <div class="navigation">
+      <a href="/Evandoz/https:/evandoz.github.io">Hexo · Levan</a>
+    </div>
+  </div>
+</footer>
+
+      </div>
+    </div>
+  </div>
+  <div id="top-anchor" class="top-anchor">
+  <ul><li></li><li></li></ul>
+</div>
+
+  <div id="mobile-nav" class="mobile-nav">
+  
+    <a class="menu-item" href="/Evandoz/archives">归档</a>
+  
+    <a class="menu-item" href="/Evandoz/categories">分类</a>
+  
+    <a class="menu-item" href="/Evandoz/tags">标签</a>
+  
+    <a class="menu-item" href="/Evandoz/about">关于</a>
+  
+</div>
+
+<div id="over-layer" class="over-layer"></div>
+
+  
+<script src="/Evandoz/js/jquery.js"></script>
+
+
+<script src="/Evandoz/js/velocity.js"></script>
+
+
+<script src="/Evandoz/js/plugins.js"></script>
+
+
+<script src="/Evandoz/js/script.js"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config("");
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+
+
+
+</body>
+</html>
