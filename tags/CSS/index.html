@@ -30,7 +30,7 @@
   
 <link rel="stylesheet" href="/Evandoz/css/style.css">
 
-<meta name="generator" content="Hexo 4.1.0"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
+<meta name="generator" content="Hexo 4.1.1"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
 
 <body>
   <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="overflow" class="overflow">
@@ -99,10 +99,11 @@
       <div class="post-excerpt">
         
           1. 基本规则
- 1.  使用小写
- 2.  使用英文，而不是拼音
- 3.  使用短横线（-）而不是下划线（_）做连接符（好处：①少按一次 shift； ②区别于 js 中变量命名；③IE 兼容性）
 
+使用小写
+使用英文，而不是拼音
+使用短横线（-）而不是下划线（_）做连接符（好处：①少按一次 shift； ②区别于 js 中变量命名；③IE 兼容性）
+语...
         
       </div>
       <div class="post-meta">
@@ -133,8 +134,7 @@
         
           书写顺序
 遵循浏览器渲染顺序，减少浏览器 reflow（回流），提升浏览器渲染 dom 的性能。
-
-定位属性的修改会导致 reflow，改变文字颜色、背景等会使得浏览器 repaint，都会影响浏览器
+定位属性的修改会导致 reflow，改变文字颜色、背景等会使得浏览器 rep...
         
       </div>
       <div class="post-meta">
@@ -164,8 +164,7 @@
       <div class="post-excerpt">
         
           position: fixed表示相对于窗口定位，可以让元素不跟随浏览器的滚动条滚动，但是今天却碰到了失效的情况。
-
-原来当父元素设置 transform 时，子元素的 position: fixed
+原来当父元素设置 transform 时，子元素的 pos...
         
       </div>
       <div class="post-meta">
@@ -194,7 +193,8 @@
 
       <div class="post-excerpt">
         
-          在 CodePen 发现了一种不太常见元素绝对居中（水平和垂直）方法，大致思路是使用 margin 和 position 属性。但它并非是将 margin 置为负，而是直接置为 auto，需要说明的是
+          <p>在 CodePen 发现了一种不太常见元素绝对居中（水平和垂直）方法，大致思路是使用 margin 和 position 属性。<strong>但它并非是将 margin 置为负，而是直接置为 auto，需要说明的是元素需要声明宽/高</strong>。</p>
+<p>原文链接是 <a href="https://s.codepen.io/shshaw/fullpage/gEiDt##" target="_blank" rel="external nofollow noopener noreferrer">Absolute Centering in CSS</a></p>
         
       </div>
       <div class="post-meta">
@@ -224,18 +224,7 @@
       <div class="post-excerpt">
         
           对图片使用max-width和max-height，图片会按照父容器宽高自动缩放，并保持图片原本的长宽比，图片相对不变形。
-
-1
-
-img{
-
-2
-
-  width: auto;
-
-3
-
-  heig
+123456img&#123;  width: a...
         
       </div>
       <div class="post-meta">
@@ -265,10 +254,8 @@ img{
       <div class="post-excerpt">
         
           CSS 作为前端三件套中的装饰部件有着重要地位，本文在结合W3School及网易云课堂相关课程基础上梳理一下CSS样式表引入方式及选择器相关的知识点。
-
 CSS 三种引入方式
-行间样式
- * 写法：在
+...
         
       </div>
       <div class="post-meta">
@@ -276,7 +263,7 @@ CSS 三种引入方式
   <time datetime="2016-08-31T16:00:00.000Z">3 年前</time>
 </span>
 
-        <span class="post-time">时长 8 分钟</span>
+        <span class="post-time">时长 7 分钟</span>
 
       </div>
     </div>
@@ -299,7 +286,7 @@ CSS 三种引入方式
       <p><span>EXP</span> &copy; 2015 - 2019</p>
     </div>
     <div class="navigation">
-      <a href="/Evandoz/https:/evandoz.github.io">Hexo · Levan</a>
+      <a href="https://evandoz.github.io">Hexo · Levan</a>
     </div>
   </div>
 </footer>

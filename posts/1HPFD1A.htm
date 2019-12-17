@@ -30,7 +30,7 @@
   
 <link rel="stylesheet" href="/Evandoz/css/style.css">
 
-<meta name="generator" content="Hexo 4.1.0"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
+<meta name="generator" content="Hexo 4.1.1"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
 
 <body>
   <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="overflow" class="overflow">
@@ -108,7 +108,7 @@
 <p>重点在于<strong>开辟额外空间</strong>，<strong>统计每个元素的数量</strong>，即计数排序得名之源。</p>
 <h3 id="代码实现"><a class="headerlink" href="#代码实现"></a>代码实现</h3>
 <p>基数排序过程中，是将待排序集合中的每个元素值本身大小作为下标，依次进行了存放，而记录的值是元素出现的次数。</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">CountSort</span><span class="params">(<span class="keyword">int</span> L[], <span class="keyword">int</span> n)</span></span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="function"></span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    create B[n+<span class="number">1</span>] = L, C[k+<span class="number">1</span>] <span class="comment">// 计数</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">for</span> i=<span class="number">0</span> to k <span class="comment">// 初始化</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">        C[i] = <span class="number">0</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">for</span> i=<span class="number">1</span> to n <span class="comment">// 计数</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">        ++C[L[i]]</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">for</span> i=<span class="number">1</span> to k</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">        C[i] += C[i<span class="number">-1</span>] <span class="comment">// 计算排序后每一段的最大下标位置</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">for</span> i=n to <span class="number">1</span> <span class="comment">// 从后往前，保证稳定性</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">        L[ C[ B[i] ]-- ] = B[i]</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">CountSort</span><span class="params">(<span class="keyword">int</span> L[], <span class="keyword">int</span> n)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    create B[n+<span class="number">1</span>] = L, C[k+<span class="number">1</span>] <span class="comment">// 计数</span></span><br><span class="line">    <span class="keyword">for</span> i=<span class="number">0</span> to k <span class="comment">// 初始化</span></span><br><span class="line">        C[i] = <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> i=<span class="number">1</span> to n <span class="comment">// 计数</span></span><br><span class="line">        ++C[L[i]]</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> i=<span class="number">1</span> to k</span><br><span class="line">        C[i] += C[i<span class="number">-1</span>] <span class="comment">// 计算排序后每一段的最大下标位置</span></span><br><span class="line">    <span class="keyword">for</span> i=n to <span class="number">1</span> <span class="comment">// 从后往前，保证稳定性</span></span><br><span class="line">        L[ C[ B[i] ]-- ] = B[i]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h3 id="归纳分析"><a class="headerlink" href="#归纳分析"></a>归纳分析</h3>
 <ol>
 <li>稳定排序（stable sort）</li>
@@ -149,7 +149,7 @@
 <p>桶排序的实现有两个关键点：</p>
 <p>（1）桶的划分，即元素到桶的映射规则。映射规则要根据待排序集合的元素分布情况来选择。规则太粗糙宽泛，就会导致所有元素都映射到一个桶上，桶排序也就失效，变成基于比较的排序。规则太具体细致，又会导致每个元素值映射到一个单独的桶上，桶排序就退化成计数排序。</p>
 <p>（2）桶内排序的选择，各个桶内元素进行排序时，可以自主选择合适的排序算法，这样桶排序算法的复杂度和稳定性，都会随桶内排序算法的不同而变化。</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">BucketSort</span><span class="params">(<span class="keyword">int</span> L[], <span class="keyword">int</span> n)</span></span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="function"></span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    create buckets B[m]</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">for</span> i=<span class="number">1</span> to n</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">        insert L[i] to B[f(L[i])]</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">for</span> i=<span class="number">1</span> to m</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">        sort B[i]</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">BucketSort</span><span class="params">(<span class="keyword">int</span> L[], <span class="keyword">int</span> n)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    create buckets B[m]</span><br><span class="line">    <span class="keyword">for</span> i=<span class="number">1</span> to n</span><br><span class="line">        insert L[i] to B[f(L[i])]</span><br><span class="line">    <span class="keyword">for</span> i=<span class="number">1</span> to m</span><br><span class="line">        sort B[i]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h3 id="归纳分析-v2"><a class="headerlink" href="#归纳分析-v2"></a>归纳分析</h3>
 <ol>
 <li>（不）稳定排序（(un)stable sort）</li>
@@ -216,7 +216,7 @@
 <p>LSD 比 MSD 在算法实现上更简单，所用空间更少，依次通常讨论基数排序时默认为 LSD。</p>
 <p>这就是排序算法稳定性对基数排序的重要影响。</p>
 <h3 id="代码实现-v3"><a class="headerlink" href="#代码实现-v3"></a>代码实现</h3>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">RadixSort</span><span class="params">(<span class="keyword">int</span> L[], <span class="keyword">int</span> n)</span></span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="function"></span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">RadixSort</span><span class="params">(<span class="keyword">int</span> L[], <span class="keyword">int</span> n)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h3 id="归纳分析-v3"><a class="headerlink" href="#归纳分析-v3"></a>归纳分析</h3>
 <ol>
 <li>稳定排序（stable sort）</li>
@@ -305,7 +305,7 @@
         <span class="text">标签</span>
       </a>
       <a class="col" href="/Evandoz/archives">
-        <span class="amount">88.8k</span>
+        <span class="amount">86.3k</span>
         <span class="text">字数</span>
       </a>
     </div>
@@ -329,7 +329,7 @@
       <p><span>EXP</span> &copy; 2015 - 2019</p>
     </div>
     <div class="navigation">
-      <a href="/Evandoz/https:/evandoz.github.io">Hexo · Levan</a>
+      <a href="https://evandoz.github.io">Hexo · Levan</a>
     </div>
   </div>
 </footer>

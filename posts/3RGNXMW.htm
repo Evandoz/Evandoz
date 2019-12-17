@@ -30,7 +30,7 @@
   
 <link rel="stylesheet" href="/Evandoz/css/style.css">
 
-<meta name="generator" content="Hexo 4.1.0"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
+<meta name="generator" content="Hexo 4.1.1"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
 
 <body>
   <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="overflow" class="overflow">
@@ -101,7 +101,7 @@
 <ol>
 <li>从优盘启动后，直接使用 Windows 的自动创建功能，它默认会创建相应大小的分区，其大小一般如下（Windows 10）</li>
 </ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">分区 ###       类型              大小     偏移量</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">-------------  ----------------  -------  -------</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">分区      1    恢复                 529 MB  1024 KB</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">分区      2    系统                 100 MB   530 MB</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">分区      3    保留                  16 MB   630 MB</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">分区      4    主要                  XX GB   646 MB</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">......</span></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">分区 ###       类型              大小     偏移量</span><br><span class="line">-------------  ----------------  -------  -------</span><br><span class="line">分区      1    恢复                 529 MB  1024 KB</span><br><span class="line">分区      2    系统                 100 MB   530 MB</span><br><span class="line">分区      3    保留                  16 MB   630 MB</span><br><span class="line">分区      4    主要                  XX GB   646 MB</span><br><span class="line">......</span><br></pre></td></tr></table></figure>
 <p><strong>恢复（Recovery）分区</strong>：用于 Windows Recovery，默认大小为 529M，安装好系统后会使用掉 465M 左右，剩余空间 16% 。默认大小有个痛点就是，Windows 10 大版本直接通过系统更新时会出现空间不足，然后它就会从系统盘（C:）扣除，这样一来已经调整好的分区空间就会被破坏（强迫症），当然如果自己下载系统重装就不会出现这种情况了。</p>
 <p><strong>系统（EFI System）分区</strong>：引导分区，非常重要，缺失将无法进入系统，默认大小 100M，用于存放引导文件，当系统本身完好，引导出问题时，可以通过优启打开 CMD 终端，通过 bcdboot 重建引导分区。100M 的默认大小对于安装双系统会是一个痛点，像 Linux、MacOS 一般要求 200M+，如黑苹果双系统，若 ESP 分区小于 200M，MacOS 上如磁盘工具等会无法使用。</p>
 <p><strong>保留（MSR）分区</strong>：未分配分区，默认大小 16M，不是很重要，可有可无。</p>
@@ -110,30 +110,30 @@
 <li>使用 Windows 自带的 DiskPart 命令行工具手动分配</li>
 </ol>
 <p>优盘启动至选择分区时，Shift + F10 打开 CMD 终端，使用命令</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">diskpart</span></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">diskpart</span><br></pre></td></tr></table></figure>
 <p>即可进入分区工具终端操作界面（大小写不敏感）</p>
 <p>显示所有硬盘</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">list disk</span></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">list disk</span><br></pre></td></tr></table></figure>
 <p>选择硬盘</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">select disk X （X为硬盘编号）</span></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select disk X （X为硬盘编号）</span><br></pre></td></tr></table></figure>
 <p>清空磁盘</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">clean</span></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">clean</span><br></pre></td></tr></table></figure>
 <p>转化为 GPT 分区表</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">convert gpt</span></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">convert gpt</span><br></pre></td></tr></table></figure>
 <p><strong>创建恢复分区</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">cre part primary size&#x3D;512</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">format quick fs&#x3D;ntfs label&#x3D;&quot;Recovery&quot; （fs&#x3D;filesystem，格式化为 NTFS）</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">set id&#x3D;&quot;de94bba4-06d1-4d40-a16a-bfd50179d6ac&quot;  （设置GUID，表示 GPT 分区类型）</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">gpt attributes&#x3D;0x8000000000000001  （设置Attribute，表示 GPT 分区属性，此处为其设置特殊保护）</span></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">cre part primary size&#x3D;512</span><br><span class="line">format quick fs&#x3D;ntfs label&#x3D;&quot;Recovery&quot; （fs&#x3D;filesystem，格式化为 NTFS）</span><br><span class="line">set id&#x3D;&quot;de94bba4-06d1-4d40-a16a-bfd50179d6ac&quot;  （设置GUID，表示 GPT 分区类型）</span><br><span class="line">gpt attributes&#x3D;0x8000000000000001  （设置Attribute，表示 GPT 分区属性，此处为其设置特殊保护）</span><br></pre></td></tr></table></figure>
 <p><strong>创建系统分区</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">cre part efi size&#x3D;256  （建议 256M - 512M，如果装双系统建议设置大一点）</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">format quick fs&#x3D;fat32 （fs&#x3D;filesystem，格式化为 FAT32）</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">set id&#x3D;&quot;c12a7328-f81f-11d2-ba4b-00a0c93ec93b&quot;  （设置GUID，表示 GPT 分区类型）</span></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cre part efi size&#x3D;256  （建议 256M - 512M，如果装双系统建议设置大一点）</span><br><span class="line">format quick fs&#x3D;fat32 （fs&#x3D;filesystem，格式化为 FAT32）</span><br><span class="line">set id&#x3D;&quot;c12a7328-f81f-11d2-ba4b-00a0c93ec93b&quot;  （设置GUID，表示 GPT 分区类型）</span><br></pre></td></tr></table></figure>
 <p><strong>创建保留分区</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">cre part msr size&#x3D;16 （使用 Windows 10 默认大小）</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; set id&#x3D;&quot;e3c9e316-0b5c-4db8-817d-f92df00215ae&quot;  （设置GUID，表示 GPT 分区类型，Windows MSR 分区不支持此操作）</span></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cre part msr size&#x3D;16 （使用 Windows 10 默认大小）</span><br><span class="line">&#x2F;&#x2F; set id&#x3D;&quot;e3c9e316-0b5c-4db8-817d-f92df00215ae&quot;  （设置GUID，表示 GPT 分区类型，Windows MSR 分区不支持此操作）</span><br></pre></td></tr></table></figure>
 <p>注：MSR 分区未格式化，因为它的设定就是未分配空间。</p>
 <p>以上命令中使用了简写：</p>
 <p>cre === create<br>
 part === partition</p>
 <p>使用命令</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">list part</span></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">list part</span><br></pre></td></tr></table></figure>
 <p>显示刚创建的分区：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">分区 ###       类型              大小     偏移量</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">-------------  ----------------  -------  -------</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">分区      1    恢复                 512 MB  1024 KB</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">分区      2    系统                 256 MB   513 MB</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">分区      3    保留                  16 MB   769 MB</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">分区      4    主要                  50 GB   785 MB</span></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">分区 ###       类型              大小     偏移量</span><br><span class="line">-------------  ----------------  -------  -------</span><br><span class="line">分区      1    恢复                 512 MB  1024 KB</span><br><span class="line">分区      2    系统                 256 MB   513 MB</span><br><span class="line">分区      3    保留                  16 MB   769 MB</span><br><span class="line">分区      4    主要                  50 GB   785 MB</span><br></pre></td></tr></table></figure>
 <p>最后，关于 GPT 分区表的内容参见</p>
 
         </div>
@@ -183,7 +183,7 @@ part === partition</p>
         <span class="text">标签</span>
       </a>
       <a class="col" href="/Evandoz/archives">
-        <span class="amount">88.8k</span>
+        <span class="amount">86.3k</span>
         <span class="text">字数</span>
       </a>
     </div>
@@ -206,7 +206,7 @@ part === partition</p>
       <p><span>EXP</span> &copy; 2015 - 2019</p>
     </div>
     <div class="navigation">
-      <a href="/Evandoz/https:/evandoz.github.io">Hexo · Levan</a>
+      <a href="https://evandoz.github.io">Hexo · Levan</a>
     </div>
   </div>
 </footer>

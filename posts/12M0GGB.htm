@@ -30,7 +30,7 @@
   
 <link rel="stylesheet" href="/Evandoz/css/style.css">
 
-<meta name="generator" content="Hexo 4.1.0"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
+<meta name="generator" content="Hexo 4.1.1"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
 
 <body>
   <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="overflow" class="overflow">
@@ -101,15 +101,15 @@
 <a id="more"></a>
 <h2 id="问题出现"><a class="headerlink" href="#问题出现"></a>问题出现</h2>
 <p>第一次配置 gitment 时，按照官方文档进行如下设置：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">const gitment &#x3D; new Gitment(&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  id: &#39;Your page ID&#39;, &#x2F;&#x2F; optional</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">  owner: &#39;Your GitHub ID&#39;,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">  repo: &#39;The repo to store comments&#39;,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">  oauth: &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">    client_id: &#39;Your client ID&#39;,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">    client_secret: &#39;Your client secret&#39;,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">  &#125;,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">  &#x2F;&#x2F; ...</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">  &#x2F;&#x2F; For more available options, check out the documentation below</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">&#125;)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">gitment.render(&#39;comments&#39;)</span></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">const gitment &#x3D; new Gitment(&#123;</span><br><span class="line">  id: &#39;Your page ID&#39;, &#x2F;&#x2F; optional</span><br><span class="line">  owner: &#39;Your GitHub ID&#39;,</span><br><span class="line">  repo: &#39;The repo to store comments&#39;,</span><br><span class="line">  oauth: &#123;</span><br><span class="line">    client_id: &#39;Your client ID&#39;,</span><br><span class="line">    client_secret: &#39;Your client secret&#39;,</span><br><span class="line">  &#125;,</span><br><span class="line">  &#x2F;&#x2F; ...</span><br><span class="line">  &#x2F;&#x2F; For more available options, check out the documentation below</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">gitment.render(&#39;comments&#39;)</span><br></pre></td></tr></table></figure>
 <p>由于 id 这一项，默认为 window.location.pathname ，于是便删除了这一条。随后 push 到 github，初始化评论(Initialize Comments)时，浏览器边弹窗报错：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">Error: Validation Failed</span></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Error: Validation Failed</span><br></pre></td></tr></table></figure>
 <h2 id="问题解决"><a class="headerlink" href="#问题解决"></a>问题解决</h2>
 <p>经过一番摸索，疑似是因为 gitment 配置中 id 过长引起的。因为 gitment 是其作者基于 gitHub 的 issue 开发的，每一条 issue 会有两个 label，label 的最大长度限制为50个字符。这个问题多数人都遇到过，关于这个问题的讨论与建议在 gitment 的 issues 上出现过：<a href="https://github.com/imsun/gitment/issues/116" target="_blank" rel="external nofollow noopener noreferrer">Validation Failed ID长度问题建议</a>，印证了前面的想法。问题找到了，那么我们设置一个长度较短的 id 就可以了。</p>
 <p>起初想用 page.title 来作为 id，然而操作并不顺利，因为我的标题大部分是中文，而且长度也都不短，再通过 utf 转码会有一堆 % 占空间，长度必定更长。</p>
 <p>最后决定使用 page.path 作为 id，因为我的 permalink 的配置有所更改，所以 page.path 的长度相对较短，重新设置后初始化成功，Initialize Comments 按钮变成了文字 No Comment Yet 。</p>
 <p>关于我的 permalink 设置(在博客根目录的 config.yml 中)，只保留了 year 和 title：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">xxx</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">permalink: :year&#x2F;:title&#x2F;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">xxx</span></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">xxx</span><br><span class="line">permalink: :year&#x2F;:title&#x2F;</span><br><span class="line">xxx</span><br></pre></td></tr></table></figure>
 <h2 id="最后"><a class="headerlink" href="#最后"></a>最后</h2>
 <p>由于我的 page.path 长度在50个字符以内，所以上述的设置能够成功。但这并不适合所有情况，具体情况具体分析，只要保证 id 在50个字符以内即可。</p>
 
@@ -160,7 +160,7 @@
         <span class="text">标签</span>
       </a>
       <a class="col" href="/Evandoz/archives">
-        <span class="amount">88.8k</span>
+        <span class="amount">86.3k</span>
         <span class="text">字数</span>
       </a>
     </div>
@@ -184,7 +184,7 @@
       <p><span>EXP</span> &copy; 2015 - 2019</p>
     </div>
     <div class="navigation">
-      <a href="/Evandoz/https:/evandoz.github.io">Hexo · Levan</a>
+      <a href="https://evandoz.github.io">Hexo · Levan</a>
     </div>
   </div>
 </footer>

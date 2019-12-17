@@ -8,6 +8,28 @@
     </url>
 
     <url>
+        <loc>https://evandoz.github.io/Evandoz/posts/1GH2266.htm</loc>
+        <lastmod>2019-12-17T03:49:40.456Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://evandoz.github.io/Evandoz/posts/43ZHPY.htm</loc>
+        <lastmod>2019-12-17T03:21:15.538Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+        <image:image>
+
+            <image:loc>https://raw.githubusercontent.com/Evandoz/blob/master/Google/Google.jpg</image:loc>
+
+        </image:image>
+
+    </url>
+
+    <url>
         <loc>https://evandoz.github.io/Evandoz/posts/3W9SDG3.htm</loc>
         <lastmod>2019-12-15T13:22:42.296Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -18,14 +40,6 @@
     <url>
         <loc>https://evandoz.github.io/Evandoz/posts/3047R13.htm</loc>
         <lastmod>2019-12-15T13:22:27.640Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>https://evandoz.github.io/Evandoz/posts/1GH2266.htm</loc>
-        <lastmod>2019-12-15T13:12:58.288Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
@@ -472,20 +486,6 @@
         <lastmod>2019-12-05T13:54:57.477Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>https://evandoz.github.io/Evandoz/posts/43ZHPY.htm</loc>
-        <lastmod>2019-12-05T13:54:50.343Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-        <image:image>
-
-            <image:loc>https://raw.githubusercontent.com/Evandoz/blob/master/Google/Google.jpg</image:loc>
-
-        </image:image>
 
     </url>
 

@@ -30,7 +30,7 @@
   
 <link rel="stylesheet" href="/Evandoz/css/style.css">
 
-<meta name="generator" content="Hexo 4.1.0"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
+<meta name="generator" content="Hexo 4.1.1"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
 
 <body>
   <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="overflow" class="overflow">
@@ -122,7 +122,7 @@
 </ol>
 <h2 id="bcdboot-命令-bcdboot-exe-程序"><a class="headerlink" href="#bcdboot-命令-bcdboot-exe-程序"></a>bcdboot 命令（bcdboot.exe 程序）</h2>
 <p>bcdboot 命令格式</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">bcdboot &lt;source&gt; [&#x2F;l &lt;locale&gt;] [&#x2F;s &lt;volume-letter&gt; [&#x2F;f &lt;firmware&gt;]]</span></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bcdboot &lt;source&gt; [&#x2F;l &lt;locale&gt;] [&#x2F;s &lt;volume-letter&gt; [&#x2F;f &lt;firmware&gt;]]</span><br></pre></td></tr></table></figure>
 <p>bcdboot 命令选项（只列举常用选项，更多选项可在 Windows 终端中输入<code>bcdboot</code>查看）</p>
 <table>
 <thead>
@@ -170,12 +170,12 @@
 <ol>
 <li>BIOS+MBR 常用</li>
 </ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">bcdboot C:\Windows &#x2F;l zh-cn</span></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bcdboot C:\Windows &#x2F;l zh-cn</span><br></pre></td></tr></table></figure>
 <p>从系统盘 C:\Windows 目录中复制启动文件，并创建 BCD（中文）启动菜单。</p>
 <ol start="2">
 <li>UEFI+GPT 常用</li>
 </ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">bcdboot C:\Windows &#x2F;s H: &#x2F;f UEFI &#x2F;l zh-cn</span></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bcdboot C:\Windows &#x2F;s H: &#x2F;f UEFI &#x2F;l zh-cn</span><br></pre></td></tr></table></figure>
 <p>从系统盘 C:\Windows 目录中复制启动文件到 ESP 中，使用 UEFI 引导。<br>
 此处指定了 ESP 的驱动器号 H（可选），前提是已经使用 DiskPart 等工具将 ESP 分区装载为 H 盘。</p>
 <h2 id="bcdboot-使用条件"><a class="headerlink" href="#bcdboot-使用条件"></a>bcdboot 使用条件</h2>
@@ -255,7 +255,7 @@
         <span class="text">标签</span>
       </a>
       <a class="col" href="/Evandoz/archives">
-        <span class="amount">88.8k</span>
+        <span class="amount">86.3k</span>
         <span class="text">字数</span>
       </a>
     </div>
@@ -279,7 +279,7 @@
       <p><span>EXP</span> &copy; 2015 - 2019</p>
     </div>
     <div class="navigation">
-      <a href="/Evandoz/https:/evandoz.github.io">Hexo · Levan</a>
+      <a href="https://evandoz.github.io">Hexo · Levan</a>
     </div>
   </div>
 </footer>

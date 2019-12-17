@@ -30,7 +30,7 @@
   
 <link rel="stylesheet" href="/Evandoz/css/style.css">
 
-<meta name="generator" content="Hexo 4.1.0"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
+<meta name="generator" content="Hexo 4.1.1"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
 
 <body>
   <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="overflow" class="overflow">
@@ -98,26 +98,26 @@
         </div>
         <div id="post-content" class="post-content">
           <h2 id="1-安装fcitx输入法引擎"><a class="headerlink" href="#1-安装fcitx输入法引擎"></a>1.安装fcitx输入法引擎</h2>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">$ sudo pacman -S fcitx</span></pre></td></tr></table></figure>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo pacman -S fcitx</span><br></pre></td></tr></table></figure>
 <p>注意：为了在 Gtk+ 和 Qt 上获得更好的体验，还需要安装如下几个包。虽然不安装也可以使用，但很可能出现各种奇怪问题，例如无法光标跟随、无法显示预编辑字符串、无法输入甚至卡死等情况。</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">$ sudo pacman -S fcitx-gtk2 fcitx-gtk3 fcitx-qt4 fcitx-qt5</span></pre></td></tr></table></figure>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo pacman -S fcitx-gtk2 fcitx-gtk3 fcitx-qt4 fcitx-qt5</span><br></pre></td></tr></table></figure>
 <h2 id="2-配置fcitx"><a class="headerlink" href="#2-配置fcitx"></a>2.配置fcitx</h2>
 <p>fcitx 提供了若干图形界面的配置程序：KDE 中的 kcm-fcitx，基于 GTK3 的 fcitx-configtool。</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">$ sudo pacman -S fcitx-configtool</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">$ sudo pacman -S kcm-fcitx</span></pre></td></tr></table></figure>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ sudo pacman -S fcitx-configtool</span><br><span class="line">$ sudo pacman -S kcm-fcitx</span><br></pre></td></tr></table></figure>
 <p>安装完配置工具 fcitx-configtool 之后打开配置工具即可添加输入法。</p>
 <p>对于新安装的英文系统，要取消只显示当前语言的输入法（Only Show Current Language），才能看到和添加中文输入法(Pinyin, Libpinyin等)。</p>
 <p>如果要手工编辑 fcitx 的配置文件，请确保系统中并没有在运行 fcitx ，否则手工编辑的配置内容可能丢失。</p>
 <h2 id="3-安装搜狗拼音"><a class="headerlink" href="#3-安装搜狗拼音"></a>3.安装搜狗拼音</h2>
 <p>添加 archlinuxcn 的源</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">$ nano /etc/pacman.conf</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">[archlinuxcn]</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">SigLevel = Optional TrustAll</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">Server = https://cdn.repo.archlinuxcn.org/<span class="variable">$arch</span></span></pre></td></tr></table></figure>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ nano /etc/pacman.conf</span><br><span class="line">[archlinuxcn]</span><br><span class="line">SigLevel = Optional TrustAll</span><br><span class="line">Server = https://cdn.repo.archlinuxcn.org/<span class="variable">$arch</span></span><br></pre></td></tr></table></figure>
 <p>然后同步软件库并添加 PGP keys</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">$ sudo pacman -Syy &amp;&amp; sudo pacman -S archlinuxcn-keyring</span></pre></td></tr></table></figure>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo pacman -Syy &amp;&amp; sudo pacman -S archlinuxcn-keyring</span><br></pre></td></tr></table></figure>
 <p>关于 archlinuxcn 参见</p>
 <p><a href="https://github.com/archlinuxcn/repo" target="_blank" rel="external nofollow noopener noreferrer">archlinuxcn/repo</a></p>
 <p>此外，还可以使用 清华、浙大等其他镜像库。</p>
 <p><a href="https://github.com/archlinuxcn/mirrorlist-repo" target="_blank" rel="external nofollow noopener noreferrer">archlinuxcn/mirrorlist-repo</a></p>
 <p>注意：安装 fcitx-sogoupinyin 前，需要引入 Archlinuxcn 软件源。</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">$ sudo pacman -S fcitx-sogoupinyin</span></pre></td></tr></table></figure>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo pacman -S fcitx-sogoupinyin</span><br></pre></td></tr></table></figure>
 <h2 id="4-配置搜狗输入法"><a class="headerlink" href="#4-配置搜狗输入法"></a>4.配置搜狗输入法</h2>
 <p>重启后 fcitx 引擎自动启动，在图形界面配置中将搜狗输入法添加进去即可。</p>
 
@@ -168,7 +168,7 @@
         <span class="text">标签</span>
       </a>
       <a class="col" href="/Evandoz/archives">
-        <span class="amount">88.8k</span>
+        <span class="amount">86.3k</span>
         <span class="text">字数</span>
       </a>
     </div>
@@ -192,7 +192,7 @@
       <p><span>EXP</span> &copy; 2015 - 2019</p>
     </div>
     <div class="navigation">
-      <a href="/Evandoz/https:/evandoz.github.io">Hexo · Levan</a>
+      <a href="https://evandoz.github.io">Hexo · Levan</a>
     </div>
   </div>
 </footer>

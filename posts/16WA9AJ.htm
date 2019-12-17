@@ -30,7 +30,7 @@
   
 <link rel="stylesheet" href="/Evandoz/css/style.css">
 
-<meta name="generator" content="Hexo 4.1.0"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
+<meta name="generator" content="Hexo 4.1.1"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
 
 <body>
   <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="overflow" class="overflow">
@@ -101,20 +101,20 @@
 <a id="more"></a>
 <h2 id="缺少mysqldb模块"><a class="headerlink" href="#缺少mysqldb模块"></a>缺少MySQLdb模块</h2>
 <p>没有安装该中间件会报错缺少MySQLdb的模块</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">django.core.exceptions.ImproperlyConfigured: Error loading MySQLdb module: No module named MySQLdb</span></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">django.core.exceptions.ImproperlyConfigured: Error loading MySQLdb module: No module named MySQLdb</span><br></pre></td></tr></table></figure>
 <h2 id="命令行安装mysql-python"><a class="headerlink" href="#命令行安装mysql-python"></a>命令行安装MySQL-Python</h2>
 <p>根据提示及网上建议，使用pip来安装该模块</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">pip install MySQL-python</span></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install MySQL-python</span><br></pre></td></tr></table></figure>
 <p>然而问题再次出现，需要Microsoft Visual C++ 9.0</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">error: Microsoft Visual C++ 9.0 is required. Get it from http:&#x2F;&#x2F;aka.ms&#x2F;vcpython27</span></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">error: Microsoft Visual C++ 9.0 is required. Get it from http:&#x2F;&#x2F;aka.ms&#x2F;vcpython27</span><br></pre></td></tr></table></figure>
 <p>根据提示安装VC++ 9.0后，再次尝试，依然失败。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">error: command &#39;C:\\Users\\RAY\\AppData\\Local\\Programs\\Common\\Microsoft\\Visual C++ for Python\\9.0\\VC\\Bin\\amd64\\cl.exe&#39; failed with exit status 2</span></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">error: command &#39;C:\\Users\\RAY\\AppData\\Local\\Programs\\Common\\Microsoft\\Visual C++ for Python\\9.0\\VC\\Bin\\amd64\\cl.exe&#39; failed with exit status 2</span><br></pre></td></tr></table></figure>
 <h2 id="exe方式安装mysql-python"><a class="headerlink" href="#exe方式安装mysql-python"></a>EXE方式安装MySQL-python</h2>
 <p>问题多多，放弃该方法，按网上所说直接下载已经编译好的exe包。访问<a href="https://pypi.python.org/pypi/MySQL-python/1.2.5" target="_blank" rel="external nofollow noopener noreferrer">Python Package</a>，下载了MySQL-python-1.2.5.win32-py2.7.exe，安装完成后，不在报错缺失模块，但出现了utf-8字符编码的问题</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">&#39;utf8&#39; codec can&#39;t decode byte 0xb2 in position 20: invalid start byte</span></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#39;utf8&#39; codec can&#39;t decode byte 0xb2 in position 20: invalid start byte</span><br></pre></td></tr></table></figure>
 <p>经过一番探究，发现可能是因为我使用的是Python 2.7，而MySQL-python是32位的，版本不匹配，然而Python Package网站上只有32位的安装包。</p>
 <p>上网搜索64位安装包，终于发现了一个新网站：<a href="https://www.lfd.uci.edu/~gohlke/pythonlibs/#mysql-python" target="_blank" rel="external nofollow noopener noreferrer">Unofficial Windows Binaries for Python Extension Packages</a>，下载<strong>MySQL_python-1.2.5-cp27-none-win_amd64.whl</strong>到本地，然后使用pip安装</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">pip install MySQL_python-1.2.5-cp27-none-win_amd64.whl</span></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install MySQL_python-1.2.5-cp27-none-win_amd64.whl</span><br></pre></td></tr></table></figure>
 <p>安装完成后，尝试运行Django，不在报错完美运行</p>
 <h2 id="最后"><a class="headerlink" href="#最后"></a>最后</h2>
 <p>最后说明一下，MySQL-python支持Python 2，如果使用Python 3，需要使用pymysql作为连接中间件，其安装方法简单，不会由上述一系列问题，具体步骤可上网搜索，此处不再赘述。</p>
@@ -167,7 +167,7 @@
         <span class="text">标签</span>
       </a>
       <a class="col" href="/Evandoz/archives">
-        <span class="amount">88.8k</span>
+        <span class="amount">86.3k</span>
         <span class="text">字数</span>
       </a>
     </div>
@@ -191,7 +191,7 @@
       <p><span>EXP</span> &copy; 2015 - 2019</p>
     </div>
     <div class="navigation">
-      <a href="/Evandoz/https:/evandoz.github.io">Hexo · Levan</a>
+      <a href="https://evandoz.github.io">Hexo · Levan</a>
     </div>
   </div>
 </footer>

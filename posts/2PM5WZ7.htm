@@ -30,7 +30,7 @@
   
 <link rel="stylesheet" href="/Evandoz/css/style.css">
 
-<meta name="generator" content="Hexo 4.1.0"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
+<meta name="generator" content="Hexo 4.1.1"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
 
 <body>
   <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="overflow" class="overflow">
@@ -98,13 +98,13 @@
         </div>
         <div id="post-content" class="post-content">
           <p>安装 Deepin 桌面环境</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">$ sudo pacman -S deepin</span></pre></td></tr></table></figure>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo pacman -S deepin</span><br></pre></td></tr></table></figure>
 <p>修改 lightdm.conf 使用登录管理器</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">$ nano /etc/lightdm/lightdm.conf</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">[Seat *]</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">greeter-session=lightdm-deepin-greeter</span></pre></td></tr></table></figure>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ nano /etc/lightdm/lightdm.conf</span><br><span class="line"></span><br><span class="line">[Seat *]</span><br><span class="line">greeter-session=lightdm-deepin-greeter</span><br></pre></td></tr></table></figure>
 <p>需要注意的是，非 root 用户需要<strong>存在有效的主目录</strong>才能使 greeter 工作。</p>
 <p>实测，如果只有 root 用户，没有普通用户，登录界面会是白屏。</p>
 <p>开机启动</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">$ sudo systemctl <span class="built_in">enable</span> lightdm</span></pre></td></tr></table></figure>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo systemctl <span class="built_in">enable</span> lightdm</span><br></pre></td></tr></table></figure>
 <p>如果安装的双系统，打开 Deepin 文件管理器后总是会提示挂载 Windows 盘需要输入密码认证，如果感觉很烦，不想挂载，可以点击右上角设置按钮，在设置中取消勾选自动挂载。</p>
 
         </div>
@@ -154,7 +154,7 @@
         <span class="text">标签</span>
       </a>
       <a class="col" href="/Evandoz/archives">
-        <span class="amount">88.8k</span>
+        <span class="amount">86.3k</span>
         <span class="text">字数</span>
       </a>
     </div>
@@ -177,7 +177,7 @@
       <p><span>EXP</span> &copy; 2015 - 2019</p>
     </div>
     <div class="navigation">
-      <a href="/Evandoz/https:/evandoz.github.io">Hexo · Levan</a>
+      <a href="https://evandoz.github.io">Hexo · Levan</a>
     </div>
   </div>
 </footer>

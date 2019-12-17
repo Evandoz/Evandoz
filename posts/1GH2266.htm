@@ -30,7 +30,7 @@
   
 <link rel="stylesheet" href="/Evandoz/css/style.css">
 
-<meta name="generator" content="Hexo 4.1.0"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
+<meta name="generator" content="Hexo 4.1.1"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
 
 <body>
   <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="overflow" class="overflow">
@@ -100,7 +100,7 @@
           <h2 id="b-树"><a class="headerlink" href="#b-树"></a>B+ 树</h2>
 <p>B+ 树是应数据库所需出现的一种 B 树的变形树，严格来讲，它已经不是标准定义的树了。<br>
 一棵 m 阶的 B+ 树与 B 树的<strong>区别</strong>在于：<br>
-(1) 节点中关键字的数量和子树的数量相等，即有 \(n\) 棵子树的节点同样有 \(n\) 个关键字(\(⌈\frac{m}{2}⌉≤n≤m\))；<br>
+(1) 节点中关键字的数量和子树的数量相等，即有 \(n\) 棵子树的节点同样有 \(n\) 个关键字 (\(⌈\frac{m}{2}⌉≤n≤m\)) ；<br>
 (2) 所有叶子节点包含全部关键字和指向相应记录的指针，并且叶子节点本身按照关键字大小自小到大顺序链接；<br>
 (3) 所有非终端节点可以视为索引部分，节点中仅包含其子树中的最大关键字及相应的子树指针。</p>
 <p>根据 B+ 树的定义可以发现，它其实类似于<code>分块查找</code>，也称作<code>索引顺序查找</code>。</p>
@@ -109,9 +109,9 @@
 <p>从根开始的多路查找与 B 树不同的地方是：如果非终端节点上的关键字等于给定值，并不终止，而是继续向下知道叶子节点，因为非终端节点只是索引，所有关键字都在叶子上。<br>
 因此，在 B+ 树上查找，无论成功与否，每次查找都走了一条从根到叶子的路径。</p>
 <h2 id="b-树的插入"><a class="headerlink" href="#b-树的插入"></a>B+ 树的插入</h2>
-<p>B+ 树的插入仅在叶子节点进行，关键字数量大于 \(m\)，分裂操作与 B+ 树相同</p>
+<p>B+ 树的插入仅在叶子节点进行，关键字数量大于 \(m\) ，分裂操作与 B+ 树相同</p>
 <h2 id="b-树的删除"><a class="headerlink" href="#b-树的删除"></a>B+ 树的删除</h2>
-<p>B+ 树的删除也仅在叶子节点进行，关键字数量小于 \(⌈\frac{m}{2}⌉\)，合并操作与 B 树相同</p>
+<p>B+ 树的删除也仅在叶子节点进行，关键字数量小于 \(⌈\frac{m}{2}⌉\) ，合并操作与 B 树相同</p>
 <p><a href="https://zhuanlan.zhihu.com/p/50112182" target="_blank" rel="external nofollow noopener noreferrer">POLARDB · B+树并发控制机制的前世今生</a></p>
 
         </div>
@@ -161,7 +161,7 @@
         <span class="text">标签</span>
       </a>
       <a class="col" href="/Evandoz/archives">
-        <span class="amount">88.8k</span>
+        <span class="amount">86.3k</span>
         <span class="text">字数</span>
       </a>
     </div>
@@ -185,7 +185,7 @@
       <p><span>EXP</span> &copy; 2015 - 2019</p>
     </div>
     <div class="navigation">
-      <a href="/Evandoz/https:/evandoz.github.io">Hexo · Levan</a>
+      <a href="https://evandoz.github.io">Hexo · Levan</a>
     </div>
   </div>
 </footer>

@@ -9,14 +9,28 @@
 
     <url>
         <loc>https://evandoz.github.io/Evandoz/categories/%25E6%2595%25B0%25E6%258D%25AE%25E7%25BB%2593%25E6%259E%2584/%25E6%259F%25A5%25E6%2589%25BE%25E8%25A1%25A8/</loc>
-        <lastmod>2019-12-15T13:22:42.296Z</lastmod>
+        <lastmod>2019-12-17T03:49:40.456Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
         <loc>https://evandoz.github.io/Evandoz/categories/%25E6%2595%25B0%25E6%258D%25AE%25E7%25BB%2593%25E6%259E%2584/</loc>
-        <lastmod>2019-12-15T13:22:42.296Z</lastmod>
+        <lastmod>2019-12-17T03:49:40.456Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://evandoz.github.io/Evandoz/categories/%25E5%2589%258D%25E7%25AB%25AF%25E5%25BC%2580%25E5%258F%2591/CSS/</loc>
+        <lastmod>2019-12-17T03:21:15.538Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://evandoz.github.io/Evandoz/categories/%25E5%2589%258D%25E7%25AB%25AF%25E5%25BC%2580%25E5%258F%2591/</loc>
+        <lastmod>2019-12-17T03:21:15.538Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
@@ -92,22 +106,8 @@
     </url>
 
     <url>
-        <loc>https://evandoz.github.io/Evandoz/categories/%25E5%2589%258D%25E7%25AB%25AF%25E5%25BC%2580%25E5%258F%2591/</loc>
-        <lastmod>2019-12-05T13:55:46.734Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
         <loc>https://evandoz.github.io/Evandoz/categories/%25E5%2589%258D%25E7%25AB%25AF%25E5%25BC%2580%25E5%258F%2591/JavaScript/</loc>
         <lastmod>2019-12-05T13:55:21.164Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://evandoz.github.io/Evandoz/categories/%25E5%2589%258D%25E7%25AB%25AF%25E5%25BC%2580%25E5%258F%2591/CSS/</loc>
-        <lastmod>2019-12-05T13:55:16.460Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>

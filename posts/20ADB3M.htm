@@ -30,7 +30,7 @@
   
 <link rel="stylesheet" href="/Evandoz/css/style.css">
 
-<meta name="generator" content="Hexo 4.1.0"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
+<meta name="generator" content="Hexo 4.1.1"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
 
 <body>
   <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="overflow" class="overflow">
@@ -101,14 +101,14 @@
 <a id="more"></a>
 <p>在Element UI提供的NavMenu组件中，其提供了一个属性：default-active，它表示当前激活菜单的index。使用该属性可以保持菜单中当前激活的项与当前的页面是一致的，而这其中的关键就在于设置该属性的值。由于页面跳转变化，所以这个属性的值也需要随着当前页面路由的改变而改变，Vue.js官方提供的vue-router刚好可以解决此问题。</p>
 <p>vue-router中提供了一个路由对象(route object)，它表示当前激活的路由的状态信息，包含了当前URL解析得到的信息，还有URL 匹配到的路由记录(route records)。该路由对象有很多属性，诸如$route.path，$route.params，$route.query等，更多详情可以参见<a href="https://router.vuejs.org/zh-cn/api/route-object.html" target="_blank" rel="external nofollow noopener noreferrer">官方文档</a>。在这里我们使用$route.path即可，返回值位字符串(string)，对应当前路由的路径，然后将NavMenu中各项的index值设置为相应的路由即可。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">:default-active&#x3D;&quot;$route.path&quot;</span></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">:default-active&#x3D;&quot;$route.path&quot;</span><br></pre></td></tr></table></figure>
 <p><strong>注意</strong>：</p>
 <ol>
 <li>冒号(:)不可少，这属于Vue.js的语法问题，不再赘述</li>
 <li>不设置default-active属性时，点击菜单项虽然当前点击项会被激活，但刷新页面后其选中效果就会丢失，页面跟菜单项无法保持一致。</li>
 </ol>
 <p>完整代码实例如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">&lt;el-menu :default-active&#x3D;&quot;$route.path&quot; class&#x3D;&quot;el-menu-demo&quot; mode&#x3D;&quot;horizontal&quot;&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  &lt;el-menu-item index&#x3D;&quot;&#x2F;page1&quot;&gt;page1&lt;&#x2F;el-menu-item&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">  &lt;el-menu-item index&#x3D;&quot;&#x2F;page2&quot;&gt;page2&lt;&#x2F;el-menu-item&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">  &lt;el-menu-item index&#x3D;&quot;&#x2F;page3&quot;&gt;page3&lt;&#x2F;el-menu-item&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">  &lt;el-menu-item index&#x3D;&quot;&#x2F;page4&quot;&gt;page4&lt;&#x2F;el-menu-item&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">&lt;&#x2F;el-menu&gt;</span></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;el-menu :default-active&#x3D;&quot;$route.path&quot; class&#x3D;&quot;el-menu-demo&quot; mode&#x3D;&quot;horizontal&quot;&gt;</span><br><span class="line">  &lt;el-menu-item index&#x3D;&quot;&#x2F;page1&quot;&gt;page1&lt;&#x2F;el-menu-item&gt;</span><br><span class="line">  &lt;el-menu-item index&#x3D;&quot;&#x2F;page2&quot;&gt;page2&lt;&#x2F;el-menu-item&gt;</span><br><span class="line">  &lt;el-menu-item index&#x3D;&quot;&#x2F;page3&quot;&gt;page3&lt;&#x2F;el-menu-item&gt;</span><br><span class="line">  &lt;el-menu-item index&#x3D;&quot;&#x2F;page4&quot;&gt;page4&lt;&#x2F;el-menu-item&gt;</span><br><span class="line">&lt;&#x2F;el-menu&gt;</span><br></pre></td></tr></table></figure>
 
         </div>
         <div class="post-footer">
@@ -157,7 +157,7 @@
         <span class="text">标签</span>
       </a>
       <a class="col" href="/Evandoz/archives">
-        <span class="amount">88.8k</span>
+        <span class="amount">86.3k</span>
         <span class="text">字数</span>
       </a>
     </div>
@@ -180,7 +180,7 @@
       <p><span>EXP</span> &copy; 2015 - 2019</p>
     </div>
     <div class="navigation">
-      <a href="/Evandoz/https:/evandoz.github.io">Hexo · Levan</a>
+      <a href="https://evandoz.github.io">Hexo · Levan</a>
     </div>
   </div>
 </footer>

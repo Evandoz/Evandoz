@@ -30,7 +30,7 @@
   
 <link rel="stylesheet" href="/Evandoz/css/style.css">
 
-<meta name="generator" content="Hexo 4.1.0"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
+<meta name="generator" content="Hexo 4.1.1"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
 
 <body>
   <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="overflow" class="overflow">
@@ -104,7 +104,7 @@
 <p><a href="https://github.com/nodejs/node-gyp/issues/1663" target="_blank" rel="external nofollow noopener noreferrer">node-gyp is unable to find msbuild if VS2019 is installed · Issue #1663 · nodejs/node-gyp</a><br>
 <a href="https://github.com/nodejs/node-gyp/issues/1688" target="_blank" rel="external nofollow noopener noreferrer">node-gyp failed to build with msbuild 15 · Issue #1688 · nodejs/node-gyp</a></p>
 <p>对原文件进行修改</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">if (vsSetup) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  gyp.opts.msvs_version &#x3D; &#39;2015&#39;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">  process.env[&#39;GYP_MSVS_VERSION&#39;] &#x3D; 2015</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">  process.env[&#39;GYP_MSVS_OVERRIDE_PATH&#39;] &#x3D; vsSetup.path</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">  &#x2F;* defaults[&#39;msbuild_toolset&#39;] &#x3D; &#39;v141&#39; *&#x2F;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">  defaults[&#39;msbuild_toolset&#39;] &#x3D; &#39;v142&#39;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">  defaults[&#39;msvs_windows_target_platform_version&#39;] &#x3D; vsSetup.sdk</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">  &#x2F;* variables[&#39;msbuild_path&#39;] &#x3D; path.join(vsSetup.path, &#39;MSBuild&#39;, &#39;15.0&#39;,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">                                           &#39;Bin&#39;, &#39;MSBuild.exe&#39;) *&#x2F;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">  variables[&#39;msbuild_path&#39;] &#x3D; path.join(vsSetup.path, &#39;MSBuild&#39;, &#39;Current&#39;,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">                                           &#39;Bin&#39;, &#39;MSBuild.exe&#39;)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">if (vsSetup) &#123;</span><br><span class="line">  gyp.opts.msvs_version &#x3D; &#39;2015&#39;</span><br><span class="line">  process.env[&#39;GYP_MSVS_VERSION&#39;] &#x3D; 2015</span><br><span class="line">  process.env[&#39;GYP_MSVS_OVERRIDE_PATH&#39;] &#x3D; vsSetup.path</span><br><span class="line">  &#x2F;* defaults[&#39;msbuild_toolset&#39;] &#x3D; &#39;v141&#39; *&#x2F;</span><br><span class="line">  defaults[&#39;msbuild_toolset&#39;] &#x3D; &#39;v142&#39;</span><br><span class="line">  defaults[&#39;msvs_windows_target_platform_version&#39;] &#x3D; vsSetup.sdk</span><br><span class="line">  &#x2F;* variables[&#39;msbuild_path&#39;] &#x3D; path.join(vsSetup.path, &#39;MSBuild&#39;, &#39;15.0&#39;,</span><br><span class="line">                                           &#39;Bin&#39;, &#39;MSBuild.exe&#39;) *&#x2F;</span><br><span class="line">  variables[&#39;msbuild_path&#39;] &#x3D; path.join(vsSetup.path, &#39;MSBuild&#39;, &#39;Current&#39;,</span><br><span class="line">                                           &#39;Bin&#39;, &#39;MSBuild.exe&#39;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>需要修改的就是 MSB 构建工具的版本以及路径，<br>
 需要注意的是:</p>
 <ol>
@@ -114,7 +114,7 @@
 </ol>
 <p><img src="https://raw.githubusercontent.com/Evandoz/blob/master/NPM/node-gyp.png" alt="VS 2019"><span class="caption">VS 2019</span></p>
 <p>该文件在计算机上的具体位置为：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">X:\nodejs\node_modules\npm\node_modules\node-gyp\lib\configure.js L152-L163 (nodejs 安装目录下)</span></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">X:\nodejs\node_modules\npm\node_modules\node-gyp\lib\configure.js L152-L163 (nodejs 安装目录下)</span><br></pre></td></tr></table></figure>
 <p>另外：</p>
 <ol>
 <li>如果未使用 VS 2019，譬如 VS 2015、VS 2017 等，无需修改任何东西或者根据官方说明进行设置即可</li>
@@ -168,7 +168,7 @@
         <span class="text">标签</span>
       </a>
       <a class="col" href="/Evandoz/archives">
-        <span class="amount">88.8k</span>
+        <span class="amount">86.3k</span>
         <span class="text">字数</span>
       </a>
     </div>
@@ -191,7 +191,7 @@
       <p><span>EXP</span> &copy; 2015 - 2019</p>
     </div>
     <div class="navigation">
-      <a href="/Evandoz/https:/evandoz.github.io">Hexo · Levan</a>
+      <a href="https://evandoz.github.io">Hexo · Levan</a>
     </div>
   </div>
 </footer>

@@ -30,7 +30,7 @@
   
 <link rel="stylesheet" href="/Evandoz/css/style.css">
 
-<meta name="generator" content="Hexo 4.1.0"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
+<meta name="generator" content="Hexo 4.1.1"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
 
 <body>
   <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="overflow" class="overflow">
@@ -98,7 +98,6 @@
         </div>
         <div id="post-content" class="post-content">
           <p>本文记录了如何使用谷歌的字体库！</p>
-<a id="more"></a>
 <h2 id="谷歌字体库"><a class="headerlink" href="#谷歌字体库"></a>谷歌字体库</h2>
 <p>网站大概长这个样</p>
 <p><img src="https://raw.githubusercontent.com/Evandoz/blob/master/Google/001.png" alt="Google Fonts"><span class="caption">Google Fonts</span></p>
@@ -107,16 +106,16 @@
 <h2 id="在线使用"><a class="headerlink" href="#在线使用"></a>在线使用</h2>
 <p>访问谷歌字体网站，选择想要使用的字体，随后页面下方会弹出一个悬浮页面，里面提供了使用该字体的方法。</p>
 <p>一种是HTML标签<code>link</code>引入，然后在css中使用<code>font-family</code>属性</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">link</span> <span class="attr">href</span>=<span class="string">"https://fonts.googleapis.com/css?family=XXX"</span> <span class="attr">rel</span>=<span class="string">"stylesheet"</span>&gt;</span></span></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">link</span> <span class="attr">href</span>=<span class="string">"https://fonts.googleapis.com/css?family=XXX"</span> <span class="attr">rel</span>=<span class="string">"stylesheet"</span>&gt;</span></span><br></pre></td></tr></table></figure>
 <p><img src="https://raw.githubusercontent.com/Evandoz/blob/master/Google/002.png" alt="link"><span class="caption">link</span></p>
 <p>另一种是使用CSS的引入方式<code>@import</code>，然后同样是在css中使用<code>font-family</code>属性</p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">@<span class="keyword">import</span> url(<span class="string">'https://fonts.googleapis.com/css?family=XXX'</span>);</span></pre></td></tr></table></figure>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">@import</span> url(<span class="string">'https://fonts.googleapis.com/css?family=XXX'</span>);</span><br></pre></td></tr></table></figure>
 <p><img src="https://raw.githubusercontent.com/Evandoz/blob/master/Google/003.png" alt="@import"><span class="caption">@import</span></p>
 <h2 id="离线使用"><a class="headerlink" href="#离线使用"></a>离线使用</h2>
 <p>前面两种方式均是引入谷歌字体库的链接，我们也可以下载谷歌字体文件离线使用，谷歌字体提供了下载接口。</p>
 <p><img src="https://raw.githubusercontent.com/Evandoz/blob/master/Google/004.png" alt="下载字体"><span class="caption">下载字体</span></p>
 <p>下载之后用本地方式引入 css 中，即下面这种方式，其中<strong><em>xxx.eot/woff/ttf</em></strong>等即为下载的字体文件，根据下载的字体格式，选择性使用下面的代码。</p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">@<span class="keyword">font-face</span> &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  <span class="attribute">font-family</span>: <span class="string">'xxx'</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    <span class="attribute">src</span>: <span class="built_in">url</span>(<span class="string">'../fonts/xxx.eot'</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    <span class="attribute">src</span>: <span class="built_in">url</span>(<span class="string">'../fonts/xxx.eot?#iefix'</span>) <span class="built_in">format</span>(<span class="string">'embedded-opentype'</span>),</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">         <span class="built_in">url</span>(<span class="string">'../fonts/xxx.woff'</span>) <span class="built_in">format</span>(<span class="string">'woff'</span>),</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">         <span class="built_in">url</span>(<span class="string">'../fonts/xxx.ttf'</span>) <span class="built_in">format</span>(<span class="string">'truetype'</span>),</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">         <span class="built_in">url</span>(<span class="string">'../fonts/xxx.svg#xxx'</span>) <span class="built_in">format</span>(<span class="string">'svg'</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">    <span class="attribute">font-weight</span>: normal;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">    <span class="attribute">font-style</span>: normal;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">@font-face</span> &#123;</span><br><span class="line">  <span class="attribute">font-family</span>: <span class="string">'xxx'</span>;</span><br><span class="line">    <span class="attribute">src</span>: <span class="built_in">url</span>(<span class="string">'../fonts/xxx.eot'</span>);</span><br><span class="line">    <span class="attribute">src</span>: <span class="built_in">url</span>(<span class="string">'../fonts/xxx.eot?#iefix'</span>) <span class="built_in">format</span>(<span class="string">'embedded-opentype'</span>),</span><br><span class="line">         <span class="built_in">url</span>(<span class="string">'../fonts/xxx.woff'</span>) <span class="built_in">format</span>(<span class="string">'woff'</span>),</span><br><span class="line">         <span class="built_in">url</span>(<span class="string">'../fonts/xxx.ttf'</span>) <span class="built_in">format</span>(<span class="string">'truetype'</span>),</span><br><span class="line">         <span class="built_in">url</span>(<span class="string">'../fonts/xxx.svg#xxx'</span>) <span class="built_in">format</span>(<span class="string">'svg'</span>);</span><br><span class="line">    <span class="attribute">font-weight</span>: normal;</span><br><span class="line">    <span class="attribute">font-style</span>: normal;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h2 id="最后"><a class="headerlink" href="#最后"></a>最后</h2>
 <p>本文只介绍怎么用，至于能不能用就要看众多老司机们了，虽然大流氓曾经做过谷歌字体的代理，不过现在已经正式停止服务了。</p>
 <p><img src="https://raw.githubusercontent.com/Evandoz/blob/master/Google/005.png" alt></p>
@@ -168,7 +167,7 @@
         <span class="text">标签</span>
       </a>
       <a class="col" href="/Evandoz/archives">
-        <span class="amount">88.8k</span>
+        <span class="amount">86.3k</span>
         <span class="text">字数</span>
       </a>
     </div>
@@ -192,7 +191,7 @@
       <p><span>EXP</span> &copy; 2015 - 2019</p>
     </div>
     <div class="navigation">
-      <a href="/Evandoz/https:/evandoz.github.io">Hexo · Levan</a>
+      <a href="https://evandoz.github.io">Hexo · Levan</a>
     </div>
   </div>
 </footer>

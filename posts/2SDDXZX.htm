@@ -30,7 +30,7 @@
   
 <link rel="stylesheet" href="/Evandoz/css/style.css">
 
-<meta name="generator" content="Hexo 4.1.0"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
+<meta name="generator" content="Hexo 4.1.1"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
 
 <body>
   <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="overflow" class="overflow">
@@ -113,16 +113,16 @@
 <p>图形示意：</p>
 <p><img src="https://raw.githubusercontent.com/Evandoz/blob/master/Directive/directive002.png" alt="立即寻址"><span class="caption">立即寻址</span></p>
 <p>代码示意：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">mov al, 5	;执行结果：(al) &#x3D; 5      [&quot;()&quot;表示取内容，以下皆如此]</span></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mov al, 5	;执行结果：(al) &#x3D; 5      [&quot;()&quot;表示取内容，以下皆如此]</span><br></pre></td></tr></table></figure>
 <h3 id="寄存器寻址"><a class="headerlink" href="#寄存器寻址"></a>寄存器寻址</h3>
 <p>操作数存放在寄存器中，而在指令中给出寄存器的标号，指令执行时会到这个寄存器中取出相应的操作数，即访问寄存器，不访问存储器，速度也很快。</p>
 <p>图形示意：</p>
 <p><img src="https://raw.githubusercontent.com/Evandoz/blob/master/Directive/directive003.png" alt="寄存器寻址"><span class="caption">寄存器寻址</span></p>
 <p>代码示意：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">mov ax, bx	;假设(bx) &#x3D; 30H，则执行结果为：(ax) &#x3D; 30H</span></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mov ax, bx	;假设(bx) &#x3D; 30H，则执行结果为：(ax) &#x3D; 30H</span><br></pre></td></tr></table></figure>
 <h3 id="存储器寻址说明"><a class="headerlink" href="#存储器寻址说明"></a>存储器寻址说明</h3>
 <p><strong>1.有效地址</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">有效地址（EA）&#x3D; 位移量(disp) + 基址(base) + 变址(index)</span></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">有效地址（EA）&#x3D; 位移量(disp) + 基址(base) + 变址(index)</span><br></pre></td></tr></table></figure>
 <p>位移量：存放在指令中的数，但它不是立即数，而是一个<code>地址</code>，可以用变量或标号表示。<br>
 基址：存放在基址寄存器(BX、BP)中，有效地址的基址部分。<br>
 变址：存放在变址寄存器(SI、DI)中，有效地址的变址部分。</p>
@@ -170,7 +170,7 @@
 <p>图形示意：</p>
 <p><img src="https://raw.githubusercontent.com/Evandoz/blob/master/Directive/directive004.png" alt="直接寻址"><span class="caption">直接寻址</span></p>
 <p>代码示意：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">mov ax, [2000H]		;假设 (ds) &#x3D; 3000H ，则执行结果为：(ax) &#x3D; (32000) ，即取出存储单元 32000H-32001H 位置的值赋给 ax</span></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mov ax, [2000H]		;假设 (ds) &#x3D; 3000H ，则执行结果为：(ax) &#x3D; (32000) ，即取出存储单元 32000H-32001H 位置的值赋给 ax</span><br></pre></td></tr></table></figure>
 <p>位移量可以像高级语言一样用变量表示，而且还可以为这个位移量指定段前缀。</p>
 <h3 id="寄存器间接寻址"><a class="headerlink" href="#寄存器间接寻址"></a>寄存器间接寻址</h3>
 <p>操作数在存储器中，而其有效地址存放在某个寄存器中，可用寄存器有 BX、BP、SI、DI。</p>
@@ -179,21 +179,21 @@
 <p>图形示意：</p>
 <p><img src="https://raw.githubusercontent.com/Evandoz/blob/master/Directive/directive005.png" alt="寄存器间接寻址"><span class="caption">寄存器间接寻址</span></p>
 <p>代码示意：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">mov ax，[bx]	;假设 (ds) &#x3D; 2000H，(bx) &#x3D; 1000H ，则执行结果为：(ax) &#x3D; (21000) ，即取出存储单元 21000H-21001H 位置的值赋给 ax</span></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mov ax，[bx]	;假设 (ds) &#x3D; 2000H，(bx) &#x3D; 1000H ，则执行结果为：(ax) &#x3D; (21000) ，即取出存储单元 21000H-21001H 位置的值赋给 ax</span><br></pre></td></tr></table></figure>
 <h3 id="寄存器相对寻址"><a class="headerlink" href="#寄存器相对寻址"></a>寄存器相对寻址</h3>
 <p>操作数有效地址等于寄存器内容与指令中指定位移量之和，可使用寄存器有 BX、BP、SI、DI。与寄存器间接寻址相比，指令中多了位移量。</p>
 <p>有效地址（EA）= 基址/变址 + 位移量。</p>
 <p>图形示意：</p>
 <p><img src="https://raw.githubusercontent.com/Evandoz/blob/master/Directive/directive006.png" alt="寄存器相对寻址"><span class="caption">寄存器相对寻址</span></p>
 <p>代码示意：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">mov ax, count[si]&#x2F;[count+si]	;假设 (ds) &#x3D; 3000H ，(si) &#x3D; 2000H ，count &#x3D; 3000H ，则执行结果为：(ax) &#x3D; (35000H)，即取出存储单元 35000H-35001H 位置的值赋给 ax</span></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mov ax, count[si]&#x2F;[count+si]	;假设 (ds) &#x3D; 3000H ，(si) &#x3D; 2000H ，count &#x3D; 3000H ，则执行结果为：(ax) &#x3D; (35000H)，即取出存储单元 35000H-35001H 位置的值赋给 ax</span><br></pre></td></tr></table></figure>
 <h3 id="基址变址寻址"><a class="headerlink" href="#基址变址寻址"></a>基址变址寻址</h3>
 <p>操作数有效地址等于基址寄存器与变址寄存器内容之和，可使用寄存器有 BX、BP、SI、DI。</p>
 <p>有效地址（EA）= 基址 + 变址。</p>
 <p>图形示意：</p>
 <p><img src="https://raw.githubusercontent.com/Evandoz/blob/master/Directive/directive007.png" alt="基址变址寻址"><span class="caption">基址变址寻址</span></p>
 <p>代码示意：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">mov ax, [bx][di]&#x2F;[bx+di]	;假设 (ds) &#x3D; 2100H ，(bx) &#x3D; 0158H ，(di) &#x3D; 10A5H ，则执行结果为：(ax) &#x3D; (221FDH)，即取出存储单元 221FDH-221FEH 位置的值赋给 ax</span></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mov ax, [bx][di]&#x2F;[bx+di]	;假设 (ds) &#x3D; 2100H ，(bx) &#x3D; 0158H ，(di) &#x3D; 10A5H ，则执行结果为：(ax) &#x3D; (221FDH)，即取出存储单元 221FDH-221FEH 位置的值赋给 ax</span><br></pre></td></tr></table></figure>
 <h3 id="相对基址变址寻址"><a class="headerlink" href="#相对基址变址寻址"></a>相对基址变址寻址</h3>
 <p>操作数有效地址是基址寄存器与变址寄存器的内容和指令中指定的位移量之和。相比前面多了位移量，而寻址方式命名中多了相对二字。</p>
 <p>有效地址（EA）= 基址 + 变址 + 位移量</p>
@@ -203,7 +203,7 @@
 <p>图形示意：</p>
 <p><img src="https://raw.githubusercontent.com/Evandoz/blob/master/Directive/directive008.png" alt="相对基址变址寻址"><span class="caption">相对基址变址寻址</span></p>
 <p>代码示意：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">mov ax, count[bx][si]&#x2F;[count+bx+si]		;假设 (ds) &#x3D; 3000H ，(bx) &#x3D; 2000H ，(si) &#x3D; 1000H ，count &#x3D; 0250H ，则执行结果为：(ax) &#x3D; (33250H)，即取出存储单元 33250H-33251H 位置的值赋给 ax</span></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mov ax, count[bx][si]&#x2F;[count+bx+si]		;假设 (ds) &#x3D; 3000H ，(bx) &#x3D; 2000H ，(si) &#x3D; 1000H ，count &#x3D; 0250H ，则执行结果为：(ax) &#x3D; (33250H)，即取出存储单元 33250H-33251H 位置的值赋给 ax</span><br></pre></td></tr></table></figure>
 <p><strong>应用</strong>：<br>
 这种寻址方式通常用于对二维数组的寻址。也为堆栈处理提供了方便，一般(BP)可指向栈顶，从栈顶到数组的首地址可用位移量表示，变址寄存器可用来访问数组中的某个元素。</p>
 <h2 id="转移寻址"><a class="headerlink" href="#转移寻址"></a>转移寻址</h2>
@@ -216,7 +216,7 @@
 <p>图形示意：</p>
 <p><img src="https://raw.githubusercontent.com/Evandoz/blob/master/Directive/directive009.png" alt="段内直接寻址"><span class="caption">段内直接寻址</span></p>
 <p>代码示意：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">jmp near ptr progia</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">jmp short quest</span></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">jmp near ptr progia</span><br><span class="line">jmp short quest</span><br></pre></td></tr></table></figure>
 <p>其中，progia和quest均为转向的符号地址，在机器指令中，用位移量来表示。<br>
 在汇编指令中，如果位移量为16位，则在符号地址前加操作符near ptr，如果位移量为8位，则在符号地址前加操作符SHORT。<br>
 条件转移指令只能使用段内直接寻址的8位位移量。</p>
@@ -225,19 +225,19 @@
 <p>图形示意：</p>
 <p><img src="https://raw.githubusercontent.com/Evandoz/blob/master/Directive/directive010.png" alt="段内间接寻址"><span class="caption">段内间接寻址</span></p>
 <p>代码示意：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">jmp bx</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">jmp word ptr[bp+table]</span></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">jmp bx</span><br><span class="line">jmp word ptr[bp+table]</span><br></pre></td></tr></table></figure>
 <h3 id="段间直接寻址"><a class="headerlink" href="#段间直接寻址"></a>段间直接寻址</h3>
 <p>在指令中直接提供了转向段地址和偏移地址，所以只要用指令中指定的偏移地址取代IP寄存器的内容，用指令中指定的段地址取代CS寄存器的内容就完成了从一个段到另一个段的转移操作。</p>
 <p>图形示意：</p>
 <p><img src="https://raw.githubusercontent.com/Evandoz/blob/master/Directive/directive011.png" alt="段间直接寻址"><span class="caption">段间直接寻址</span></p>
 <p>代码示意：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">jmp far ptr next	;next 为转向的符号地址，far ptr 则是表示段间转移的操作符。</span></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">jmp far ptr next	;next 为转向的符号地址，far ptr 则是表示段间转移的操作符。</span><br></pre></td></tr></table></figure>
 <h3 id="段间间接寻址"><a class="headerlink" href="#段间间接寻址"></a>段间间接寻址</h3>
 <p>用存储器中的两个相继字的内容来取代IP和CS寄存器中的原始内容，以达到段间转移的目的。(这里，存储单元的地址是由指令指定除立即数方式和寄存器方式以外的任何一种数据寻址方式取得)</p>
 <p>图形示意：</p>
 <p><img src="https://raw.githubusercontent.com/Evandoz/blob/master/Directive/directive012.png" alt="段间间接寻址"><span class="caption">段间间接寻址</span></p>
 <p>代码示意：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">jmp dword ptr[inters+bx]</span></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">jmp dword ptr[inters+bx]</span><br></pre></td></tr></table></figure>
 <p>其中，[inters+bx]说明数据寻址方式为寄存器相对寻址方式，dword ptr为双字操作符，说明转向地址需取双字为段间转移指令。依次作为IP和CS的值。</p>
 
         </div>
@@ -287,7 +287,7 @@
         <span class="text">标签</span>
       </a>
       <a class="col" href="/Evandoz/archives">
-        <span class="amount">88.8k</span>
+        <span class="amount">86.3k</span>
         <span class="text">字数</span>
       </a>
     </div>
@@ -311,7 +311,7 @@
       <p><span>EXP</span> &copy; 2015 - 2019</p>
     </div>
     <div class="navigation">
-      <a href="/Evandoz/https:/evandoz.github.io">Hexo · Levan</a>
+      <a href="https://evandoz.github.io">Hexo · Levan</a>
     </div>
   </div>
 </footer>
