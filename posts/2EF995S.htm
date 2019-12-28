@@ -97,29 +97,59 @@
 
         </div>
         <div id="post-content" class="post-content">
-          <h2 id="1-添加普通用户"><a class="headerlink" href="#1-添加普通用户"></a>1.添加普通用户</h2>
+          <h2 id="添加普通用户"><a class="headerlink" href="#添加普通用户"></a>添加普通用户</h2>
 <p>新安装的系统只有一个超级用户 root，使用 root 进行日常操作是不安全的，应当创建普通用户进行日常操作，仅在管理系统时使用 root。</p>
-<p>执行who命令，可以查看目前已登陆的用户。</p>
+<p>执行 who 命令，可以查看目前已登陆的用户。</p>
 <p>执行 passwd -Sa 命令，可以查看系统上的用户。</p>
 <p>执行 useradd 命令，可以添加新用户</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># useradd -m -g "初始组" -G "附加组" -s "登陆shell" "用户"</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># useradd -m -g [initial_group] -G [additional_groups] -s [login_shell] [username]</span></span><br></pre></td></tr></table></figure>
 <p><strong>参数解释：</strong></p>
 <ul>
-<li>-m：创建用户主目录/home/[用户名]；在自己的主目录内，即使不是root用户也可以读写文件、安装程序等。</li>
-<li>-g：设置用户初始组的名称或数字ID；该组必须是存在的；如果没有设置该选项，useradd会根据/etc/login.defs文件中的USERGROUPS_ENAB环境变量进行设置。默认(USERGROUPS_ENAB yes) 会用和用户名相同的名字创建群组，GID 等于 UID.</li>
-<li>-G：用户要加入的附加组列表；使用逗号分隔多个组，不要添加空格；如果不设置，用户仅仅加入初始组。</li>
-<li>-s：用户默认登录shell的路径；启动过程结束后，默认启动的登录shell在此处设定；请确保使用的shell已经安装，默认是 Bash。</li>
+<li>-m/–create-home：创建用户主目录 /home/[username] ；在用户自己的主目录内，即使不是root用户也可以读写文件、安装程序等；</li>
+<li>-g：设置用户初始组的名称或 ID，该组必须是存在的；如果没有设置该选项，useradd 会根据 /etc/login.defs 文件中的 USERGROUPS_ENAB 环境变量进行设置。默认(USERGROUPS_ENAB yes) 会用和用户名相同的名字创建群组，GID 等于 UID；</li>
+<li>-G/–groups：用户要加入的附加组列表；使用逗号分隔多个组，中间不要添加空格；如果不设置，用户仅仅加入初始组；</li>
+<li>-s/–shell：用户默认登录 shell 的路径；启动过程结束后，会默认启动此处设定的 shell；请确保设置的 shell 已安装，默认是 Bash。</li>
 </ul>
-<p>例如要添加一个名为hit的用户，并使用bash作为登录shell：</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># useradd -m -G wheel -s /bin/bash hit</span></span><br></pre></td></tr></table></figure>
-<p>此命令会自动创建 hit 群组，并成为 hit 的默认登录群组，<strong>建议每一个用户都设置自己的默认群组</strong></p>
-<h2 id="2-安装-sudo"><a class="headerlink" href="#2-安装-sudo"></a>2.安装 sudo</h2>
+<blockquote>
+<p>注意：<br>
+为了能正常登录，选择的 shell 必须位于 /etc/shells 列表中，否则 PAM 的 pam_shell 模块会阻止登录请求。不要使用 /usr/bin/bash 替代 /bin/bash，除非这个路径已经在 /etc/shells 中正确配置。</p>
+</blockquote>
+<p>例如要添加一个用户名为 exp 的用户，并使用 bash 作为登录 shell：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># useradd -m -G wheel -s /bin/bash exp</span></span><br></pre></td></tr></table></figure>
+<p>此命令会自动创建 exp 群组，并成为 exp 的默认登录群组，<strong>建议每一个用户都设置自己的默认群组</strong></p>
+<blockquote>
+<p>wheel 是管理组，通常用于授予执行管理操作的权限。它拥有对日志文件的完全读访问权，并有权管理CUPS中的打印机。也可以用来访问sudo和su实用程序(默认情况下都不使用)。</p>
+</blockquote>
+<p>之后通过 passwd 命令设置用户密码，虽然不是必须的，但还是强烈建议设置密码</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># passwd exp</span></span><br></pre></td></tr></table></figure>
+<h2 id="修改用户登陆名或主目录"><a class="headerlink" href="#修改用户登陆名或主目录"></a>修改用户登陆名或主目录</h2>
+<p>1.如下命令修改用户主目录：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># usermod -d /my/new/home -m username</span></span><br></pre></td></tr></table></figure>
+<p>-m 选项会自动创建新目录并移动内容。</p>
+<blockquote>
+<p>Tip:<br>
+创建从用户原目录到新目录的链接，这样做将允许程序找到具有硬编码路径的文件。</p>
+</blockquote>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># ln -s /my/new/home/ /my/old/home</span></span><br></pre></td></tr></table></figure>
+<p>注：确保 <code>/my/old/home</code> 结尾没有 /。</p>
+<p>2.如下命令更改用户登录名：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># usermod -l newname oldname</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>注：<br>
+此处需要确保没有用当前要更改的用户名登录，具体操作为打开一个新的 tty，以根用户或另一个用户的身份登录并提升为根用户，这样可以防止误操作。</p>
+</blockquote>
+<h2 id="安装-sudo"><a class="headerlink" href="#安装-sudo"></a>安装 sudo</h2>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># pacman -S sudo</span></span><br></pre></td></tr></table></figure>
 <p>如果之前安装过 base-devel 包，此处不需要再安装 sudo，因为已经安装过了。</p>
-<p>编辑sudo配置文件，为新创建的用户添加sudo权限。</p>
-<p>具体操作是：去掉 %wheel ALL=(ALL) NOPASSWD: ALL 前面的注释</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># nano /etc/sudoers</span></span><br><span class="line">%wheel ALL=(ALL) NOPASSWD: ALL</span><br></pre></td></tr></table></figure>
-<p>安装配置完sudo，使用普通用户登陆系统执行命令时就可以使用sudo来临时获取权限了。如果要切换到root用户可以使用 su 命令。默认配置时，su 将改用 root 用户登录 shell，而 sudo 会给单个命令临时的超级用户权限。</p>
+<p>编辑 sudo 配置文件 <code>/etc/sudoers</code>，为新创建的用户添加 sudo 权限。不过 <code>visudo</code> 会锁定 sudoers 配置文件，保存修改到临时文件，然后检查文件格式，确保正确后才会覆盖 sudoers 文件，必须保证 sudoers 格式正确，否则 sudo 将无法运行。任何 /etc/sudoers 格式错误会导致 sudo 不可用，通常使用 visudo 编辑该文件防止出错。</p>
+<p>visudo 调用的默认编辑器是 vi，官方仓库里的 sudo 编译时开启了<code>--with-env-editor</code>，会采用环境变量 VISUAL 和 EDITOR 的设置。如果设置了 VISUAL 就不会使用 EDITOR。</p>
+<p>如果要临时使用其他编辑器，在该命令前加上 EDITOR 环境变量即可,如要使用 vim 作为编辑器调用 visudo ：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># EDITOR=vim visudo</span></span><br></pre></td></tr></table></figure>
+<p>允许 wheel 用户组成员无密码使用 sudo：去掉 %wheel ALL=(ALL) NOPASSWD: ALL 前面的注释</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">%wheel ALL=(ALL) NOPASSWD: ALL</span><br></pre></td></tr></table></figure>
+<p>安装配置完sudo，使用普通用户登陆系统执行命令时就可以使用 sudo 来临时获取权限了。如果要切换到 root 用户可以使用 su 命令。默认配置时，su 将改用 root 用户登录 shell，而 sudo 会给单个命令临时的超级用户权限。</p>
+<p>参考WIKi：</p>
+<p><a href="https://wiki.archlinux.org/index.php/Users_and_groups" target="_blank" rel="external nofollow noopener noreferrer">Users and groups</a></p>
 
         </div>
         <div class="post-footer">
@@ -168,7 +198,7 @@
         <span class="text">标签</span>
       </a>
       <a class="col" href="/Evandoz/archives">
-        <span class="amount">86.3k</span>
+        <span class="amount">86.9k</span>
         <span class="text">字数</span>
       </a>
     </div>
@@ -178,7 +208,7 @@
       <div id="toc" class="toc">
         
           <h3 class="toc-title">目录</h3>
-          <ol class="toc-content"><li class="toc-content-item toc-content-level-2"><a class="toc-content-link" href="#1-添加普通用户"><span class="toc-content-text">1.添加普通用户</span></a></li><li class="toc-content-item toc-content-level-2"><a class="toc-content-link" href="#2-安装-sudo"><span class="toc-content-text">2.安装 sudo</span></a></li></ol>
+          <ol class="toc-content"><li class="toc-content-item toc-content-level-2"><a class="toc-content-link" href="#添加普通用户"><span class="toc-content-text">添加普通用户</span></a></li><li class="toc-content-item toc-content-level-2"><a class="toc-content-link" href="#修改用户登陆名或主目录"><span class="toc-content-text">修改用户登陆名或主目录</span></a></li><li class="toc-content-item toc-content-level-2"><a class="toc-content-link" href="#安装-sudo"><span class="toc-content-text">安装 sudo</span></a></li></ol>
         
       </div>
     </aside>

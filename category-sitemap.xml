@@ -8,6 +8,20 @@
     </url>
 
     <url>
+        <loc>https://evandoz.github.io/Evandoz/categories/%25E6%2593%258D%25E4%25BD%259C%25E7%25B3%25BB%25E7%25BB%259F/ArchLinux/</loc>
+        <lastmod>2019-12-27T08:35:50.811Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://evandoz.github.io/Evandoz/categories/%25E6%2593%258D%25E4%25BD%259C%25E7%25B3%25BB%25E7%25BB%259F/</loc>
+        <lastmod>2019-12-27T08:35:50.811Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
         <loc>https://evandoz.github.io/Evandoz/categories/%25E6%2595%25B0%25E6%258D%25AE%25E7%25BB%2593%25E6%259E%2584/%25E6%259F%25A5%25E6%2589%25BE%25E8%25A1%25A8/</loc>
         <lastmod>2019-12-17T03:49:40.456Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -136,20 +150,6 @@
     <url>
         <loc>https://evandoz.github.io/Evandoz/categories/%25E6%2593%258D%25E4%25BD%259C%25E7%25B3%25BB%25E7%25BB%259F/Windows/</loc>
         <lastmod>2019-12-05T13:54:09.376Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://evandoz.github.io/Evandoz/categories/%25E6%2593%258D%25E4%25BD%259C%25E7%25B3%25BB%25E7%25BB%259F/</loc>
-        <lastmod>2019-12-05T13:54:09.376Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://evandoz.github.io/Evandoz/categories/%25E6%2593%258D%25E4%25BD%259C%25E7%25B3%25BB%25E7%25BB%259F/ArchLinux/</loc>
-        <lastmod>2019-12-05T13:53:58.359Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
